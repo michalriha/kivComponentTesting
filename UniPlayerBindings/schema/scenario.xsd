@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:version="2.0" jaxb:extensionBindingPrefixes="xjc">
+	<!-- obecne typy // -->
+	<xs:simpleType name="TNonNegativeLong">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="0" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TNonNegativeDouble">
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TPositiveLong">
+		<xs:restriction base="xs:long">
+			<xs:minInclusive value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="TBundleName">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="(([a-z_]+[0-9]*)+\.)+([a-z_]+[0-9]*)*" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="TInterfaceName">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="(([a-z_]+[0-9]*)+\.)+([a-zA-Z_]+[0-9]*)*" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TMethodName">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="[a-zA-Z_$]([a-zA-Z0-9_$])*" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TVersion">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="(\d+\.)*(\d+)" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="TCollection">
+		<xs:attribute name="type" default="ArrayList">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="array" />
+					<xs:enumeration value="ArrayList" />
+					<xs:enumeration value="LinkedList" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="TStringList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="string" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TShortList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="short" type="xs:short" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="TIntList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="int" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TLongList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="long" type="xs:long" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TFloatList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="float" type="xs:float" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TDoubleList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="double" type="xs:double" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TByteList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="byte" type="xs:byte" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TBooleanList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="boolean" type="xs:boolean" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TBigDecimalList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="BigDecimal" type="xs:decimal" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TBigIntegerList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="BigInteger" type="xs:integer" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TByteArrayList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="base64" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TFileList">
+		<xs:complexContent>
+			<xs:extension base="TCollection">
+				<xs:choice>
+					<xs:element name="file" type="xs:anyURI" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TValue">
+		<xs:choice>
+			<xs:element name="string" type="xs:string" nillable="true" />
+			<xs:element name="short" type="xs:short" nillable="true" />
+			<xs:element name="int" type="xs:int" nillable="true" />
+			<xs:element name="long" type="xs:long" nillable="true" />
+			<xs:element name="float" type="xs:float" nillable="true" />
+			<xs:element name="double" type="xs:double" nillable="true" />
+			<xs:element name="byte" type="xs:byte" nillable="true" />
+			<xs:element name="boolean" type="xs:boolean" nillable="true" />
+			<xs:element name="BigInteger" type="xs:integer" nillable="true" />
+			<xs:element name="BigDecimal" type="xs:decimal" nillable="true" />
+			<xs:element name="base64" type="xs:base64Binary" nillable="true" />
+			<xs:element name="file" type="xs:anyURI" />
+			<xs:element name="stringList" type="TStringList" />
+			<xs:element name="longList" type="TLongList" />
+			<xs:element name="intList" type="TIntList" />
+			<xs:element name="shortList" type="TShortList" />
+			<xs:element name="doubleList" type="TDoubleList" />
+			<xs:element name="floatList" type="TFloatList" />
+			<xs:element name="BigDecimalList" type="TBigDecimalList" />
+			<xs:element name="BigIntegerList" type="TBigIntegerList" />
+			<xs:element name="booleanList" type="TBooleanList" />
+			<xs:element name="fileList" type="TFileList" />
+			<xs:element name="byteList" type="TByteList" />
+			<xs:element name="byteArrayList" type="TByteArrayList" />			
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="TArgument">
+		<xs:complexContent>
+			<xs:extension base="TValue">
+				<xs:attribute name="ord-num" type="xs:int" default="0" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Gaussovo pravdepodobnostni rozdeleni // -->
+	<xs:complexType name="TGaussian">
+		<xs:attribute name="mean" type="xs:double" use="required" />
+		<xs:attribute name="deviation" type="xs:double" use="required" />
+	</xs:complexType>
+
+	<!-- exponencialni pravdepodobnostni rozdeleni // -->
+	<xs:complexType name="TExponential">
+		<xs:attribute name="rate" type="TNonNegativeLong" use="required" />
+		<xs:attribute name="time-span" type="TNonNegativeLong"
+			use="required" />
+	</xs:complexType>
+	
+	<!-- pravidelne opakovani // -->
+	<xs:complexType name="TEquidistant">
+		<xs:attribute name="step" type="TNonNegativeLong" use="required" />
+	</xs:complexType>
+
+	<!-- opakovani // -->
+	<xs:complexType name="TRecurrence">
+		<xs:choice>
+			<xs:element name="equidistant" type="TEquidistant" />
+			<xs:element name="gaussian" type="TGaussian" />
+			<xs:element name="exponential" type="TExponential" />
+		</xs:choice>
+		<xs:attribute name="count" type="TPositiveLong" default="1" />
+		<xs:attribute name="repeat-until" type="TPositiveLong" default="9223372036854775807" />
+	</xs:complexType>
+
+	<!-- volani metody // -->
+
+	<xs:complexType name="TArgumentsList">
+		<xs:sequence>
+			<xs:element name="argument" type="TArgument" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TCall">
+		<xs:sequence>
+			<xs:element name="arguments" type="TArgumentsList" />
+		</xs:sequence>
+		<xs:attribute name="service" type="TInterfaceName" use="required" />
+		<xs:attribute name="method" type="TMethodName" use="required" />
+		<xs:attribute name="filter" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<!-- vyvolani udalosti // -->
+	<xs:complexType name="TEvent">
+		<xs:sequence>
+			<xs:element name="argument" type="TValue" />
+		</xs:sequence>
+		<xs:attribute name="topic" type="xs:string" use="required" />
+		<xs:attribute name="key" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="TCommand">
+		<xs:choice>
+			<xs:element name="call" type="TCall" />
+			<xs:element name="event" type="TEvent" />
+		</xs:choice>
+	</xs:complexType>
+
+	<!-- akce scenare -->
+	<xs:complexType name="TAction">
+		<xs:sequence>
+			<xs:element name="recurrence" type="TRecurrence" minOccurs="0" maxOccurs="1" />
+			<xs:element name="command" type="TCommand" />
+		</xs:sequence>
+		<xs:attribute name="time" type="xs:long" use="required" />
+	</xs:complexType>
+
+	<!-- seznam akci (scenar) -->
+	<xs:complexType name="TActionsList">
+		<xs:sequence>
+			<xs:element name="action" type="TAction" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TSettings">
+		<xs:sequence>
+			<xs:element name="time-limit" type="TPositiveLong" default="9223372036854775807"  minOccurs="0" maxOccurs="1" />
+			<xs:element name="simul-step-delay" type="TPositiveLong" default="1"  minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- projekt // -->
+	<xs:complexType name="TProject">
+		<xs:sequence>
+			<xs:element name="settings" type="TSettings" minOccurs="0" maxOccurs="1" />
+			<xs:element name="actions"  type="TActionsList" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- dokument // -->
+	<xs:element name="project" type="TProject" />
+</xs:schema>

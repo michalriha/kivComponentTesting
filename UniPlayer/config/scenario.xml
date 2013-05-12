@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="scenario.xsd"
+>
+	<settings>
+		<time-limit>1400</time-limit>
+		<simul-step-delay>50</simul-step-delay>
+	</settings>
+    <actions>
+        <action time="750">
+            <recurrence count="10" repeat-until="1600">
+                <equidistant step="250" />
+            </recurrence>
+            <command>
+                <call service="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IDisplay" method="Render">
+                	<arguments>
+                	    <argument ord-num="0"><string>jeden argument</string></argument>
+                	    <argument ord-num="1"><short>16384</short></argument>
+                	    <argument ord-num="2">
+                	    	<intList type="LinkedList">
+                	    		<int>1</int>
+                	    		<int>2</int>
+                	    	</intList>
+                	    </argument>
+                	    <argument ord-num="3">
+                	    	<byteArrayList type="array">
+                	    		<base64>TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
+IHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2Yg
+dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu
+dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
+ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=</base64>
+                	    		<base64>TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
+IHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2Yg
+dGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGlu
+dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
+ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=</base64>
+                	    	</byteArrayList>
+                	    </argument>
+                	</arguments>
+                </call>
+            </command>
+        </action>
+        <action time="10">
+            <recurrence count="2">
+                <gaussian mean="30" deviation="2" />
+            </recurrence>
+            <command>
+                <call service="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IDisplay" method="Render"> 
+	                <arguments>
+	                    <argument ord-num="1"><string>kokos</string></argument>
+	                    <argument ord-num="0"><file>1;7</file></argument>
+	                </arguments>
+                </call>
+            </command>
+        </action>
+        <action time="000">
+            <recurrence count="30">
+                <exponential rate="5" time-span="60" />
+            </recurrence>
+            <command>
+                <event topic="event_topic_scripted" key="event.topics">
+                    <argument><string xsi:nil="true"/></argument>
+                </event>
+            </command>
+        </action>
+    </actions>
+</project>
