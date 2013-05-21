@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -145,19 +148,34 @@ public class Scenario implements IScenario
     public void saveToFile(String fileName)
     throws FileNotFoundException, IOException, JAXBException
     {
-        try
-        (
-        	OutputStream os = new FileOutputStream(new File(fileName));
-        	OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-        )
-        {
+    	try (
+    		StringWriter sw = new StringWriter();
+	    	OutputStream os = new FileOutputStream(new File(fileName));
+	    	OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+    	)
+    	{
             JAXBElement<TProject> je = new JAXBElement<TProject>(
                 new QName("", "project"),
                 TProject.class,
                 _.scenario
             );
-            _.m.marshal(je, osw);
-        }
+            _.m.marshal(je, sw);
+            osw.write(sw.toString());
+    	}
+    	
+//        try
+//        (
+//        	OutputStream os = new FileOutputStream(new File(fileName));
+//        	OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+//        )
+//        {
+//            JAXBElement<TProject> je = new JAXBElement<TProject>(
+//                new QName("", "project"),
+//                TProject.class,
+//                _.scenario
+//            );
+//            _.m.marshal(je, osw);
+//        }
     }
     
     /**
