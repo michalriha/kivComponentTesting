@@ -207,31 +207,31 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
         {
         	ret.setString(this.createElement((String) arg.getVal(), String.class, "string"));
         }
-        else if (clazz == Short.TYPE /*clazz.equals(Short.class) || clazz.equals(short.class)*/)
+        else if (clazz == Short.TYPE || clazz == Short.class)
         {
         	ret.setShort(this.createElement((Short) arg.getVal(), short.class, "short"));
         }
-        else if (clazz == Integer.TYPE /*clazz.equals(Integer.class) || clazz.equals(int.class)*/)
+        else if (clazz == Integer.TYPE || clazz == Integer.class)
         {
         	ret.setInt(this.createElement((Integer) arg.getVal(), int.class, "int"));
         }
-        else if (clazz == Long.TYPE /*clazz.equals(Long.class) || clazz.equals(long.class)*/)
+        else if (clazz == Long.TYPE || clazz == Long.class)
         {
         	ret.setLong(this.createElement((Long) arg.getVal(), long.class, "long"));
         }
-        else if (clazz == Float.TYPE /*clazz.equals(Float.class) || clazz.equals(float.class)*/)
+        else if (clazz == Float.TYPE  || clazz == Float.class/*clazz.equals(Float.class) || clazz.equals(float.class)*/)
         {
         	ret.setFloat(this.createElement((Float) arg.getVal(), float.class, "float"));
         }
-        else if (clazz == Double.TYPE /*clazz.equals(Double.class) || clazz.equals(double.class)*/)
+        else if (clazz == Double.TYPE || clazz == Double.class/*clazz.equals(Double.class) || clazz.equals(double.class)*/)
         {
         	ret.setDouble(this.createElement((Double) arg.getVal(), double.class, "double"));
         }
-        else if (clazz == Byte.TYPE /*clazz.equals(Byte.class) || clazz.equals(byte.class)*/)
+        else if (clazz == Byte.TYPE || clazz == Byte.class /*clazz.equals(Byte.class) || clazz.equals(byte.class)*/)
         {
         	ret.setByte(this.createElement((Byte) arg.getVal(), byte.class, "byte"));
         }
-        else if (clazz == Boolean.TYPE /*clazz.equals(Boolean.class) || clazz.equals(boolean.class)*/)
+        else if (clazz == Boolean.TYPE || clazz == Boolean.class /*clazz.equals(Boolean.class) || clazz.equals(boolean.class)*/)
         {
         	ret.setBoolean(this.createElement((Boolean) arg.getVal(), boolean.class, "boolean"));
         }
