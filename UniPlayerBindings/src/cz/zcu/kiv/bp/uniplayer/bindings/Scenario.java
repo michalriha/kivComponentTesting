@@ -23,6 +23,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.ValidationEvent;
+import javax.xml.bind.ValidationEventHandler;
 import javax.xml.bind.helpers.DefaultValidationEventHandler;
 import javax.xml.namespace.QName;
 import javax.xml.validation.Schema;
@@ -82,7 +84,13 @@ public class Scenario implements IScenario
         _.u.setSchema(_.sch);
         _.u.setEventHandler(new DefaultValidationEventHandler());
         _.m.setSchema(_.sch);
-        _.m.setEventHandler(new DefaultValidationEventHandler());
+        _.m.setEventHandler(new ValidationEventHandler() {
+			@Override
+			public boolean handleEvent(ValidationEvent event) {
+				event.getLinkedException().printStackTrace();
+				return true;
+			}
+		});
         _.m.setProperty("jaxb.formatted.output", true);
         
         _.scenario = new TProject();
@@ -159,7 +167,7 @@ public class Scenario implements IScenario
     {
         System.out.println(_.jc);
 
-        System.out.println("Actions:");
+        System.out.printf("Actions: (%d)%n", _.scenario.getActions().size());
         for (Entry<Long, LinkedList<TAction>> entry : _.scenario.getActions().entrySet())
         {
             System.out.printf("time: %d%n", entry.getKey());
@@ -167,7 +175,7 @@ public class Scenario implements IScenario
             {
                 if (action.getCommand().getCall() != null)
                 {
-                    System.out.printf("call: %s%n\targuments:%n", action.getCommand().getCall().getMethod());
+                    System.out.printf("call: %s (rep: %d <= %d)%n\targuments:%n", action.getCommand().getCall().getMethod(), action.getRecurrence().getCount(), action.getRecurrence().getRepeatUntil());
                     for (Argument arg : action.getCommand().getCall().getArguments())
                     {
                         System.out.printf("\t\t%s %s (%s, %s)%n", arg.getArgumentOrder(), arg.getVal(), arg.getVal() == null ? "null" : arg.getVal().getClass(), arg.getType());
@@ -176,7 +184,14 @@ public class Scenario implements IScenario
                 if (action.getCommand().getEvent() != null)
                 {
                 	Value arg = action.getCommand().getEvent().getArgument();
-                    System.out.printf("event: %s (%s, %s)%n", arg != null ? arg.getVal() : "void", arg.getType(), arg.getVal() != null ? arg.getVal().getClass().getCanonicalName() : "void");
+                    System.out.printf(
+                    	"event: (rep: %d <= %d) %s (%s, %s)%n",
+                    	action.getRecurrence().getCount(),
+                    	action.getRecurrence().getRepeatUntil(),
+                    	arg != null ? arg.getVal() : "void",
+                    	arg.getType(),
+                    	arg.getVal() != null ? arg.getVal().getClass().getCanonicalName() : "void"
+                    );
                 }
             }
         }
@@ -195,7 +210,7 @@ public class Scenario implements IScenario
             System.out.println(e.getMessage());
         }
     }
-
+    
     private ActionsMap actions;
     
     private List<TAction> currentTimeList;

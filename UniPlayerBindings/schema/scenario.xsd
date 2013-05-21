@@ -295,7 +295,7 @@
 	<xs:complexType name="TSettings">
 		<xs:sequence>
 			<xs:element name="time-limit" type="TPositiveLong" default="9223372036854775807"  minOccurs="0" maxOccurs="1" />
-			<xs:element name="simul-step-delay" type="TPositiveLong" default="1"  minOccurs="0" maxOccurs="1" />
+			<xs:element name="simul-step-delay" type="TNonNegativeLong" default="0"  minOccurs="0" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	

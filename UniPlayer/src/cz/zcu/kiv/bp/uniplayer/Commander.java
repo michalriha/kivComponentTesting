@@ -103,7 +103,7 @@ public class Commander implements CommandProvider
             case ("DIAG"):
                 _.ldr.diag();
                 break;
-            
+                
             default:
                 System.out.printf("Unknown command!%n");
                 _.getHelp();

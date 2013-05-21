@@ -201,7 +201,6 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
     public TValue marshal(Value arg) throws Exception
     {
         TValue ret = new TValue();
-
         Class<?> clazz = arg.getType();
 
         if (clazz == String.class)
@@ -210,31 +209,31 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
         }
         else if (clazz == Short.TYPE /*clazz.equals(Short.class) || clazz.equals(short.class)*/)
         {
-        	ret.setShort(this.createElement((short) arg.getVal(), short.class, "short"));
+        	ret.setShort(this.createElement((Short) arg.getVal(), short.class, "short"));
         }
         else if (clazz == Integer.TYPE /*clazz.equals(Integer.class) || clazz.equals(int.class)*/)
         {
-        	ret.setInt(this.createElement((int) arg.getVal(), int.class, "int"));
+        	ret.setInt(this.createElement((Integer) arg.getVal(), int.class, "int"));
         }
         else if (clazz == Long.TYPE /*clazz.equals(Long.class) || clazz.equals(long.class)*/)
         {
-        	ret.setLong(this.createElement((long) arg.getVal(), long.class, "long"));
+        	ret.setLong(this.createElement((Long) arg.getVal(), long.class, "long"));
         }
         else if (clazz == Float.TYPE /*clazz.equals(Float.class) || clazz.equals(float.class)*/)
         {
-        	ret.setFloat(this.createElement((float) arg.getVal(), float.class, "float"));
+        	ret.setFloat(this.createElement((Float) arg.getVal(), float.class, "float"));
         }
         else if (clazz == Double.TYPE /*clazz.equals(Double.class) || clazz.equals(double.class)*/)
         {
-        	ret.setDouble(this.createElement((double) arg.getVal(), double.class, "double"));
+        	ret.setDouble(this.createElement((Double) arg.getVal(), double.class, "double"));
         }
         else if (clazz == Byte.TYPE /*clazz.equals(Byte.class) || clazz.equals(byte.class)*/)
         {
-        	ret.setByte(this.createElement((byte) arg.getVal(), byte.class, "byte"));
+        	ret.setByte(this.createElement((Byte) arg.getVal(), byte.class, "byte"));
         }
         else if (clazz == Boolean.TYPE /*clazz.equals(Boolean.class) || clazz.equals(boolean.class)*/)
         {
-        	ret.setBoolean(this.createElement((boolean) arg.getVal(), boolean.class, "boolean"));
+        	ret.setBoolean(this.createElement((Boolean) arg.getVal(), boolean.class, "boolean"));
         }
         else if (clazz == BigInteger.class)
         {
