@@ -17,7 +17,7 @@ public class ArgumentsList extends ArrayList<Argument>
         
         for (int i = 0; i < this.size(); i++)
         {
-            ret[i] = this.get(i).getVal().getClass();
+            ret[i] = this.get(i).getValue().getClass();
         }
         
         return ret;
@@ -29,7 +29,7 @@ public class ArgumentsList extends ArrayList<Argument>
         
         for (int i = 0; i < this.size(); i++)
         {
-            ret[i] = this.get(i).getVal();
+            ret[i] = this.get(i).getValue();
         }
         
         return ret;

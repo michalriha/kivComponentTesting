@@ -23,8 +23,10 @@ public class ArgumentsListAdapter extends XmlAdapter<TArgumentsList, ArgumentsLi
             Argument arg = new Argument();
             arg.setArgumentOrder(i);
             arg.setType(sortedArguments.get(i).getType());
-            arg.setVal(sortedArguments.get(i).getVal());
-
+            arg.setValue(sortedArguments.get(i).getValue());
+            arg.setAdaptedTypeWrapper(sortedArguments.get(i).getAdaptedTypeWrapper());
+            arg.setXmlTypeWrapper(sortedArguments.get(i).getXmlTypeWrapper());
+            
             ret.getArgument().add(arg);
         }
         

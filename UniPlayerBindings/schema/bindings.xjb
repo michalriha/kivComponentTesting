@@ -2,6 +2,7 @@
 <jaxb:bindings version="1.0"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
 	schemaLocation="scenario.xsd" node="/xs:schema">
 	
 	<jaxb:bindings node="//xs:element[@type='TArgumentsList']" multiple="true" required="false">
@@ -28,21 +29,117 @@
 		</jaxb:property>
 	</jaxb:bindings>
 	
+	<jaxb:bindings node="//xs:element[@type='TStringCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.StringCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TBigIntegerCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.BigIntegerCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TLongCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.LongCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TIntCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.IntegerCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TShortCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.ShortCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TByteCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.ByteCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TDoubleCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.DoubleCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TBigDecimalCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.BigDecimalCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TFloatCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.FloatCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TBooleanCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.BooleanCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@type='TFileCollection']">
+		<jaxb:property>
+			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.FileCollection" />
+		</jaxb:property>
+	</jaxb:bindings>
+	
 	<jaxb:bindings node="//xs:element[@type='TRecurrence']">
 		<jaxb:property>
 			<jaxb:baseType name="cz.zcu.kiv.bp.uniplayer.bindings.adapted.Recurrence" />
 		</jaxb:property>
 	</jaxb:bindings>
 
-	<jaxb:bindings node="//xs:complexType[@name='TValue']//xs:element[@name='file']">
-		<jaxb:property>
-			<jaxb:baseType>
-				<jaxb:javaType name="java.io.File"
-					parseMethod="cz.zcu.kiv.bp.uniplayer.bindings.adapted.FileAdapter.parse"
-					printMethod="cz.zcu.kiv.bp.uniplayer.bindings.adapted.FileAdapter.print"
-				/>
-			</jaxb:baseType>
-		</jaxb:property>
+	<jaxb:bindings node="//xs:simpleType[@name='TFile']">
+		<jaxb:bindings>
+			<xjc:javaType name="java.io.File" adapter="cz.zcu.kiv.bp.uniplayer.bindings.FileAdapter" />
+		</jaxb:bindings>
 	</jaxb:bindings>
+	
+	<jaxb:bindings node="//xs:extension[@base='TCollection']/xs:sequence/xs:element" multiple="true" >
+		<jaxb:property name="items" />
+	</jaxb:bindings>
+	
+	<jaxb:bindings node="//xs:extension[@base='TCollectionItem']/xs:sequence/xs:element" multiple="true">
+		<jaxb:property name="value" />
+	</jaxb:bindings>
+	
+	<jaxb:bindings node="//xs:simpleType[@name='TValueType']">
+		<jaxb:typesafeEnumClass />
+	</jaxb:bindings>
+	
+	<jaxb:bindings node="//xs:simpleType[@name='TCollectionType']">
+		<jaxb:typesafeEnumClass />
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:complexType[@name='TCollection']">
+		<jaxb:class ref="cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollection" />
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:complexType[@name='TCollectionItem']">
+		<jaxb:class ref="cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem" />
+	</jaxb:bindings>
+
+<!-- 	<jaxb:bindings node="//xs:complexType[@name='TValue']//xs:element[@name='file']"> -->
+<!-- 		<jaxb:property> -->
+<!-- 			<jaxb:baseType> -->
+<!-- 				<jaxb:javaType name="java.io.File" -->
+<!-- 					parseMethod="cz.zcu.kiv.bp.uniplayer.bindings.adapted.FileAdapter.parse" -->
+<!-- 					printMethod="cz.zcu.kiv.bp.uniplayer.bindings.adapted.FileAdapter.print" -->
+<!-- 				/> -->
+<!-- 			</jaxb:baseType> -->
+<!-- 		</jaxb:property> -->
+<!-- 	</jaxb:bindings> -->
 
 </jaxb:bindings>

@@ -9,8 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,8 +26,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
-import javax.xml.bind.helpers.DefaultValidationEventHandler;
-import javax.xml.namespace.QName;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
@@ -51,8 +47,10 @@ import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Value;
 public class Scenario implements IScenario
 {
     public static final String
-        SCHEMA_FILE           = "schema/scenario.xsd",
-        BINDINGS_PACKAGE      = "cz.zcu.kiv.bp.uniplayer.bindings:cz.zcu.kiv.bp.uniplayer.bindings.adapted";
+        SCHEMA_FILE      = "schema/scenario.xsd",
+        BINDINGS_PACKAGE = "cz.zcu.kiv.bp.uniplayer.bindings"
+        		+ ":cz.zcu.kiv.bp.uniplayer.bindings.basics"
+        		+ ":cz.zcu.kiv.bp.uniplayer.bindings.adapted";
 
     private Scenario _ = this;
     
@@ -85,7 +83,13 @@ public class Scenario implements IScenario
 		_.u = jc.createUnmarshaller();
         _.m = jc.createMarshaller();
         _.u.setSchema(_.sch);
-        _.u.setEventHandler(new DefaultValidationEventHandler());
+        _.u.setEventHandler(new ValidationEventHandler() {
+			@Override
+			public boolean handleEvent(ValidationEvent event) {
+				System.out.println(event.getMessage());
+				return true;
+			}
+		});
         _.m.setSchema(_.sch);
         _.m.setEventHandler(new ValidationEventHandler() {
 			@Override
@@ -95,7 +99,7 @@ public class Scenario implements IScenario
 			}
 		});
         _.m.setProperty("jaxb.formatted.output", true);
-        
+
         _.scenario = new TProject();
         _.scenario.setSettings(new TSettings());
         _.scenario.setActions(new ActionsMap());
@@ -154,28 +158,13 @@ public class Scenario implements IScenario
 	    	OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
     	)
     	{
-            JAXBElement<TProject> je = new JAXBElement<TProject>(
-                new QName("", "project"),
-                TProject.class,
-                _.scenario
-            );
+    		
+    		ObjectFactory of = new ObjectFactory();
+            JAXBElement<TProject> je = of.createProject(_.scenario);
+            
             _.m.marshal(je, sw);
             osw.write(sw.toString());
     	}
-    	
-//        try
-//        (
-//        	OutputStream os = new FileOutputStream(new File(fileName));
-//        	OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-//        )
-//        {
-//            JAXBElement<TProject> je = new JAXBElement<TProject>(
-//                new QName("", "project"),
-//                TProject.class,
-//                _.scenario
-//            );
-//            _.m.marshal(je, osw);
-//        }
     }
     
     /**
@@ -196,7 +185,7 @@ public class Scenario implements IScenario
                     System.out.printf("call: %s (rep: %d <= %d)%n\targuments:%n", action.getCommand().getCall().getMethod(), action.getRecurrence().getCount(), action.getRecurrence().getRepeatUntil());
                     for (Argument arg : action.getCommand().getCall().getArguments())
                     {
-                        System.out.printf("\t\t%s %s (%s, %s)%n", arg.getArgumentOrder(), arg.getVal(), arg.getVal() == null ? "null" : arg.getVal().getClass(), arg.getType());
+                        System.out.printf("\t\t%s %s (%s, %s)%n", arg.getArgumentOrder(), arg.getValue(), arg.getValue() == null ? "null" : arg.getValue().getClass(), arg.getType());
                     }
                 }
                 if (action.getCommand().getEvent() != null)
@@ -206,9 +195,9 @@ public class Scenario implements IScenario
                     	"event: (rep: %d <= %d) %s (%s, %s)%n",
                     	action.getRecurrence().getCount(),
                     	action.getRecurrence().getRepeatUntil(),
-                    	arg != null ? arg.getVal() : "void",
+                    	arg != null ? arg.getValue() : "void",
                     	arg.getType(),
-                    	arg.getVal() != null ? arg.getVal().getClass().getCanonicalName() : "void"
+                    	arg.getValue() != null ? arg.getValue().getClass().getCanonicalName() : "void"
                     );
                 }
             }
@@ -216,12 +205,12 @@ public class Scenario implements IScenario
         
         try
         {
-            JAXBElement<TProject> je = new JAXBElement<TProject>(
-                new QName("", "project"),
-                TProject.class,
-                _.scenario
-            );
-            _.m.marshal(je, System.out);
+            ObjectFactory of = new ObjectFactory();
+            JAXBElement<TProject> je = of.createProject(_.scenario);
+            
+            StringWriter sw = new StringWriter();
+            _.m.marshal(je, sw);
+            System.out.println(sw);
         }
         catch (JAXBException e)
         {

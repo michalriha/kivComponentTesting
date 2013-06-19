@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.xml,
  javax.xml.bind,
  javax.xml.validation,
+ org.eclipse.persistence.jaxb;version="2.5.0",
  org.osgi.framework;version="1.3.0",
  org.osgi.service.event;version="1.3.0",
  org.xml.sax

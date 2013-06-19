@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<project>
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.kiv.zcu.cz/component-testing/player"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
     <settings>
         <time-limit>75600</time-limit>
         <simul-step-delay>14</simul-step-delay>
@@ -25,10 +26,13 @@
                 <call service="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IDisplay" method="Render">
                     <arguments>
                         <argument ord-num="0">
-                            <file>1;7</file>
+                            <File>1;7</File>
                         </argument>
                         <argument ord-num="1">
                             <string>kokos</string>
+                        </argument>
+                        <argument ord-num="2">
+                            <null base-type="String" />
                         </argument>
                     </arguments>
                 </call>
@@ -77,19 +81,19 @@
                             <short>16384</short>
                         </argument>
                         <argument ord-num="2">
-                            <intList type="LinkedList">
-                                <int>1</int>
-                                <int>2</int>
-                            </intList>
+                            <ints type="LinkedList">
+                                <item ord-num="0"><int>1</int></item>
+                                <item ord-num="1"><int>2</int></item>
+                            </ints>
                         </argument>
                         <argument ord-num="3">
-                            <byteArrayList type="ArrayList"/>
+                            <bytes type="ArrayList"/>
                         </argument>
                         <argument ord-num="4">
-                            <longList type="array">
-                                <long>1</long>
-                                <long>2</long>
-                            </longList>
+                            <longs type="array">
+                                <item ord-num="0"><long>1</long> </item>
+                                <item ord-num="1"><long>2</long> </item>
+                            </longs>
                         </argument>
                     </arguments>
                 </call>

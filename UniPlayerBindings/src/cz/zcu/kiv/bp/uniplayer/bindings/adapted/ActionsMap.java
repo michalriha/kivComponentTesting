@@ -8,8 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import cz.zcu.kiv.bp.uniplayer.bindings.TAction;
 
-
-@XmlJavaTypeAdapter(ActionsMapAdapter.class)
+@XmlJavaTypeAdapter(cz.zcu.kiv.bp.uniplayer.bindings.adapted.ActionsMapAdapter.class)
 public class ActionsMap extends TreeMap<Long, LinkedList<TAction>>
 {
     private BigInteger stepsCount = BigInteger.ZERO;

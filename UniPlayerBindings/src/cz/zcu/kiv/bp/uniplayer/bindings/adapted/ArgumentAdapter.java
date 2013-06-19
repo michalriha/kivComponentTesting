@@ -8,6 +8,10 @@ package cz.zcu.kiv.bp.uniplayer.bindings.adapted;
 //import java.util.List;
 //
 //import javax.xml.bind.JAXBElement;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import cz.zcu.kiv.bp.uniplayer.bindings.TArgument;
@@ -37,7 +41,9 @@ public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
         Value unmVal = valAdapt.unmarshal((TValue) arg);
         Argument ret = new Argument();
         ret.setType(unmVal.getType());
-        ret.setVal(unmVal.getVal());
+        ret.setValue(unmVal.getValue());
+        ret.setAdaptedTypeWrapper(unmVal.getAdaptedTypeWrapper());
+        ret.setXmlTypeWrapper(unmVal.getXmlTypeWrapper());
         ret.setArgumentOrder(arg.getOrdNum());
 
         return ret;
@@ -45,40 +51,62 @@ public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
 
     @Override
     public TArgument marshal(Argument arg) throws Exception
-    {   
+    {
         ValueAdapter valAdapt = new ValueAdapter();
         TValue marVal = valAdapt.marshal(arg);
         TArgument ret = createArgumentFromValue(marVal);
         ret.setOrdNum(arg.getArgumentOrder());
+       
         return ret;
     }
 
-	private TArgument createArgumentFromValue(TValue marVal) {
+	private TArgument createArgumentFromValue(TValue marVal)
+	{
 		TArgument ret = new TArgument();
-        ret.setLong(marVal.getLong());
-        ret.setInt(marVal.getInt());
-        ret.setShort(marVal.getShort());
-        ret.setByte(marVal.getByte());
-        ret.setDouble(marVal.getDouble());
-        ret.setFloat(marVal.getFloat());
-        ret.setBigDecimal(marVal.getBigDecimal());
-        ret.setBigInteger(marVal.getBigInteger());
-        ret.setBoolean(marVal.getBoolean());
-        ret.setBase64(marVal.getBase64());
-        ret.setString(marVal.getString());
-        ret.setFile(marVal.getFile());
-        ret.setLongList(marVal.getLongList());
-        ret.setIntList(marVal.getIntList());
-        ret.setShortList(marVal.getShortList());
-        ret.setByteList(marVal.getByteList());
-        ret.setDoubleList(marVal.getDoubleList());
-        ret.setFloatList(marVal.getFloatList());
-        ret.setBigDecimalList(marVal.getBigDecimalList());
-        ret.setBigIntegerList(marVal.getBigIntegerList());
-        ret.setBooleanList(marVal.getBooleanList());
-        ret.setByteArrayList(marVal.getByteArrayList());
-        ret.setStringList(marVal.getStringList());
-        ret.setFileList(marVal.getFileList());
+		
+		Object foundValue = null;
+				
+		for (Method met : TValue.class.getDeclaredMethods())
+		{
+			// skip non public method
+			if ((met.getModifiers() & Modifier.PUBLIC) == 0) continue;
+			
+			// skip non getter method
+			if (!met.getName().startsWith("get")) continue;
+			
+			// try to invoke getter
+			try
+			{
+				
+				foundValue = met.invoke(marVal, (Object[]) null);
+				// if the getter returns value -> we have found something
+				// and therefore can end seeking, else try another method
+				if (foundValue == null) continue;
+				else
+				{
+					String setterName = "set" + met.getName().substring(3);
+					try
+					{
+						met = TArgument.class.getMethod(setterName, foundValue.getClass());
+					}
+					catch (NoSuchMethodException e)
+					{
+						e.printStackTrace(); break;
+					}
+					met.invoke(ret, foundValue);
+					break;
+				}
+			}
+			catch (IllegalAccessException
+					| IllegalArgumentException
+					| InvocationTargetException
+					| SecurityException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return ret;
 	}
 }

@@ -1,196 +1,239 @@
 package cz.zcu.kiv.bp.uniplayer.bindings.adapted;
 
-import java.io.File;
 import java.lang.reflect.Array;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import cz.zcu.kiv.bp.uniplayer.bindings.ObjectFactory;
-import cz.zcu.kiv.bp.uniplayer.bindings.TBigDecimalList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TBigIntegerList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TBooleanList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TByteArrayList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TByteList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TCollection;
-import cz.zcu.kiv.bp.uniplayer.bindings.TDoubleList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TFileList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TFloatList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TIntList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TLongList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TShortList;
-import cz.zcu.kiv.bp.uniplayer.bindings.TStringList;
+import cz.zcu.kiv.bp.uniplayer.bindings.TCollectionType;
+import cz.zcu.kiv.bp.uniplayer.bindings.TNull;
 import cz.zcu.kiv.bp.uniplayer.bindings.TValue;
+import cz.zcu.kiv.bp.uniplayer.bindings.TValueType;
+import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollection;
 
 
 public class ValueAdapter extends XmlAdapter<TValue, Value>
 {
 
+	private ValueAdapter _ = this;
+	/**
+	 * Walks through unmarshalled object and extracts contained value.
+	 * Given that TValue can only contain one value, it's enough to end after single found value.
+	 * May return null in case something goes wrong during unmarshalling process.
+	 * @param probed instance of TValue
+	 * @return transported value from probed instance
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
+	public Object probeUnMarshalledInstanceForValue(TValue v)
+	throws IllegalAccessException, InvocationTargetException
+	{		
+		Object ret = null;	
+		// get all method of TValue class - presumes that TValue class
+		// has only setters/getters generated from schema.
+		for (Method met : TValue.class.getDeclaredMethods())
+		{
+			// skip non public method
+			if ((met.getModifiers() & Modifier.PUBLIC) == 0) continue;
+			
+			// skip non getter method
+			if (!met.getName().startsWith("get")) continue;
+			
+			// try to invoke getter
+			ret = met.invoke(v, (Object[]) null);
+			
+			// if the getter returns value -> we have found something
+			// and therefore can end seeking, else try another method
+			if (ret == null) continue;
+			else
+			{
+//				System.out.println("# found: " + met.getName() + " : " + (ret != null ? ret.getClass() : void.class).getSimpleName());
+				break;
+			}
+		}
+		return ret;
+	}
+
+	/**
+	 * Extracts collection object in proper shape given by CollectionType
+	 * (array/linkedlist/arraylist) and stores that object into Value instance.
+	 * @param Collection to transform.
+	 * @param Destination for transformed collection.
+	 */
+	private void extractAndStoreProperCollection(MyCollection<Object> col, Value ret)
+	{		
+		//save XmlType wrapper class
+		ret.setXmlTypeWrapper(col.getXmlType());
+		
+		// save AdaptedType wrapper class
+		@SuppressWarnings("unchecked")
+		Class<? extends MyCollection<?>> adaptedTypeWrapper = (Class<? extends MyCollection<?>>) col.getClass();
+		ret.setAdaptedTypeWrapper(adaptedTypeWrapper);
+		
+		// transform collection to proper object
+		List<Object> list;
+		switch (col.getCollectionType())
+		{
+			case ARRAY:
+				ret.setValue(col.toArray());
+				ret.setType(Array.newInstance(col.getComponentType(), 0).getClass());
+				break;
+				
+			case ARRAY_LIST:
+				list = new ArrayList<>(col);
+				ret.setValue(list);
+				ret.setType(ArrayList.class);
+				break;
+				
+			case LINKED_LIST:
+				list = new LinkedList<>(col);
+				ret.setValue(list);
+				ret.setType(LinkedList.class);
+				break;			
+		}
+	}
+
+	/**
+	 * Extracts collection transported as Value instance and transforms it into proper XmlType object.
+	 * @param value which to extract from
+	 * @return transformed collection 
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 */
+	private MyCollection<Object> extractAndTransformCollection2XmlType(Value value)
+	throws InstantiationException, IllegalAccessException
+	{
+		@SuppressWarnings("unchecked")
+		MyCollection<Object> col = (MyCollection<Object>) value.getAdaptedTypeWrapper().newInstance();
+		
+		@SuppressWarnings("unchecked")
+		Class<? extends TCollection<Object>> xmlTypeWrapper = (Class<? extends TCollection<Object>>) value.getXmlTypeWrapper();
+		col.setXmlType(xmlTypeWrapper);
+
+		Class<?> clazz = value.getType();
+		if (clazz.isArray())
+		{
+			col.setCollectionType(TCollectionType.ARRAY);
+			for (Object item : (Object[]) value.getValue())
+			{
+				col.add(item);
+			}
+		}
+		else if (List.class.isAssignableFrom(clazz))
+		{
+			if (ArrayList.class.isAssignableFrom(clazz))
+			{
+				col.setCollectionType(TCollectionType.ARRAY_LIST);
+			}
+			else if (LinkedList.class.isAssignableFrom(clazz))
+			{
+				col.setCollectionType(TCollectionType.LINKED_LIST);
+			}
+			
+			@SuppressWarnings("unchecked")
+			List<Object> list = (List<Object>) value.getValue();
+			col.addAll(list);
+		}
+		return col;
+	}
+
+	/**
+	 * Finds proper setter method and invokes it on return object with given value.
+	 * Separate value type is required in case of the value could be null.
+	 * So far not possible. For null value use TNull elements instead.
+	 * @param ret Return object to set the value into.
+	 * @param paramClass value type
+	 * @param paramValue value object
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
+	private void setValueToReturnedObject(
+		TValue ret,
+		Class<?> paramClass,
+		Object paramValue)
+	throws IllegalAccessException, InvocationTargetException
+	{
+		for (Method met : TValue.class.getMethods())
+		{
+			if (met.getName().startsWith("set"))
+			{
+				if (met.getParameterTypes().length == 1)
+				{	
+					if (met.getParameterTypes()[0] == paramClass)
+					{ // found setter compatible with this collectionWrapper
+						met.invoke(ret, paramValue);
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	private TNull createNullElement(Value v)
+	throws InstantiationException, IllegalAccessException
+	{
+		TNull nul = new TNull();
+		if (v.getXmlTypeWrapper() != null)
+		{ // found wrapped value (collection)
+			nul.setBaseType(
+				TValueType.fromBaseClass(
+					v.getType(),
+					v.getXmlTypeWrapper().newInstance().getComponentType()
+				)
+			);
+		}
+		else
+		{ // simple value
+			nul.setBaseType(
+				TValueType.fromBaseClass(
+					v.getType(),
+					null
+				)
+			);
+		}
+		return nul;
+	}
+	
     @Override
     public Value unmarshal(TValue arg) throws Exception
     {
         Value ret = new Value();
-                
-        if (arg.getString() != null)
-        {
-        	ret.setType(String.class);
-            ret.setVal(arg.getString().getValue());
-        }
-        else if (arg.getShort() != null)
-        {
-        	ret.setType(short.class);
-            ret.setVal(arg.getShort().getValue());
-        }
-        else if (arg.getInt() != null)
-        {
-        	ret.setType(int.class);
-            ret.setVal(arg.getInt().getValue());
-        }
-        else if (arg.getLong() != null)
-        {
-        	ret.setType(long.class);
-            ret.setVal(arg.getLong().getValue());
-        }
-        else if (arg.getFloat() != null)
-        {
-        	ret.setType(float.class);
-            ret.setVal(arg.getFloat().getValue());
-        }
-        else if (arg.getDouble() != null)
-        {
-        	ret.setType(double.class);
-            ret.setVal(arg.getDouble().getValue());
-        }
-        else if (arg.getByte() != null)
-        {
-        	ret.setType(byte.class);
-            ret.setVal(arg.getByte().getValue());
-        }
-        else if (arg.getBoolean() != null)
-        {
-        	ret.setType(boolean.class);
-            ret.setVal(arg.getBoolean().getValue());
-        }
-        else if (arg.getBigInteger() != null)
-        {
-        	ret.setType(BigInteger.class);
-            ret.setVal(arg.getBigInteger().getValue());
-        }
-        else if (arg.getBigDecimal() != null)
-        {
-        	ret.setType(BigDecimal.class);
-            ret.setVal(arg.getBigDecimal().getValue());
-        }
-        else if (arg.getBase64() != null)
-        {
-        	ret.setType(byte[].class);
-            ret.setVal(arg.getBase64().getValue());
-        }
-        else if (arg.getFile() != null)
-        {
-        	ret.setType(File.class);
-        	ret.setVal(arg.getFile());
-        }
-        else if (arg.getStringList() != null)
-        {
-        	ret.setType(TStringList.class);
-        	TStringList listElem =  arg.getStringList();
-        	List<String> list = listElem.getString();
-        	Object val = this.createListValue(listElem, list, "");
-        	ret.setVal(val);
-        }
-        else if (arg.getLongList() != null)
-        {
-        	ret.setType(TLongList.class);
-        	TLongList listElem =  arg.getLongList();
-        	List<Long> list = listElem.getLong();
-        	Object val = this.createListValue(listElem, list, 0L);
-        	ret.setVal(val);
-        }
-        else if (arg.getIntList() != null)
-        {
-        	ret.setType(TIntList.class);
-        	TIntList listElem =  arg.getIntList();
-        	List<Integer> list = listElem.getInt();
-        	Object val = this.createListValue(listElem, list, 0);
-        	ret.setVal(val);
-        }
-        else if (arg.getShortList() != null)
-        {
-        	ret.setType(TShortList.class);
-        	TShortList listElem =  arg.getShortList();
-        	List<Short> list = listElem.getShort();
-        	Object val = this.createListValue(listElem, list, (short)0);
-        	ret.setVal(val);
-        }
-        else if (arg.getByteList() != null)
-        {
-        	ret.setType(TByteList.class);
-        	TByteList listElem =  arg.getByteList();
-        	List<Byte> list = listElem.getByte();
-        	Object val = this.createListValue(listElem, list, (byte)0x00);
-        	ret.setVal(val);
-        }
-        else if (arg.getDoubleList() != null)
-        {
-        	ret.setType(TDoubleList.class);
-        	TDoubleList listElem =  arg.getDoubleList();
-        	List<Double> list = listElem.getDouble();
-        	Object val = this.createListValue(listElem, list, 0.0);
-        	ret.setVal(val);
-        }
-        else if (arg.getFloatList() != null)
-        {
-        	ret.setType(TFloatList.class);
-        	TFloatList listElem =  arg.getFloatList();
-        	List<Float> list = listElem.getFloat();
-        	Object val = this.createListValue(listElem, list, 0.0f);
-        	ret.setVal(val);
-        }
-        else if (arg.getBigDecimalList() != null)
-        {
-        	ret.setType(TBigDecimalList.class);
-        	TBigDecimalList listElem =  arg.getBigDecimalList();
-        	List<BigDecimal> list = listElem.getBigDecimal();
-        	Object val = this.createListValue(listElem, list, BigDecimal.ZERO);
-        	ret.setVal(val);
-        }
-        else if (arg.getBigIntegerList() != null)
-        {
-        	ret.setType(TBigIntegerList.class);
-        	TBigIntegerList listElem =  arg.getBigIntegerList();
-        	List<BigInteger> list = listElem.getBigInteger();
-        	Object val = this.createListValue(listElem, list, BigInteger.ZERO);
-        	ret.setVal(val);
-        }
-        else if (arg.getBooleanList() != null)
-        {
-        	ret.setType(TBooleanList.class);
-        	TBooleanList listElem =  arg.getBooleanList();
-        	List<Boolean> list = listElem.getBoolean();
-        	Object val = this.createListValue(listElem, list, false);
-        	ret.setVal(val);
-        }
-        else if (arg.getFileList() != null)
-        {
-        	ret.setType(TFileList.class);
-        	TFileList listElem =  arg.getFileList();
-        	List<String> list = listElem.getFile();
-        	Object val = this.createListValue(listElem, list, ".");
-        	ret.setVal(val);
-        }
-        else if (arg.getByteArrayList() != null)
-        {
-        	ret.setType(TByteArrayList.class);
-        	TByteArrayList listElem =  arg.getByteArrayList();
-        	List<byte[]> list = listElem.getBase64();
-        	Object val = this.createListValue(listElem, list, new byte[0]);
-        	ret.setVal(val);
-        }
+        
+        // find contained value
+     	Object foundValue = _.probeUnMarshalledInstanceForValue(arg);
+     	
+     	if (foundValue == null)
+     	{ // should not occur during unmarshalling of valid xml file
+     		throw new JAXBException("Null values in TValue element are not allowed!");
+     	}
+     	else if (foundValue instanceof JAXBElement)
+     	{
+     		foundValue = JAXBIntrospector.getValue(foundValue);
+     	}
+		else if (foundValue instanceof TNull)
+		{ // the instance is transporting null-type value
+			ret.setValue(null);
+			ret.setType(((TNull) foundValue).getBaseType().baseClass());
+			ret.setXmlTypeWrapper(((TNull) foundValue).getBaseType().wrapperClass());
+		}
+		else if (foundValue instanceof MyCollection)
+		{ // value is some kind of collection
+			@SuppressWarnings("unchecked")
+			MyCollection<Object> col = (MyCollection<Object>) foundValue;
+			_.extractAndStoreProperCollection(col, ret);
+		}
+		else
+		{ // value is a simple types
+			ret.setValue(foundValue);
+			ret.setType(foundValue.getClass());
+		}
         
         return ret;
     }
@@ -199,203 +242,21 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
     public TValue marshal(Value arg) throws Exception
     {
         TValue ret = new TValue();
-        Class<?> clazz = arg.getType();
 
-        ObjectFactory of = new ObjectFactory();
-        if (clazz == String.class)
-        {
-        	ret.setString(of.createTValueString((String) arg.getVal()));
-        	//ret.setString(this.createElement((String) arg.getVal(), String.class, "string"));
-        }
-        else if (clazz == Short.TYPE || clazz == Short.class)
-        {
-        	ret.setShort(of.createTValueShort((Short) arg.getVal()));
-        	//ret.setShort(this.createElement((Short) arg.getVal(), short.class, "short"));
-        }
-        else if (clazz == Integer.TYPE || clazz == Integer.class)
-        {
-        	ret.setInt(of.createTValueInt((Integer) arg.getVal()));
-        	//ret.setInt(this.createElement((Integer) arg.getVal(), int.class, "int"));
-        }
-        else if (clazz == Long.TYPE || clazz == Long.class)
-        {
-        	ret.setLong(of.createTValueLong((Long) arg.getVal()));
-        	//ret.setLong(this.createElement((Long) arg.getVal(), long.class, "long"));
-        }
-        else if (clazz == Float.TYPE  || clazz == Float.class/*clazz.equals(Float.class) || clazz.equals(float.class)*/)
-        {
-        	ret.setFloat(of.createTValueFloat((Float) arg.getVal()));
-        	//ret.setFloat(this.createElement((Float) arg.getVal(), float.class, "float"));
-        }
-        else if (clazz == Double.TYPE || clazz == Double.class/*clazz.equals(Double.class) || clazz.equals(double.class)*/)
-        {
-        	ret.setDouble(of.createTValueDouble((Double) arg.getVal()));
-        	//ret.setDouble(this.createElement((Double) arg.getVal(), double.class, "double"));
-        }
-        else if (clazz == Byte.TYPE || clazz == Byte.class /*clazz.equals(Byte.class) || clazz.equals(byte.class)*/)
-        {
-        	ret.setByte(of.createTValueByte((Byte) arg.getVal()));
-        	//ret.setByte(this.createElement((Byte) arg.getVal(), byte.class, "byte"));
-        }
-        else if (clazz == Boolean.TYPE || clazz == Boolean.class /*clazz.equals(Boolean.class) || clazz.equals(boolean.class)*/)
-        {
-        	ret.setBoolean(of.createTValueBoolean((Boolean) arg.getVal()));
-        	//ret.setBoolean(this.createElement((Boolean) arg.getVal(), boolean.class, "boolean"));
-        }
-        else if (clazz == BigInteger.class)
-        {
-        	ret.setBigInteger(of.createTValueBigInteger((BigInteger) arg.getVal()));
-        	//ret.setBigInteger(this.createElement((BigInteger) arg.getVal(), BigInteger.class, "BigInteger"));
-        }
-        else if (clazz == BigDecimal.class)
-        {
-        	ret.setBigDecimal(of.createTValueBigDecimal((BigDecimal) arg.getVal()));
-        	//ret.setBigDecimal(this.createElement((BigDecimal) arg.getVal(), BigDecimal.class, "BigDecimal"));
-        }
-        else if (clazz == Byte[].class || clazz == byte[].class)
-        {
-        	ret.setBase64(of.createTValueBase64((byte[]) arg.getVal()));
-        	//ret.setBase64(this.createElement((byte[]) arg.getVal(), byte[].class, "base64"));
-        }
-        else if (clazz == File.class)
-        {
-        	ret.setFile((File) arg.getVal());
-        }
-        else if (clazz == TLongList.class)
-        {
-        	TLongList lngL = new TLongList();
-        	createElement(arg.getVal(), lngL, lngL.getLong(), 1L);
-        	ret.setLongList(lngL);
-        }
-        else if (clazz == TIntList.class)
-        {
-        	TIntList intL = new TIntList();
-        	createElement(arg.getVal(), intL, intL.getInt(), 0);
-        	ret.setIntList(intL);
-        }
-        else if (clazz == TShortList.class)
-        {
-        	TShortList shrtL = new TShortList();
-        	createElement(arg.getVal(), shrtL, shrtL.getShort(), (short)0);
-        	ret.setShortList(shrtL);
-        }
-        else if (clazz == TByteList.class)
-        {
-        	TByteList bytL = new TByteList();
-        	createElement(arg.getVal(), bytL, bytL.getByte(), (byte) 0x00);
-        	ret.setByteList(bytL);
-        }
-        else if (clazz == TDoubleList.class)
-        {
-        	TDoubleList dblL = new TDoubleList();
-        	createElement(arg.getVal(), dblL, dblL.getDouble(), 0.0);
-        	ret.setDoubleList(dblL);
-        }
-        else if (clazz == TFloatList.class)
-        {
-        	TFloatList fltL = new TFloatList();
-        	createElement(arg.getVal(), fltL, fltL.getFloat(), 0.0f);
-        	ret.setFloatList(fltL);
-        }
-        else if (clazz == TBigDecimalList.class)
-        {
-        	TBigDecimalList bigDecL = new TBigDecimalList();
-        	createElement(arg.getVal(), bigDecL, bigDecL.getBigDecimal(), BigDecimal.ZERO);
-        	ret.setBigDecimalList(bigDecL);
-        }
-        else if (clazz == TBigIntegerList.class)
-        {
-        	TBigIntegerList bigintL = new TBigIntegerList();
-        	createElement(arg.getVal(), bigintL, bigintL.getBigInteger(), BigInteger.ZERO);
-        	ret.setBigIntegerList(bigintL);
-        }
-        else if (clazz == TBooleanList.class)
-        {
-        	TBooleanList booL = new TBooleanList();
-        	createElement(arg.getVal(), booL, booL.getBoolean(), false);
-        	ret.setBooleanList(booL);
-        }
-        else if (clazz == TFileList.class)
-        {
-        	TFileList filL = new TFileList();
-        	createElement(arg.getVal(), filL, filL.getFile(), ".");
-        	ret.setFileList(filL);
-        }
-        else if (clazz == TStringList.class)
-        {
-        	TStringList strL = new TStringList();
-        	createElement(arg.getVal(), strL, strL.getString(), "");
-        	ret.setStringList(strL);
-        }
-        else if (clazz == TByteArrayList.class)
-        {
-        	TByteArrayList bayList = new TByteArrayList();
-        	createElement(arg.getVal(), bayList, bayList.getBase64(), new byte[0]);
-        	ret.setByteArrayList(bayList);
-        }
-
+		if (arg.getValue() == null)
+		{ // found null value
+			this.setValueToReturnedObject(ret, TNull.class, this.createNullElement(arg));
+		}
+		else if (arg.getType().isArray() || List.class.isAssignableFrom(arg.getType()))
+		{ // found some sort of collection (array/list)
+			MyCollection<Object> col = _.extractAndTransformCollection2XmlType(arg);
+			this.setValueToReturnedObject(ret, col.getClass(), col);
+		}
+		else
+		{ // primitive or unknown type
+			this.setValueToReturnedObject(ret, arg.getType(), arg.getValue());
+		}
+		
         return ret;
     }
-
-	/// TODO add @SuppresWarning after testing
-	private <T extends TCollection, V extends List<U>, U> Object createListValue(T listElement, V list, U itemPrototype)
-    {    	
-		Object val = null;
-		if (listElement.getType().equals("array"))
-		{
-			val =  list.toArray( (U[]) Array.newInstance(itemPrototype.getClass(), list.size()) );
-		}
-		else if (listElement.getType().equals("LinkedList"))
-		{
-			val = new LinkedList<U>(list);
-		}
-		else if (listElement.getType().equals("ArrayList"))
-		{
-			val = list;
-		}
-		return val;
-    }
-
-	/// TODO add @SuppresWarning after testing
-	private <T extends TCollection, V extends List<U>, U> void createElement(Object value, T targetElement, V targetList, U itemPrototype)
-	{		
-//		U[] prototype = (U[]) Array.newInstance(itemPrototype.getClass(), 0);
-		
-		if (value.getClass().equals(ArrayList.class))
-		{
-			targetElement.setType("ArrayList");
-			targetList.addAll((V) value);
-		}
-		else if (value.getClass().equals(LinkedList.class))
-		{
-			targetElement.setType("LinkedList");
-			targetList.addAll((V) value);
-		}
-		else if (value.getClass().isArray() && value.getClass().getComponentType() == itemPrototype.getClass())
-		{
-			targetElement.setType("array");
-			targetList.addAll(Arrays.asList((U[]) value));
-		}
-		/*else if (value.getClass().equals(prototype.getClass()))
-		{
-			targetElement.setType("array");
-			targetList.addAll(Arrays.asList((U[]) value));
-		}*/
-	}
-	
-//	private <T> JAXBElement<T> createElement(T arg, Class<T> elemType, String elemName)
-//	{
-//		JAXBElement<T> ret = null;
-//		ret = new JAXBElement<T>(
-//			new QName("", elemName),
-//			elemType,
-//			TValue.class,
-//			arg
-//		);
-//		if (arg == null)
-//		{
-//			ret.setNil(true);
-//		}
-//		return ret;
-//	}
 }
