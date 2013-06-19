@@ -9,10 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.namespace.QName;
-
 import cz.zcu.kiv.bp.uniplayer.bindings.ObjectFactory;
 import cz.zcu.kiv.bp.uniplayer.bindings.TBigDecimalList;
 import cz.zcu.kiv.bp.uniplayer.bindings.TBigIntegerList;
