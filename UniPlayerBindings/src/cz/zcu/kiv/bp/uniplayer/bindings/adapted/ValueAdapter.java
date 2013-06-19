@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.namespace.QName;
 
+import cz.zcu.kiv.bp.uniplayer.bindings.ObjectFactory;
 import cz.zcu.kiv.bp.uniplayer.bindings.TBigDecimalList;
 import cz.zcu.kiv.bp.uniplayer.bindings.TBigIntegerList;
 import cz.zcu.kiv.bp.uniplayer.bindings.TBooleanList;
@@ -203,49 +204,61 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
         TValue ret = new TValue();
         Class<?> clazz = arg.getType();
 
+        ObjectFactory of = new ObjectFactory();
         if (clazz == String.class)
         {
-        	ret.setString(this.createElement((String) arg.getVal(), String.class, "string"));
+        	ret.setString(of.createTValueString((String) arg.getVal()));
+        	//ret.setString(this.createElement((String) arg.getVal(), String.class, "string"));
         }
         else if (clazz == Short.TYPE || clazz == Short.class)
         {
-        	ret.setShort(this.createElement((Short) arg.getVal(), short.class, "short"));
+        	ret.setShort(of.createTValueShort((Short) arg.getVal()));
+        	//ret.setShort(this.createElement((Short) arg.getVal(), short.class, "short"));
         }
         else if (clazz == Integer.TYPE || clazz == Integer.class)
         {
-        	ret.setInt(this.createElement((Integer) arg.getVal(), int.class, "int"));
+        	ret.setInt(of.createTValueInt((Integer) arg.getVal()));
+        	//ret.setInt(this.createElement((Integer) arg.getVal(), int.class, "int"));
         }
         else if (clazz == Long.TYPE || clazz == Long.class)
         {
-        	ret.setLong(this.createElement((Long) arg.getVal(), long.class, "long"));
+        	ret.setLong(of.createTValueLong((Long) arg.getVal()));
+        	//ret.setLong(this.createElement((Long) arg.getVal(), long.class, "long"));
         }
         else if (clazz == Float.TYPE  || clazz == Float.class/*clazz.equals(Float.class) || clazz.equals(float.class)*/)
         {
-        	ret.setFloat(this.createElement((Float) arg.getVal(), float.class, "float"));
+        	ret.setFloat(of.createTValueFloat((Float) arg.getVal()));
+        	//ret.setFloat(this.createElement((Float) arg.getVal(), float.class, "float"));
         }
         else if (clazz == Double.TYPE || clazz == Double.class/*clazz.equals(Double.class) || clazz.equals(double.class)*/)
         {
-        	ret.setDouble(this.createElement((Double) arg.getVal(), double.class, "double"));
+        	ret.setDouble(of.createTValueDouble((Double) arg.getVal()));
+        	//ret.setDouble(this.createElement((Double) arg.getVal(), double.class, "double"));
         }
         else if (clazz == Byte.TYPE || clazz == Byte.class /*clazz.equals(Byte.class) || clazz.equals(byte.class)*/)
         {
-        	ret.setByte(this.createElement((Byte) arg.getVal(), byte.class, "byte"));
+        	ret.setByte(of.createTValueByte((Byte) arg.getVal()));
+        	//ret.setByte(this.createElement((Byte) arg.getVal(), byte.class, "byte"));
         }
         else if (clazz == Boolean.TYPE || clazz == Boolean.class /*clazz.equals(Boolean.class) || clazz.equals(boolean.class)*/)
         {
-        	ret.setBoolean(this.createElement((Boolean) arg.getVal(), boolean.class, "boolean"));
+        	ret.setBoolean(of.createTValueBoolean((Boolean) arg.getVal()));
+        	//ret.setBoolean(this.createElement((Boolean) arg.getVal(), boolean.class, "boolean"));
         }
         else if (clazz == BigInteger.class)
         {
-        	ret.setBigInteger(this.createElement((BigInteger) arg.getVal(), BigInteger.class, "BigInteger"));
+        	ret.setBigInteger(of.createTValueBigInteger((BigInteger) arg.getVal()));
+        	//ret.setBigInteger(this.createElement((BigInteger) arg.getVal(), BigInteger.class, "BigInteger"));
         }
         else if (clazz == BigDecimal.class)
         {
-        	ret.setBigDecimal(this.createElement((BigDecimal) arg.getVal(), BigDecimal.class, "BigDecimal"));
+        	ret.setBigDecimal(of.createTValueBigDecimal((BigDecimal) arg.getVal()));
+        	//ret.setBigDecimal(this.createElement((BigDecimal) arg.getVal(), BigDecimal.class, "BigDecimal"));
         }
         else if (clazz == Byte[].class || clazz == byte[].class)
         {
-        	ret.setBase64(this.createElement((byte[]) arg.getVal(), byte[].class, "base64"));
+        	ret.setBase64(of.createTValueBase64((byte[]) arg.getVal()));
+        	//ret.setBase64(this.createElement((byte[]) arg.getVal(), byte[].class, "base64"));
         }
         else if (clazz == File.class)
         {
@@ -373,19 +386,19 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 		}*/
 	}
 	
-	private <T> JAXBElement<T> createElement(T arg, Class<T> elemType, String elemName)
-	{
-		JAXBElement<T> ret = null;
-		ret = new JAXBElement<T>(
-			new QName("", elemName),
-			elemType,
-			TValue.class,
-			arg
-		);
-		if (arg == null)
-		{
-			ret.setNil(true);
-		}
-		return ret;
-	}
+//	private <T> JAXBElement<T> createElement(T arg, Class<T> elemType, String elemName)
+//	{
+//		JAXBElement<T> ret = null;
+//		ret = new JAXBElement<T>(
+//			new QName("", elemName),
+//			elemType,
+//			TValue.class,
+//			arg
+//		);
+//		if (arg == null)
+//		{
+//			ret.setNil(true);
+//		}
+//		return ret;
+//	}
 }
