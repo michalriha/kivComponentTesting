@@ -81,17 +81,19 @@ public class Activator implements BundleActivator, IPlayer {
 			if (call != null)
 			{
 				System.out.printf(
-					" %s.%s",
+					" %s.%s (%s)",
 					call.getService(),
-					call.getMethod()
+					call.getMethod(),
+					call.getArguments()
 				);
 			}
 			else if (event != null)
 			{
 				System.out.printf(
-					" %s/%s",
+					" %s/%s[%s]",
 					event.getTopic(),
-					event.getKey()
+					event.getKey(),
+					event.getArgument()
 				);
 			}
 			System.out.println();
