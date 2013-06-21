@@ -31,7 +31,6 @@ public class UniHandler implements InvocationHandler
 		Object[] args)
 	throws Throwable
 	{
-
 		Method tmpMet = null;
 		try
 		{
