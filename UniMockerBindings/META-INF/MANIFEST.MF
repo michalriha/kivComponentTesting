@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UniMockerBindings
+Bundle-SymbolicName: cz.zcu.kiv.bp.unimocker.bindings
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Michal Říha
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: cz.zcu.kiv.bp.unimocker.bindings,
+ cz.zcu.kiv.bp.unimocker.bindings.adapted,
+ cz.zcu.kiv.bp.unimocker.bindings.basics
