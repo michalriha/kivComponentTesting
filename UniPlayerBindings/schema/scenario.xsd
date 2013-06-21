@@ -341,30 +341,6 @@
 			<xsd:element name="bools" type="TBooleanCollection" />
 			<xsd:element name="Files" type="TFileCollection" />
 			<xsd:element name="null" type="TNull" />
-<!-- 			<xsd:element name="string" type="xsd:string" nillable="true" /> -->
-<!-- 			<xsd:element name="short" type="xsd:short" nillable="true" /> -->
-<!-- 			<xsd:element name="int" type="xsd:int" nillable="true" /> -->
-<!-- 			<xsd:element name="long" type="xsd:long" nillable="true" /> -->
-<!-- 			<xsd:element name="float" type="xsd:float" nillable="true" /> -->
-<!-- 			<xsd:element name="double" type="xsd:double" nillable="true" /> -->
-<!-- 			<xsd:element name="byte" type="xsd:byte" nillable="true" /> -->
-<!-- 			<xsd:element name="boolean" type="xsd:boolean" nillable="true" /> -->
-<!-- 			<xsd:element name="BigInteger" type="xsd:integer" nillable="true" /> -->
-<!-- 			<xsd:element name="BigDecimal" type="xsd:decimal" nillable="true" /> -->
-<!-- 			<xsd:element name="base64" type="xsd:base64Binary" nillable="true" /> -->
-<!-- 			<xsd:element name="file" type="xsd:anyURI" /> -->
-<!-- 			<xsd:element name="stringList" type="TStringList" /> -->
-<!-- 			<xsd:element name="longList" type="TLongList" /> -->
-<!-- 			<xsd:element name="intList" type="TIntList" /> -->
-<!-- 			<xsd:element name="shortList" type="TShortList" /> -->
-<!-- 			<xsd:element name="doubleList" type="TDoubleList" /> -->
-<!-- 			<xsd:element name="floatList" type="TFloatList" /> -->
-<!-- 			<xsd:element name="BigDecimalList" type="TBigDecimalList" /> -->
-<!-- 			<xsd:element name="BigIntegerList" type="TBigIntegerList" /> -->
-<!-- 			<xsd:element name="booleanList" type="TBooleanList" /> -->
-<!-- 			<xsd:element name="fileList" type="TFileList" /> -->
-<!-- 			<xsd:element name="byteList" type="TByteList" /> -->
-<!-- 			<xsd:element name="byteArrayList" type="TByteArrayList" />			 -->
 		</xsd:choice>
 	</xsd:complexType>
 
