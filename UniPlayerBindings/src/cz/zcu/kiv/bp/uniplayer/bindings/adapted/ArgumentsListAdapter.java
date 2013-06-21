@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import cz.zcu.kiv.bp.uniplayer.bindings.TArgumentsList;
-import cz.zcu.kiv.bp.uniplayer.bindings.UnOrderableItemsException;
+import cz.zcu.kiv.bp.uniplayer.bindings.basics.UnOrderableItemsException;
 
 
 

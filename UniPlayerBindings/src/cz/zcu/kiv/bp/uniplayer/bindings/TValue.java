@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.*;
@@ -87,6 +88,9 @@ import cz.zcu.kiv.bp.uniplayer.bindings.adapted.*;
     "bools",
     "files",
     "_null"
+})
+@XmlSeeAlso({
+    TArgument.class
 })
 public class TValue {
 

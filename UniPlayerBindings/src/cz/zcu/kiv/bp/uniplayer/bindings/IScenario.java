@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.xml.bind.JAXBException;
 import org.xml.sax.SAXException;
 
-import cz.zcu.kiv.bp.uniplayer.bindings.InvalidFileException;
+import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
 
 public interface IScenario extends Iterable<TCommand>
 {

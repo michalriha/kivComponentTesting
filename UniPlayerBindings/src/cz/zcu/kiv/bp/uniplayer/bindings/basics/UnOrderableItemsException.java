@@ -1,4 +1,4 @@
-package cz.zcu.kiv.bp.uniplayer.bindings;
+package cz.zcu.kiv.bp.uniplayer.bindings.basics;
 
 import javax.xml.bind.JAXBException;
 

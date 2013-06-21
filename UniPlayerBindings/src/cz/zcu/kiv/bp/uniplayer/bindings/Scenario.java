@@ -34,10 +34,10 @@ import org.osgi.service.event.EventAdmin;
 import org.xml.sax.SAXException;
 
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenarioIterator;
-import cz.zcu.kiv.bp.uniplayer.bindings.InvalidFileException;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.ActionsMap;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Argument;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Value;
+import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
 
 /**
  * Scenario file loader. Provides methods for proper unmarshaling of scenario file

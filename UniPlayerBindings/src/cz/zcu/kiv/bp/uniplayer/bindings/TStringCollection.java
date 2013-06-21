@@ -51,7 +51,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem;
 @XmlType(name = "TStringCollection", propOrder = {
     "items"
 })
-public class TStringCollection  extends TCollection<String>
+public class TStringCollection extends TCollection<String>
 {
 
     @XmlElement(name = "item", type = TStringCollection.Item.class)
