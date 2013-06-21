@@ -8,7 +8,7 @@ import org.eclipse.osgi.framework.console.CommandProvider;
 import org.xml.sax.SAXException;
 
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenario;
-import cz.zcu.kiv.bp.uniplayer.bindings.InvalidFileException;
+import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
 
 /**
  * Component tester implementation
@@ -123,7 +123,7 @@ public class Commander implements CommandProvider
         ));
         sb.append(String.format(
             "up play%n" +
-            "Plays the scenario previusly loaded. If no scenario has not been loaded, loads the file from defautl location config/scenario.xml.%n%n"
+            "Plays the scenario previously loaded.%n%n"
         ));
         sb.append(String.format(
             "up diag%n" +

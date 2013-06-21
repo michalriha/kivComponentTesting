@@ -21,5 +21,5 @@
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfigArea" value="true"/>
-<stringAttribute key="workspace_bundles" value="cz.zcu.kiv.bp.uniplayer.bindings@default:default,cz.zcu.kiv.bp.uniplayer@default:default,org.uncommons.maths@default:default"/>
+<stringAttribute key="workspace_bundles" value="cz.zcu.dummy@default:default,cz.zcu.kiv.bp.unimocker.bindings@default:default,cz.zcu.kiv.bp.unimocker@default:default,cz.zcu.kiv.bp.uniplayer.bindings@default:default,cz.zcu.kiv.bp.uniplayer@default:default,org.uncommons.maths@default:default"/>
 </launchConfiguration>
