@@ -1,4 +1,3 @@
-InvalidFileException
 ObjectFactory
 Scenario
 TAction
@@ -29,4 +28,3 @@ TShortCollection
 TStringCollection
 TValue
 TValueType
-UnOrderableItemsException
