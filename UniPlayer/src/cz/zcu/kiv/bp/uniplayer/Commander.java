@@ -17,8 +17,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
  */
 public class Commander implements CommandProvider
 {
-	public static final String
-    	DEFAULT_SCENARIO_FILE = "config/scenario.xml";
+	public static final String DEFAULT_SCENARIO_FILE = "config/scenario.xml";
     
     private Commander _ = this;
     
@@ -34,6 +33,11 @@ public class Commander implements CommandProvider
     public void setPlr(IPlayer plr)
     {
         _.plr = plr;
+    }
+    
+    public void start()
+    {
+		System.out.println("\n" + _.getHelp());
     }
     
     /**
@@ -78,7 +82,7 @@ public class Commander implements CommandProvider
                                 try
                                 {
                                 	System.out.println();
-                                    _.plr.play();
+                                    _.plr.play(_.ldr);
                                 }
                                 catch (Exception e)
                                 {

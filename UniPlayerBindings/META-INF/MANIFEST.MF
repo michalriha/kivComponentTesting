@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: UniPlayerBindings
 Bundle-SymbolicName: cz.zcu.kiv.bp.uniplayer.bindings
 Bundle-Version: 2.0.1.qualifier
-Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.xml,
  javax.xml.bind,
