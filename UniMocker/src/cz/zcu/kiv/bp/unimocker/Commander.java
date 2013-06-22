@@ -33,6 +33,12 @@ public class Commander implements CommandProvider
 		this.mocker = mocker;
 	}
 
+	public void start()
+	{
+		System.out.println("\n" + _.getHelp());
+	}
+	
+	
 	/**
 	 * Implementation of CommandProvider - processes commands.
 	 * @param ci
@@ -58,7 +64,10 @@ public class Commander implements CommandProvider
 	            break;
 	        
 	        case (CMD_MOCK):
-	        	_.mocker.mock();
+	        	try
+		        {
+		        	_.mocker.mock();
+		        } catch (Exception ex) { ex.printStackTrace(); }
 	        	break;
 	            
             case (CMD_DIAG):

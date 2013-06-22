@@ -17,9 +17,9 @@ import javax.xml.bind.JAXBException;
 import org.apache.commons.lang.reflect.MethodUtils;
 import org.eclipse.osgi.framework.console.CommandProvider;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.springframework.osgi.context.BundleContextAware;
 import org.xml.sax.SAXException;
 
 import cz.zcu.kiv.bp.unimocker.bindings.Scenario;
@@ -29,9 +29,9 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.InvokedMethod;
 import cz.zcu.kiv.bp.unimocker.bindings.basics.InvalidFileException;
 
-public class Activator implements BundleActivator, IMocker {
+public class Mocker implements IMocker, BundleContextAware {
 
-	private Activator _ = this;
+	private Mocker _ = this;
 	
 	private BundleContext context;
 	
@@ -115,26 +115,6 @@ public class Activator implements BundleActivator, IMocker {
 		return ret;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext context) throws Exception
-	{
-		_.context = context;
-		
-		Commander commander = new Commander();
-		commander.setMocker(this);
-		
-		_.reg = _.context.registerService(
-			CommandProvider.class,
-			commander,
-			null
-		);
-		
-		System.out.println("\n" + commander.getHelp());
-	}
-
 	/**
 	 * Creates mockup as instance of Java Proxy from given class and UniHandler object.
 	 * Handler object if filled with invocation expectation. Object is registered as OSGi service.
@@ -202,15 +182,8 @@ public class Activator implements BundleActivator, IMocker {
 		return returns;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception
-	{
-		// unregister CommandProvider
-		_.reg.unregister();
-		
+	public void stop() throws Exception
+	{		
 		// unregister mockups
 		for (ServiceRegistration<?> reg : _.serviceRegistrations)
 		{
@@ -273,6 +246,12 @@ public class Activator implements BundleActivator, IMocker {
 	{
 		_.scenarioProject = new Scenario();
 		_.scenarioProject.loadFile(fileName);
+	}
+
+	@Override
+	public void setBundleContext(BundleContext context)
+	{
+		_.context = context;
 	}
 
 }
