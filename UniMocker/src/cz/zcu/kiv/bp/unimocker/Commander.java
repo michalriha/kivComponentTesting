@@ -33,7 +33,7 @@ public class Commander implements CommandProvider
 		this.mocker = mocker;
 	}
 
-	public void start()
+	public void init()
 	{
 		System.out.println("\n" + _.getHelp());
 	}

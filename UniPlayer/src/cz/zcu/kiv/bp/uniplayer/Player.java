@@ -9,9 +9,8 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang.reflect.MethodUtils;
-import org.eclipse.osgi.framework.console.CommandProvider;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
+import org.osgi.framework.ServiceReference;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 import org.osgi.util.tracker.ServiceTracker;
@@ -35,8 +34,6 @@ public class Player implements IPlayer, BundleContextAware
 	private BundleContext context;
 	
 	private volatile boolean stopped = false;
-	
-	private ServiceRegistration<CommandProvider> reg;
 	
 	private EventAdmin eventAdmin;
 	
@@ -65,14 +62,19 @@ public class Player implements IPlayer, BundleContextAware
         _.eventAdmin = eventAdmin;
     }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext bundleContext) throws Exception
+    /**
+     * Bundle 
+     * @param bundleContext
+     * @throws Exception
+     */
+	public void destroy() throws Exception
 	{
-		_.context = null;
-		_.reg.unregister();
+		for (ServiceTracker<?, ?> st : _.svcTrackers.values())
+		{
+			ServiceReference<?> ref = st.getServiceReference();
+			_.context.ungetService(ref);
+			st.close();
+		}
 	}
 
 	@Override
@@ -275,10 +277,6 @@ public class Player implements IPlayer, BundleContextAware
 	 */
 	public void stop()
 	{
-		for (ServiceTracker<?, ?> st : _.svcTrackers.values())
-		{
-			st.close();
-		}
 		_.stopped = true;
 	}
 

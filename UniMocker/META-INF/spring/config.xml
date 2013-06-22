@@ -12,9 +12,9 @@
 
 	<osgi:service id="UniplayerCommander" ref="commander" interface="org.eclipse.osgi.framework.console.CommandProvider" />
 	 
-	<bean name="commander" class="cz.zcu.kiv.bp.unimocker.Commander" init-method="start">
+	<bean name="commander" class="cz.zcu.kiv.bp.unimocker.Commander" init-method="init">
 		<property name="mocker" ref="mocker" />
 	</bean>
 
- 	<bean name="mocker" class="cz.zcu.kiv.bp.unimocker.Mocker" destroy-method="stop" />
+ 	<bean name="mocker" class="cz.zcu.kiv.bp.unimocker.Mocker" destroy-method="destroy" />
 </beans>

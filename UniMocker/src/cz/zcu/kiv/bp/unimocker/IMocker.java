@@ -5,7 +5,7 @@ public interface IMocker
 	/**
 	 * Register mockups created according to loaded scenario file. 
 	 */
-	void mock();
+	abstract void mock();
 	
 	/**
 	 * Loads scenario file and tries to unmarshall.
@@ -15,11 +15,11 @@ public interface IMocker
 	 * @throws InvalidFileException when file format is invalid
 	 * @throws Throwable other exceptions that might occur
 	 */
-	void loadFile(String fileName) throws Throwable;
+	abstract void loadFile(String fileName) throws Throwable;
 	
 	/**
 	 * Prints diagnostics info about loaded file.
 	 * Prints loaded scenario in unmarshalled format.
 	 */
-	void diag();
+	abstract void diag();
 }

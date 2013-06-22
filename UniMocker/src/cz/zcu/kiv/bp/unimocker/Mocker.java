@@ -15,7 +15,6 @@ import java.util.Map.Entry;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang.reflect.MethodUtils;
-import org.eclipse.osgi.framework.console.CommandProvider;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -38,7 +37,6 @@ public class Mocker implements IMocker, BundleContextAware {
 	
 	private IScenario scenarioProject;
 	
-	private ServiceRegistration<CommandProvider> reg = null; 
     /**
      * ServiceRegistrations for mocks registered as OSGi services.
      */
@@ -183,7 +181,7 @@ public class Mocker implements IMocker, BundleContextAware {
 		return returns;
 	}
 
-	public void stop() throws Exception
+	public void destroy() throws Exception
 	{		
 		// unregister mockups
 		for (ServiceRegistration<?> reg : _.serviceRegistrations)

@@ -1,13 +1,31 @@
 package cz.zcu.kiv.bp.uniplayer;
 
-
 public interface IPlayer
 {
-    public abstract void play() throws Exception;
+	/**
+	 * Starts currently loaded simulation.
+	 * @throws Exception
+	 */
+    abstract void play() throws Exception;
 
-    public abstract void stop();
+    /**
+     * Stops currently running simulation.
+     */
+    abstract void stop();
     
-    public void loadFile(String fileName) throws Throwable;
+    /**
+	 * Loads scenario file and tries to unmarshall.
+	 * @param fileName file to load
+	 * @throws JAXBException when unmarshalling failed
+	 * @throws FileNotFoundException when unable to read given file
+	 * @throws InvalidFileException when file format is invalid
+	 * @throws Throwable other exceptions that might occur
+	 */
+	abstract void loadFile(String fileName) throws Throwable;
 
-	public void diag();
+	/**
+	 * Prints diagnostics info about loaded file.
+	 * Prints loaded scenario in unmarshalled format.
+	 */
+	abstract void diag();
 }

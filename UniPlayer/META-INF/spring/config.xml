@@ -14,11 +14,11 @@
 	
 	<osgi:service id="UniplayerCommander" ref="commander" interface="org.eclipse.osgi.framework.console.CommandProvider" />
 	 
-	<bean name="commander" class="cz.zcu.kiv.bp.uniplayer.Commander" init-method="start">
+	<bean name="commander" class="cz.zcu.kiv.bp.uniplayer.Commander" init-method="init">
 		<property name="plr" ref="player" />
 	</bean>
 		
- 	<bean name="player" class="cz.zcu.kiv.bp.uniplayer.Player" destroy-method="stop">
+ 	<bean name="player" class="cz.zcu.kiv.bp.uniplayer.Player" destroy-method="destroy">
 		<property name="eventAdmin" ref="EventAdmin" />
 	</bean>
 </beans>
