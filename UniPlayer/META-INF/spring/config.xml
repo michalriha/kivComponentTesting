@@ -12,12 +12,9 @@
 
 	<osgi:reference id="EventAdmin" interface="org.osgi.service.event.EventAdmin" />
 	
-	<osgi:reference id="ScenarioLoader" interface="cz.zcu.kiv.bp.uniplayer.bindings.IScenario" />
-	
 	<osgi:service id="UniplayerCommander" ref="commander" interface="org.eclipse.osgi.framework.console.CommandProvider" />
 	 
 	<bean name="commander" class="cz.zcu.kiv.bp.uniplayer.Commander" init-method="start">
-		<property name="ldr" ref="ScenarioLoader" />
 		<property name="plr" ref="player" />
 	</bean>
 		

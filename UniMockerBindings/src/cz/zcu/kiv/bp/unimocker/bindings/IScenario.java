@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 
 import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 import cz.zcu.kiv.bp.unimocker.bindings.basics.InvalidFileException;
 
 
@@ -20,4 +21,6 @@ public interface IScenario
            IOException;
     
     public abstract void diag();
+    
+    public BundlesMap getSimulatedComponents();
 }

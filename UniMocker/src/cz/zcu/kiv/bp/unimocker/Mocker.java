@@ -22,6 +22,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.springframework.osgi.context.BundleContextAware;
 import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.unimocker.bindings.IScenario;
 import cz.zcu.kiv.bp.unimocker.bindings.Scenario;
 import cz.zcu.kiv.bp.unimocker.bindings.TSimulatedService;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
@@ -35,7 +36,7 @@ public class Mocker implements IMocker, BundleContextAware {
 	
 	private BundleContext context;
 	
-	private Scenario scenarioProject;
+	private IScenario scenarioProject;
 	
 	private ServiceRegistration<CommandProvider> reg = null; 
     /**
@@ -199,7 +200,7 @@ public class Mocker implements IMocker, BundleContextAware {
 		{
 			throw new IllegalStateException("Mockup scenario has not been loaded."); 
 		}
-		BundlesMap scenario = _.scenarioProject.getProject().getSimulatedComponents();
+		BundlesMap scenario = _.scenarioProject.getSimulatedComponents();
 		for (Entry<String, HashMap<String, TSimulatedService>> bundle : scenario.entrySet())
 		{
 			Bundle mockedBundle = _.findBundle(bundle.getKey());

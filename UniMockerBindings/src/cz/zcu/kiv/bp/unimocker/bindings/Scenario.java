@@ -115,9 +115,9 @@ public class Scenario implements IScenario
 		return schemaFile;
 	}
     
-	public TProject getProject()
+	public BundlesMap getSimulatedComponents()
 	{
-		return _.scenario;
+		return _.scenario.getSimulatedComponents();
 	}
 	
     /**

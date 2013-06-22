@@ -1,9 +1,13 @@
 package cz.zcu.kiv.bp.uniplayer;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 //import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.bind.JAXBException;
+
 import org.apache.commons.lang.reflect.MethodUtils;
 import org.eclipse.osgi.framework.console.CommandProvider;
 import org.osgi.framework.BundleContext;
@@ -12,9 +16,12 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 import org.osgi.util.tracker.ServiceTracker;
 import org.springframework.osgi.context.BundleContextAware;
+import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenario;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenarioIterator;
+import cz.zcu.kiv.bp.uniplayer.bindings.Scenario;
 import cz.zcu.kiv.bp.uniplayer.bindings.TCall;
 import cz.zcu.kiv.bp.uniplayer.bindings.TCommand;
 import cz.zcu.kiv.bp.uniplayer.bindings.TEvent;
@@ -32,6 +39,8 @@ public class Player implements IPlayer, BundleContextAware
 	private ServiceRegistration<CommandProvider> reg;
 	
 	private EventAdmin eventAdmin;
+	
+	private IScenario scenario;
     
     /**
      * ServiceTracker for services required in scenario
@@ -67,10 +76,10 @@ public class Player implements IPlayer, BundleContextAware
 	}
 
 	@Override
-	public void play(IScenario scenario) throws Exception
+	public void play() throws Exception
 	{
 		_.stopped = false;
-		IScenarioIterator iter = scenario.iterator();
+		IScenarioIterator iter = _.scenario.iterator();
     	while (!_.stopped && iter.hasNext())
 		{
 			TCommand currentCommand = iter.next();
@@ -271,5 +280,24 @@ public class Player implements IPlayer, BundleContextAware
 			st.close();
 		}
 		_.stopped = true;
+	}
+
+	@Override
+	public void loadFile(String fileName)
+	throws JAXBException, SAXException, InvalidFileException, IOException
+	{
+		_.scenario = new Scenario();
+		_.scenario.loadFile(fileName);
+	}
+	
+	@Override
+	public void diag()
+	{
+		if (_.scenario == null)
+		{
+			System.out.println("Simulation scenario has not been loaded.");
+			return;
+		}
+		_.scenario.diag();
 	}
 }

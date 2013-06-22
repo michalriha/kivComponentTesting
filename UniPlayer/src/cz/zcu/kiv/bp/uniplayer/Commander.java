@@ -7,7 +7,6 @@ import org.eclipse.osgi.framework.console.CommandInterpreter;
 import org.eclipse.osgi.framework.console.CommandProvider;
 import org.xml.sax.SAXException;
 
-import cz.zcu.kiv.bp.uniplayer.bindings.IScenario;
 import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
 
 /**
@@ -21,14 +20,7 @@ public class Commander implements CommandProvider
     
     private Commander _ = this;
     
-    private IScenario ldr; 
-    
     private IPlayer plr;
-    
-    public void setLdr(IScenario ldr)
-    {
-        _.ldr = ldr;
-    }
     
     public void setPlr(IPlayer plr)
     {
@@ -63,10 +55,10 @@ public class Commander implements CommandProvider
                     fileName = Commander.DEFAULT_SCENARIO_FILE;
                     System.out.printf("Loading scenario from default location config/scenario.xml ... %n");
                 }
-                try { _.ldr.loadFile(fileName); }
+                try { _.plr.loadFile(fileName); }
                 catch (FileNotFoundException e) { System.out.println(e.getLocalizedMessage()); }
                 catch (InvalidFileException e) { System.out.println("Unable to load file. Invalid format."); }
-                catch (Exception e) { e.printStackTrace(); }
+                catch (Throwable e) { e.printStackTrace(); }
                 
                 break;
                 
@@ -82,7 +74,7 @@ public class Commander implements CommandProvider
                                 try
                                 {
                                 	System.out.println();
-                                    _.plr.play(_.ldr);
+                                    _.plr.play();
                                 }
                                 catch (Exception e)
                                 {
@@ -105,7 +97,7 @@ public class Commander implements CommandProvider
                 break;
                 
             case ("DIAG"):
-                _.ldr.diag();
+                _.plr.diag();
                 break;
                 
             default:
