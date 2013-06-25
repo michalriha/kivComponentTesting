@@ -11,29 +11,57 @@ import cz.zcu.kiv.bp.unimocker.ArgumentScenarioTable.Posibility;
 
 public class UniHandler implements InvocationHandler 
 {	
+	private UniHandler _ = this;
+	
 	private Class<?> mockedClass;
 	
-	private Map<Method, Map<Object[], Object>> retVals = null;
+	private boolean ignoreUndefinedMethods;
+	
+	private boolean ignoreUndefinedPossibilities;
+	
+//	private Map<Method, Map<Object[], Object>> retVals = null;
 	
 	private Map<Method, ArgumentScenarioTable> retMatrix = new HashMap<Method, ArgumentScenarioTable>();
 	
 	private Map<Method, Object> paramLessMethods = new HashMap<>();
 	
-	private enum EQUALITY
-	{
-		EQUAL, INEQUAL, NO_SURE
-	}
+//	private enum EQUALITY
+//	{
+//		EQUAL, INEQUAL, NO_SURE
+//	}
 	
 	public UniHandler(Class<?> mockedClass)
 	{
-		this(mockedClass, new HashMap<Method, Map<Object[], Object>>());
+		this(mockedClass, new HashMap<Method, Map<Object[], Object>>(), false, false);
 	}
 	
 	public UniHandler(Class<?> mockedClass, Map<Method, Map<Object[], Object>> retVals)
 	{
-		this.mockedClass = mockedClass;
-		this.retVals = retVals;
+		this(mockedClass, retVals, false, false);
+	}
+	
+	public UniHandler(
+		Class<?> mockedClass,
+		Map<Method, Map<Object[], Object>> retVals,
+		boolean ignoreUndefMethods,
+		boolean ignoreUndefPossibs)
+	{
+
+		_.mockedClass = mockedClass;
+//		_.retVals = retVals;
+		_.ignoreUndefinedMethods = ignoreUndefMethods;
+		_.ignoreUndefinedPossibilities = ignoreUndefPossibs;
 		
+		_.buildPossibilitiesMatrices(retVals);
+	}
+
+	/**
+	 * Creates possibility matrix for methods with parameters and fills simple
+	 * list of pairs method => return value for parameterless methods.
+	 * @param retVals possibilities
+	 */
+	private void buildPossibilitiesMatrices(Map<Method, Map<Object[], Object>> retVals)
+	{
 		for (Entry<Method, Map<Object[], Object>> posib : retVals.entrySet())
 		{
 			int argsCount = posib.getKey().getParameterTypes().length;
@@ -43,7 +71,7 @@ public class UniHandler implements InvocationHandler
 				// we can save only the first possibility
 				for (Object retunValue: posib.getValue().values())
 				{
-					this.paramLessMethods.put(posib.getKey(), retunValue);
+					_.paramLessMethods.put(posib.getKey(), retunValue);
 					break;
 				}
 				continue;
@@ -55,16 +83,13 @@ public class UniHandler implements InvocationHandler
 			for (Entry<Object[], Object> row : posib.getValue().entrySet())
 			{
 				Posibility tmp = matrix.new Posibility();
+				tmp.addAll(Arrays.asList(row.getKey()));
 				tmp.returnValue = row.getValue();
-				for (Object o : row.getKey())
-				{
-					tmp.add(o);
-				}
 				matrix.addPosibility(tmp);
 			}
 		}
 	}
-	
+
 	@Override
 	public Object invoke(
 		Object proxy,
@@ -78,27 +103,51 @@ public class UniHandler implements InvocationHandler
 		Method tmpMet = null;
 		try
 		{
-			// check if the call is for mocked interface or for Object methods			160 161 162 163 164 165 166
+			// check if the call is for mocked interface or for Object methods
 			Class<?>[] paramTypes = method.getParameterTypes();
-			tmpMet = this.mockedClass.getMethod(method.getName(), paramTypes);
+			tmpMet = _.mockedClass.getMethod(method.getName(), paramTypes);
 
-			if (!this.retMatrix.containsKey(tmpMet) && !this.paramLessMethods.containsKey(tmpMet))
+			if (!_.retMatrix.containsKey(tmpMet) && !_.paramLessMethods.containsKey(tmpMet))
 			{
-				throw new Exception("Undefined method: " + tmpMet + " width args: " + Arrays.deepToString(args) + " " + Arrays.toString(paramTypes));
+				if(!_.ignoreUndefinedMethods)
+				{
+					throw new UndefinedMethodInvocationException(
+						String.format(
+							"Undefined method: %s width args: %s of type (%s)",
+							tmpMet,
+							Arrays.deepToString(args),
+							Arrays.toString(paramTypes)
+						)
+					);
+				}
+				else return null;
 			}
 			
-			if (args != null) ret = this.retMatrix.get(tmpMet).find(args);
-			else ret = this.paramLessMethods.get(tmpMet);
+			if (args != null)
+			{
+				ret = _.retMatrix.get(tmpMet).find(args);
+			}
+			else
+			{
+				ret = _.paramLessMethods.get(tmpMet);
+			}
+		}
+		catch (UndefinedPossibilityException ex)
+		{
+			if (!_.ignoreUndefinedPossibilities)
+			{
+				throw ex;
+			}
 		}
 		catch (NoSuchMethodException ignore)
 		{ // method has not been found -> method is from Object
 			
-//			if (method.getDeclaringClass() != this.mockedClass)
+//			if (method.getDeclaringClass() != _.mockedClass)
 //			{
 //				System.out.println("called method belongs into super interface: " + method.getDeclaringClass().getCanonicalName());
-//				System.out.println(this.retMatrix);
-//				System.out.println(this.paramLessMethods);
-//				System.out.println(this.mockedClass.getMethod(method.getName(), method.getParameterTypes()));
+//				System.out.println(_.retMatrix);
+//				System.out.println(_.paramLessMethods);
+//				System.out.println(_.mockedClass.getMethod(method.getName(), method.getParameterTypes()));
 //				return null;
 //			}
 			
@@ -113,8 +162,8 @@ public class UniHandler implements InvocationHandler
 ////System.out.println(tmpMet + "\n" + Arrays.deepToString(args));
 //			Class<?>[] methodsArgumentTypes = tmpMet.getParameterTypes();
 //			
-//			Map<Object[], Object> methodsScenario = this.getScenarioForMethod(tmpMet);
-//			this.checkArgumentsCounts(tmpMet, methodsScenario);
+//			Map<Object[], Object> methodsScenario = _.getScenarioForMethod(tmpMet);
+//			_.checkArgumentsCounts(tmpMet, methodsScenario);
 //			
 //			for (Object[] possibleArguments : methodsScenario.keySet())
 //			{
@@ -143,7 +192,7 @@ public class UniHandler implements InvocationHandler
 //					}
 //										
 //					// if argument type is Comparable, try to test by comparison
-//					EQUALITY eq = this.checkIfComparable(possibleArgument, givenArgument, argumentsType);
+//					EQUALITY eq = _.checkIfComparable(possibleArgument, givenArgument, argumentsType);
 //					if (eq == EQUALITY.EQUAL)
 //					{
 //						continue;
@@ -153,9 +202,9 @@ public class UniHandler implements InvocationHandler
 //						break;
 //					}
 //
-////System.out.println("array match: " + this.checkIfArrays(possibleArgument, givenArgument, argumentsType));
+////System.out.println("array match: " + _.checkIfArrays(possibleArgument, givenArgument, argumentsType));
 //					// if argument type is array, try to test whole array
-//					eq = this.checkIfArrays(possibleArgument, givenArgument, argumentsType);
+//					eq = _.checkIfArrays(possibleArgument, givenArgument, argumentsType);
 //					if (eq == EQUALITY.EQUAL)
 //					{
 //						continue;
@@ -229,17 +278,17 @@ public class UniHandler implements InvocationHandler
 //		Method tmpMet = null;
 //		try
 //		{
-//			tmpMet = this.mockedClass.getDeclaredMethod(method.getName(), method.getParameterTypes());
+//			tmpMet = _.mockedClass.getDeclaredMethod(method.getName(), method.getParameterTypes());
 //		}
 //		catch (NoSuchMethodException ignore) { /* TODO: throw invalid method */}
 //		
-//		if (this.retVals.containsKey(method))
+//		if (_.retVals.containsKey(method))
 //		{
 //			Object[] foundExpectation = null;
 //			
 //			System.out.println("Given argument: " + Arrays.deepToString(args));
 //			System.out.println("Available invocations:");
-//			for (Entry<Object[], Object> entry : this.retVals.get(method).entrySet())
+//			for (Entry<Object[], Object> entry : _.retVals.get(method).entrySet())
 //			{
 //				if (args.length != entry.getKey().length) throw new Exception("Wrong number of arguments!");
 //				
@@ -306,7 +355,7 @@ public class UniHandler implements InvocationHandler
 //			}
 //			
 //			if (foundExpectation == null) throw new Exception("Undeclared expectation.");
-//			ret =  this.retVals.get(method).get(foundExpectation);
+//			ret =  _.retVals.get(method).get(foundExpectation);
 //		}
 //		else
 //		{
@@ -393,10 +442,10 @@ public class UniHandler implements InvocationHandler
 //	private Map<Object[], Object> getScenarioForMethod(Method method)
 //	throws Exception
 //	{
-//		if (!this.retVals.containsKey(method))
+//		if (!_.retVals.containsKey(method))
 //		{
 //			throw new Exception("Return values registry does not contain scenario for this method.\n" + method);
 //		}
-//		return this.retVals.get(method);
+//		return _.retVals.get(method);
 //	}
 }

@@ -33,6 +33,8 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.InvokedMethod;
  *         &lt;element name="method" type="{http://www.kiv.zcu.cz/component-testing/mocker}TInvokedMethod" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="interface" type="{http://www.kiv.zcu.cz/component-testing/mocker}TInterfaceName" />
+ *       &lt;attribute name="ignore-undefined-methods" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *       &lt;attribute name="ignore-undefined-possibilities" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -51,6 +53,10 @@ public class TSimulatedService {
     @XmlAttribute(name = "interface")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String _interface;
+    @XmlAttribute(name = "ignore-undefined-methods")
+    protected Boolean ignoreUndefinedMethods;
+    @XmlAttribute(name = "ignore-undefined-possibilities")
+    protected Boolean ignoreUndefinedPossibilities;
 
     /**
      * Gets the value of the methods property.
@@ -103,6 +109,62 @@ public class TSimulatedService {
      */
     public void setInterface(String value) {
         this._interface = value;
+    }
+
+    /**
+     * Gets the value of the ignoreUndefinedMethods property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isIgnoreUndefinedMethods() {
+        if (ignoreUndefinedMethods == null) {
+            return false;
+        } else {
+            return ignoreUndefinedMethods;
+        }
+    }
+
+    /**
+     * Sets the value of the ignoreUndefinedMethods property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIgnoreUndefinedMethods(Boolean value) {
+        this.ignoreUndefinedMethods = value;
+    }
+
+    /**
+     * Gets the value of the ignoreUndefinedPossibilities property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isIgnoreUndefinedPossibilities() {
+        if (ignoreUndefinedPossibilities == null) {
+            return false;
+        } else {
+            return ignoreUndefinedPossibilities;
+        }
+    }
+
+    /**
+     * Sets the value of the ignoreUndefinedPossibilities property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIgnoreUndefinedPossibilities(Boolean value) {
+        this.ignoreUndefinedPossibilities = value;
     }
 
 }

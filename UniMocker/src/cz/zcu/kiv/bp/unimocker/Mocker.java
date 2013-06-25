@@ -117,26 +117,41 @@ public class Mocker implements IMocker, BundleContextAware {
 	
 	/**
 	 * Creates mockup as instance of Java Proxy from given class and UniHandler object.
-	 * Handler object if filled with invocation expectation. Object is registered as OSGi service.
+	 * Handler object is filled with invocation expectation. Object is registered as OSGi service.
 	 * Service registration descriptor is stored for proper unregistration when bundle stops.
 	 * @param clazz class to mock
 	 * @param returns map of invocation expectations
 	 */
-	private void createService(
-			Class<?> clazz,
-			Map<Method, Map<Object[], Object>> returns)
+	private void createService( Class<?> clazz, Object serviceImpl)
+	{
+		// register object as service
+		// TODO implement the possibility to add property map for service object
+		ServiceRegistration<?> reg = _.context.registerService(clazz.getCanonicalName(), serviceImpl, null);
+		_.serviceRegistrations.add(reg);
+	}
+
+	/**
+	 * Creates mockup as instance of Java Proxy from given class and UniHandler object.
+	 * Handler object is filled with invocation expectation. 
+	 * @param clazz
+	 * @param returns
+	 * @param ignoreUndefMethods
+	 * @param ignoreUndefPossibs
+	 * @return
+	 */
+	private Object createMockup(
+		Class<?> clazz,
+		Map<Method, Map<Object[], Object>> returns,
+		boolean ignoreUndefMethods,
+		boolean ignoreUndefPossibs)
 	{
 		// create mockup object
 		Object mockup = Proxy.newProxyInstance(
 			clazz.getClassLoader(),
 			new Class<?> [] { clazz },
-			new UniHandler(clazz, returns)
+			new UniHandler(clazz, returns, ignoreUndefMethods, ignoreUndefPossibs)
 		);
-		
-		// register object as service
-		// TODO implement the possibility to add property map for service object
-		ServiceRegistration<?> reg = _.context.registerService(clazz.getCanonicalName(), mockup, null);
-		_.serviceRegistrations.add(reg);
+		return mockup;
 	}
 
 	/**
@@ -229,8 +244,17 @@ public class Mocker implements IMocker, BundleContextAware {
 					TSimulatedService simulation = bundle.getValue().get(clazz.getName());
 					Map<Method, Map<Object[], Object>> returns = _.buildInvocationPossibilitiesForClass(clazz, simulation);
 					
+					TSimulatedService descr = bundle.getValue().get(clazz.getCanonicalName());
+
+					Object srv = _.createMockup(
+						clazz,
+						returns,
+						descr.isIgnoreUndefinedMethods(),
+						descr.isIgnoreUndefinedPossibilities()
+					);
+					
 					// building mockup
-					_.createService(clazz, returns);
+					_.createService(clazz, srv);
 				}
 			}
 			catch (NoSuchMethodException ex) { ex.printStackTrace(); }

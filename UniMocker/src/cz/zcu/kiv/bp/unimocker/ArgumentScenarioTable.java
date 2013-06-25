@@ -56,9 +56,13 @@ public class ArgumentScenarioTable
 		this.matrix.add(pos);
 	}
 	
-	public Object find(Object... args) throws Exception, IllegalArgumentException
+	public Object find(Object... args)
+	throws UndefinedPossibilityException, IllegalArgumentException
 	{
-		if (args != null && args.length != ARGS_COUNT) throw new IllegalArgumentException("Invalid arguments count!(" + args.length + " / " + ARGS_COUNT + ")");
+		if (args != null && args.length != ARGS_COUNT)
+		{
+			throw new IllegalArgumentException("Invalid arguments count!(" + args.length + " / " + ARGS_COUNT + ")");
+		}
 		
 		Object ret = null;
 		boolean found = false;
@@ -93,7 +97,10 @@ public class ArgumentScenarioTable
         // reset possibility markers for next call
         this.resetPosibleMarkers();
 
-        if (!found) throw new Exception("No valid argument combination has been found.\n" + Arrays.deepToString(args));
+        if (!found)
+        {
+        	throw new UndefinedPossibilityException("No valid argument combination has been found.\n" + Arrays.deepToString(args));
+        }
 
         return ret;
 	}
