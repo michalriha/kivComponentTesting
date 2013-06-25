@@ -12,6 +12,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import cz.zcu.kiv.bp.unimocker.bindings.TAnyValue;
 import cz.zcu.kiv.bp.unimocker.bindings.TCollectionType;
 import cz.zcu.kiv.bp.unimocker.bindings.TNull;
 import cz.zcu.kiv.bp.unimocker.bindings.TValue;
@@ -35,10 +37,11 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 	public Object probeUnMarshalledInstanceForValue(TValue v)
 	throws IllegalAccessException, InvocationTargetException
 	{		
-		Object ret = null;	
+		Object ret = null;
+		
 		// get all method of TValue class - presumes that TValue class
 		// has only setters/getters generated from schema.
-		for (Method met : TValue.class.getDeclaredMethods())
+		for (Method met : TValue.class.getMethods())
 		{
 			// skip non public method
 			if ((met.getModifiers() & Modifier.PUBLIC) == 0) continue;
@@ -48,7 +51,7 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 			
 			// try to invoke getter
 			ret = met.invoke(v, (Object[]) null);
-			
+
 			// if the getter returns value -> we have found something
 			// and therefore can end seeking, else try another method
 			if (ret == null) continue;
@@ -208,7 +211,7 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
         
         // find contained value
      	Object foundValue = _.probeUnMarshalledInstanceForValue(arg);
-     	
+
      	if (foundValue == null)
      	{ // should not occur during unmarshalling of valid xml file
      		throw new JAXBException("Null values in TValue element are not allowed!");
@@ -216,6 +219,11 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
      	else if (foundValue instanceof JAXBElement)
      	{
      		foundValue = JAXBIntrospector.getValue(foundValue);
+     	}
+     	else if (foundValue instanceof TAnyValue)
+     	{
+			ret.setValue(foundValue);
+			ret.setType(foundValue.getClass());
      	}
 		else if (foundValue instanceof TNull)
 		{ // the instance is transporting null-type value
@@ -242,8 +250,12 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
     public TValue marshal(Value arg) throws Exception
     {
         TValue ret = new TValue();
-
-		if (arg.getValue() == null)
+        
+        if (arg == null)
+        { // ?????
+        	ret = null;
+        }
+        else if (arg.getValue() == null)
 		{ // found null value
 			this.setValueToReturnedObject(ret, TNull.class, this.createNullElement(arg));
 		}

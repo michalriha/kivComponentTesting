@@ -33,7 +33,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="short" type="{http://www.w3.org/2001/XMLSchema}short"/>
+ *                   &lt;element name="Short" type="{http://www.w3.org/2001/XMLSchema}short"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -102,7 +102,7 @@ public class TShortCollection extends TCollection<Short>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="short" type="{http://www.w3.org/2001/XMLSchema}short"/>
+     *         &lt;element name="Short" type="{http://www.w3.org/2001/XMLSchema}short"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>
@@ -118,7 +118,7 @@ public class TShortCollection extends TCollection<Short>
     public static class Item extends TCollectionItem<Short>
     {
 
-        @XmlElement(name = "short")
+        @XmlElement(name = "Short")
         protected short value;
 
         /**

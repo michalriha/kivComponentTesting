@@ -37,7 +37,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="file" type="{http://www.kiv.zcu.cz/component-testing/player}TFile"/>
+ *                   &lt;element name="File" type="{http://www.kiv.zcu.cz/component-testing/player}TFile"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -105,7 +105,7 @@ public class TFileCollection extends TCollection<File>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="file" type="{http://www.kiv.zcu.cz/component-testing/player}TFile"/>
+     *         &lt;element name="File" type="{http://www.kiv.zcu.cz/component-testing/player}TFile"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>

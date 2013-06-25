@@ -42,29 +42,29 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TInvokedMethod", propOrder = {
-    "invocation"
+    "invocations"
 })
 public class TInvokedMethod {
 
-    @XmlElement(required = true, type = TInvocation.class)
-    protected List<Invocation> invocation;
+    @XmlElement(name = "invocation", required = true, type = TInvocation.class)
+    protected List<Invocation> invocations;
     @XmlAttribute(name = "name")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String name;
 
     /**
-     * Gets the value of the invocation property.
+     * Gets the value of the invocations property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the invocation property.
+     * This is why there is not a <CODE>set</CODE> method for the invocations property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getInvocation().add(newItem);
+     *    getInvocations().add(newItem);
      * </pre>
      * 
      * 
@@ -74,11 +74,11 @@ public class TInvokedMethod {
      * 
      * 
      */
-    public List<Invocation> getInvocation() {
-        if (invocation == null) {
-            invocation = new ArrayList<Invocation>();
+    public List<Invocation> getInvocations() {
+        if (invocations == null) {
+            invocations = new ArrayList<Invocation>();
         }
-        return this.invocation;
+        return this.invocations;
     }
 
     /**

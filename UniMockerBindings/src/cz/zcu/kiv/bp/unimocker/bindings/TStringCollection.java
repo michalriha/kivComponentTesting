@@ -33,7 +33,7 @@ import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="string" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="String" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -101,7 +101,7 @@ public class TStringCollection extends TCollection<String>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="string" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="String" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>
@@ -117,7 +117,7 @@ public class TStringCollection extends TCollection<String>
     public static class Item extends TCollectionItem<String>
     {
 
-        @XmlElement(name = "string", required = true)
+        @XmlElement(name = "String", required = true)
         protected String value;
 
         /**

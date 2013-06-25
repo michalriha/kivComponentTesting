@@ -33,7 +33,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="bool" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *                   &lt;element name="Boolean" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -102,7 +102,7 @@ public class TBooleanCollection extends TCollection<Boolean>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="bool" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+     *         &lt;element name="Boolean" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>
@@ -118,7 +118,7 @@ public class TBooleanCollection extends TCollection<Boolean>
     public static class Item extends TCollectionItem<Boolean>
     {
 
-        @XmlElement(name = "bool")
+        @XmlElement(name = "Boolean")
         protected boolean value;
 
         /**

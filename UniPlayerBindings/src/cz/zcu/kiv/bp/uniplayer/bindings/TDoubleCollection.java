@@ -33,7 +33,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="double" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *                   &lt;element name="Double" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -102,7 +102,7 @@ public class TDoubleCollection extends TCollection<Double>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="double" type="{http://www.w3.org/2001/XMLSchema}double"/>
+     *         &lt;element name="Double" type="{http://www.w3.org/2001/XMLSchema}double"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>
@@ -118,7 +118,7 @@ public class TDoubleCollection extends TCollection<Double>
     public static class Item extends TCollectionItem<Double>
     {
 
-        @XmlElement(name = "double")
+        @XmlElement(name = "Double")
         protected double value;
 
         /**

@@ -2,6 +2,24 @@
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<simulated-components>
+		<bundle symbolic-name="cz.zcu.kivcmd.core" version="1.0.0">
+			<service interface="cz.zcu.kiv.kc.interfaces.IViewPlugin">
+				<method name="executeAction">
+					<invocation>
+						<arguments>
+							<argument ord-num="0">
+								<Files type="ArrayList">
+									<item ord-num="0"><File>d:\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\WP_000014.jpg</File></item>
+								</Files>
+							</argument>
+						</arguments>
+						<return>
+							<null base-type="String" />
+						</return>
+					</invocation>
+				</method>
+			</service>
+		</bundle>
 		<bundle symbolic-name="cz.zcu.dummy" version="1.0.0">
 			<service interface="ifcs.IPrinter">
 				<method name="print">

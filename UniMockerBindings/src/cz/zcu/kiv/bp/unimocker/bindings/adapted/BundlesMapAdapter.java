@@ -17,21 +17,16 @@ public class BundlesMapAdapter extends XmlAdapter<TBundleList, BundlesMap>
     {
         BundlesMap ret = new BundlesMap();
         
-        for (TBundle bundle : v.getBundle())
+        for (TBundle bundle : v.getBundles())
         { 
         	HashMap<String, TSimulatedService> bundleServices = new HashMap<String, TSimulatedService>();
-            for (TSimulatedService service : bundle.getService())
+            for (TSimulatedService service : bundle.getServices())
             {
                 bundleServices.put(service.getInterface(), service);
             }
 
             String bundleKey = bundle.getSymbolicName() + ":" + bundle.getVersion();   
             ret.put(bundleKey, bundleServices);
-        }
-        
-        for (Entry<String, HashMap<String, TSimulatedService>> entry : ret.entrySet())
-        {
-        	System.out.println(entry.getKey() + " => " + entry.getValue());
         }
         
         return ret;
@@ -47,9 +42,9 @@ public class BundlesMapAdapter extends XmlAdapter<TBundleList, BundlesMap>
             TBundle bndl = new TBundle();
             bndl.setSymbolicName(entry.getKey().split(":")[0]);
             bndl.setVersion(entry.getKey().split(":")[1]);
-            bndl.getService().addAll(entry.getValue().values());
+            bndl.getServices().addAll(entry.getValue().values());
             
-            ret.getBundle().add(bndl);
+            ret.getBundles().add(bndl);
         }
         
         return ret;

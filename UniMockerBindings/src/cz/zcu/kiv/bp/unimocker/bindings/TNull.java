@@ -11,6 +11,7 @@ package cz.zcu.kiv.bp.unimocker.bindings;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -33,6 +34,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TNull")
+@XmlSeeAlso({
+    TAnyValue.class
+})
 public class TNull {
 
     @XmlAttribute(name = "base-type", required = true)

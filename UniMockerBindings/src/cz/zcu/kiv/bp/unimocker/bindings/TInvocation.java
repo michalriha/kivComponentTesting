@@ -27,7 +27,7 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.Value;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="arguments" type="{http://www.kiv.zcu.cz/component-testing/mocker}TArgumentsList"/>
- *         &lt;element name="return" type="{http://www.kiv.zcu.cz/component-testing/mocker}TValue"/>
+ *         &lt;element name="return" type="{http://www.kiv.zcu.cz/component-testing/mocker}TReturnValue"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,7 +45,7 @@ public class TInvocation {
 
     @XmlElement(required = true, type = TArgumentsList.class)
     protected ArgumentsList arguments;
-    @XmlElement(name = "return", required = true, type = TValue.class)
+    @XmlElement(name = "return", required = false, type = TValue.class)
     protected Value _return;
 
     /**
@@ -77,7 +77,7 @@ public class TInvocation {
      * 
      * @return
      *     possible object is
-     *     {@link TValue }
+     *     {@link TReturnValue }
      *     
      */
     public Value getReturn() {
@@ -89,7 +89,7 @@ public class TInvocation {
      * 
      * @param value
      *     allowed object is
-     *     {@link TValue }
+     *     {@link TReturnValue }
      *     
      */
     public void setReturn(Value value) {

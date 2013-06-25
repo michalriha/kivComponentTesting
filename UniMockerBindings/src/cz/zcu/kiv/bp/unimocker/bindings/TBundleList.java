@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -36,25 +37,26 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TBundleList", propOrder = {
-    "bundle"
+    "bundles"
 })
 public class TBundleList {
 
-    protected List<TBundle> bundle;
+    @XmlElement(name = "bundle")
+    protected List<TBundle> bundles;
 
     /**
-     * Gets the value of the bundle property.
+     * Gets the value of the bundles property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the bundle property.
+     * This is why there is not a <CODE>set</CODE> method for the bundles property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBundle().add(newItem);
+     *    getBundles().add(newItem);
      * </pre>
      * 
      * 
@@ -64,11 +66,11 @@ public class TBundleList {
      * 
      * 
      */
-    public List<TBundle> getBundle() {
-        if (bundle == null) {
-            bundle = new ArrayList<TBundle>();
+    public List<TBundle> getBundles() {
+        if (bundles == null) {
+            bundles = new ArrayList<TBundle>();
         }
-        return this.bundle;
+        return this.bundles;
     }
 
 }

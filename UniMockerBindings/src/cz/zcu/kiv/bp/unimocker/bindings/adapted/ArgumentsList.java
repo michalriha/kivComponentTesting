@@ -1,7 +1,11 @@
 package cz.zcu.kiv.bp.unimocker.bindings.adapted;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import cz.zcu.kiv.bp.unimocker.bindings.TAnyValue;
 @XmlJavaTypeAdapter(ArgumentsListAdapter.class)
 public class ArgumentsList extends ArrayList<Argument>
 {
@@ -17,7 +21,11 @@ public class ArgumentsList extends ArrayList<Argument>
         
         for (int i = 0; i < this.size(); i++)
         {
-            ret[i] = this.get(i).getType();
+        	if (this.get(i).getType() == TAnyValue.class && this.get(i).getValue() instanceof TAnyValue)
+        	{
+        		ret[i] = ((TAnyValue) this.get(i).getValue()).getBaseType().baseClass();
+        	}
+        	else ret[i] = this.get(i).getType();
         }
         
         return ret;

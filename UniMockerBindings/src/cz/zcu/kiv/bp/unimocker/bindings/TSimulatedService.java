@@ -42,29 +42,29 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.InvokedMethod;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TSimulatedService", propOrder = {
-    "method"
+    "methods"
 })
 public class TSimulatedService {
 
-    @XmlElement(required = true, type = TInvokedMethod.class)
-    protected List<InvokedMethod> method;
+    @XmlElement(name = "method", required = true, type = TInvokedMethod.class)
+    protected List<InvokedMethod> methods;
     @XmlAttribute(name = "interface")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String _interface;
 
     /**
-     * Gets the value of the method property.
+     * Gets the value of the methods property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the method property.
+     * This is why there is not a <CODE>set</CODE> method for the methods property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMethod().add(newItem);
+     *    getMethods().add(newItem);
      * </pre>
      * 
      * 
@@ -74,11 +74,11 @@ public class TSimulatedService {
      * 
      * 
      */
-    public List<InvokedMethod> getMethod() {
-        if (method == null) {
-            method = new ArrayList<InvokedMethod>();
+    public List<InvokedMethod> getMethods() {
+        if (methods == null) {
+            methods = new ArrayList<InvokedMethod>();
         }
-        return this.method;
+        return this.methods;
     }
 
     /**

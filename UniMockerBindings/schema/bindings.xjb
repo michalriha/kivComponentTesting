@@ -83,20 +83,20 @@
 		</jaxb:property>
 	</jaxb:bindings>
 	
-	<jaxb:bindings node="//xsd:element[@type='TValue']" multiple="true">
+	<jaxb:bindings node="//xsd:element[@type='TValue' or @type='TReturnValue']" multiple="true">
 		<jaxb:property>
 			<jaxb:baseType name="cz.zcu.kiv.bp.unimocker.bindings.adapted.Value" />
 		</jaxb:property>
 	</jaxb:bindings>
 	
 	<jaxb:bindings node="//xsd:element[@type='TInvocation']">
-		<jaxb:property>
+		<jaxb:property name="invocations">
 			<jaxb:baseType name="cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation" />
 		</jaxb:property>
 	</jaxb:bindings>
 	
 	<jaxb:bindings node="//xsd:element[@type='TInvokedMethod']" >
-		<jaxb:property>
+		<jaxb:property name="methods">
 			<jaxb:baseType name="cz.zcu.kiv.bp.unimocker.bindings.adapted.InvokedMethod" />
 		</jaxb:property>
 	</jaxb:bindings>
@@ -109,7 +109,7 @@
 
 	<jaxb:bindings node="//xsd:simpleType[@name='TFile']">
 		<jaxb:bindings>
-			<xjc:javaType name="java.io.File" adapter="cz.zcu.kiv.bp.unimocker.bindings.FileAdapter" />
+			<xjc:javaType name="java.io.File" adapter="cz.zcu.kiv.bp.unimocker.bindings.adapted.FileAdapter" />
 		</jaxb:bindings>
 	</jaxb:bindings>
 	
@@ -135,6 +135,14 @@
 
 	<jaxb:bindings node="//xsd:complexType[@name='TCollectionItem']">
 		<jaxb:class ref="cz.zcu.kiv.bp.unimocker.bindings.basics.TCollectionItem" />
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xsd:complexType[@name='TBundleList']/xsd:sequence/xsd:element" multiple="true">
+		<jaxb:property name="bundles" />
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xsd:complexType[@name='TBundle']/xsd:sequence/xsd:element" multiple="true">
+		<jaxb:property name="services" />
 	</jaxb:bindings>
 	
 </jaxb:bindings>

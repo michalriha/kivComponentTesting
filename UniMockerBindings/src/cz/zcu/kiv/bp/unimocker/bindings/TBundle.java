@@ -42,12 +42,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TBundle", propOrder = {
-    "service"
+    "services"
 })
 public class TBundle {
 
-    @XmlElement(required = true)
-    protected List<TSimulatedService> service;
+    @XmlElement(name = "service", required = true)
+    protected List<TSimulatedService> services;
     @XmlAttribute(name = "symbolic-name")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String symbolicName;
@@ -56,18 +56,18 @@ public class TBundle {
     protected String version;
 
     /**
-     * Gets the value of the service property.
+     * Gets the value of the services property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the service property.
+     * This is why there is not a <CODE>set</CODE> method for the services property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getService().add(newItem);
+     *    getServices().add(newItem);
      * </pre>
      * 
      * 
@@ -77,11 +77,11 @@ public class TBundle {
      * 
      * 
      */
-    public List<TSimulatedService> getService() {
-        if (service == null) {
-            service = new ArrayList<TSimulatedService>();
+    public List<TSimulatedService> getServices() {
+        if (services == null) {
+            services = new ArrayList<TSimulatedService>();
         }
-        return this.service;
+        return this.services;
     }
 
     /**

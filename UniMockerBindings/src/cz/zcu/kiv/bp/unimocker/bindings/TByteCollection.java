@@ -33,7 +33,7 @@ import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="byte" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+ *                   &lt;element name="Byte" type="{http://www.w3.org/2001/XMLSchema}byte"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -102,7 +102,7 @@ public class TByteCollection extends TCollection<Byte>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="byte" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+     *         &lt;element name="Byte" type="{http://www.w3.org/2001/XMLSchema}byte"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>
@@ -118,7 +118,7 @@ public class TByteCollection extends TCollection<Byte>
     public static class Item extends TCollectionItem<Byte>
     {
 
-        @XmlElement(name = "byte")
+        @XmlElement(name = "Byte")
         protected byte value;
 
         /**

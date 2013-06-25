@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -153,7 +154,7 @@ public class Mocker implements IMocker, BundleContextAware {
 	{
 		// Contains return values for all described methods.
 		Map<Method, Map<Object[], Object>> returns = new HashMap<>();
-		for (InvokedMethod methodToFind : simulation.getMethod())
+		for (InvokedMethod methodToFind : simulation.getMethods())
 		{
 			for (Invocation inv : methodToFind.getInvocations())
 			{
@@ -164,7 +165,13 @@ public class Mocker implements IMocker, BundleContextAware {
 					methodToFind.getName(),
 					parameterTypes
 				);
-				
+				System.out.printf(
+					"class: %s method: %s/wanted method: %s (%s)%n",
+					clazz,
+					foundMethod,
+					methodToFind.getName(),
+					Arrays.deepToString(parameterTypes)
+				);
 				// If this method has not been yet described, create new collection.
 				if (!returns.containsKey(foundMethod))
 				{ // new method
@@ -174,10 +181,11 @@ public class Mocker implements IMocker, BundleContextAware {
 				Map<Object[], Object> methodsInvocationPossibilities = returns.get(foundMethod);
 				methodsInvocationPossibilities.put(
 					inv.getArguments().toArray(),
-					inv.getReturnValue()
+					inv.getReturnValue().getValue()
 				);
 			}
 		}
+
 		return returns;
 	}
 
@@ -199,6 +207,7 @@ public class Mocker implements IMocker, BundleContextAware {
 			throw new IllegalStateException("Mockup scenario has not been loaded."); 
 		}
 		BundlesMap scenario = _.scenarioProject.getSimulatedComponents();
+
 		for (Entry<String, HashMap<String, TSimulatedService>> bundle : scenario.entrySet())
 		{
 			Bundle mockedBundle = _.findBundle(bundle.getKey());
@@ -224,7 +233,7 @@ public class Mocker implements IMocker, BundleContextAware {
 					_.createService(clazz, returns);
 				}
 			}
-			catch (NoSuchMethodException ignore) { ignore.printStackTrace(); }
+			catch (NoSuchMethodException ex) { ex.printStackTrace(); }
 		}
 	}
 	

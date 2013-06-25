@@ -24,7 +24,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TValue">
  *       &lt;attribute name="ord-num" type="{http://www.w3.org/2001/XMLSchema}int" default="0" />
- *       &lt;attribute name="any" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -40,8 +39,6 @@ public class TArgument
 
     @XmlAttribute(name = "ord-num")
     protected Integer ordNum;
-    @XmlAttribute(name = "any")
-    protected Boolean any;
 
     /**
      * Gets the value of the ordNum property.
@@ -69,34 +66,6 @@ public class TArgument
      */
     public void setOrdNum(Integer value) {
         this.ordNum = value;
-    }
-
-    /**
-     * Gets the value of the any property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isAny() {
-        if (any == null) {
-            return false;
-        } else {
-            return any;
-        }
-    }
-
-    /**
-     * Sets the value of the any property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setAny(Boolean value) {
-        this.any = value;
     }
 
 }

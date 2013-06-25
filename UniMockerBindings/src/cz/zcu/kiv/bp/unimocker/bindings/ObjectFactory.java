@@ -209,6 +209,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link TAnyValue }
+     * 
+     */
+    public TAnyValue createTAnyValue() {
+        return new TAnyValue();
+    }
+
+    /**
      * Create an instance of {@link TShortCollection.Item }
      * 
      */

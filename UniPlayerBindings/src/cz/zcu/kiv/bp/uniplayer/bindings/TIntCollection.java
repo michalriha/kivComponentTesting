@@ -33,7 +33,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="int" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *                   &lt;element name="Integer" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -100,7 +100,7 @@ public class TIntCollection extends TCollection<Integer>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="int" type="{http://www.w3.org/2001/XMLSchema}int"/>
+     *         &lt;element name="Integer" type="{http://www.w3.org/2001/XMLSchema}int"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>
@@ -116,7 +116,7 @@ public class TIntCollection extends TCollection<Integer>
     public static class Item extends TCollectionItem<Integer>
     {
 
-        @XmlElement(name = "int")
+        @XmlElement(name = "Integer")
         protected int value;
 
         /**

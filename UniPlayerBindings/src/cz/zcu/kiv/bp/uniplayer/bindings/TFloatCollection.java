@@ -33,7 +33,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="float" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *                   &lt;element name="Float" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -101,7 +101,7 @@ public class TFloatCollection extends TCollection<Float>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/player}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="float" type="{http://www.w3.org/2001/XMLSchema}float"/>
+     *         &lt;element name="Float" type="{http://www.w3.org/2001/XMLSchema}float"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>
@@ -117,7 +117,7 @@ public class TFloatCollection extends TCollection<Float>
     public static class Item extends TCollectionItem<Float>
     {
 
-        @XmlElement(name = "float")
+        @XmlElement(name = "Float")
         protected float value;
 
         /**

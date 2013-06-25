@@ -10,7 +10,14 @@ public class InvocationAdapter extends XmlAdapter<TInvocation, Invocation>
     @Override
     public Invocation unmarshal(TInvocation v) throws Exception
     {
-        return new Invocation(v.getArguments(), v.getReturn());
+    	Value val = v.getReturn();
+    	if (val == null)
+    	{
+    		val = new Value();
+    		val.setType(void.class);
+    		val.setValue(null);
+    	}
+        return new Invocation(v.getArguments(), val);
     }
 
     @Override
@@ -18,7 +25,8 @@ public class InvocationAdapter extends XmlAdapter<TInvocation, Invocation>
     {
         TInvocation inv = new TInvocation();
         inv.setArguments(v.getArguments());
-        inv.setReturn(v.getReturnValue());
+        System.out.println(v.getReturnValue());
+        if (v.getReturnValue().getType() != void.class) inv.setReturn(v.getReturnValue());
         
         return inv;
     }

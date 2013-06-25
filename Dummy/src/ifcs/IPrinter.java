@@ -6,5 +6,5 @@ public interface IPrinter
 		
 		boolean print(Number number);
 		
-		void print(int[] ints);
+		void print(Integer[] ints);
 }

@@ -80,6 +80,8 @@ public class Scenario implements IScenario
 			public boolean handleEvent(ValidationEvent event) {
 				System.out.println(event.getLocator());
 				System.out.println(event.getMessage());
+				event.getLinkedException().printStackTrace();
+				System.out.println();
 				return true;
 			}
 		});
@@ -88,7 +90,9 @@ public class Scenario implements IScenario
 			@Override
 			public boolean handleEvent(ValidationEvent event) {
 				System.out.println(event.getLocator());
-				System.out.println(event.getLocator());
+				System.out.println(event.getMessage());
+				event.getLinkedException().printStackTrace();
+				System.out.println();
 				return true;
 			}
 		});
@@ -175,7 +179,7 @@ public class Scenario implements IScenario
     			for (Entry<String, TSimulatedService> service : bundle.getValue().entrySet())
     			{
     				System.out.println("    interface: " + service.getValue().getInterface());
-    				for (InvokedMethod method : service.getValue().getMethod())
+    				for (InvokedMethod method : service.getValue().getMethods())
     				{
     					System.out.println("        method: " + method.getName());
     					for (Invocation inv : method.getInvocations())

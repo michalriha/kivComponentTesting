@@ -32,29 +32,29 @@ import cz.zcu.kiv.bp.uniplayer.bindings.adapted.*;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;choice>
- *         &lt;element name="string" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="String" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="BigInteger" type="{http://www.w3.org/2001/XMLSchema}integer"/>
- *         &lt;element name="long" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="int" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="short" type="{http://www.w3.org/2001/XMLSchema}short"/>
- *         &lt;element name="byte" type="{http://www.w3.org/2001/XMLSchema}byte"/>
+ *         &lt;element name="Long" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="Integer" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="Short" type="{http://www.w3.org/2001/XMLSchema}short"/>
+ *         &lt;element name="Byte" type="{http://www.w3.org/2001/XMLSchema}byte"/>
  *         &lt;element name="BigDecimal" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
- *         &lt;element name="double" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="float" type="{http://www.w3.org/2001/XMLSchema}float"/>
- *         &lt;element name="file" type="{http://www.kiv.zcu.cz/component-testing/player}TFile"/>
- *         &lt;element name="bool" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element name="strings" type="{http://www.kiv.zcu.cz/component-testing/player}TStringCollection"/>
- *         &lt;element name="BigInts" type="{http://www.kiv.zcu.cz/component-testing/player}TBigIntegerCollection"/>
- *         &lt;element name="longs" type="{http://www.kiv.zcu.cz/component-testing/player}TLongCollection"/>
- *         &lt;element name="ints" type="{http://www.kiv.zcu.cz/component-testing/player}TIntCollection"/>
- *         &lt;element name="shorts" type="{http://www.kiv.zcu.cz/component-testing/player}TShortCollection"/>
- *         &lt;element name="bytes" type="{http://www.kiv.zcu.cz/component-testing/player}TByteCollection"/>
- *         &lt;element name="BigDecimals" type="{http://www.kiv.zcu.cz/component-testing/player}TBigDecimalCollection"/>
- *         &lt;element name="doubles" type="{http://www.kiv.zcu.cz/component-testing/player}TDoubleCollection"/>
- *         &lt;element name="floats" type="{http://www.kiv.zcu.cz/component-testing/player}TFloatCollection"/>
- *         &lt;element name="bools" type="{http://www.kiv.zcu.cz/component-testing/player}TBooleanCollection"/>
- *         &lt;element name="files" type="{http://www.kiv.zcu.cz/component-testing/player}TFileCollection"/>
- *         &lt;element name="null" type="{http://www.kiv.zcu.cz/component-testing/player}TNull"/>
+ *         &lt;element name="Double" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="Float" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *         &lt;element name="File" type="{http://www.kiv.zcu.cz/component-testing/mocker}TFile"/>
+ *         &lt;element name="Boolean" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="Strings" type="{http://www.kiv.zcu.cz/component-testing/mocker}TStringCollection"/>
+ *         &lt;element name="BigInts" type="{http://www.kiv.zcu.cz/component-testing/mocker}TBigIntegerCollection"/>
+ *         &lt;element name="Longs" type="{http://www.kiv.zcu.cz/component-testing/mocker}TLongCollection"/>
+ *         &lt;element name="Ints" type="{http://www.kiv.zcu.cz/component-testing/mocker}TIntCollection"/>
+ *         &lt;element name="Shorts" type="{http://www.kiv.zcu.cz/component-testing/mocker}TShortCollection"/>
+ *         &lt;element name="Bytes" type="{http://www.kiv.zcu.cz/component-testing/mocker}TByteCollection"/>
+ *         &lt;element name="BigDecimals" type="{http://www.kiv.zcu.cz/component-testing/mocker}TBigDecimalCollection"/>
+ *         &lt;element name="Doubles" type="{http://www.kiv.zcu.cz/component-testing/mocker}TDoubleCollection"/>
+ *         &lt;element name="Floats" type="{http://www.kiv.zcu.cz/component-testing/mocker}TFloatCollection"/>
+ *         &lt;element name="Booleans" type="{http://www.kiv.zcu.cz/component-testing/mocker}TBooleanCollection"/>
+ *         &lt;element name="Files" type="{http://www.kiv.zcu.cz/component-testing/mocker}TFileCollection"/>
+ *         &lt;element name="Null" type="{http://www.kiv.zcu.cz/component-testing/mocker}TNull"/>
  *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -68,14 +68,14 @@ import cz.zcu.kiv.bp.uniplayer.bindings.adapted.*;
     "string",
     "bigInteger",
     "_long",
-    "_int",
+    "integer",
     "_short",
     "_byte",
     "bigDecimal",
     "_double",
     "_float",
     "file",
-    "bool",
+    "_boolean",
     "strings",
     "bigInts",
     "longs",
@@ -85,7 +85,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.adapted.*;
     "bigDecimals",
     "doubles",
     "floats",
-    "bools",
+    "booleans",
     "files",
     "_null"
 })
@@ -94,30 +94,31 @@ import cz.zcu.kiv.bp.uniplayer.bindings.adapted.*;
 })
 public class TValue {
 
+    @XmlElement(name = "String")
     protected String string;
     
     @XmlElement(name = "BigInteger")
     protected BigInteger bigInteger;
     
-    @XmlElement(name = "long")
+    @XmlElement(name = "Long")
     protected Long _long;
     
-    @XmlElement(name = "int")
-    protected Integer _int;
+    @XmlElement(name = "Integer")
+    protected Integer integer;
     
-    @XmlElement(name = "short")
+    @XmlElement(name = "Short")
     protected Short _short;
     
-    @XmlElement(name = "byte")
+    @XmlElement(name = "Byte")
     protected Byte _byte;
     
     @XmlElement(name = "BigDecimal")
     protected BigDecimal bigDecimal;
     
-    @XmlElement(name = "double")
+    @XmlElement(name = "Double")
     protected Double _double;
-
-    @XmlElement(name = "float")
+    
+    @XmlElement(name = "Float")
     protected Float _float;
     
     @XmlElement(name = "File", type = String.class)
@@ -125,9 +126,10 @@ public class TValue {
     @XmlJavaTypeAdapter(FileAdapter.class)
     protected File file;
     
-    protected Boolean bool;
+    @XmlElement(name = "Boolean")
+    protected Boolean _boolean;
     
-    @XmlElement(type = TStringCollection.class)
+    @XmlElement(name = "Strings", type = TStringCollection.class)
     @XmlJavaTypeAdapter(StringCollectionAdapter.class)
     protected StringCollection strings;
     
@@ -135,19 +137,19 @@ public class TValue {
     @XmlJavaTypeAdapter(BigIntegerCollectionAdapter.class)
     protected BigIntegerCollection bigInts;
     
-    @XmlElement(type = TLongCollection.class)
+    @XmlElement(name = "Longs", type = TLongCollection.class)
     @XmlJavaTypeAdapter(LongCollectionAdapter.class)
     protected LongCollection longs;
     
-    @XmlElement(type = TIntCollection.class)
+    @XmlElement(name = "Ints", type = TIntCollection.class)
     @XmlJavaTypeAdapter(IntegerCollectionAdapter.class)
     protected IntegerCollection ints;
     
-    @XmlElement(type = TShortCollection.class)
+    @XmlElement(name = "Shorts", type = TShortCollection.class)
     @XmlJavaTypeAdapter(ShortCollectionAdapter.class)
     protected ShortCollection shorts;
     
-    @XmlElement(type = TByteCollection.class)
+    @XmlElement(name = "Bytes", type = TByteCollection.class)
     @XmlJavaTypeAdapter(ByteCollectionAdapter.class)
     protected ByteCollection bytes;
     
@@ -155,23 +157,23 @@ public class TValue {
     @XmlJavaTypeAdapter(BigDecimalCollectionAdapter.class)
     protected BigDecimalCollection bigDecimals;
     
-    @XmlElement(type = TDoubleCollection.class)
+    @XmlElement(name = "Doubles", type = TDoubleCollection.class)
     @XmlJavaTypeAdapter(DoubleCollectionAdapter.class)
     protected DoubleCollection doubles;
     
-    @XmlElement(type = TFloatCollection.class)
+    @XmlElement(name = "Floats", type = TFloatCollection.class)
     @XmlJavaTypeAdapter(FloatCollectionAdapter.class)
     protected FloatCollection floats;
     
-    @XmlElement(type = TBooleanCollection.class)
+    @XmlElement(name = "Booleans", type = TBooleanCollection.class)
     @XmlJavaTypeAdapter(BooleanCollectionAdapter.class)
-    protected BooleanCollection bools;
+    protected BooleanCollection booleans;
     
     @XmlElement(name = "Files", type = TFileCollection.class)
     @XmlJavaTypeAdapter(FileCollectionAdapter.class)
     protected FileCollection files;
     
-    @XmlElement(name = "null")
+    @XmlElement(name = "Null")
     protected TNull _null;
 
     /**
@@ -247,27 +249,27 @@ public class TValue {
     }
 
     /**
-     * Gets the value of the int property.
+     * Gets the value of the integer property.
      * 
      * @return
      *     possible object is
      *     {@link Integer }
      *     
      */
-    public Integer getInt() {
-        return _int;
+    public Integer getInteger() {
+        return integer;
     }
 
     /**
-     * Sets the value of the int property.
+     * Sets the value of the integer property.
      * 
      * @param value
      *     allowed object is
      *     {@link Integer }
      *     
      */
-    public void setInt(Integer value) {
-        this._int = value;
+    public void setInteger(Integer value) {
+        this.integer = value;
     }
 
     /**
@@ -415,27 +417,27 @@ public class TValue {
     }
 
     /**
-     * Gets the value of the bool property.
+     * Gets the value of the boolean property.
      * 
      * @return
      *     possible object is
      *     {@link Boolean }
      *     
      */
-    public Boolean getBool() {
-        return bool;
+    public Boolean getBoolean() {
+        return _boolean;
     }
 
     /**
-     * Sets the value of the bool property.
+     * Sets the value of the boolean property.
      * 
      * @param value
      *     allowed object is
      *     {@link Boolean }
      *     
      */
-    public void setBool(Boolean value) {
-        this.bool = value;
+    public void setBoolean(Boolean value) {
+        this._boolean = value;
     }
 
     /**
@@ -655,27 +657,27 @@ public class TValue {
     }
 
     /**
-     * Gets the value of the bools property.
+     * Gets the value of the booleans property.
      * 
      * @return
      *     possible object is
      *     {@link TBooleanCollection }
      *     
      */
-    public MyCollection<Boolean> getBools() {
-        return bools;
+    public MyCollection<Boolean> getBooleans() {
+        return booleans;
     }
 
     /**
-     * Sets the value of the bools property.
+     * Sets the value of the booleans property.
      * 
      * @param value
      *     allowed object is
      *     {@link TBooleanCollection }
      *     
      */
-    public void setBools(BooleanCollection value) {
-        this.bools = value;
+    public void setBooleans(BooleanCollection value) {
+        this.booleans = value;
     }
 
     /**

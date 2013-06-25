@@ -33,7 +33,7 @@ import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollectionItem;
  *             &lt;complexContent>
  *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="long" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *                   &lt;element name="Long" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -102,7 +102,7 @@ public class TLongCollection extends TCollection<Long>
      *   &lt;complexContent>
      *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="long" type="{http://www.w3.org/2001/XMLSchema}long"/>
+     *         &lt;element name="Long" type="{http://www.w3.org/2001/XMLSchema}long"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>
@@ -118,7 +118,7 @@ public class TLongCollection extends TCollection<Long>
     public static class Item extends TCollectionItem<Long>
     {
 
-        @XmlElement(name = "long")
+        @XmlElement(name = "Long")
         protected long value;
 
         /**

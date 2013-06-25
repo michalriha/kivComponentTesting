@@ -90,7 +90,7 @@ public class Player implements IPlayer, BundleContextAware
 			TEvent event = currentCommand.getEvent();
 			
 			System.out.printf(
-				"%10d: %s",
+				"%10d: %s => ",
 				iter.getCurrentTime(),
 				call != null ? "call" : "event"
 			);
@@ -107,13 +107,13 @@ public class Player implements IPlayer, BundleContextAware
 			}
 			else if (event != null)
 			{
-				_.execute(event);
 				System.out.printf(
 					" %s/%s[%s]",
 					event.getTopic(),
 					event.getKey(),
 					event.getArgument()
 				);
+				_.execute(event);
 			}
 			System.out.println();
 			
@@ -124,7 +124,7 @@ public class Player implements IPlayer, BundleContextAware
 	private void execute(TEvent event)
 	{
         HashMap<String, Object> arguments = new HashMap<>();
-        arguments.put(event.getKey(), event.getArgument());
+        arguments.put(event.getKey(), event.getArgument().getValue());
         _.eventAdmin.sendEvent(new Event(event.getTopic(), arguments));
 	}
 	
@@ -132,6 +132,7 @@ public class Player implements IPlayer, BundleContextAware
 	{
 		// find service instance
 		Object serviceInstance = _.getServiceInstance(call.getService());
+		System.out.println(serviceInstance);
 		if (serviceInstance == null)
 		{ // no service implementation is active in current context
 			System.out.printf("No instance of %s has not been found. skipping ...%n", call.getService());
@@ -189,6 +190,10 @@ public class Player implements IPlayer, BundleContextAware
 			| InvocationTargetException e)
 		{
 			System.out.println("Invocation of method %s in service %s failled. stack trace:%n");
+			e.printStackTrace();
+		}
+		catch (Throwable e)
+		{
 			e.printStackTrace();
 		}
 	}
