@@ -17,7 +17,7 @@ import org.eclipse.osgi.framework.console.CommandProvider;
 public class Commander implements CommandProvider
 {
 	public static final String
-		DEFAULT_SCENARIO_FILE = "config/scenario.xml",
+		DEFAULT_SCENARIO_FILE = "mocker_scenario.xml",
 		CMD_LOAD = "load",
 		CMD_MOCK = "mock",
 		CMD_DIAG = "diag";

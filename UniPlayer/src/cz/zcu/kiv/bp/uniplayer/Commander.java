@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
  */
 public class Commander implements CommandProvider
 {
-	public static final String DEFAULT_SCENARIO_FILE = "config/scenario.xml";
+	public static final String DEFAULT_SCENARIO_FILE = "player_scenario.xml";
     
     private Commander _ = this;
     
