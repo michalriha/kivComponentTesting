@@ -8,3 +8,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: cz.zcu.kiv.bp.unimocker.bindings,
  cz.zcu.kiv.bp.unimocker.bindings.adapted,
  cz.zcu.kiv.bp.unimocker.bindings.basics
+Import-Package: cz.zcu.kiv.bp.namespaces

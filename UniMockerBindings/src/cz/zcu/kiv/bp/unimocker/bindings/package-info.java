@@ -7,10 +7,10 @@
 
 @javax.xml.bind.annotation.XmlSchema(	xmlns = {
 		@javax.xml.bind.annotation.XmlNs(
-			    prefix = cz.zcu.kiv.bp.unimocker.bindings.basics.MyPrefixMapper.SCENARIO_PREFIX,
-			    namespaceURI = cz.zcu.kiv.bp.unimocker.bindings.basics.MyPrefixMapper.SCENARIO_URI
+			    prefix = cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_PREFIX,
+			    namespaceURI = cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_URI
 			)},
-			namespace = cz.zcu.kiv.bp.unimocker.bindings.basics.MyPrefixMapper.SCENARIO_URI,
+			namespace = cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_URI,
 			elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED	)
 
 package cz.zcu.kiv.bp.unimocker.bindings;

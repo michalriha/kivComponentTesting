@@ -8,10 +8,10 @@
 @javax.xml.bind.annotation.XmlSchema(
 	xmlns = {
 	@javax.xml.bind.annotation.XmlNs(
-	    prefix = cz.zcu.kiv.bp.uniplayer.bindings.basics.MyPrefixMapper.SCENARIO_PREFIX,
-	    namespaceURI = cz.zcu.kiv.bp.uniplayer.bindings.basics.MyPrefixMapper.SCENARIO_URI //"http://www.kiv.zcu.cz/component-testing/simulation/scenario/player"
+	    prefix = cz.zcu.kiv.bp.namespaces.UniPlayer.SCENARIO_PREFIX,
+	    namespaceURI = cz.zcu.kiv.bp.namespaces.UniPlayer.SCENARIO_URI //"http://www.kiv.zcu.cz/component-testing/simulation/scenario/player"
 	)},
-	namespace = cz.zcu.kiv.bp.uniplayer.bindings.basics.MyPrefixMapper.SCENARIO_URI,
+	namespace = cz.zcu.kiv.bp.namespaces.UniPlayer.SCENARIO_URI,
 	elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED	
 )
 package cz.zcu.kiv.bp.uniplayer.bindings;
