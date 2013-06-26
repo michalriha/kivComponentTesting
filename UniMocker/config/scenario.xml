@@ -3,126 +3,34 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<simulated-components>
 		<bundle symbolic-name="cz.zcu.kivcmd.core" version="1.0.0">
-			<service interface="cz.zcu.kiv.kc.interfaces.IViewPlugin">
-				<method name="executeAction">
+			<service interface="cz.zcu.kiv.kc.interfaces.IViewPlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+				<method name="executeAction2">
 					<invocation>
 						<arguments>
 							<argument ord-num="0">
-								<Files type="ArrayList">
-									<item ord-num="0"><File>d:\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\WP_000014.jpg</File></item>
-								</Files>
-							</argument>
+                                <Files>
+                                    <item ord-num="0"><File>obr.pic</File></item>
+                                </Files>
+                              <!--   <Any base-type="FileArrayList" /> -->
+                            </argument>
+                            <argument ord-num="1">
+                                <Any base-type="String" />
+                            </argument>
+                            <argument ord-num="2">
+                                <Any base-type="String" />
+                            </argument>
 						</arguments>
-						<return>
-							<null base-type="String" />
-						</return>
 					</invocation>
 				</method>
+                <method name="getName">
+                    <invocation>
+                        <arguments />
+                        <return>
+                            <String>MockupPlugin2</String>
+                        </return>
+                    </invocation>
+                </method>
 			</service>
 		</bundle>
-		<bundle symbolic-name="cz.zcu.dummy" version="1.0.0">
-			<service interface="ifcs.IPrinter">
-				<method name="print">
-					<invocation>
-						<arguments>
-							<argument ord-num="0"><int>10</int></argument>
-							<argument ord-num="1"><int>11</int></argument>
-							<argument ord-num="2"><int>12</int></argument>
-							<argument ord-num="3"><int>13</int></argument>
-						</arguments>
-						<return>
-							<null base-type="String" />
-						</return>
-					</invocation>
-				</method>
-			</service>
-			<service interface="ifcs.IPainter">
-				<method name="line">
-					<invocation>
-						<arguments>
-							<argument ord-num="0"><int>10</int></argument>
-							<argument ord-num="1"><int>11</int></argument>
-							<argument ord-num="2"><int>12</int></argument>
-							<argument ord-num="3"><int>13</int></argument>
-						</arguments>
-						<return>
-							<bool>true</bool>
-						</return>
-					</invocation>
-					<invocation>
-						<arguments>
-							<argument ord-num="0"><int>10</int></argument>
-							<argument ord-num="1"><int>11</int></argument>
-							<argument ord-num="2"><int>12</int></argument>
-							<argument ord-num="3"><int>14</int></argument>
-						</arguments>
-						<return><bool>false</bool></return>
-					</invocation>
-				</method>
-				<method name="render">
-					<invocation>
-						<arguments>
-							<argument ord-num="0"><string>Nazdar</string></argument>
-						</arguments>
-						<return><string>Trhni si</string></return>
-					</invocation>
-					<invocation>
-						<arguments>
-							<argument ord-num="0"><string>Heslo</string></argument>
-						</arguments>
-						<return><string>Hovno kleslo</string></return>
-					</invocation>
-				</method>
-				<method name="test">
-					<invocation>
-						<arguments>
-							<argument ord-num="0"><string>Skubni si</string></argument>
-						</arguments>
-						<return><string>skubnu</string></return>
-					</invocation>
-				</method>
-			</service>
-		</bundle> 
-<!-- 		<bundle symbolic-name="cz.zcu.kiv.bp.testing.dummy.commons" version="1.0.0" > -->
-<!-- 			<service interface="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IDisplay"> -->
-<!-- 				<method name="Render"> -->
-<!-- 					<invocation> -->
-<!-- 						<arguments> -->
-<!-- 							<argument ord-num="1"><null base-type="String" /></argument> -->
-<!-- 						</arguments> -->
-<!-- 						<return><bool>false</bool></return> -->
-<!-- 					</invocation> -->
-<!-- 					<invocation> -->
-<!-- 						<arguments> -->
-<!-- 							<argument ord-num="1"><null base-type="String" /></argument> -->
-<!-- 							<argument ord-num="2"><null base-type="String" /></argument> -->
-<!-- 						</arguments> -->
-<!-- 						<return><bool>false</bool></return> -->
-<!-- 					</invocation> -->
-<!-- 				</method> -->
-					<!-- <invocation expected-calls="2">
-						<arguments>
-							<argument ord-num="1"><string>texticek novy - 2</string></argument>
-							<argument><string>texticek novy - 1</string></argument>
-						</arguments>
-						<return><boolean>0</boolean></return>
-					</invocation> //-->
-					<!-- <invocation>
-						<arguments>
-							<argument>
-								<list>
-									<int>1</int>
-									<int>2</int>
-									<int>3</int>
-								</list>
-							</argument>
-						</arguments>
-						<return>
-							<boolean>true</boolean>
-						</return>
-					</invocation>
-				</method>-->
-<!-- 			</service> -->
-<!-- 		</bundle> -->
 	</simulated-components>
 </project>
