@@ -1,13 +1,5 @@
 package cz.zcu.kiv.bp.unimocker.bindings.adapted;
 
-//import java.io.File;
-//import java.lang.reflect.Array;
-//import java.math.BigDecimal;
-//import java.math.BigInteger;
-//import java.util.LinkedList;
-//import java.util.List;
-//
-//import javax.xml.bind.JAXBElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -17,7 +9,11 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import cz.zcu.kiv.bp.unimocker.bindings.TArgument;
 import cz.zcu.kiv.bp.unimocker.bindings.TValue;
 
-
+/**
+ * Adapter for transforming TArgument to Argument 
+ * @author Michal
+ *
+ */
 public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
 {
 

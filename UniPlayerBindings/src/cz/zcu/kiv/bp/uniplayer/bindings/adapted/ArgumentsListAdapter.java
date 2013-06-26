@@ -10,6 +10,11 @@ import cz.zcu.kiv.bp.uniplayer.bindings.basics.UnOrderableItemsException;
 
 
 
+/**
+ * Adapter for transforming TArgumentList to ArgumentList 
+ * @author Michal
+ *
+ */
 public class ArgumentsListAdapter extends XmlAdapter<TArgumentsList, ArgumentsList>
 {
 

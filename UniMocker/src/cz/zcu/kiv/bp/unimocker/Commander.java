@@ -5,8 +5,15 @@ import java.io.FileNotFoundException;
 import org.eclipse.osgi.framework.console.CommandInterpreter;
 import org.eclipse.osgi.framework.console.CommandProvider;
 
-import cz.zcu.kiv.bp.unimocker.bindings.basics.InvalidFileException;
-
+/**
+ * Implements simple user interface for controlling UniMocker.
+ * Implements CommandProvider - command prefixed with "um".<br>
+ * <ul>
+ *  <li>um load file.xml - loads scenario from file file.xml</li>
+ *  <li>um mock - makes IMocker to create mockups and registers them as OSGi services</li>
+ * </ul> 
+ * @author Michal
+ */
 public class Commander implements CommandProvider
 {
 	public static final String
@@ -17,6 +24,9 @@ public class Commander implements CommandProvider
 
 	private Commander _ = this;
 	
+	/**
+	 * used mocker implementation
+	 */
 	private IMocker mocker;
 	
 	/**
@@ -33,6 +43,9 @@ public class Commander implements CommandProvider
 		this.mocker = mocker;
 	}
 
+	/**
+	 * bundle init method - print help
+	 */
 	public void init()
 	{
 		System.out.println("\n" + _.getHelp());
@@ -58,7 +71,6 @@ public class Commander implements CommandProvider
 	            }
 	            try { _.mocker.loadFile(fileName); }
 	            catch (FileNotFoundException e) { System.out.println(e.getLocalizedMessage()); }
-	            catch (InvalidFileException e) { System.out.println("Unable to load file. Invalid format."); }
 	            catch (Throwable e) { e.printStackTrace(); }
 	            
 	            break;

@@ -1,5 +1,10 @@
 package cz.zcu.kiv.bp.unimocker;
 
+/**
+ * Describes the methods that mocker has to implement. Useful for possible mocker
+ * implementation replacement with OSGi service provided by other bundle. 
+ * @author Michal
+ */
 public interface IMocker
 {
 	/**
@@ -12,7 +17,6 @@ public interface IMocker
 	 * @param fileName file to load
 	 * @throws JAXBException when unmarshalling failed
 	 * @throws FileNotFoundException when unable to read given file
-	 * @throws InvalidFileException when file format is invalid
 	 * @throws Throwable other exceptions that might occur
 	 */
 	abstract void loadFile(String fileName) throws Throwable;

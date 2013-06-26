@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import cz.zcu.kiv.bp.unimocker.bindings.TArgumentsList;
 import cz.zcu.kiv.bp.unimocker.bindings.basics.UnOrderableItemsException;
 
+/**
+ * Adapter for transforming TArgumentList to ArgumentList 
+ * @author Michal
+ *
+ */
 public class ArgumentsListAdapter extends XmlAdapter<TArgumentsList, ArgumentsList>
 {
 

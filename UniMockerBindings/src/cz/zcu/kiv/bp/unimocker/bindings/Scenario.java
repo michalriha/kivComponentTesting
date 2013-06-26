@@ -34,8 +34,11 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.InvokedMethod;
 import cz.zcu.kiv.bp.unimocker.bindings.ObjectFactory;
-import cz.zcu.kiv.bp.unimocker.bindings.basics.InvalidFileException;
 
+/**
+ * Implementation of IScenario. Provides method for loading/storing mocking scenario using JAXB technology.
+ * @author Michal
+  */
 public class Scenario implements IScenario
 {
     public static final String
@@ -132,7 +135,6 @@ public class Scenario implements IScenario
     public void loadFile(String fileName)
     throws JAXBException,
            SAXException,
-           InvalidFileException,
            IOException
     {
         try 

@@ -4,6 +4,10 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import cz.zcu.kiv.bp.unimocker.bindings.TInvocation;
 
+/**
+ * Adapter for transforming TInvocation to Invocation.
+ * @author Michal
+ */
 public class InvocationAdapter extends XmlAdapter<TInvocation, Invocation>
 {
 
@@ -25,7 +29,6 @@ public class InvocationAdapter extends XmlAdapter<TInvocation, Invocation>
     {
         TInvocation inv = new TInvocation();
         inv.setArguments(v.getArguments());
-        System.out.println(v.getReturnValue());
         if (v.getReturnValue().getType() != void.class) inv.setReturn(v.getReturnValue());
         
         return inv;

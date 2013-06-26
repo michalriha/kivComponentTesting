@@ -2,39 +2,42 @@ package cz.zcu.kiv.bp.unimocker.bindings.adapted;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
+/**
+ * Describes single invocation possibility
+ * @author Michal
+ */
 @XmlJavaTypeAdapter(InvocationAdapter.class)
 public class Invocation
 {
-
     private Invocation _ = this;
 
     private ArgumentsList arguments;
     
     private Value returnValue;
     
+    /**
+     * Returns return value associated with this invocation.
+     * @return
+     */
     public Value getReturnValue()
     {
         return returnValue;
     }
     
+    /**
+     * Returns invocation arguments.
+     * @return
+     */
     public ArgumentsList getArguments()
     {
         return _.arguments;
     }
-
-    public void setReturnValue(Value returnVaue)
-    {
-        _.returnValue = _.returnValue;
-    }
-
-    public void setArguments(ArgumentsList arguments)
-    {
-        _.arguments = _.arguments;
-    }
     
-    public Invocation() { }
-    
+    /**
+     * Creates new Invocation possibility based on given argument and return value;
+     * @param arguments
+     * @param returnValue
+     */
     public Invocation(ArgumentsList arguments, Value returnValue)
     {
         _.arguments = arguments;

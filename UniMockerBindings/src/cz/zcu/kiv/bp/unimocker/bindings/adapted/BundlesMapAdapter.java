@@ -9,6 +9,10 @@ import cz.zcu.kiv.bp.unimocker.bindings.TBundle;
 import cz.zcu.kiv.bp.unimocker.bindings.TBundleList;
 import cz.zcu.kiv.bp.unimocker.bindings.TSimulatedService;
 
+/**
+ * Adapter for transforming TBundleList to BundlesMap 
+ * @author Michal
+ */
 public class BundlesMapAdapter extends XmlAdapter<TBundleList, BundlesMap>
 {
 

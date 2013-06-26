@@ -7,12 +7,15 @@ import org.eclipse.osgi.framework.console.CommandInterpreter;
 import org.eclipse.osgi.framework.console.CommandProvider;
 import org.xml.sax.SAXException;
 
-import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
-
 /**
- * Component tester implementation
+ * Implements simple user interface for controlling UniPlayer.
+ * Implements CommandProvider - command prefixed with "up".<br>
+ * <ul>
+ *  <li>up load file.xml - loads scenario from file file.xml</li>
+ *  <li>up play - starts or resumes iterating over loaded scenario and executing each action</li>
+ *  <li>up stop - stops currently playing scenario</li>
+ * </ul> 
  * @author Michal
- *
  */
 public class Commander implements CommandProvider
 {
@@ -20,13 +23,23 @@ public class Commander implements CommandProvider
     
     private Commander _ = this;
     
+    /**
+     * user player implementation
+     */
     private IPlayer plr;
     
+    /**
+     * Sets used player
+     * @param plr IPlayer implementation
+     */
     public void setPlr(IPlayer plr)
     {
         _.plr = plr;
     }
     
+    /**
+     * bundles init method - prints help
+     */
     public void init()
     {
 		System.out.println("\n" + _.getHelp());
@@ -57,7 +70,6 @@ public class Commander implements CommandProvider
                 }
                 try { _.plr.loadFile(fileName); }
                 catch (FileNotFoundException e) { System.out.println(e.getLocalizedMessage()); }
-                catch (InvalidFileException e) { System.out.println("Unable to load file. Invalid format."); }
                 catch (Throwable e) { e.printStackTrace(); }
                 
                 break;

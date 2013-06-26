@@ -1,4 +1,10 @@
 package cz.zcu.kiv.bp.uniplayer.bindings.adapted;
 
-@SuppressWarnings("serial")
-public class ShortCollection extends MyCollection<Short> { }
+/**
+ * MyCollection for Short numbers
+ * @author Michal
+ */
+public class ShortCollection extends MyCollection<Short>
+{
+	private static final long serialVersionUID = -4430340326766549436L;
+}

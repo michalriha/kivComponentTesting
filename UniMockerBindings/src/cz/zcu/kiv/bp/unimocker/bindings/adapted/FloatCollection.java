@@ -1,4 +1,10 @@
 package cz.zcu.kiv.bp.unimocker.bindings.adapted;
 
-@SuppressWarnings("serial")
-public class FloatCollection extends MyCollection<Float> { }
+/**
+ * MyCollection for Float numbers
+ * @author Michal
+ */
+public class FloatCollection extends MyCollection<Float>
+{
+	private static final long serialVersionUID = 2618856988537836188L;
+}

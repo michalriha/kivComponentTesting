@@ -31,6 +31,11 @@ import cz.zcu.kiv.bp.uniplayer.bindings.TArgument;
 import cz.zcu.kiv.bp.uniplayer.bindings.TValue;
 
 
+/**
+ * Adapter for transforming TArgument to Argument 
+ * @author Michal
+ *
+ */
 public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
 {
 

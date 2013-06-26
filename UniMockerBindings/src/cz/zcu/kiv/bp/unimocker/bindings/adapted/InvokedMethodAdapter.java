@@ -4,6 +4,11 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import cz.zcu.kiv.bp.unimocker.bindings.TInvokedMethod;
 
+/**
+ * Adapter for transforming TInvokedMethod to InvokedMethod
+ * @author Michal
+ *
+ */
 public class InvokedMethodAdapter extends XmlAdapter<TInvokedMethod, InvokedMethod>
 {
 

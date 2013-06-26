@@ -9,20 +9,42 @@ import java.util.Map.Entry;
 
 import cz.zcu.kiv.bp.unimocker.ArgumentScenarioTable.Posibility;
 
+/**
+ * Implements InvocationHandler. This class is universal invocation handler pro proxy objects used as mockup.
+ * When some method has been invoked, it checks whether the invoked method and actual invocation arguments
+ * have been described in mocking scenario. If not throws corresponding exception. If they were, return the value
+ * associated with given arguments as described in mocking scenario.
+ * @author Michal
+ */
 public class UniHandler implements InvocationHandler 
 {	
 	private UniHandler _ = this;
 	
+	/**
+	 * class that is mocked by proxy using this handler instance
+	 */
 	private Class<?> mockedClass;
 	
+	/**
+	 * flag whether or not to throw UndefinedMethodInvocationException
+	 */
 	private boolean ignoreUndefinedMethods;
 	
+	/**
+	 * flag whether or not to throw UndefinedPossibilityException
+	 */
 	private boolean ignoreUndefinedPossibilities;
 	
 //	private Map<Method, Map<Object[], Object>> retVals = null;
 	
+	/**
+	 * possibility matrix (scenario)
+	 */
 	private Map<Method, ArgumentScenarioTable> retMatrix = new HashMap<Method, ArgumentScenarioTable>();
 	
+	/**
+	 * list for pairs method=>return value for method without arguments
+	 */
 	private Map<Method, Object> paramLessMethods = new HashMap<>();
 	
 //	private enum EQUALITY
@@ -30,16 +52,32 @@ public class UniHandler implements InvocationHandler
 //		EQUAL, INEQUAL, NO_SURE
 //	}
 	
+	/**
+	 * Create handler with empty scenario, propagates both exceptions
+	 * @param mockedClass class that is mocked by proxy using this handler instance
+	 */
 	public UniHandler(Class<?> mockedClass)
 	{
 		this(mockedClass, new HashMap<Method, Map<Object[], Object>>(), false, false);
 	}
 	
+	/**
+	 * Creates handler with given scenario. Propagates both exceptions
+	 * @param mockedClass class that is mocked by proxy using this handler instance
+	 * @param retVals mocking scenario
+	 */
 	public UniHandler(Class<?> mockedClass, Map<Method, Map<Object[], Object>> retVals)
 	{
 		this(mockedClass, retVals, false, false);
 	}
 	
+	/**
+	 * Create handler with given scenario and exception propagating flags.
+	 * @param mockedClass mockedClass class that is mocked by proxy using this handler instance
+	 * @param retVals mocking scenario
+	 * @param ignoreUndefMethods flag whether or not to throw UndefinedMethodInvocationException
+	 * @param ignoreUndefPossibs flag whether or not to throw UndefinedPossibilityException
+	 */
 	public UniHandler(
 		Class<?> mockedClass,
 		Map<Method, Map<Object[], Object>> retVals,
@@ -90,6 +128,10 @@ public class UniHandler implements InvocationHandler
 		}
 	}
 
+	/**
+	 * @exception UndefinedMethodInvocationException
+	 * @exception UndefinedPossibilityException
+	 */
 	@Override
 	public Object invoke(
 		Object proxy,

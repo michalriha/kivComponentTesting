@@ -9,7 +9,10 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import cz.zcu.kiv.bp.uniplayer.bindings.TAction;
 import cz.zcu.kiv.bp.uniplayer.bindings.TActionsList;
 
-
+/**
+ * Adapter for transforming TActionsList to ActionMap
+ * @author Michal
+ */
 public class ActionsMapAdapter extends XmlAdapter<TActionsList, ActionsMap>
 {
     @Override

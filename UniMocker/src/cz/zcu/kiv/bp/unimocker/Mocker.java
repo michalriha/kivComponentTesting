@@ -28,14 +28,24 @@ import cz.zcu.kiv.bp.unimocker.bindings.TSimulatedService;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.InvokedMethod;
-import cz.zcu.kiv.bp.unimocker.bindings.basics.InvalidFileException;
 
-public class Mocker implements IMocker, BundleContextAware {
-
+/**
+ * IMocker implementation. Implements local mockup builder.
+ * When mockup is created, it's also registered as OSGi service.
+ * @author Michal
+ */
+public class Mocker implements IMocker, BundleContextAware
+{
 	private Mocker _ = this;
-	
+
+	/**
+	 * OSGi bundle context
+	 */
 	private BundleContext context;
 	
+	/**
+	 * UniMockerBinding loader
+	 */
 	private IScenario scenarioProject;
 	
     /**
@@ -180,6 +190,17 @@ public class Mocker implements IMocker, BundleContextAware {
 					methodToFind.getName(),
 					parameterTypes
 				);
+				if (foundMethod == null)
+				{ // class does not provide required method
+					throw new NoSuchMethodException(
+						String.format(
+							"Class %s does not provide any method %s with arguments %s",
+							clazz.getCanonicalName(),
+							methodToFind.getName(),
+							Arrays.deepToString(parameterTypes)
+						)
+					);
+				}
 				System.out.printf(
 					"class: %s method: %s/wanted method: %s (%s)%n",
 					clazz,
@@ -204,6 +225,10 @@ public class Mocker implements IMocker, BundleContextAware {
 		return returns;
 	}
 
+	/**
+	 * bundles destroy method - Unregister all created mockup services.
+	 * @throws Exception
+	 */
 	public void destroy() throws Exception
 	{		
 		// unregister mockups
@@ -214,11 +239,15 @@ public class Mocker implements IMocker, BundleContextAware {
 		}
 	}
 
+	/**
+	 * Iterates over the loaded scenario and creates described mockups.
+	 * Mockups are filled with described invocation possibilities and their return values.
+	 */
 	@Override
 	public void mock()
 	{
 		if (_.scenarioProject == null)
-		{
+		{ // scenario has not been loaded
 			throw new IllegalStateException("Mockup scenario has not been loaded."); 
 		}
 		BundlesMap scenario = _.scenarioProject.getSimulatedComponents();
@@ -227,25 +256,34 @@ public class Mocker implements IMocker, BundleContextAware {
 		{
 			Bundle mockedBundle = _.findBundle(bundle.getKey());
 			if (mockedBundle == null)
-			{
+			{ // bundle described in scenario has not been found in current context
 				System.out.printf("Bundle %s has not been found! Skipping bundle.%n", bundle.getKey());
 				continue;
 			}
 
 			String[] classesToFind = bundle.getValue().keySet().toArray(new String[0]);
 			Class<?>[] mockedClasses = _.findClassesToMock(mockedBundle, classesToFind);
-			if (mockedClasses == null) continue;
+			if (mockedClasses == null || mockedClasses.length != classesToFind.length)
+			{ // not all classes that should be mocked has been found
+				System.out.printf(
+					"Not all classes to mock has been found.%nrequired: %s%nfound: %s%n",
+					Arrays.toString(classesToFind),
+					mockedClasses == null ? Arrays.deepToString(mockedClasses) : "none"
+				);
+				continue;
+			}
 			
-			try
+			// try to create mockup objects
+			for (Class<?> clazz : mockedClasses)
 			{
-				for (Class<?> clazz : mockedClasses)
-				{
+				try
+				{ 
 					// find all described invocations for current class
 					TSimulatedService simulation = bundle.getValue().get(clazz.getName());
 					Map<Method, Map<Object[], Object>> returns = _.buildInvocationPossibilitiesForClass(clazz, simulation);
 					
 					TSimulatedService descr = bundle.getValue().get(clazz.getCanonicalName());
-
+	
 					Object srv = _.createMockup(
 						clazz,
 						returns,
@@ -256,8 +294,11 @@ public class Mocker implements IMocker, BundleContextAware {
 					// building mockup
 					_.createService(clazz, srv);
 				}
+				catch (NoSuchMethodException ex)
+				{ // described method not been found in current class
+					System.out.printf("%s -> skipping%n", ex.getMessage());
+				}
 			}
-			catch (NoSuchMethodException ex) { ex.printStackTrace(); }
 		}
 	}
 	
@@ -274,7 +315,7 @@ public class Mocker implements IMocker, BundleContextAware {
 
 	@Override
 	public void loadFile(String fileName)
-    throws JAXBException, SAXException, InvalidFileException, IOException
+    throws JAXBException, SAXException, IOException
 	{
 		_.scenarioProject = new Scenario();
 		_.scenarioProject.loadFile(fileName);

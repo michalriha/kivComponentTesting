@@ -7,20 +7,41 @@ import java.util.ArrayList;
 import cz.zcu.kiv.bp.unimocker.bindings.TCollectionType;
 import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollection;
 
-@SuppressWarnings("serial")
+/**
+ * Common collection implementation. Is intended to be extended, but can be used on it's own. 
+ * @author Michal
+ *
+ * @param <T> component type
+ */
 public class MyCollection<T> extends ArrayList<T>
 {
+	private static final long serialVersionUID = 5860260268967496007L;
+
 	private MyCollection<T> _ = this;
 	
+	/**
+	 * The type of collection that should be actually used.
+	 */
 	private TCollectionType collectionType;
 	
+	/**
+	 * Corresponding XMLType (T?Collection)
+	 */
 	private Class<? extends TCollection<T>> xmlType;
 	
+	/**
+	 * Gets the type of collection that should be used as actual value.
+	 * @return collection type
+	 */
 	public TCollectionType getCollectionType()
 	{
 		return _.collectionType;
 	}
 
+	/**
+	 * Sets the type of collection that should be used as actual value.
+	 * @param type collection type
+	 */
 	public void setCollectionType(TCollectionType type)
 	{
 		_.collectionType = type;

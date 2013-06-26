@@ -1,4 +1,10 @@
 package cz.zcu.kiv.bp.unimocker.bindings.adapted;
 
-@SuppressWarnings("serial")
-public class DoubleCollection extends MyCollection<Double> { }
+/**
+ * MyCollection for Double numbers
+ * @author Michal
+ */
+public class DoubleCollection extends MyCollection<Double>
+{
+	private static final long serialVersionUID = -923060142701526588L;
+}

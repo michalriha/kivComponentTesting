@@ -23,21 +23,7 @@ import cz.zcu.kiv.bp.unimocker.bindings.*;
 
 
 /**
- * <p>Java class for TCollection complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="TCollection">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="type" type="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionType" default="ArrayList" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
+ * Common superclass for all T?Collection classes
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TCollection")
@@ -56,10 +42,25 @@ import cz.zcu.kiv.bp.unimocker.bindings.*;
 })
 public abstract class TCollection<T>
 {
+	/**
+	 * Returns content of this collection.
+	 * @return content of collection, each item is wrapped in T?CollectionItem instance
+	 */
 	public abstract List<TCollectionItem<T>> getItems();
 	
+	/**
+	 * Return collection component wrapper class.
+	 * Wrapper are used for storing information of item's type event if the value is null.
+	 * @return Wrapper class corresponding to it's collection
+	 */
 	public abstract Class<? extends TCollectionItem<T>> getComponentWrapperClass();
 
+	/**
+	 * Wraps given value in proper wrapper and adds it into collection.
+	 * @param value value to add into collection
+	 * @throws InstantiationException Could not create new instance of wrapper class. 
+	 * @throws IllegalAccessException Could not create new instance of wrapper class. 
+	 */
 	public void add(T value) throws InstantiationException, IllegalAccessException
 	{
 		TCollectionItem<T> wrappedItem = this.getComponentWrapperClass().newInstance();
@@ -68,6 +69,12 @@ public abstract class TCollection<T>
 		this.getItems().add(wrappedItem);
 	}
 	
+	/**
+	 * Adds all values into collection.
+	 * @param values values to add into collection
+	 * @throws InstantiationException Could not create new instance of wrapper class. 
+	 * @throws IllegalAccessException Could not create new instance of wrapper class. 
+	 */
 	public void addAll(Collection<T> values) throws InstantiationException, IllegalAccessException
 	{
 		for (T value : values)
@@ -76,6 +83,10 @@ public abstract class TCollection<T>
 		}
 	}
 	
+	/**
+	 * Returns component type of this collection.
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public Class<T> getComponentType()
 	{
@@ -88,7 +99,8 @@ public abstract class TCollection<T>
     protected TCollectionType type;
 	
     /**
-     * Gets the value of the type property.
+     * Gets the value of the type property. Return type of this collection that should be used as value.
+     * Possible values are Array, ArrayList, LinkedList
      * 
      * @return
      *     possible object is

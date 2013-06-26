@@ -17,7 +17,6 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.springframework.osgi.context.BundleContextAware;
 import org.xml.sax.SAXException;
 
-import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenario;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenarioIterator;
 import cz.zcu.kiv.bp.uniplayer.bindings.Scenario;
@@ -25,18 +24,38 @@ import cz.zcu.kiv.bp.uniplayer.bindings.TCall;
 import cz.zcu.kiv.bp.uniplayer.bindings.TCommand;
 import cz.zcu.kiv.bp.uniplayer.bindings.TEvent;
 
+/**
+ * IPlayer implementation. Implements local scenario player.
+ * @author Michal
+ */
 public class Player implements IPlayer, BundleContextAware
 {
-	private static int SERVICE_WAIT_LIMIT = 3000; // ms
-		
+	/**
+	 * How long to wait for service to activate
+	 */
+	// TODO: add to scenario file format
+	private static int SERVICE_WAIT_LIMIT = 30000; // ms
+
 	private Player _ = this;
 	
+	/**
+	 * OSGi context
+	 */
 	private BundleContext context;
 	
-	private volatile boolean stopped = false;
-	
+	/**
+	 * OSGI EventAdmin service
+	 */
 	private EventAdmin eventAdmin;
 	
+	/**
+	 * flag signaling whether the scenario has replay has been stopped  
+	 */
+	private volatile boolean stopped = false;
+	
+	/**
+	 * UniPlayerBinding loader
+	 */
 	private IScenario scenario;
     
     /**
@@ -121,6 +140,10 @@ public class Player implements IPlayer, BundleContextAware
 		}
 	}
 
+	/**
+	 * Fires given event.
+	 * @param event
+	 */
 	private void execute(TEvent event)
 	{
         HashMap<String, Object> arguments = new HashMap<>();
@@ -128,6 +151,10 @@ public class Player implements IPlayer, BundleContextAware
         _.eventAdmin.sendEvent(new Event(event.getTopic(), arguments));
 	}
 	
+	/**
+	 * Invokes method on service with arguments described in call argument.
+	 * @param call invocation description
+	 */
 	private void execute(TCall call)
 	{
 		// find service instance
@@ -138,36 +165,9 @@ public class Player implements IPlayer, BundleContextAware
 			System.out.printf("No instance of %s has not been found. skipping ...%n", call.getService());
 			return;
 		}
-		
-//		// find service's interface
-//		Class<?> serviceInterface = _.getServiceClass(serviceInstance, call.getService());
-//		if (serviceInterface == null)
-//		{ // interface does not exist in current context 
-//			System.out.printf("Service %s has not been found. skipping ...%n", call.getService());
-//			return;
-//		}
-//		
-//		// find invoked method in service
-//		// apache method utils have better matching capabilities than implicit java reflection
-//		Method invokedMethod = MethodUtils.getMatchingAccessibleMethod(
-//			serviceInterface,
-//			call.getMethod(),
-//			call.getArguments().getTypes()
-//		);
-//		if (invokedMethod == null)
-//		{ // required method does not exist
-//			System.out.printf(
-//				"Service does not provide method %s (%s). skipping ...%n",
-//				call.getMethod(),
-//				printTypes(call.getArguments().getTypes())
-//			);
-//			return;
-//		}
 
 		try
 		{ // try to execute requirred action
-//			invokedMethod.invoke(serviceInstance, call.getArguments().toArray());
-			
 			// apache method utils used for it's better matching capabilities
 			MethodUtils.invokeMethod(
 				serviceInstance,
@@ -188,16 +188,21 @@ public class Player implements IPlayer, BundleContextAware
 			IllegalAccessException
 			| IllegalArgumentException
 			| InvocationTargetException e)
-		{
+		{ // invocation failed
 			System.out.println("Invocation of method %s in service %s failled. stack trace:%n");
 			e.printStackTrace();
 		}
 		catch (Throwable e)
-		{
+		{ // unexpected exception
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Implodes array of Class<?> using it's getName() method.
+	 * @param types
+	 * @return list of comma separated class names 
+	 */
 	private String printTypes(Class<?>[] types)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -208,24 +213,11 @@ public class Player implements IPlayer, BundleContextAware
 		return sb.length() == 0 ? void.class.getName() : sb.toString();
 	}
 
-//	private Class<?> getServiceClass(Object serviceInstance, String service)
-//	{
-//		if (serviceInstance == null) return null;
-//		
-//		Class<?> ret = null;
-//		
-//		try
-//		{
-//			ret = serviceInstance.getClass().getClassLoader().loadClass(service);
-//		}
-//		catch (ClassNotFoundException ignore)
-//		{ // should never occur since the object is either regular instance of class implementing serviceName
-//		  //interface or it is mockup which already has found the proper interface class in bundle context.
-//		}
-//		
-//		return ret;
-//	}
-
+	/**
+	 * Tries to acquire service from OSGi context.
+	 * @param serviceName name of the service to acquire
+	 * @return service instance
+	 */
 	private Object getServiceInstance(String serviceName)
 	{
 		Object ret = null; // service instance
@@ -261,6 +253,11 @@ public class Player implements IPlayer, BundleContextAware
 		return ret;
 	}
 	
+	/**
+	 * Returns ServiceTracker for given service. If the tracker does not exist, it creates and stores new one.
+	 * @param serviceName service to track
+	 * @return corresponding ServiceTracker
+	 */
 	private ServiceTracker<?, ?> getTracker(String serviceName)
 	{
 		if (!_.svcTrackers.containsKey(serviceName))
@@ -270,6 +267,10 @@ public class Player implements IPlayer, BundleContextAware
 		return _.svcTrackers.get(serviceName);
 	}
 	
+	/**
+	 * Create ServiceTracker for current OSGi context and given service.
+	 * @param serviceName name of the tracked service
+	 */
 	private void createServiceTracker(String serviceName)
 	{
 		ServiceTracker<?, ?> st = new ServiceTracker<>(_.context, serviceName, null);
@@ -287,7 +288,7 @@ public class Player implements IPlayer, BundleContextAware
 
 	@Override
 	public void loadFile(String fileName)
-	throws JAXBException, SAXException, InvalidFileException, IOException
+	throws JAXBException, SAXException, IOException
 	{
 		_.scenario = new Scenario();
 		_.scenario.loadFile(fileName);

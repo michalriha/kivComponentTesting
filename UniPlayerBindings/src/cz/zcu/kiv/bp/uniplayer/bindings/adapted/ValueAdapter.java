@@ -19,6 +19,11 @@ import cz.zcu.kiv.bp.uniplayer.bindings.TValueType;
 import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollection;
 
 
+/**
+ * Adapter for transforming TValue to Value
+ * @author Michal
+ *
+ */
 public class ValueAdapter extends XmlAdapter<TValue, Value>
 {
 

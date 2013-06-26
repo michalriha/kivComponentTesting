@@ -20,7 +20,11 @@ import cz.zcu.kiv.bp.unimocker.bindings.TValue;
 import cz.zcu.kiv.bp.unimocker.bindings.TValueType;
 import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollection;
 
-
+/**
+ * Adapter for transforming TValue to Value
+ * @author Michal
+ *
+ */
 public class ValueAdapter extends XmlAdapter<TValue, Value>
 {
 

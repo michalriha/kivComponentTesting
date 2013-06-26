@@ -18,21 +18,7 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TCollectionItem complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="TCollectionItem">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="ord-num" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
+ * Common superclass for all T?CollectionItem wrapper classes
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TCollectionItem")
@@ -51,6 +37,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public abstract class TCollectionItem<T> {
 
+	/**
+	 * index for ordering purposes
+	 */
     @XmlAttribute(name = "ord-num", required = true)
     protected int ordNum;
 
@@ -81,27 +70,5 @@ public abstract class TCollectionItem<T> {
      * @param value
      */
     public abstract void setValue(T value);
-
-//    /**
-//     * Gets item's value type.
-//     * @return
-//     */
-//    public abstract Class<T> getValueType();
-//    
-//    public Class<T> getValueType2()
-//    {
-//    	Class<T> ret = null;
-//    	
-//    	try {
-//			Method getter = this.getClass().getMethod("getValue", (Class<?>[]) null);
-//			ret = (Class<T>) getter.getReturnType();
-//			
-//		} catch (NoSuchMethodException | SecurityException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//    	
-//    	return ret;
-//    }
 
 }

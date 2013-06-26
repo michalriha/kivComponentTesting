@@ -37,10 +37,9 @@ import cz.zcu.kiv.bp.uniplayer.bindings.IScenarioIterator;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.ActionsMap;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Argument;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Value;
-import cz.zcu.kiv.bp.uniplayer.bindings.basics.InvalidFileException;
 
 /**
- * Scenario file loader. Provides methods for proper unmarshaling of scenario file
+ * Scenario file loader. Provides methods for proper unmarshalling of scenario file
  * @author Michal
  *
  */
@@ -53,6 +52,16 @@ public class Scenario implements IScenario
         		+ ":cz.zcu.kiv.bp.uniplayer.bindings.adapted";
 
     private Scenario _ = this;
+    
+    /**
+     * OSGI EventAdmin service
+     */
+    private EventAdmin eventAdmin;
+    
+    public void setEventAdmin(EventAdmin eventAdmin)
+    {
+    	_.eventAdmin = eventAdmin;
+    }
     
     /**
      * JAXB providers
@@ -69,7 +78,7 @@ public class Scenario implements IScenario
     private TProject scenario = null;
     
     /**
-     * On init prepares all JAXB providers required for (u)nmarshaling of xml file
+     * On init prepares all JAXB providers required for (un)marshaling of xml file
      * @throws JAXBException
      * @throws SAXException
      * @throws FileNotFoundException 
@@ -105,6 +114,11 @@ public class Scenario implements IScenario
         _.scenario.setActions(new ActionsMap());
     }
 
+    /**
+     * Loads schema file.
+     * @return URL of the schema file
+     * @throws FileNotFoundException when unable to locate schema file
+     */
 	private URL getSchemaFile() throws FileNotFoundException
 	{
 		URL schemaFile = _.getClass().getClassLoader().getResource(SCHEMA_FILE);
@@ -122,6 +136,10 @@ public class Scenario implements IScenario
 		return schemaFile;
 	}
     
+	/**
+	 * Returns top element of current scenario. Use with caution! Intended for building new scenario.
+	 * @return top element of raw scenario
+	 */
 	public TProject getProject()
 	{
 		return _.scenario;
@@ -135,7 +153,6 @@ public class Scenario implements IScenario
     public void loadFile(String fileName)
     throws JAXBException,
            SAXException,
-           InvalidFileException,
            IOException
     {
         try 
@@ -149,6 +166,13 @@ public class Scenario implements IScenario
         }
     }
 
+    /**
+     * Saves current scenario into file.
+     * @param fileName where to save the scenario
+     * @throws FileNotFoundException 
+     * @throws IOException
+     * @throws JAXBException marshaling of current scenario has failed - possibly for improper nodes in scenario tree
+     */
     public void saveToFile(String fileName)
     throws FileNotFoundException, IOException, JAXBException
     {
@@ -170,6 +194,7 @@ public class Scenario implements IScenario
     /**
      * Prints diagnostics information about existing scenario project.
      */
+    @Override
     public void diag()
     {
         System.out.println(_.jc);
@@ -226,8 +251,9 @@ public class Scenario implements IScenario
     
     private long currentTime = 0;
 
-    private EventAdmin eventAdmin;
-    
+    /**
+     * Convenient event objects for signaling steps in scenario.
+     */
     private Event
     	actionRemovedEvent,
     	actionUpdatedEvent;
@@ -239,11 +265,6 @@ public class Scenario implements IScenario
     	Map<String, String> actionUpdatedEventProps = new HashMap<String, String>();
     	actionRemovedEventProps.put("updated", "");
     	actionUpdatedEvent = new Event("scenario/action", actionUpdatedEventProps);
-    }
-    
-    public void setEventAdmin(EventAdmin eventAdmin)
-    {
-    	_.eventAdmin = eventAdmin;
     }
     
 	@Override
@@ -268,6 +289,9 @@ public class Scenario implements IScenario
 				return ret;
 			}
 
+			/**
+			 * Returns next action in scenario.
+			 */
 			@Override
 			public TCommand next()
 			{
@@ -291,6 +315,11 @@ public class Scenario implements IScenario
 				throw new UnsupportedOperationException();
 			}
 
+			/**
+			 * Updates current action that is pointed by this iterator.
+			 * If the current action has reached it's occurrence limit,
+			 * it's removed and corresponding event is fired.
+			 */
 			private void update()
 			{
 				_.currentAction.getRecurrence().decCount();

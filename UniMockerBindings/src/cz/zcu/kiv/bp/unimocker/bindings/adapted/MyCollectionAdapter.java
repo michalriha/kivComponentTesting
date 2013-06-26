@@ -8,6 +8,12 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollection;
 import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollectionItem;
 
+/**
+ * Adapter for transforming any extension of TCollection to corresponding extension of MyCollection
+ * @author Michal
+ *
+ * @param <T> collection component type
+ */
 public abstract class MyCollectionAdapter<T> extends XmlAdapter<TCollection<T>, MyCollection<T>> {
 
 	protected Class<? extends MyCollection<T>> collectionWrapper = null; //(Class<? extends MyCollection<T>>) MyCollection.class;
