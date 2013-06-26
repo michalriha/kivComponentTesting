@@ -147,7 +147,7 @@ public class Mocker implements IMocker, BundleContextAware
 	 * @param returns
 	 * @param ignoreUndefMethods
 	 * @param ignoreUndefPossibs
-	 * @return
+	 * @return create mockup object
 	 */
 	private Object createMockup(
 		Class<?> clazz,

@@ -67,7 +67,7 @@ public class ActionsMap extends TreeMap<Long, LinkedList<TAction>>
     
     /**
      * Returns current total count of actions that should be executed. 
-     * @return
+     * @return total count of actions
      */
     public BigInteger getStepsCount()
     {

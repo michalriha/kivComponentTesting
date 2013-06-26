@@ -82,8 +82,7 @@ public class Player implements IPlayer, BundleContextAware
     }
 
     /**
-     * Bundle 
-     * @param bundleContext
+     * Bundle destroy method.
      * @throws Exception
      */
 	public void destroy() throws Exception

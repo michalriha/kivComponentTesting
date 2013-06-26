@@ -77,7 +77,7 @@ public class Exponential extends ADistribution
 
     /**
      * Returns generator's time span parameter.
-     * @return
+     * @return time span parameter
      */
     public long getTimeSpan()
     {

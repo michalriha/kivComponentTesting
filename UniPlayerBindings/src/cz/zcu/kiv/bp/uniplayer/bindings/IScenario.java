@@ -39,8 +39,8 @@ public interface IScenario extends Iterable<TCommand>
     public abstract long getScenarioDurrationLimit(); 
     
     /**
-     * Return the time delay in milliseconds between two actions. 
-     * @return
+     * Return the time delay in milliseconds between two actions. Intended for easier visualization.
+     * @return delay between two steps of simulation
      */
     public abstract long getSimulStepDelay();
 

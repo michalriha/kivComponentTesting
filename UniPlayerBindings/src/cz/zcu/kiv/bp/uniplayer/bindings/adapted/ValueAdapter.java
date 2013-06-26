@@ -37,7 +37,7 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
 	 */
-	public Object probeUnMarshalledInstanceForValue(TValue v)
+	public Object probeUnMarshalledInstanceForValue(TValue probed)
 	throws IllegalAccessException, InvocationTargetException
 	{		
 		Object ret = null;	
@@ -52,7 +52,7 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 			if (!met.getName().startsWith("get")) continue;
 			
 			// try to invoke getter
-			ret = met.invoke(v, (Object[]) null);
+			ret = met.invoke(probed, (Object[]) null);
 			
 			// if the getter returns value -> we have found something
 			// and therefore can end seeking, else try another method

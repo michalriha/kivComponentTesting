@@ -85,7 +85,7 @@ public abstract class TCollection<T>
 	
 	/**
 	 * Returns component type of this collection.
-	 * @return
+	 * @return collection's actual component type
 	 */
 	@SuppressWarnings("unchecked")
 	public Class<T> getComponentType()

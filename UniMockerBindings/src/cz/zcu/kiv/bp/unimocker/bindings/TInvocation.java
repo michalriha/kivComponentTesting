@@ -77,7 +77,7 @@ public class TInvocation {
      * 
      * @return
      *     possible object is
-     *     {@link TReturnValue }
+     *     {@link Value }
      *     
      */
     public Value getReturn() {
@@ -89,7 +89,7 @@ public class TInvocation {
      * 
      * @param value
      *     allowed object is
-     *     {@link TReturnValue }
+     *     {@link Value }
      *     
      */
     public void setReturn(Value value) {

@@ -17,7 +17,7 @@ public class Invocation
     
     /**
      * Returns return value associated with this invocation.
-     * @return
+     * @return this invocatio's return value
      */
     public Value getReturnValue()
     {
@@ -26,7 +26,7 @@ public class Invocation
     
     /**
      * Returns invocation arguments.
-     * @return
+     * @return this invocation's arguments
      */
     public ArgumentsList getArguments()
     {

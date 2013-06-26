@@ -11,13 +11,13 @@ public interface IScenarioIterator extends Iterator<TCommand>
 {
 	/**
 	 * Returns simulation time of current position.
-	 * @return
+	 * @return current position's time
 	 */
 	long getCurrentTime();
 	
 	/**
 	 * Returns simulation time of next position.
-	 * @return
+	 * @return next position'S time
 	 */
 	long getNextTime();
 }

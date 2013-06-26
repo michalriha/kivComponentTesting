@@ -8,6 +8,11 @@ import org.uncommons.maths.number.NumberGenerator;
  */
 public abstract class ADistribution
 {
+	/**
+	 * Representation of distribution type.
+	 * @author Michal
+	 *
+	 */
     public enum Type
     {
         EQUIDISTANT,
@@ -17,13 +22,13 @@ public abstract class ADistribution
     
     /**
      * Returns repeating distribution type.
-     * @return
+     * @return type of distribution {@link Type}
      */
     public abstract Type getType();
     
     /**
      * Return next time to occur.
-     * @return
+     * @return new generated number
      */
     public abstract double nextOccurrence();
     

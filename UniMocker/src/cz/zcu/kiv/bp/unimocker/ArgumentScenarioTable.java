@@ -214,7 +214,7 @@ public class ArgumentScenarioTable
 	 * @param posibleObj first object to match
 	 * @param actualObj second object to match
 	 * @param parametrType type that both objects should have - used in case of Comparable has to be used 
-	 * @return
+	 * @return true if objects are decided as equal, false otherwise
 	 */
 	private boolean match(Object posibleObj, Object actualObj, Class<?> parametrType)
 	{

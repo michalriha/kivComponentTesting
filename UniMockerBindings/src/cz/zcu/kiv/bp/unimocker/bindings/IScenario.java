@@ -36,7 +36,7 @@ public interface IScenario
     
     /**
      * Return map of bundles that should contain classes that should be mocked.
-     * @return
+     * @return mocking scenario map
      */
     public BundlesMap getSimulatedComponents();
 }
