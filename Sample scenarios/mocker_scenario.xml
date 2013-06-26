@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<simulated-components>
+		<bundle symbolic-name="cz.zcu.kivcmd.core" version="1.0.0">
+			<service interface="cz.zcu.kiv.kc.interfaces.IViewPlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+				<method name="executeAction2">
+					<invocation>
+						<arguments>
+							<argument ord-num="0">
+                                <Files>
+                                    <item ord-num="0"><File>obr.pic</File></item>
+                                </Files>
+                              <!--   <Any base-type="FileArrayList" /> -->
+                            </argument>
+                            <argument ord-num="1">
+                                <Any base-type="String" />
+                            </argument>
+                            <argument ord-num="2">
+                                <Any base-type="String" />
+                            </argument>
+						</arguments>
+					</invocation>
+				</method>
+                <method name="getName">
+                    <invocation>
+                        <arguments />
+                        <return>
+                            <String>MockupPlugin2</String>
+                        </return>
+                    </invocation>
+                </method>
+			</service>
+		</bundle>
+	</simulated-components>
+</project>
