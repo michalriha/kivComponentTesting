@@ -2,8 +2,11 @@ package cz.zcu.kiv.bp.unimocker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 
 import cz.zcu.kiv.bp.unimocker.bindings.TAnyValue;
 
@@ -232,6 +235,48 @@ public class ArgumentScenarioTable
 		{ // objects match by simple equal as defined in Object
 			return true;
 		}
+
+		if (parametrType.isArray())
+		{ // objects should be arrays
+			if (Arrays.deepEquals((Object[]) posibleObj, (Object[]) actualObj))
+			{ // all array items match by simple equal method inherited from Object
+				return true;
+			}
+		}
+		
+//		if (List.class.isAssignableFrom(parametrType))
+//		{ // objects should be lists
+//			List<?> list1 = (List<?>) posibleObj;
+//			List<?> list2 = (List<?>) actualObj;
+//			
+//			// check list's sizes
+//			if (list1.size() != list2.size()) return false;
+//			
+//			// check items in lists
+//			for (int i = 0; i < list1.size(); i++)
+//			{
+//				boolean res = this.match(list1.get(i),list1.get(i), parametrType);
+//				if (!res)
+//				{ // match has been negative so we can mark these lists as unequal
+//					return false;
+//				}
+//			}
+//			return true;
+//		}
+		
+		///TODO test this
+		if (Collection.class.isAssignableFrom(parametrType))
+		{ // objects should be come sort of collection
+			Collection<?> map1 = (Collection<?>) posibleObj;
+			Collection<?> map2 = (Collection<?>) actualObj;
+			
+			boolean res = CollectionUtils.isEqualCollection(map1, map2);
+			if (!res)
+			{
+				return false;
+			}
+			return true;
+		}
 		
 		if (Comparable.class.isAssignableFrom(parametrType))
 		{ // objects should be instances of Comparable
@@ -242,16 +287,6 @@ public class ArgumentScenarioTable
 				return true;
 			}
 		}
-
-		if (parametrType.isArray())
-		{ // objects should be arrays
-			if (Arrays.deepEquals((Object[]) posibleObj, (Object[]) actualObj))
-			{ // all array items match by simple equal as defined in Object
-				return true;
-			}
-		}
-		
-		///TODO implement Collection matching
 		
 		return false;
 	}
