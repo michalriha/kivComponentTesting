@@ -316,7 +316,7 @@ public class Mocker implements IMocker, BundleContextAware
 	@Override
 	public void loadFile(String fileName)
     throws JAXBException, SAXException, IOException
-	{
+	{System.out.println("Nacitam soubor: " + fileName);
 		_.scenarioProject = new Scenario();
 		_.scenarioProject.loadFile(fileName);
 	}

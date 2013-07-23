@@ -55,7 +55,7 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.*;
  *         &lt;element name="Booleans" type="{http://www.kiv.zcu.cz/component-testing/mocker}TBooleanCollection"/>
  *         &lt;element name="Files" type="{http://www.kiv.zcu.cz/component-testing/mocker}TFileCollection"/>
  *         &lt;element name="Null" type="{http://www.kiv.zcu.cz/component-testing/mocker}TNull"/>
- *         &lt;element name="Any" type="{http://www.kiv.zcu.cz/component-testing/mocker}TAnyValue"/>
+ *         &lt;element name="AnyValue" type="{http://www.kiv.zcu.cz/component-testing/mocker}TAnyValue"/>
  *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -89,7 +89,7 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.*;
     "booleans",
     "files",
     "_null",
-    "any"
+    "anyValue"
 })
 @XmlSeeAlso({
     TArgument.class
@@ -178,8 +178,8 @@ public class TValue {
     @XmlElement(name = "Null")
     protected TNull _null;
     
-    @XmlElement(name = "Any")
-    protected TAnyValue any;
+    @XmlElement(name = "AnyValue")
+    protected TAnyValue anyValue;
 
     /**
      * Gets the value of the string property.
@@ -742,7 +742,7 @@ public class TValue {
      *     
      */
     public TAnyValue getAny() {
-        return any;
+        return anyValue;
     }
 
     /**
@@ -754,7 +754,7 @@ public class TValue {
      *     
      */
     public void setAny(TAnyValue value) {
-        this.any = value;
+        this.anyValue = value;
     }
 
     @Override
