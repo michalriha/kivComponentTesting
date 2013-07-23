@@ -10,6 +10,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
     		<recurrence count="2" repeat-until="9223372036854775807">
     			<equidistant step="15"/>
     		</recurrence>
+    		<!-- akce se bude opakovat s exponenciálním rozdělením -->
     		<command>
     		<call service="cz.zcu.kiv.kc.interfaces.ICopyPlugin" method="executeAction">
     			<arguments>
@@ -208,7 +209,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
 <!--         </action> -->
 <!--         <action time="10"> -->
 <!--             <recurrence count="2" repeat-until="9223372036854775807"> -->
-<!--                 <gaussian mean="30.0" deviation="2.0"/> -->
+                <gaussian mean="30.0" deviation="2.0"/>
 <!--             </recurrence> -->
 <!--             <command> -->
 <!--                 <call service="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IDisplay" method="Render"> -->

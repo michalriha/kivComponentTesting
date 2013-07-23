@@ -14,10 +14,10 @@
                               <!--   <Any base-type="FileArrayList" /> -->
                             </argument>
                             <argument ord-num="1">
-                                <Any base-type="String" />
+                                <AnyValue base-type="String" />
                             </argument>
                             <argument ord-num="2">
-                                <Any base-type="String" />
+                                <AnyValue base-type="String" />
                             </argument>
 						</arguments>
 					</invocation>
