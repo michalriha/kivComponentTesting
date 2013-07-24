@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.kiv.zcu.cz/component-testing/player"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <settings>
+    <time-limit>75600</time-limit>
+    <simul-step-delay>500</simul-step-delay>
+  </settings>
+  <actions>
+    <action time="150">
+      <recurrence count="1" repeat-until="9223372036854775807">
+        <equidistant step="15"/>
+      </recurrence>
+      <command>
+        <call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+          <arguments>
+            <argument ord-num="0">
+              <Files>
+                <item ord-num="0"><File>d:/Stažené/mips2.asm</File></item>
+              </Files>
+            </argument>
+            <argument ord-num="1"><String>d:/Stažené/</String></argument>
+            <argument ord-num="2"><String>d:/Stažené/</String></argument>
+          </arguments>
+        </call>
+      </command>
+    </action>
+    <action time="290">
+      <recurrence count="1" repeat-until="9223372036854775807">
+        <equidistant step="30"/>
+      </recurrence>
+      <command>
+        <call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+          <arguments>
+            <argument ord-num="0">
+              <Files>
+                <item ord-num="0"><File>d:/Obrázky/WP_000008.jpg</File></item>
+              </Files>
+            </argument>
+            <argument ord-num="1"><String>d:/Obrázky/</String></argument>
+            <argument ord-num="2"><String>d:/Stažené/</String></argument>
+          </arguments>
+        </call>
+      </command>
+    </action>
+  </actions>
+</project>

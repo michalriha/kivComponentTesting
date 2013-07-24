@@ -61,24 +61,24 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
     		</call>
     		</command>
     	</action>
-<!--     	<action time="700"> -->
-<!--     		<recurrence count="1" repeat-until="9223372036854775807"> -->
-<!--     			<equidistant step="15"/> -->
-<!--     		</recurrence> -->
-<!--     		<command> -->
-<!--     		<call service="cz.zcu.kiv.kc.interfaces.IDeletePlugin" method="executeAction"> -->
-<!--     			<arguments> -->
-<!--     				<argument ord-num="0"> -->
-<!--     					<Files> -->
-<!--     						<item ord-num="0"><File>e:/tmp/nazdar/</File></item> -->
-<!--     					</Files> -->
-<!--     				</argument> -->
-<!--     				<argument ord-num="1"><String>e:/tmp/</String></argument> -->
-<!--     				<argument ord-num="2"><String>e:/tmp/</String></argument> -->
-<!--     			</arguments> -->
-<!--     		</call> -->
-<!--     		</command> -->
-<!--     	</action> -->
+    	<action time="700">
+    		<recurrence count="1" repeat-until="9223372036854775807">
+    			<equidistant step="15"/>
+    		</recurrence>
+    		<command>
+    		<call service="cz.zcu.kiv.kc.interfaces.IDeletePlugin" method="executeAction">
+    			<arguments>
+    				<argument ord-num="0">
+    					<Files>
+    						<item ord-num="0"><File>e:/tmp/nazdar/</File></item>
+    					</Files>
+    				</argument>
+    				<argument ord-num="1"><String>e:/tmp/</String></argument>
+    				<argument ord-num="2"><String>e:/tmp/</String></argument>
+    			</arguments>
+    		</call>
+    		</command>
+    	</action>
     	<action time="590">
     		<recurrence count="1" repeat-until="9223372036854775807">
     			<equidistant step="15"/>
@@ -209,7 +209,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
 <!--         </action> -->
 <!--         <action time="10"> -->
 <!--             <recurrence count="2" repeat-until="9223372036854775807"> -->
-                <gaussian mean="30.0" deviation="2.0"/>
+<!--                 <gaussian mean="30.0" deviation="2.0"/> -->
 <!--             </recurrence> -->
 <!--             <command> -->
 <!--                 <call service="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IDisplay" method="Render"> -->

@@ -110,7 +110,7 @@ public class ArgumentScenarioTable
 	public Object find(Object... args)
 	throws UndefinedPossibilityException, IllegalArgumentException
 	{
-		if (args != null && args.length != ARGS_COUNT)
+		if (args != null && args.length != this.parametrTypes.length)
 		{
 			throw new IllegalArgumentException("Invalid arguments count!(" + args.length + " / " + ARGS_COUNT + ")");
 		}

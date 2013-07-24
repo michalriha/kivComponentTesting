@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.kiv.zcu.cz/component-testing/player"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <settings>
+    <time-limit>75600</time-limit>
+    <simul-step-delay>500</simul-step-delay>
+  </settings>
+  <actions>
+    <action time="100">
+      <recurrence count="15"><equidistant step="100"/></recurrence>
+      <command>
+        <event topic="changeSourceDir" key="dir">
+          <argument><String>d:/Obrázky/</String></argument>
+        </event>
+      </command>
+    </action>
+    <action time="150">
+      <recurrence count="15" repeat-until="9223372036854775807">
+        <exponential rate="5" />
+      </recurrence>
+      <command>
+        <event topic="changeDestinationDir" key="dir">
+          <argument><String>e:/</String></argument>
+        </event>
+      </command>
+    </action>
+    <action time="200">
+      <recurrence count="2">
+        <equidistant step="100"/>
+      </recurrence>
+      <command>
+        <event topic="changeDestinationDir" key="dir">
+          <argument><String>d:/Videa/</String></argument>
+        </event>
+      </command>
+    </action>
+  </actions>
+</project>

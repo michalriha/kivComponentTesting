@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<simulated-components>
+		<bundle symbolic-name="cz.zcu.kivcmd.core" version="1.0.0">
+			<service interface="cz.zcu.kiv.kc.interfaces.ICopyPlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+				<method name="getName">
+					<invocation>
+						<arguments />
+						<return>
+							<String>CopyMock</String>
+						</return>
+					</invocation>
+				</method>
+				<method name="executeAction">
+					<invocation>
+						<arguments>
+							<argument ord-num="0">
+								<AnyValue base-type="FileArrayList" />
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="String" />
+							</argument>
+							<argument ord-num="2">
+								<AnyValue base-type="String" />
+							</argument>
+						</arguments>
+					</invocation>
+				</method>
+			</service>
+			<service interface="cz.zcu.kiv.kc.interfaces.ICreateDirPlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+				<method name="getName">
+					<invocation>
+						<arguments />
+						<return>
+							<String>CreateDirMock</String>
+						</return>
+					</invocation>
+				</method>
+				<method name="executeAction">
+					<invocation>
+						<arguments>
+							<argument ord-num="0">
+								<AnyValue base-type="FileArrayList" />
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="String" />
+							</argument>
+							<argument ord-num="2">
+								<AnyValue base-type="String" />
+							</argument>
+						</arguments>
+					</invocation>
+				</method>
+			</service>
+			<service interface="cz.zcu.kiv.kc.interfaces.IDeletePlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+				<method name="getName">
+					<invocation>
+						<arguments />
+						<return>
+							<String>DeleteMock</String>
+						</return>
+					</invocation>
+				</method>
+				<method name="executeAction">
+					<invocation>
+						<arguments>
+							<argument ord-num="0">
+								<AnyValue base-type="FileArrayList" />
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="String" />
+							</argument>
+							<argument ord-num="2">
+								<AnyValue base-type="String" />
+							</argument>
+						</arguments>
+					</invocation>
+				</method>
+			</service>
+			<service interface="cz.zcu.kiv.kc.interfaces.IMovePlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+				<method name="getName">
+					<invocation>
+						<arguments />
+						<return>
+							<String>MoveMock</String>
+						</return>
+					</invocation>
+				</method>
+				<method name="executeAction">
+					<invocation>
+						<arguments>
+							<argument ord-num="0">
+								<AnyValue base-type="FileArrayList" />
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="String" />
+							</argument>
+							<argument ord-num="2">
+								<AnyValue base-type="String" />
+							</argument>
+						</arguments>
+					</invocation>
+				</method>
+			</service>
+		</bundle>
+	</simulated-components>
+</project>

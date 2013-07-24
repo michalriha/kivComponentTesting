@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://www.kiv.zcu.cz/component-testing/player"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <settings>
+    <time-limit>75600</time-limit>
+    <simul-step-delay>500</simul-step-delay>
+  </settings>
+  <actions>
+    <action time="100">
+      <recurrence count="3"><equidistant step="100"/></recurrence>
+      <command>
+        <event topic="changeSourceDir" key="dir">
+          <argument><String>d:/Obrázky/</String></argument>
+        </event>
+      </command>
+    </action>
+    <action time="150">
+      <recurrence count="4"><equidistant step="100"/></recurrence>
+      <command>
+        <event topic="changeSourceDir" key="dir">
+          <argument><String>d:/</String></argument>
+        </event>
+      </command>
+    </action>
+    <action time="150">
+      <recurrence count="5">
+        <exponential rate="5" time-span="900" />
+      </recurrence>
+      <command>
+        <event topic="changeDestinationDir" key="dir">
+          <argument><String>e:/</String></argument>
+        </event>
+      </command>
+    </action>
+    <action time="200">
+      <recurrence count="6">
+        <exponential rate="10" time-span="900" />
+      </recurrence>
+      <command>
+        <event topic="changeDestinationDir" key="dir">
+          <argument><String>c:/</String></argument>
+        </event>
+      </command>
+    </action>
+    <action time="154">
+      <recurrence count="2">
+        <equidistant step="15"/>
+      </recurrence>
+      <command>
+        <call service="cz.zcu.kiv.kc.interfaces.ICopyPlugin" method="executeAction">
+          <arguments>
+            <argument ord-num="0">
+              <Files>
+                <item ord-num="0"><File>d:/676956.iso</File></item>
+              </Files>
+            </argument>
+            <argument ord-num="1"><String>e:/tmp/nazdar</String></argument>
+            <argument ord-num="2"><String>d:/</String></argument>
+          </arguments>
+        </call>
+      </command>
+    </action>
+    <action time="150">
+      <recurrence count="1">
+        <equidistant step="15"/>
+      </recurrence>
+      <command>
+        <call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+          <arguments>
+            <argument ord-num="0">
+              <Files>
+                <item ord-num="0"><File>d:/Stažené/mips2.asm</File></item>
+              </Files>
+            </argument>
+            <argument ord-num="1"><String>d:/Stažené/</String></argument>
+            <argument ord-num="2"><String>d:/Stažené/</String></argument>
+          </arguments>
+        </call>
+      </command>
+    </action>
+    <action time="700">
+      <recurrence count="1">
+        <equidistant step="15"/>
+      </recurrence>
+      <command>
+        <call service="cz.zcu.kiv.kc.interfaces.IDeletePlugin" method="executeAction">
+          <arguments>
+            <argument ord-num="0">
+              <Files>
+                <item ord-num="0"><File>e:/tmp/nazdar/</File></item>
+              </Files>
+            </argument>
+            <argument ord-num="1"><String>d:/</String></argument>
+            <argument ord-num="2"><String>e:/tmp/</String></argument>
+          </arguments>
+        </call>
+      </command>
+    </action>
+  </actions>
+</project>
