@@ -74,7 +74,8 @@ public class Scenario implements IScenario
     {
         _.sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         _.jc  = JAXBContext.newInstance(BINDINGS_PACKAGE, TProject.class.getClassLoader());
-		_.sch = sf.newSchema(_.getSchemaFile());
+//		_.sch = sf.newSchema(_.getSchemaFile());
+        _.sch = sf.newSchema();
 		_.u = jc.createUnmarshaller();
         _.m = jc.createMarshaller();
         _.u.setSchema(_.sch);
@@ -100,6 +101,7 @@ public class Scenario implements IScenario
 			}
 		});
         _.m.setProperty("jaxb.formatted.output", true);
+        _.m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.kiv.zcu.cz/component-testing/mocker " + _.getSchemaFile());
 
         _.scenario = new TProject();
         _.scenario.setSimulatedComponents(new BundlesMap());

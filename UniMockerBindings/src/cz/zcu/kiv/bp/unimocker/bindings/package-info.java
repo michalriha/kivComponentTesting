@@ -5,12 +5,14 @@
 // Generated on: 2013.06.20 at 09:31:37 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(	xmlns = {
+@javax.xml.bind.annotation.XmlSchema(
+	xmlns = {
 		@javax.xml.bind.annotation.XmlNs(
 			    prefix = cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_PREFIX,
 			    namespaceURI = cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_URI
-			)},
-			namespace = cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_URI,
-			elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED	)
-
+		)
+	},
+	namespace = cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_URI,
+	elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED
+)
 package cz.zcu.kiv.bp.unimocker.bindings;
