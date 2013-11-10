@@ -34,6 +34,36 @@
           </invocation>
         </method>
       </service>
+      <service interface="cz.zcu.kiv.kc.archiver.IArchivePacker">
+        <method name="getExtension">
+          <invocation>
+            <arguments />
+            <return><String>rar</String></return>
+          </invocation>
+        </method>
+        <method name="getFormatName">
+          <invocation>
+           <arguments />
+           <return><String>RAR 5.0</String></return>
+          </invocation>
+        </method>
+        <method name="packFilesToArchive">
+          <invocation>
+            <arguments>
+              <argument ord-num="0">
+                <AnyValue base-type="FileArrayList" />
+              </argument>
+              <argument ord-num="1">
+                <AnyValue base-type="File" />
+              </argument>
+              <argument ord-num="2">
+                <AnyValue base-type="File" />
+              </argument>
+            </arguments>
+            <return><Boolean>false</Boolean></return>
+          </invocation>
+        </method>
+      </service>
     </bundle>
   </simulated-components>
 </project>

@@ -1,6 +1,8 @@
 package cz.zcu.kiv.bp.unimocker.bindings.adapted;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
@@ -23,10 +25,15 @@ public class BundlesMapAdapter extends XmlAdapter<TBundleList, BundlesMap>
         
         for (TBundle bundle : v.getBundles())
         { 
-        	HashMap<String, TSimulatedService> bundleServices = new HashMap<String, TSimulatedService>();
+        	HashMap<String, List<TSimulatedService>> bundleServices = new HashMap<String, List<TSimulatedService>>();
             for (TSimulatedService service : bundle.getServices())
             {
-                bundleServices.put(service.getInterface(), service);
+            	if (!bundleServices.containsKey(service.getInterface()))
+            	{
+                	List<TSimulatedService> servicesList = new ArrayList<>();
+                	bundleServices.put(service.getInterface(), servicesList);
+            	}
+                bundleServices.get(service.getInterface()).add(service);
             }
 
             String bundleKey = bundle.getSymbolicName() + ":" + bundle.getVersion();   
@@ -41,12 +48,15 @@ public class BundlesMapAdapter extends XmlAdapter<TBundleList, BundlesMap>
     {
         TBundleList ret = new TBundleList();
 
-        for (Entry<String, HashMap<String, TSimulatedService>> entry : v.entrySet())
+        for (Entry<String, HashMap<String, List<TSimulatedService>>> entry : v.entrySet())
         {
             TBundle bndl = new TBundle();
             bndl.setSymbolicName(entry.getKey().split(":")[0]);
             bndl.setVersion(entry.getKey().split(":")[1]);
-            bndl.getServices().addAll(entry.getValue().values());
+            for (List<TSimulatedService> services : entry.getValue().values())
+            {
+                bndl.getServices().addAll(services);	
+            }
             
             ret.getBundles().add(bndl);
         }

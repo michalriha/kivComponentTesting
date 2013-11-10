@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.xml.XMLConstants;
@@ -192,27 +193,30 @@ public class Scenario implements IScenario
         try
         {
     		System.out.println("loaded scenario");
-    		for (Entry<String, HashMap<String, TSimulatedService>> bundle : scenario.getSimulatedComponents().entrySet())
+    		for (Entry<String, HashMap<String, List<TSimulatedService>>> bundle : scenario.getSimulatedComponents().entrySet())
     		{
     			System.out.println("bundle: " + bundle.getKey());
-    			for (Entry<String, TSimulatedService> service : bundle.getValue().entrySet())
+    			for (Entry<String, List<TSimulatedService>> servicesEntry : bundle.getValue().entrySet())
     			{
-    				System.out.println("    interface: " + service.getValue().getInterface());
-    				for (InvokedMethod method : service.getValue().getMethods())
+    				System.out.println("    interface: " + servicesEntry.getKey());
+    				for (TSimulatedService service : servicesEntry.getValue())
     				{
-    					System.out.println("        method: " + method.getName());
-    					for (Invocation inv : method.getInvocations())
-    					{
-    						System.out.printf(
-    							"        invocation: %n"
-    							+ "            arguments: %s %s%n"
-    							+ "            return: %s %s%n",
-    							Arrays.toString(inv.getArguments().getTypes()),
-    							Arrays.toString(inv.getArguments().toArray()),
-    							inv.getReturnValue().getType(),
-    							inv.getReturnValue().getValue()
-    						);
-    					}
+        				for (InvokedMethod method : service.getMethods())
+        				{
+        					System.out.println("        method: " + method.getName());
+        					for (Invocation inv : method.getInvocations())
+        					{
+        						System.out.printf(
+        							"        invocation: %n"
+        							+ "            arguments: %s %s%n"
+        							+ "            return: %s %s%n",
+        							Arrays.toString(inv.getArguments().getTypes()),
+        							Arrays.toString(inv.getArguments().toArray()),
+        							inv.getReturnValue().getType(),
+        							inv.getReturnValue().getValue()
+        						);
+        					}
+        				}
     				}
     			}
     		}

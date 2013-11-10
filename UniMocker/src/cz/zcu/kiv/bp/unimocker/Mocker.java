@@ -252,7 +252,7 @@ public class Mocker implements IMocker, BundleContextAware
 		}
 		BundlesMap scenario = _.scenarioProject.getSimulatedComponents();
 
-		for (Entry<String, HashMap<String, TSimulatedService>> bundle : scenario.entrySet())
+		for (Entry<String, HashMap<String, List<TSimulatedService>>> bundle : scenario.entrySet())
 		{
 			Bundle mockedBundle = _.findBundle(bundle.getKey());
 			if (mockedBundle == null)
@@ -279,20 +279,26 @@ public class Mocker implements IMocker, BundleContextAware
 				try
 				{ 
 					// find all described invocations for current class
-					TSimulatedService simulation = bundle.getValue().get(clazz.getName());
-					Map<Method, Map<Object[], Object>> returns = _.buildInvocationPossibilitiesForClass(clazz, simulation);
-					
-					TSimulatedService descr = bundle.getValue().get(clazz.getCanonicalName());
-	
-					Object srv = _.createMockup(
-						clazz,
-						returns,
-						descr.isIgnoreUndefinedMethods(),
-						descr.isIgnoreUndefinedPossibilities()
-					);
-					
-					// building mockup
-					_.createService(clazz, srv);
+					List<TSimulatedService> simulation = bundle.getValue().get(clazz.getName());
+					for (TSimulatedService service : simulation)
+					{
+						Map<Method, Map<Object[], Object>> returns = _.buildInvocationPossibilitiesForClass(clazz, service);
+						
+//						List<TSimulatedService> descriptors = bundle.getValue().get(clazz.getCanonicalName());
+//		
+//						for (TSimulatedService descriptor : descriptors)
+//						{
+							Object srv = _.createMockup(
+								clazz,
+								returns,
+								service.isIgnoreUndefinedMethods(),
+								service.isIgnoreUndefinedPossibilities()
+							);
+							
+							// building mockup
+							_.createService(clazz, srv);
+//						}
+					}
 				}
 				catch (NoSuchMethodException ex)
 				{ // described method not been found in current class
