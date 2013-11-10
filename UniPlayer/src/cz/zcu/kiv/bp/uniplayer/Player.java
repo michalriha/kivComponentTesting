@@ -98,6 +98,8 @@ public class Player implements IPlayer, BundleContextAware
 	@Override
 	public void play() throws Exception
 	{
+		Map<String, TCommand> actionEventArgs = new HashMap<>();
+		
 		_.stopped = false;
 		IScenarioIterator iter = _.scenario.iterator();
     	while (!_.stopped && iter.hasNext())
@@ -112,6 +114,11 @@ public class Player implements IPlayer, BundleContextAware
 				iter.getCurrentTime(),
 				call != null ? "call" : "event"
 			);
+			
+			actionEventArgs.clear();
+			
+			actionEventArgs.put(IPlayer.SIMULATION_PLAYER_EVENT_KEY, currentCommand);
+			_.eventAdmin.sendEvent(new Event(IPlayer.SIMULATION_PLAYER_EVENT_TOPIC_START, actionEventArgs));
 			
 			if (call != null)
 			{
@@ -135,6 +142,7 @@ public class Player implements IPlayer, BundleContextAware
 			}
 			System.out.println();
 			
+			_.eventAdmin.sendEvent(new Event(IPlayer.SIMULATION_PLAYER_EVENT_TOPIC_FINISH, actionEventArgs));
 			Thread.sleep(scenario.getSimulStepDelay());
 		}
 	}
@@ -229,7 +237,7 @@ public class Player implements IPlayer, BundleContextAware
 				serviceName
 			);		
 			int i = 0;
-			while (ret == null && i < SERVICE_WAIT_LIMIT)
+			while (ret == null && i < SERVICE_WAIT_LIMIT && !_.stopped)
 			{
 				ret = st.getService();
 				if (ret != null)
@@ -245,7 +253,7 @@ public class Player implements IPlayer, BundleContextAware
 				}
 				catch (InterruptedException ignore) {}
 				i += 1000;
-			}			
+			}
 		}
 
 		

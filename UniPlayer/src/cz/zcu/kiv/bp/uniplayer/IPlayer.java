@@ -7,6 +7,11 @@ package cz.zcu.kiv.bp.uniplayer;
  */
 public interface IPlayer
 {
+	public String
+		SIMULATION_PLAYER_EVENT_TOPIC_START = "simulation_action_started",
+		SIMULATION_PLAYER_EVENT_TOPIC_FINISH = "simulation_action_finished",
+		SIMULATION_PLAYER_EVENT_KEY = "command";
+	
 	/**
 	 * Starts currently loaded simulation.
 	 * @throws Exception
