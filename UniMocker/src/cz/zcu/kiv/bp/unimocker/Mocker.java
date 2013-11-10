@@ -283,21 +283,16 @@ public class Mocker implements IMocker, BundleContextAware
 					for (TSimulatedService service : simulation)
 					{
 						Map<Method, Map<Object[], Object>> returns = _.buildInvocationPossibilitiesForClass(clazz, service);
-						
-//						List<TSimulatedService> descriptors = bundle.getValue().get(clazz.getCanonicalName());
-//		
-//						for (TSimulatedService descriptor : descriptors)
-//						{
-							Object srv = _.createMockup(
-								clazz,
-								returns,
-								service.isIgnoreUndefinedMethods(),
-								service.isIgnoreUndefinedPossibilities()
-							);
+
+						Object srv = _.createMockup(
+							clazz,
+							returns,
+							service.isIgnoreUndefinedMethods(),
+							service.isIgnoreUndefinedPossibilities()
+						);
 							
-							// building mockup
-							_.createService(clazz, srv);
-//						}
+						// building mockup
+						_.createService(clazz, srv);
 					}
 				}
 				catch (NoSuchMethodException ex)
