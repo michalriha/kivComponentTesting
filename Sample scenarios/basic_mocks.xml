@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/master/UniMockerBindings/schema/unimocker.xsd">
 	<simulated-components>
 		<bundle symbolic-name="cz.zcu.kivcmd.core" version="1.0.0">
 			<service interface="cz.zcu.kiv.kc.interfaces.ICopyPlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">

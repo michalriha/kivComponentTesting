@@ -42,12 +42,12 @@ import cz.zcu.kiv.bp.unimocker.bindings.ObjectFactory;
 public class Scenario implements IScenario
 {
     public static final String
-    SCHEMA_FILE      = "schema/unimocker.xsd",
-    BINDINGS_PACKAGE = "cz.zcu.kiv.bp.unimocker.bindings"
-    				+ ":cz.zcu.kiv.bp.unimocker.bindings.basics"
-    				+ ":cz.zcu.kiv.bp.unimocker.bindings.adapted";
+        SCHEMA_FILE      = "schema/unimocker.xsd",
+        BINDINGS_PACKAGE = "cz.zcu.kiv.bp.unimocker.bindings"
+                         + ":cz.zcu.kiv.bp.unimocker.bindings.basics"
+                         + ":cz.zcu.kiv.bp.unimocker.bindings.adapted";
     
-	private Scenario _ = this;
+    private Scenario _ = this;
     
     /**
      * JAXB providers
@@ -74,63 +74,72 @@ public class Scenario implements IScenario
     {
         _.sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         _.jc  = JAXBContext.newInstance(BINDINGS_PACKAGE, TProject.class.getClassLoader());
-//		_.sch = sf.newSchema(_.getSchemaFile());
-        _.sch = sf.newSchema();
-		_.u = jc.createUnmarshaller();
-        _.m = jc.createMarshaller();
+        _.sch = sf.newSchema(_.getSchemaURL());
+
+        _.u = jc.createUnmarshaller();
         _.u.setSchema(_.sch);
         _.u.setEventHandler(new ValidationEventHandler() {
-			@Override
-			public boolean handleEvent(ValidationEvent event) {
-				System.out.println(event.getLocator());
-				System.out.println(event.getMessage());
-				event.getLinkedException().printStackTrace();
-				System.out.println();
-				return true;
-			}
-		});
+            @Override
+            public boolean handleEvent(ValidationEvent event) {
+                System.out.println(event.getLocator());
+                System.out.println(event.getMessage());
+                event.getLinkedException().printStackTrace();
+                System.out.println();
+                return true;
+            }
+        });
+
+        _.m = jc.createMarshaller();
         _.m.setSchema(_.sch);
         _.m.setEventHandler(new ValidationEventHandler() {
-			@Override
-			public boolean handleEvent(ValidationEvent event) {
-				System.out.println(event.getLocator());
-				System.out.println(event.getMessage());
-				event.getLinkedException().printStackTrace();
-				System.out.println();
-				return true;
-			}
-		});
+            @Override
+            public boolean handleEvent(ValidationEvent event) {
+                System.out.println(event.getLocator());
+                System.out.println(event.getMessage());
+                event.getLinkedException().printStackTrace();
+                System.out.println();
+                return true;
+            }
+        });
         _.m.setProperty("jaxb.formatted.output", true);
-        _.m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.kiv.zcu.cz/component-testing/mocker " + _.getSchemaFile());
+        _.m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_SCHEMA_LOCATION);
 
         _.scenario = new TProject();
         _.scenario.setSimulatedComponents(new BundlesMap());
     }
 
-	private URL getSchemaFile() throws FileNotFoundException
-	{
-		URL schemaFile = _.getClass().getClassLoader().getResource(SCHEMA_FILE);
-		if (schemaFile == null)
-		{
-			try
-			{
-				File schFile = new File(SCHEMA_FILE);
-				if (! schFile.canRead()) throw new FileNotFoundException(SCHEMA_FILE);
+    private URL getSchemaURL() throws FileNotFoundException
+    {
+        try
+        {
+            URL ret  = new URL(cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_SCHEMA);
+            return ret;
+        }
+        catch (MalformedURLException ignored) {}
+        
+        URL schemaURL = _.getClass().getClassLoader().getResource(SCHEMA_FILE);
+        if (schemaURL == null)
+        {
+            try
+            {
+                File schFile = new File(SCHEMA_FILE);
+                if (! schFile.canRead()) throw new FileNotFoundException(SCHEMA_FILE);
 
-				schemaFile = schFile.toURI().toURL();
-			}
-			catch (MalformedURLException e) { throw new FileNotFoundException(SCHEMA_FILE); }
-		}
-		return schemaFile;
-	}
+                schemaURL = schFile.toURI().toURL();
+            }
+            catch (MalformedURLException e) { throw new FileNotFoundException(SCHEMA_FILE); }
+        }
+        return schemaURL;
+    }
     
-	public BundlesMap getSimulatedComponents()
-	{
-		return _.scenario.getSimulatedComponents();
-	}
-	
+    @Override
+    public BundlesMap getSimulatedComponents()
+    {
+        return _.scenario.getSimulatedComponents();
+    }
+    
     /**
-     * Loads and unmarshales scenario description file
+     * Loads and unmarshals scenario description file
      * @throws IOException 
      */
     @Override
@@ -150,6 +159,13 @@ public class Scenario implements IScenario
         }
     }
 
+    /**
+     * Marshals currently loaded scenario and saves it resulting string into specified file.
+     * @param fileName output file
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws JAXBException
+     */
     public void saveToFile(String fileName)
     throws FileNotFoundException, IOException, JAXBException
     {
@@ -159,7 +175,6 @@ public class Scenario implements IScenario
 	    	OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
     	)
     	{
-    		
     		ObjectFactory of = new ObjectFactory();
             JAXBElement<TProject> je = of.createProject(_.scenario);
             

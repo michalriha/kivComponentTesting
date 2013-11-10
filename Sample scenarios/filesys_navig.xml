@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/player"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/master/UniPlayerBindings/schema/uniplayer.xsd"
+ >
   <settings>
     <time-limit>75600</time-limit>
     <simul-step-delay>500</simul-step-delay>
@@ -16,7 +18,7 @@
     </action>
     <action time="150">
       <recurrence count="15" repeat-until="9223372036854775807">
-        <exponential rate="5" />
+        <exponential rate="5" time-span="3600"/>
       </recurrence>
       <command>
         <event topic="changeDestinationDir" key="dir">

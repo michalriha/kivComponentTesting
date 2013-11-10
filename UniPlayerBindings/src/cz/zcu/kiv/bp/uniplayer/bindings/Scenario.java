@@ -48,8 +48,8 @@ public class Scenario implements IScenario
     public static final String
         SCHEMA_FILE      = "schema/scenario.xsd",
         BINDINGS_PACKAGE = "cz.zcu.kiv.bp.uniplayer.bindings"
-        		+ ":cz.zcu.kiv.bp.uniplayer.bindings.basics"
-        		+ ":cz.zcu.kiv.bp.uniplayer.bindings.adapted";
+        				 + ":cz.zcu.kiv.bp.uniplayer.bindings.basics"
+        				 + ":cz.zcu.kiv.bp.uniplayer.bindings.adapted";
 
     private Scenario _ = this;
     
@@ -88,9 +88,8 @@ public class Scenario implements IScenario
     {
         _.sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         _.jc  = JAXBContext.newInstance(BINDINGS_PACKAGE, TProject.class.getClassLoader());
-		_.sch = sf.newSchema(_.getSchemaFile());
+		_.sch = sf.newSchema(_.getSchemaURL());
 		_.u = jc.createUnmarshaller();
-        _.m = jc.createMarshaller();
         _.u.setSchema(_.sch);
         _.u.setEventHandler(new ValidationEventHandler() {
 			@Override
@@ -99,6 +98,8 @@ public class Scenario implements IScenario
 				return true;
 			}
 		});
+        
+        _.m = jc.createMarshaller();
         _.m.setSchema(_.sch);
         _.m.setEventHandler(new ValidationEventHandler() {
 			@Override
@@ -108,6 +109,7 @@ public class Scenario implements IScenario
 			}
 		});
         _.m.setProperty("jaxb.formatted.output", true);
+        _.m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, cz.zcu.kiv.bp.namespaces.UniPlayer.SCENARIO_SCHEMA_LOCATION);
 
         _.scenario = new TProject();
         _.scenario.setSettings(new TSettings());
@@ -119,21 +121,28 @@ public class Scenario implements IScenario
      * @return URL of the schema file
      * @throws FileNotFoundException when unable to locate schema file
      */
-	private URL getSchemaFile() throws FileNotFoundException
+	private URL getSchemaURL() throws FileNotFoundException
 	{
-		URL schemaFile = _.getClass().getClassLoader().getResource(SCHEMA_FILE);
-		if (schemaFile == null)
+		try
+        {
+            URL ret  = new URL(cz.zcu.kiv.bp.namespaces.UniPlayer.SCENARIO_SCHEMA);
+            return ret;
+        }
+        catch (MalformedURLException ignored) {}
+        
+        URL schemaURL = _.getClass().getClassLoader().getResource(SCHEMA_FILE);
+		if (schemaURL == null)
 		{
 			try
 			{
 				File schFile = new File(SCHEMA_FILE);
 				if (! schFile.canRead()) throw new FileNotFoundException(SCHEMA_FILE);
 
-				schemaFile = schFile.toURI().toURL();
+				schemaURL = schFile.toURI().toURL();
 			}
 			catch (MalformedURLException e) { throw new FileNotFoundException(SCHEMA_FILE); }
 		}
-		return schemaFile;
+		return schemaURL;
 	}
     
 	/**
