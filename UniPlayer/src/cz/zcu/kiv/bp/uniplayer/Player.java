@@ -143,7 +143,7 @@ public class Player implements IPlayer, BundleContextAware
 			System.out.println();
 			
 			_.eventAdmin.sendEvent(new Event(IPlayer.SIMULATION_PLAYER_EVENT_TOPIC_FINISH, actionEventArgs));
-			Thread.sleep(scenario.getSimulStepDelay());
+			Thread.sleep(_.scenario.getSimulStepDelay());
 		}
 	}
 
