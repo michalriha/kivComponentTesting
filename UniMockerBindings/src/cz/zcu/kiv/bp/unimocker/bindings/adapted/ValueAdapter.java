@@ -13,12 +13,12 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+import cz.zcu.kiv.bp.datatypes.bindings.*;
+import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
+import cz.zcu.kiv.bp.datatypes.bindings.basics.*;
+
 import cz.zcu.kiv.bp.unimocker.bindings.TAnyValue;
-import cz.zcu.kiv.bp.unimocker.bindings.TCollectionType;
-import cz.zcu.kiv.bp.unimocker.bindings.TNull;
 import cz.zcu.kiv.bp.unimocker.bindings.TValue;
-import cz.zcu.kiv.bp.unimocker.bindings.TValueType;
-import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollection;
 
 /**
  * Adapter for transforming TValue to Value

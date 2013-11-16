@@ -1,0 +1,14 @@
+TBigDecimalCollection
+TBigIntegerCollection
+TBooleanCollection
+TByteCollection
+TCollectionType
+TDoubleCollection
+TFileCollection
+TFloatCollection
+TIntCollection
+TLongCollection
+TNull
+TShortCollection
+TStringCollection
+TValueType

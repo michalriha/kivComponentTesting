@@ -75,7 +75,7 @@ public class Scenario implements IScenario
     {
         _.sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         _.jc  = JAXBContext.newInstance(BINDINGS_PACKAGE, TProject.class.getClassLoader());
-        _.sch = sf.newSchema(_.getSchemaURL());
+        _.sch = sf.newSchema(/*_.getSchemaURL()*/);
 
         _.u = jc.createUnmarshaller();
         _.u.setSchema(_.sch);

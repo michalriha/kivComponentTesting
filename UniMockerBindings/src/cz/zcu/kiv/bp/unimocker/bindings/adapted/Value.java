@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import cz.zcu.kiv.bp.unimocker.bindings.basics.TCollection;
+import cz.zcu.kiv.bp.datatypes.bindings.adapted.MyCollection;
+import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection;
 
 /**
  * Container class for storing values for arguments.

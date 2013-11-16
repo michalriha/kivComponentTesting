@@ -5,7 +5,10 @@ Bundle-SymbolicName: cz.zcu.kiv.bp.unimocker
 Bundle-Version: 1.0.0.qualifier
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: cz.zcu.kiv.bp.unimocker.bindings,
+Import-Package: cz.zcu.kiv.bp.datatypes.bindings,
+ cz.zcu.kiv.bp.datatypes.bindings.adapted,
+ cz.zcu.kiv.bp.datatypes.bindings.basics,
+ cz.zcu.kiv.bp.unimocker.bindings,
  cz.zcu.kiv.bp.unimocker.bindings.adapted,
  cz.zcu.kiv.bp.unimocker.bindings.basics,
  org.apache.commons.collections,

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings version="1.0"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    schemaLocation="types.xsd" node="/xsd:schema">
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TStringCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.StringCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TBigIntegerCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.BigIntegerCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TLongCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.LongCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TIntCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.IntegerCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TShortCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.ShortCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TByteCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.ByteCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TDoubleCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.DoubleCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TBigDecimalCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.BigDecimalCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TFloatCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.FloatCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TBooleanCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.BooleanCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+<!--     <jaxb:bindings node="//xsd:element[@type='TFileCollection']"> -->
+<!--         <jaxb:property> -->
+<!--             <jaxb:baseType name="cz.zcu.kiv.bp.datatypes.bindings.adapted.FileCollection" /> -->
+<!--         </jaxb:property> -->
+<!--     </jaxb:bindings> -->
+
+    <jaxb:bindings node="//xsd:simpleType[@name='TFile']">
+        <jaxb:bindings>
+            <xjc:javaType name="java.io.File" adapter="cz.zcu.kiv.bp.datatypes.bindings.adapted.FileAdapter" />
+        </jaxb:bindings>
+    </jaxb:bindings>
+    
+    <jaxb:bindings node="//xsd:extension[@base='TCollection']/xsd:sequence/xsd:element" multiple="true" >
+        <jaxb:property name="items" />
+    </jaxb:bindings>
+    
+    <jaxb:bindings node="//xsd:extension[@base='TCollectionItem']/xsd:sequence/xsd:element" multiple="true">
+        <jaxb:property name="value" />
+    </jaxb:bindings>
+    
+    <jaxb:bindings node="//xsd:simpleType[@name='TValueType']">
+        <jaxb:typesafeEnumClass />
+    </jaxb:bindings>
+    
+    <jaxb:bindings node="//xsd:simpleType[@name='TCollectionType']">
+        <jaxb:typesafeEnumClass />
+    </jaxb:bindings>
+
+    <jaxb:bindings node="//xsd:complexType[@name='TCollection']">
+        <jaxb:class ref="cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection" />
+    </jaxb:bindings>
+
+    <jaxb:bindings node="//xsd:complexType[@name='TCollectionItem']">
+        <jaxb:class ref="cz.zcu.kiv.bp.datatypes.bindings.basics.TCollectionItem" />
+    </jaxb:bindings>
+    
+</jaxb:bindings>

@@ -302,4 +302,18 @@
         </xsd:complexContent>
     </xsd:complexType>
 
+    <xsd:element name="File" type="TFile" />
+    <xsd:element name="Strings" type="TStringCollection" />
+    <xsd:element name="BigInts" type="TBigIntegerCollection" />
+    <xsd:element name="Longs" type="TLongCollection" />
+    <xsd:element name="Ints" type="TIntCollection" />
+    <xsd:element name="Shorts" type="TShortCollection" />
+    <xsd:element name="Bytes" type="TByteCollection" />
+    <xsd:element name="BigDecimals" type="TBigDecimalCollection" />
+    <xsd:element name="Doubles" type="TDoubleCollection" />
+    <xsd:element name="Floats" type="TFloatCollection" />
+    <xsd:element name="Booleans" type="TBooleanCollection" />
+    <xsd:element name="Files" type="TFileCollection" />
+    <xsd:element name="Null" type="TNull" />
+
 </xsd:schema>
