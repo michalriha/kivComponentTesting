@@ -24,19 +24,22 @@ public class BundlesMapAdapter extends XmlAdapter<TBundleList, BundlesMap>
         BundlesMap ret = new BundlesMap();
         
         for (TBundle bundle : v.getBundles())
-        { 
+        {
         	HashMap<String, List<TSimulatedService>> bundleServices = new HashMap<String, List<TSimulatedService>>();
             for (TSimulatedService service : bundle.getServices())
             {
+            	// scenario can describe mocking the same interface multiple times
             	if (!bundleServices.containsKey(service.getInterface()))
-            	{
+            	{ // current interface has not yet been processed for mocking,
+            	  // create list to store all possible mocks of that interface
                 	List<TSimulatedService> servicesList = new ArrayList<>();
                 	bundleServices.put(service.getInterface(), servicesList);
             	}
+            	// add current interface into its corresponding list of mocks
                 bundleServices.get(service.getInterface()).add(service);
             }
 
-            String bundleKey = bundle.getSymbolicName() + ":" + bundle.getVersion();   
+            String bundleKey = bundle.getSymbolicName() + ":" + bundle.getVersion();
             ret.put(bundleKey, bundleServices);
         }
         

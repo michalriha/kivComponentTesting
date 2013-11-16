@@ -17,7 +17,7 @@ public class Invocation
     
     /**
      * Returns return value associated with this invocation.
-     * @return this invocatio's return value
+     * @return this invocation's return value
      */
     public Value getReturnValue()
     {

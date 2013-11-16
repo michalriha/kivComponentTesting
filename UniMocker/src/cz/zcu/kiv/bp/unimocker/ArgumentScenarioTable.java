@@ -195,7 +195,7 @@ public class ArgumentScenarioTable
                     }
                 }
                 else
-                { // line has been abandoned
+                { // line has been abandoned as not possible
                     continue;
                 }
             }
@@ -213,7 +213,7 @@ public class ArgumentScenarioTable
 	}
 
 	/**
-	 * Tries to determine weather two given objects match.
+	 * Tries to determine whether two given objects match.
 	 * @param posibleObj first object to match
 	 * @param actualObj second object to match
 	 * @param parametrType type that both objects should have - used in case of Comparable has to be used 
@@ -243,26 +243,6 @@ public class ArgumentScenarioTable
 				return true;
 			}
 		}
-		
-//		if (List.class.isAssignableFrom(parametrType))
-//		{ // objects should be lists
-//			List<?> list1 = (List<?>) posibleObj;
-//			List<?> list2 = (List<?>) actualObj;
-//			
-//			// check list's sizes
-//			if (list1.size() != list2.size()) return false;
-//			
-//			// check items in lists
-//			for (int i = 0; i < list1.size(); i++)
-//			{
-//				boolean res = this.match(list1.get(i),list1.get(i), parametrType);
-//				if (!res)
-//				{ // match has been negative so we can mark these lists as unequal
-//					return false;
-//				}
-//			}
-//			return true;
-//		}
 		
 		///TODO test this
 		if (Collection.class.isAssignableFrom(parametrType))
