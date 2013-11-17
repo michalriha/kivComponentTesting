@@ -362,7 +362,7 @@
 			<xsd:element ref="types:Booleans" /> <!-- name="Booleans" type="types:TBooleanCollection" /> -->
 			<xsd:element ref="types:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
 			<xsd:element ref="types:Null" /> <!-- name="Null" type="types:TNull" /> -->
-			<xsd:element name="AnyValue" type="TAnyValue" /> <!--  -->
+			<xsd:element name="AnyValue" type="TAnyValue" />
 		</xsd:choice>
 	</xsd:complexType>
 
