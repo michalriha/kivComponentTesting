@@ -8,6 +8,6 @@ public class UniMocker
 {
 	public static final String SCENARIO_PREFIX = "um";
 	public static final String SCENARIO_URI = "http://www.kiv.zcu.cz/component-testing/mocker";
-	public static final String SCENARIO_SCHEMA = "https://raw.github.com/michalriha/kivComponentTesting/master/UniMockerBindings/schema/unimocker.xsd";
+	public static final String SCENARIO_SCHEMA = "https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/UniMockerBindings/schema/unimocker.xsd";
 	public static final String SCENARIO_SCHEMA_LOCATION = SCENARIO_URI + " " + SCENARIO_SCHEMA;
 }

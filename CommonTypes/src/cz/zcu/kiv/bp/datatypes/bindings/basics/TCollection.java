@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-
 import cz.zcu.kiv.bp.datatypes.bindings.*;
 
 

@@ -61,7 +61,6 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 			if (ret == null) continue;
 			else
 			{
-//				System.out.println("# found: " + met.getName() + " : " + (ret != null ? ret.getClass() : void.class).getSimpleName());
 				break;
 			}
 		}
@@ -74,7 +73,7 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 	 * @param Collection to transform.
 	 * @param Destination for transformed collection.
 	 */
-	private void extractAndStoreProperCollection(MyCollection<Object> col, Value ret)
+	private void extractAndStoreProperCollection(MyCollection<?> col, Value ret)
 	{		
 		//save XmlType wrapper class
 		ret.setXmlTypeWrapper(col.getXmlType());
@@ -86,6 +85,7 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 		
 		// transform collection to proper object
 		List<Object> list;
+		
 		switch (col.getCollectionType())
 		{
 			case ARRAY:
@@ -237,8 +237,7 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 		}
 		else if (foundValue instanceof MyCollection)
 		{ // value is some kind of collection
-			@SuppressWarnings("unchecked")
-			MyCollection<Object> col = (MyCollection<Object>) foundValue;
+			MyCollection<?> col = (MyCollection<?>) foundValue;
 			_.extractAndStoreProperCollection(col, ret);
 		}
 		else

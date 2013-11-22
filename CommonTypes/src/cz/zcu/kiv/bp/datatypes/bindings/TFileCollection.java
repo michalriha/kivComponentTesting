@@ -11,12 +11,14 @@ package cz.zcu.kiv.bp.datatypes.bindings;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import cz.zcu.kiv.bp.datatypes.bindings.adapted.FileAdapter;
 import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection;
 import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollectionItem;
@@ -30,14 +32,14 @@ import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollectionItem;
  * <pre>
  * &lt;complexType name="TFileCollection">
  *   &lt;complexContent>
- *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollection">
+ *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/types}TCollection">
  *       &lt;sequence>
  *         &lt;element name="item" maxOccurs="unbounded" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
- *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
+ *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/types}TCollectionItem">
  *                 &lt;sequence>
- *                   &lt;element name="File" type="{http://www.kiv.zcu.cz/component-testing/mocker}TFile"/>
+ *                   &lt;element name="File" type="{http://www.kiv.zcu.cz/component-testing/types}TFile"/>
  *                 &lt;/sequence>
  *               &lt;/extension>
  *             &lt;/complexContent>
@@ -103,9 +105,9 @@ public class TFileCollection extends TCollection<File>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
-     *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
+     *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/types}TCollectionItem">
      *       &lt;sequence>
-     *         &lt;element name="File" type="{http://www.kiv.zcu.cz/component-testing/mocker}TFile"/>
+     *         &lt;element name="File" type="{http://www.kiv.zcu.cz/component-testing/types}TFile"/>
      *       &lt;/sequence>
      *     &lt;/extension>
      *   &lt;/complexContent>

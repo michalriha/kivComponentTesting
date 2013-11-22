@@ -10,8 +10,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +23,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
@@ -34,7 +34,6 @@ import cz.zcu.kiv.bp.unimocker.bindings.TProject;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.InvokedMethod;
-import cz.zcu.kiv.bp.unimocker.bindings.ObjectFactory;
 
 /**
  * Implementation of IScenario. Provides method for loading/storing mocking scenario using JAXB technology.
@@ -46,7 +45,17 @@ public class Scenario implements IScenario
         SCHEMA_FILE      = "schema/unimocker.xsd",
         BINDINGS_PACKAGE = "cz.zcu.kiv.bp.unimocker.bindings"
                          + ":cz.zcu.kiv.bp.unimocker.bindings.basics"
-                         + ":cz.zcu.kiv.bp.unimocker.bindings.adapted";
+                         + ":cz.zcu.kiv.bp.unimocker.bindings.adapted"
+                         + ":cz.zcu.kiv.bp.datatypes.bindings"
+                         + ":cz.zcu.kiv.bp.datatypes.bindings.adapted"
+                         + ":cz.zcu.kiv.bp.datatypes.bindings.basics"
+						 ;
+
+    public static final Source[] XML_SCHEMAS_TO_USE =  new Source[]
+    {
+    	new StreamSource(cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_SCHEMA),
+    	new StreamSource(cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_SCHEMA),
+    };
     
     private Scenario _ = this;
     
@@ -63,6 +72,24 @@ public class Scenario implements IScenario
      * Unmarshaled scenario file 
      */
     private TProject scenario = null;
+
+    
+    /**
+     * ValidationEventHandler
+     */
+    private static final ValidationEventHandler VALIDATION_EVENT_HANDLER= new ValidationEventHandler()
+    {
+        @Override
+        public boolean handleEvent(ValidationEvent event)
+        {
+            System.out.println(event.getLocator());
+            System.out.println(event.getMessage());
+            Throwable linkedException = event.getLinkedException();
+            if (linkedException != null) linkedException.printStackTrace();
+            System.out.println();
+            return true;
+        }
+    };
     
     /**
      * On init prepares all JAXB providers required for (u)nmarshaling of xml file
@@ -73,64 +100,25 @@ public class Scenario implements IScenario
     public Scenario()
     throws JAXBException, SAXException, FileNotFoundException
     {
+    	// prepare validating JAXB context based on configured xml schemas
         _.sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        _.jc  = JAXBContext.newInstance(BINDINGS_PACKAGE, TProject.class.getClassLoader());
-        _.sch = sf.newSchema(/*_.getSchemaURL()*/);
-
+      	_.jc  = JAXBContext.newInstance(BINDINGS_PACKAGE, TProject.class.getClassLoader());
+        _.sch = sf.newSchema(XML_SCHEMAS_TO_USE);
+        
+        // prepare JAXB UnMarshaller
         _.u = jc.createUnmarshaller();
         _.u.setSchema(_.sch);
-        _.u.setEventHandler(new ValidationEventHandler() {
-            @Override
-            public boolean handleEvent(ValidationEvent event) {
-                System.out.println(event.getLocator());
-                System.out.println(event.getMessage());
-                event.getLinkedException().printStackTrace();
-                System.out.println();
-                return true;
-            }
-        });
+        _.u.setEventHandler(VALIDATION_EVENT_HANDLER);
 
+        // prepare JAXB Marshaller
         _.m = jc.createMarshaller();
         _.m.setSchema(_.sch);
-        _.m.setEventHandler(new ValidationEventHandler() {
-            @Override
-            public boolean handleEvent(ValidationEvent event) {
-                System.out.println(event.getLocator());
-                System.out.println(event.getMessage());
-                event.getLinkedException().printStackTrace();
-                System.out.println();
-                return true;
-            }
-        });
-        _.m.setProperty("jaxb.formatted.output", true);
+        _.m.setEventHandler(VALIDATION_EVENT_HANDLER);
+        _.m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         _.m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_SCHEMA_LOCATION);
 
         _.scenario = new TProject();
         _.scenario.setSimulatedComponents(new BundlesMap());
-    }
-
-    private URL getSchemaURL() throws FileNotFoundException
-    {
-        try
-        {
-            URL ret  = new URL(cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_SCHEMA);
-            return ret;
-        }
-        catch (MalformedURLException ignored) {}
-        
-        URL schemaURL = _.getClass().getClassLoader().getResource(SCHEMA_FILE);
-        if (schemaURL == null)
-        {
-            try
-            {
-                File schFile = new File(SCHEMA_FILE);
-                if (! schFile.canRead()) throw new FileNotFoundException(SCHEMA_FILE);
-
-                schemaURL = schFile.toURI().toURL();
-            }
-            catch (MalformedURLException e) { throw new FileNotFoundException(SCHEMA_FILE); }
-        }
-        return schemaURL;
     }
     
     @Override
@@ -156,8 +144,18 @@ public class Scenario implements IScenario
         )
         {
             JAXBElement<?> je = (JAXBElement<?>) u.unmarshal(isr);
-            _.scenario = (TProject)je.getValue();
+            
+            if (je.getValue() instanceof TProject)
+            {
+	            _.scenario = (TProject)je.getValue();
+            }
+            else
+            {
+            	System.out.println("Given xml file does not have project element as root! Scenario not loaded");
+            	System.out.println(je.getValue());
+            }
         }
+        catch (Exception ex) { ex.printStackTrace(); }
     }
 
     /**

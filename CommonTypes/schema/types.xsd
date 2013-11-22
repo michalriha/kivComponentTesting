@@ -271,7 +271,7 @@
                             <xsd:complexContent>
                                 <xsd:extension base="TCollectionItem">
                                     <xsd:sequence>
-                                        <xsd:element name="File" type="TFile" />
+                                        <xsd:element ref="File" />
                                     </xsd:sequence>
                                 </xsd:extension>
                             </xsd:complexContent>

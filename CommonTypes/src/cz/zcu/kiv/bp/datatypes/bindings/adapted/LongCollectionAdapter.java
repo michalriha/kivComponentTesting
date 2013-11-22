@@ -7,8 +7,9 @@ package cz.zcu.kiv.bp.datatypes.bindings.adapted;
  */
 public class LongCollectionAdapter extends MyCollectionAdapter<Long>
 {
-	public LongCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<Long>> getCollectionWrapper()
 	{
-		this.collectionWrapper = LongCollection.class;
+		return LongCollection.class;
 	}
 }

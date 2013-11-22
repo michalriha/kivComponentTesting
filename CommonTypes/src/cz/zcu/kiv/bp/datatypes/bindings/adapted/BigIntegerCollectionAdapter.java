@@ -9,8 +9,9 @@ import java.math.BigInteger;
  */
 public class BigIntegerCollectionAdapter extends MyCollectionAdapter<BigInteger>
 {	
-	public BigIntegerCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<BigInteger>> getCollectionWrapper()
 	{
-		this.collectionWrapper = BigIntegerCollection.class;
+		return BigIntegerCollection.class;
 	}
 }

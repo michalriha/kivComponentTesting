@@ -9,8 +9,9 @@ import java.io.File;
  */
 public class FileCollectionAdapter extends MyCollectionAdapter<File>
 {
-	public FileCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<File>> getCollectionWrapper()
 	{
-		this.collectionWrapper = FileCollection.class;
+		return FileCollection.class;
 	}
 }

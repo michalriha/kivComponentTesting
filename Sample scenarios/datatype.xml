@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<types:Files xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/types file:///D:/SkyDrive/GitHub/kivComponentTesting/CommonTypes/schema/types.xsd"
+>
+    <types:item ord-num="0"><types:File>d:\obrazky.zip2</types:File></types:item>
+    <types:item ord-num="1"><types:File>d:\obrazky.zip2</types:File></types:item>
+</types:Files>

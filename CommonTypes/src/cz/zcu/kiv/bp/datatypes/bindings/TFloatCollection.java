@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlType;
 import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection;
 import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollectionItem;
 
-
 /**
  * <p>Java class for TFloatCollection complex type.
  * 

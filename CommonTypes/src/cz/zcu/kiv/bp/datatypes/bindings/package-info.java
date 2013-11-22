@@ -13,7 +13,7 @@
 		)
 	},
 	namespace = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_URI,
-	location = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_SCHEMA,
+	location = "file:///D:/SkyDrive/GitHub/kivComponentTesting/CommonTypes/schema/types.xsd", //cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_SCHEMA,
 	elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED
 )
 package cz.zcu.kiv.bp.datatypes.bindings;

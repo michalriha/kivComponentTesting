@@ -12,18 +12,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
-import cz.zcu.kiv.bp.datatypes.bindings.TBigDecimalCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TBigIntegerCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TBooleanCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TByteCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TDoubleCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TFileCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TFloatCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TIntCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TLongCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TNull;
-import cz.zcu.kiv.bp.datatypes.bindings.TShortCollection;
-import cz.zcu.kiv.bp.datatypes.bindings.TStringCollection;
 
 
 /**
@@ -43,21 +31,23 @@ import cz.zcu.kiv.bp.datatypes.bindings.TStringCollection;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Null_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Null");
-    private final static QName _BigDecimals_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigDecimals");
-    private final static QName _Bytes_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Bytes");
-    private final static QName _Shorts_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Shorts");
-    private final static QName _Floats_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Floats");
-    private final static QName _Files_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Files");
-    private final static QName _Strings_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Strings");
-    private final static QName _Ints_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Ints");
-    private final static QName _Longs_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Longs");
-    private final static QName _File_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "File");
-    private final static QName _BigInts_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigInts");
+//    private final static QName _Null_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Null");
+//    private final static QName _BigDecimals_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigDecimals");
+//    private final static QName _Bytes_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Bytes");
+//    private final static QName _Shorts_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Shorts");
+//    private final static QName _Floats_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Floats");
+//    private final static QName _Files_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Files");
+//    private final static QName _Strings_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Strings");
+//    private final static QName _Ints_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Ints");
+//    private final static QName _Longs_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Longs");
+//    private final static QName _File_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "File");
+//    private final static QName _BigInts_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigInts");
     private final static QName _Project_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/mocker", "project");
-    private final static QName _Doubles_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Doubles");
-    private final static QName _Booleans_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Booleans");
+//    private final static QName _Doubles_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Doubles");
+//    private final static QName _Booleans_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Booleans");
 
+//    private cz.zcu.kiv.bp.datatypes.bindings.ObjectFactory typesOF = new cz.zcu.kiv.bp.datatypes.bindings.ObjectFactory();
+    
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.zcu.kiv.bp.unimocker.bindings.gen
      * 
@@ -153,104 +143,115 @@ public class ObjectFactory {
         return new TInvocation();
     }
 
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TNull }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Null")
-    public JAXBElement<TNull> createNull(TNull value) {
-        return new JAXBElement<TNull>(_Null_QNAME, TNull.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TBigDecimalCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "BigDecimals")
-    public JAXBElement<TBigDecimalCollection> createBigDecimals(TBigDecimalCollection value) {
-        return new JAXBElement<TBigDecimalCollection>(_BigDecimals_QNAME, TBigDecimalCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TByteCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Bytes")
-    public JAXBElement<TByteCollection> createBytes(TByteCollection value) {
-        return new JAXBElement<TByteCollection>(_Bytes_QNAME, TByteCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TShortCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Shorts")
-    public JAXBElement<TShortCollection> createShorts(TShortCollection value) {
-        return new JAXBElement<TShortCollection>(_Shorts_QNAME, TShortCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TFloatCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Floats")
-    public JAXBElement<TFloatCollection> createFloats(TFloatCollection value) {
-        return new JAXBElement<TFloatCollection>(_Floats_QNAME, TFloatCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TFileCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Files")
-    public JAXBElement<TFileCollection> createFiles(TFileCollection value) {
-        return new JAXBElement<TFileCollection>(_Files_QNAME, TFileCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TStringCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Strings")
-    public JAXBElement<TStringCollection> createStrings(TStringCollection value) {
-        return new JAXBElement<TStringCollection>(_Strings_QNAME, TStringCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TIntCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Ints")
-    public JAXBElement<TIntCollection> createInts(TIntCollection value) {
-        return new JAXBElement<TIntCollection>(_Ints_QNAME, TIntCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TLongCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Longs")
-    public JAXBElement<TLongCollection> createLongs(TLongCollection value) {
-        return new JAXBElement<TLongCollection>(_Longs_QNAME, TLongCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "File")
-    public JAXBElement<String> createFile(String value) {
-        return new JAXBElement<String>(_File_QNAME, String.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TBigIntegerCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "BigInts")
-    public JAXBElement<TBigIntegerCollection> createBigInts(TBigIntegerCollection value) {
-        return new JAXBElement<TBigIntegerCollection>(_BigInts_QNAME, TBigIntegerCollection.class, null, value);
-    }
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TNull }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Null")
+//    public JAXBElement<TNull> createNull(TNull value) {
+//    	return this.typesOF.createNull(value);
+////        return new JAXBElement<TNull>(_Null_QNAME, TNull.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TBigDecimalCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "BigDecimals")
+//    public JAXBElement<BigDecimalCollection> createBigDecimals(BigDecimalCollection value) {
+//    	return this.typesOF.createBigDecimals(value);
+////        return new JAXBElement<TBigDecimalCollection>(_BigDecimals_QNAME, TBigDecimalCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TByteCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Bytes")
+//    public JAXBElement<ByteCollection> createBytes(ByteCollection value) {
+//    	return this.typesOF.createBytes(value);
+////        return new JAXBElement<TByteCollection>(_Bytes_QNAME, TByteCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TShortCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Shorts")
+//    public JAXBElement<ShortCollection> createShorts(ShortCollection value) {
+//    	return this.typesOF.createShorts(value);
+////        return new JAXBElement<TShortCollection>(_Shorts_QNAME, TShortCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TFloatCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Floats")
+//    public JAXBElement<FloatCollection> createFloats(FloatCollection value) {
+//    	return this.typesOF.createFloats(value);
+////        return new JAXBElement<TFloatCollection>(_Floats_QNAME, TFloatCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TFileCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Files")
+//    public JAXBElement<FileCollection> createFiles(FileCollection value) {
+//    	return this.typesOF.createFiles(value);
+////        return new JAXBElement<TFileCollection>(_Files_QNAME, TFileCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TStringCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Strings")
+//    public JAXBElement<StringCollection> createStrings(StringCollection value) {
+//    	return this.typesOF.createStrings(value);
+////        return new JAXBElement<TStringCollection>(_Strings_QNAME, TStringCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TIntCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Ints")
+//    public JAXBElement<IntegerCollection> createInts(IntegerCollection value) {
+//    	return this.typesOF.createInts(value);
+////        return new JAXBElement<TIntCollection>(_Ints_QNAME, TIntCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TLongCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Longs")
+//    public JAXBElement<LongCollection> createLongs(LongCollection value) {
+//    	return this.typesOF.createLongs(value);
+////        return new JAXBElement<TLongCollection>(_Longs_QNAME, TLongCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "File")
+//    public JAXBElement<File> createFile(File value) {
+//    	return this.typesOF.createFile(value);
+////        return new JAXBElement<String>(_File_QNAME, String.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TBigIntegerCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "BigInts")
+//    public JAXBElement<BigIntegerCollection> createBigInts(BigIntegerCollection value) {
+//    	return this.typesOF.createBigInts(value);
+////        return new JAXBElement<TBigIntegerCollection>(_BigInts_QNAME, TBigIntegerCollection.class, null, value);
+//    }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TProject }{@code >}}
@@ -261,22 +262,24 @@ public class ObjectFactory {
         return new JAXBElement<TProject>(_Project_QNAME, TProject.class, null, value);
     }
 
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TDoubleCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Doubles")
-    public JAXBElement<TDoubleCollection> createDoubles(TDoubleCollection value) {
-        return new JAXBElement<TDoubleCollection>(_Doubles_QNAME, TDoubleCollection.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TBooleanCollection }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Booleans")
-    public JAXBElement<TBooleanCollection> createBooleans(TBooleanCollection value) {
-        return new JAXBElement<TBooleanCollection>(_Booleans_QNAME, TBooleanCollection.class, null, value);
-    }
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TDoubleCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Doubles")
+//    public JAXBElement<DoubleCollection> createDoubles(DoubleCollection value) {
+//    	return this.typesOF.createDoubles(value);
+////        return new JAXBElement<TDoubleCollection>(_Doubles_QNAME, TDoubleCollection.class, null, value);
+//    }
+//
+//    /**
+//     * Create an instance of {@link JAXBElement }{@code <}{@link TBooleanCollection }{@code >}}
+//     * 
+//     */
+//    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Booleans")
+//    public JAXBElement<BooleanCollection> createBooleans(BooleanCollection value) {
+//    	return this.typesOF.createBooleans(value);
+////        return new JAXBElement<TBooleanCollection>(_Booleans_QNAME, TBooleanCollection.class, null, value);
+//    }
 
 }

@@ -9,8 +9,9 @@ import java.math.BigDecimal;
  */
 public class BigDecimalCollectionAdapter extends MyCollectionAdapter<BigDecimal>
 {
-	public BigDecimalCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<BigDecimal>> getCollectionWrapper()
 	{
-		this.collectionWrapper = BigDecimalCollection.class;
+		return BigDecimalCollection.class;
 	}
 }

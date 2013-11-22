@@ -7,8 +7,9 @@ package cz.zcu.kiv.bp.datatypes.bindings.adapted;
  */
 public class IntegerCollectionAdapter extends MyCollectionAdapter<Integer>
 {
-	public IntegerCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<Integer>> getCollectionWrapper()
 	{
-		this.collectionWrapper = IntegerCollection.class;
+		return IntegerCollection.class;
 	}
 }

@@ -7,8 +7,9 @@ package cz.zcu.kiv.bp.datatypes.bindings.adapted;
  */
 public class BooleanCollectionAdapter extends MyCollectionAdapter<Boolean>
 {
-	public BooleanCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<Boolean>> getCollectionWrapper()
 	{
-		this.collectionWrapper = BooleanCollection.class;
+		return BooleanCollection.class;
 	}
 }

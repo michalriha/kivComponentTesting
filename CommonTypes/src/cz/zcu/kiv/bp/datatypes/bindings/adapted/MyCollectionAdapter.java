@@ -16,12 +16,14 @@ import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollectionItem;
  */
 public abstract class MyCollectionAdapter<T> extends XmlAdapter<TCollection<T>, MyCollection<T>> {
 
-	protected Class<? extends MyCollection<T>> collectionWrapper = null; //(Class<? extends MyCollection<T>>) MyCollection.class;
+//	protected Class<? extends MyCollection<T>> collectionWrapper = null; //(Class<? extends MyCollection<T>>) MyCollection.class;
+	
+	protected abstract Class<? extends MyCollection<T>> getCollectionWrapper();
 	
 	@Override
 	public MyCollection<T> unmarshal(TCollection<T> v) throws Exception
 	{
-		MyCollection<T> ret = this.collectionWrapper.newInstance();
+		MyCollection<T> ret = this.getCollectionWrapper().newInstance();
 		// sort and set values - using TreeMap avoids sorting
 		// and another loop for extracting contained values
 		Map<Integer, T> map = new TreeMap<>();

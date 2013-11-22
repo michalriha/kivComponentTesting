@@ -100,7 +100,7 @@ public class TShortCollection extends TCollection<Short>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
-     *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
+     *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/types}TCollectionItem">
      *       &lt;sequence>
      *         &lt;element name="Short" type="{http://www.w3.org/2001/XMLSchema}short"/>
      *       &lt;/sequence>

@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import cz.zcu.kiv.bp.datatypes.bindings.*;
 import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
@@ -98,50 +99,85 @@ public class TValue {
 
     @XmlElement(name = "String")
     protected String string;
+    
     @XmlElement(name = "BigInteger")
     protected BigInteger bigInteger;
+    
     @XmlElement(name = "Long")
     protected Long _long;
+    
     @XmlElement(name = "Integer")
     protected Integer integer;
+    
     @XmlElement(name = "Short")
     protected Short _short;
+    
     @XmlElement(name = "Byte")
     protected Byte _byte;
+    
     @XmlElement(name = "BigDecimal")
     protected BigDecimal bigDecimal;
+    
     @XmlElement(name = "Double")
     protected Double _double;
+    
     @XmlElement(name = "Float")
     protected Float _float;
+    
     @XmlElement(name = "File", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    @XmlJavaTypeAdapter(FileAdapter.class)
     protected File file;
+    
     @XmlElement(name = "Boolean")
     protected Boolean _boolean;
-    @XmlElement(name = "Strings", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Strings", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TStringCollection.class)
+    @XmlJavaTypeAdapter(StringCollectionAdapter.class)
     protected StringCollection strings;
-    @XmlElement(name = "BigInts", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "BigInts", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TBigIntegerCollection.class)
+    @XmlJavaTypeAdapter(BigIntegerCollectionAdapter.class)
     protected BigIntegerCollection bigInts;
-    @XmlElement(name = "Longs", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Longs", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TLongCollection.class)
+    @XmlJavaTypeAdapter(LongCollectionAdapter.class)
     protected LongCollection longs;
-    @XmlElement(name = "Ints", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Ints", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TIntCollection.class)
+    @XmlJavaTypeAdapter(IntegerCollectionAdapter.class)
     protected IntegerCollection ints;
-    @XmlElement(name = "Shorts", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Shorts", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TShortCollection.class)
+    @XmlJavaTypeAdapter(ShortCollectionAdapter.class)
     protected ShortCollection shorts;
-    @XmlElement(name = "Bytes", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Bytes", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TByteCollection.class)
+    @XmlJavaTypeAdapter(ByteCollectionAdapter.class)
     protected ByteCollection bytes;
-    @XmlElement(name = "BigDecimals", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "BigDecimals", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TBigDecimalCollection.class)
+    @XmlJavaTypeAdapter(BigDecimalCollectionAdapter.class)
     protected BigDecimalCollection bigDecimals;
-    @XmlElement(name = "Doubles", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Doubles", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TDoubleCollection.class)
+    @XmlJavaTypeAdapter(DoubleCollectionAdapter.class)
     protected DoubleCollection doubles;
-    @XmlElement(name = "Floats", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Floats", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TFloatCollection.class)
+    @XmlJavaTypeAdapter(FloatCollectionAdapter.class)
     protected FloatCollection floats;
-    @XmlElement(name = "Booleans", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Booleans", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TBooleanCollection.class)
+    @XmlJavaTypeAdapter(BooleanCollectionAdapter.class)
     protected BooleanCollection booleans;
-    @XmlElement(name = "Files", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    
+    @XmlElement(name = "Files", namespace = "http://www.kiv.zcu.cz/component-testing/types", type = TFileCollection.class)
+    @XmlJavaTypeAdapter(FileCollectionAdapter.class)
     protected FileCollection files;
+    
     @XmlElement(name = "Null", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected TNull _null;
+    
     @XmlElement(name = "AnyValue")
     protected TAnyValue anyValue;
 

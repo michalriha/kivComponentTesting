@@ -7,8 +7,9 @@ package cz.zcu.kiv.bp.datatypes.bindings.adapted;
  */
 public class DoubleCollectionAdapter extends MyCollectionAdapter<Double>
 {
-	public DoubleCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<Double>> getCollectionWrapper()
 	{
-		this.collectionWrapper = DoubleCollection.class;
+		return DoubleCollection.class;
 	}
 }

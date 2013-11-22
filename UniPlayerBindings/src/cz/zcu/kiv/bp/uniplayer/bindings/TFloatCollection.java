@@ -10,13 +10,14 @@ package cz.zcu.kiv.bp.uniplayer.bindings;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollection;
 import cz.zcu.kiv.bp.uniplayer.bindings.basics.TCollectionItem;
-
 
 /**
  * <p>Java class for TFloatCollection complex type.

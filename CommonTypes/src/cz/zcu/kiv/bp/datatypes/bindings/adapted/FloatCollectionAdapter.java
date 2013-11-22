@@ -7,8 +7,9 @@ package cz.zcu.kiv.bp.datatypes.bindings.adapted;
  */
 public class FloatCollectionAdapter extends MyCollectionAdapter<Float>
 {
-	public FloatCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<Float>> getCollectionWrapper()
 	{
-		this.collectionWrapper = FloatCollection.class;
+		return FloatCollection.class;
 	}
 }

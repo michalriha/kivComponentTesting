@@ -99,7 +99,7 @@ public class TStringCollection extends TCollection<String>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
-     *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
+     *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/types}TCollectionItem">
      *       &lt;sequence>
      *         &lt;element name="String" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *       &lt;/sequence>

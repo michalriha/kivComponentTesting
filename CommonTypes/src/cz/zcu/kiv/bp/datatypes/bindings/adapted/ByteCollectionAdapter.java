@@ -7,8 +7,9 @@ package cz.zcu.kiv.bp.datatypes.bindings.adapted;
  */
 public class ByteCollectionAdapter extends MyCollectionAdapter<Byte>
 {
-	public ByteCollectionAdapter()
+	@Override
+	protected Class<? extends MyCollection<Byte>> getCollectionWrapper()
 	{
-		this.collectionWrapper = ByteCollection.class;
+		return ByteCollection.class;
 	}
 }
