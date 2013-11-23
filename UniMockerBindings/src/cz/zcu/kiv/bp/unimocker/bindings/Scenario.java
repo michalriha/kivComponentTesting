@@ -72,7 +72,6 @@ public class Scenario implements IScenario
      * Unmarshaled scenario file 
      */
     private TProject scenario = null;
-
     
     /**
      * ValidationEventHandler

@@ -14,6 +14,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection;
@@ -52,6 +53,7 @@ import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollectionItem;
 @XmlType(name = "TFloatCollection", propOrder = {
     "items"
 })
+@XmlRootElement(name = "Floats")
 public class TFloatCollection extends TCollection<Float>
 {
 

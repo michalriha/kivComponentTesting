@@ -16,7 +16,7 @@
 							    <types:Files type="ArrayList">
 							       <types:item ord-num="0"><types:File>d:\Obrázky.zip2</types:File></types:item>
 							    </types:Files>
-                                <AnyValue base-type="FileArrayList" />
+<!--                                 <AnyValue base-type="FileArrayList" /> -->
                             </argument>
                             <argument ord-num="1">
                                 <AnyValue base-type="String" />

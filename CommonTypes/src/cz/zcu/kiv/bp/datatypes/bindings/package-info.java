@@ -5,9 +5,13 @@
 // Generated on: 2013.06.20 at 09:31:37 PM CEST 
 //
 
-@javax.xml.bind.annotation.XmlSchema(
+@XmlJavaTypeAdapters(
+{
+	@XmlJavaTypeAdapter(type = TFileCollection.class, value = FileCollectionAdapter.class),
+})
+@XmlSchema(
 	xmlns = {
-		@javax.xml.bind.annotation.XmlNs(
+		@XmlNs(
 			prefix = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_PREFIX,
 			namespaceURI = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_URI
 		)
@@ -17,3 +21,9 @@
 	elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED
 )
 package cz.zcu.kiv.bp.datatypes.bindings;
+
+import cz.zcu.kiv.bp.datatypes.bindings.adapted.FileCollectionAdapter;
+import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlSchema;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;

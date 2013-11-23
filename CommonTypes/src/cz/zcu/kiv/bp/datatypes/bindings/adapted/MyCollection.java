@@ -4,6 +4,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+//import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import cz.zcu.kiv.bp.datatypes.bindings.TCollectionType;
 import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection;
 
@@ -13,6 +15,7 @@ import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection;
  *
  * @param <T> component type
  */
+//@XmlJavaTypeAdapter(MyCollectionAdapter.class)
 public class MyCollection<T> extends ArrayList<T>
 {
 	private static final long serialVersionUID = 5860260268967496007L;

@@ -254,7 +254,6 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Longs")
-
     public JAXBElement<TLongCollection> createLongs(TLongCollection value) {
         return new JAXBElement<TLongCollection>(_Longs_QNAME, TLongCollection.class, null, value);
     }
@@ -264,7 +263,6 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "BigDecimals")
-    
     public JAXBElement<TBigDecimalCollection> createBigDecimals(TBigDecimalCollection value) {
         return new JAXBElement<TBigDecimalCollection>(_BigDecimals_QNAME, TBigDecimalCollection.class, null, value);
     }
@@ -274,7 +272,6 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Bytes")
-    
     public JAXBElement<TByteCollection> createBytes(TByteCollection value) {
         return new JAXBElement<TByteCollection>(_Bytes_QNAME, TByteCollection.class, null, value);
     }
@@ -284,7 +281,6 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Shorts")
-    
     public JAXBElement<TShortCollection> createShorts(TShortCollection value) {
         return new JAXBElement<TShortCollection>(_Shorts_QNAME, TShortCollection.class, null, value);
     }
@@ -304,7 +300,6 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Floats")
-
     public JAXBElement<TFloatCollection> createFloats(TFloatCollection value) {
         return new JAXBElement<TFloatCollection>(_Floats_QNAME, TFloatCollection.class, null, value);
     }
@@ -314,17 +309,16 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "BigInts")
-
     public JAXBElement<TBigIntegerCollection> createBigInts(TBigIntegerCollection value) {
         return new JAXBElement<TBigIntegerCollection>(_BigInts_QNAME, TBigIntegerCollection.class, null, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link TFileCollection }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Files")
     public JAXBElement<TFileCollection> createFiles(TFileCollection value) {
+    	System.out.println("element Files created");
         return new JAXBElement<TFileCollection>(_Files_QNAME, TFileCollection.class, null, value);
     }
 
@@ -333,7 +327,6 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Doubles")
-
     public JAXBElement<TDoubleCollection> createDoubles(TDoubleCollection value) {
         return new JAXBElement<TDoubleCollection>(_Doubles_QNAME, TDoubleCollection.class, null, value);
     }
@@ -343,7 +336,6 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Booleans")
-
     public JAXBElement<TBooleanCollection> createBooleans(TBooleanCollection value) {
         return new JAXBElement<TBooleanCollection>(_Booleans_QNAME, TBooleanCollection.class, null, value);
     }
@@ -353,7 +345,6 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Strings")
-
     public JAXBElement<TStringCollection> createStrings(TStringCollection value) {
         return new JAXBElement<TStringCollection>(_Strings_QNAME, TStringCollection.class, null, value);
     }
@@ -363,9 +354,7 @@ public class ObjectFactory
      * 
      */
     @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Ints")
-
     public JAXBElement<TIntCollection> createInts(TIntCollection value) {
         return new JAXBElement<TIntCollection>(_Ints_QNAME, TIntCollection.class, null, value);
     }
-
 }

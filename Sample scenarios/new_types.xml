@@ -19,10 +19,14 @@
 								</types:Files>
                             </argument>
                             <argument ord-num="1">
-                                <AnyValue base-type="String" />
+                                <types:File>d:\obrazky.zip2</types:File>
                             </argument>
                             <argument ord-num="2">
-                                <AnyValue base-type="String" />
+                                <types:Strings>
+                                    <types:item ord-num="0"><types:String>a</types:String></types:item>
+                                    <types:item ord-num="1"><types:String>b</types:String></types:item>
+                                    <types:item ord-num="2"><types:String>c</types:String></types:item>
+                                </types:Strings>
                             </argument>
                             <argument ord-num="3">
                                 <types:File>d:\obrazky.zip2</types:File>
@@ -34,6 +38,16 @@
                                     <types:item ord-num="2"><types:Integer>987654</types:Integer></types:item>
                                     <types:item ord-num="3"><types:Integer>456789</types:Integer></types:item>
                                 </types:Ints>
+                            </argument>
+                            <argument ord-num="5">
+                                <types:Booleans>
+                                    <types:item ord-num="0"><types:Boolean>true</types:Boolean></types:item>
+                                </types:Booleans>
+                            </argument>
+                            <argument ord-num="6">
+                                <types:BigDecimals>
+                                    <types:item ord-num="0"><types:BigDecimal>0.123564</types:BigDecimal></types:item>
+                                </types:BigDecimals>
                             </argument>
                         </arguments>
                     </invocation>

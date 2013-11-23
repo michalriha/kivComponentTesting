@@ -4,7 +4,10 @@ Bundle-Name: UniPlayerBindings
 Bundle-SymbolicName: cz.zcu.kiv.bp.uniplayer.bindings
 Bundle-Version: 2.0.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: cz.zcu.kiv.bp.namespaces,
+Import-Package: cz.zcu.kiv.bp.datatypes.bindings,
+ cz.zcu.kiv.bp.datatypes.bindings.adapted,
+ cz.zcu.kiv.bp.datatypes.bindings.basics,
+ cz.zcu.kiv.bp.namespaces,
  javax.xml,
  javax.xml.bind,
  javax.xml.validation,
