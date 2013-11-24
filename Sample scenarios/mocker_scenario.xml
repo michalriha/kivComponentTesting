@@ -31,7 +31,7 @@
                     <invocation>
                         <arguments />
                         <return>
-                            <String>MockupPlugin1</String>
+                            <types:String>MockupPlugin1</types:String>
                         </return>
                     </invocation>
                 </method>
@@ -43,7 +43,7 @@
 					<invocation>
 						<arguments />
 						<return>
-							<String>7z</String>
+							<types:String>7z</types:String>
 						</return>
 					</invocation>
 				</method>
@@ -51,7 +51,7 @@
                     <invocation>
                         <arguments />
                         <return>
-                            <String>7-Zip</String>
+                            <types:String>7-Zip</types:String>
                         </return>
                     </invocation>
                 </method>
@@ -69,7 +69,7 @@
                             </argument>
 						</arguments>
 						<return>
-							<Boolean>false</Boolean>
+							<types:Boolean>false</types:Boolean>
 						</return>
 					</invocation>
                 </method>
@@ -79,7 +79,7 @@
 					<invocation>
 						<arguments />
 						<return>
-							<String>7z</String>
+							<types:String>7z</types:String>
 						</return>
 					</invocation>
 				</method>
@@ -87,7 +87,7 @@
                     <invocation>
                         <arguments />
                         <return>
-                            <String>7-Zip</String>
+                            <types:String>7-Zip</types:String>
                         </return>
                     </invocation>
                 </method>
@@ -99,7 +99,7 @@
                 			</argument>
                 		</arguments>
                 		<return>
-                			<Boolean>false</Boolean>
+                			<types:Boolean>false</types:Boolean>
                 		</return>
                 	</invocation>
                 </method>
@@ -114,7 +114,7 @@
                             </argument>
                 		</arguments>
                 		<return>
-                			<Boolean>false</Boolean>
+                			<types:Boolean>false</types:Boolean>
                 		</return>
                 	</invocation>
                 </method>
