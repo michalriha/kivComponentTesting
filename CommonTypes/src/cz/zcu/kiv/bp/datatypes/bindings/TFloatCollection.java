@@ -102,7 +102,7 @@ public class TFloatCollection extends TCollection<Float>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
-     *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
+     *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/types}TCollectionItem">
      *       &lt;sequence>
      *         &lt;element name="Float" type="{http://www.w3.org/2001/XMLSchema}float"/>
      *       &lt;/sequence>

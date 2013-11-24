@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType name="TNull">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="base-type" use="required" type="{http://www.kiv.zcu.cz/component-testing/mocker}TValueType" />
+ *       &lt;attribute name="base-type" use="required" type="{http://www.kiv.zcu.cz/component-testing/types}TValueType" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>

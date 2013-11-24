@@ -1,4 +1,4 @@
 /**
- * cz.zcu.kiv.bp.uniplayer.bindings.adapted provides custom classes and adapters for xml binding
+ * Implementation of XMLAdapters and non mappable classes for simulation scenario
  */
 package cz.zcu.kiv.bp.uniplayer.bindings.adapted;

@@ -1,4 +1,4 @@
 /**
- * Provides convenient classes with public string constant prefixes and namespace uris for binding bundles in framework.
+ * Provides convenient classes with static public string constants containing prefixes, namespace uris and schema locations for binding bundles in framework.
  */
 package cz.zcu.kiv.bp.namespaces;

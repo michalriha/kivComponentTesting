@@ -1,0 +1,3246 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>XML Schema Documentation</title>
+<meta http-equiv="Content-Type" content="text/xml; charset=iso-8859-1" />
+<style type="text/css">
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* More-configurable styles */
+
+/******** General ********/
+
+/* Document body */
+body {
+   color: Black;
+   background-color: White;
+   font-family: Arial, sans-serif;
+   font-size: 10pt;
+}
+/* Horizontal rules */
+hr {
+   color: black;
+}
+/* Document title */
+h1 {
+   font-size: 18pt;
+   letter-spacing: 2px;
+   border-bottom: 1px #ccc solid;
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+/* Main section headers */
+h2 {
+   font-size: 14pt;
+   letter-spacing: 1px;
+}
+/* Sub-section headers */
+h3, h3 a, h3 span {
+   font-size: 12pt;
+   font-weight: bold;
+   color: black;
+}
+/* Table displaying the properties of the schema components or the
+   schema document itself */
+table.properties th, table.properties th a {
+   color: black;
+   background-color: #F99; /* Pink */
+}
+table.properties td {
+   background-color: #eee; /* Gray */
+}
+
+
+/******** Table of Contents Section ********/
+
+/* Controls for switching between printing and viewing modes */
+div#printerControls {
+   color: #963; /* Orange-brown */
+}
+/* Controls that can collapse or expand all XML Instance
+   Representation and Schema Component Representation boxes */
+div#globalControls {
+   border: 2px solid #999;
+}
+
+
+/******** Schema Document Properties Section ********/
+
+/* Table displaying the namespaces declared in the schema */
+table.namespaces th {
+   background-color: #ccc;
+}
+table.namespaces td {
+   background-color: #eee;
+}
+/* Target namespace of the schema */
+span.targetNS {
+   color: #06C;
+   font-weight: bold;
+}
+
+
+/******** Schema Components' Sections ********/
+
+/* Name of schema component */
+.name {
+   color: #F93; /* Orange */
+}
+
+/* Hierarchy table */
+table.hierarchy {
+   border: 2px solid #999; /* Gray */
+}
+
+/* XML Instance Representation table */
+div.sample div.contents {
+   border: 2px dashed black;
+}
+
+/* Schema Component Representation table */
+div.schemaComponent div.contents {
+   border: 2px black solid;
+}
+
+
+/******** Glossary Section ********/
+
+/* Glossary Terms */
+.glossaryTerm {
+   color: #036; /* Blue */
+}
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Printer-version styles */
+
+@media print {
+
+/* Ensures that controls are hidden when printing */
+div#printerControls {
+   visibility: hidden;
+}
+div#globalControls {
+   visibility: hidden;
+}
+#legend {
+   display: none;
+}
+#legendTOC {
+   display: none;
+}
+#glossary {
+   display: none;
+}
+#glossaryTOC {
+   display: none;
+}
+
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Base styles */
+
+/******** General ********/
+
+/* Unordered lists */
+ul {
+   margin-left: 1.5em;
+   margin-bottom: 0em;
+}
+/* Tables */
+table {
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 2px;
+   margin-right: 2px;
+}
+table th, table td {
+   font-size: 10pt;
+   vertical-align: top;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+table th {
+   font-weight: bold;
+   text-align: left;
+}
+/* Table displaying the properties of the schema components or the
+   schema document itself */
+table.properties {
+   width: 90%;
+}
+table.properties th {
+   width: 30%;
+}
+/* Boxes that can make its content appear and disappear*/
+div.box {
+   margin: 1em;
+}
+   /* Box caption */
+div.box span.caption {
+   font-weight: bold;
+}
+   /* Button to open and close the box */
+div.box input.control {
+   width: 1.4em;
+   height: 1.4em;
+   text-align: center;
+   vertical-align: middle;
+   font-size: 11pt;
+}
+   /* Box contents */
+div.box div.contents {
+   margin-top: 3px;
+}
+
+
+/******** Table of Contents Section ********/
+
+/* Controls for switching between printing and viewing modes */
+div#printerControls {
+   white-space: nowrap;
+   font-weight: bold;
+   padding: 5px;
+   margin: 5px;
+}
+/* Controls that can collapse or expand all XML Instance
+   Representation and Schema Component Representation boxes */
+div#globalControls {
+   padding: 10px;
+   margin: 5px;
+}
+
+
+/******** Schema Document Properties Section ********/
+
+/* Table displaying the namespaces declared in the schema */
+table.namespaces th {
+}
+table.namespaces td {
+}
+/* Target namespace of the schema */
+span.targetNS {
+}
+
+
+/******** Schema Components' Sections ********/
+
+/* Name of schema component */
+.name {
+}
+
+/* Hierarchy table */
+table.hierarchy {
+   width: 90%;
+}
+table.hierarchy th {
+   font-weight: normal;
+   font-style: italic;
+   width: 20%;
+}
+table.hierarchy th, table.hierarchy td {
+   padding: 5px;
+}
+
+/* XML Instance Representation table */
+div.sample {
+   width: 90%;
+}
+div.sample div.contents {
+   padding: 5px;
+   font-family: Courier New, sans-serif;
+   font-size: 10pt;
+}
+   /* Normal elements and attributes */
+div.sample div.contents, div.sample div.contents a {
+   color: black;
+}
+   /* Group Headers */
+div.sample div.contents .group, div.sample div.contents .group a {
+   color: #999; /* Light gray */
+}
+   /* Type Information */
+div.sample div.contents .type, div.sample div.contents .type a {
+   color: #999; /* Light gray */
+}
+   /* Occurrence Information */
+div.sample div.contents .occurs, div.sample div.contents .occurs a {
+   color: #999; /* Light gray */
+}
+   /* Fixed values */
+div.sample div.contents .fixed {
+   color: #063; /* Green */
+   font-weight: bold;
+}
+   /* Simple type constraints */
+div.sample div.contents .constraint, div.sample div.contents .constraint a {
+   color: #999; /* Light gray */
+}
+   /* Elements and attributes inherited from base type */
+div.sample div.contents .inherited, div.sample div.contents .inherited a {
+   color: #666; /* Dark gray */
+}
+   /* Elements and attributes added to or changed from base type */
+div.sample div.contents .newFields {
+   font-weight: bold;
+}
+   /* Other type of information */
+div.sample div.contents .other, div.sample div.contents .other a {
+   color: #369; /* Blue */
+   font-style: italic;
+}
+   /* Link to open up window displaying documentation */
+div.sample div.contents a.documentation {
+   text-decoration: none;
+   padding-left: 3px;
+   padding-right: 3px;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   font-weight: bold;
+   font-size: 11pt;
+   background-color: #FFD;
+   color: #069;
+}
+   /* Invert colors when hovering over link to open up window 
+      displaying documentation */
+div.sample div.contents a.documentation:hover {
+   color: #FFD;
+   background-color: #069;
+}
+
+/* Schema Component Representation table */
+div.schemaComponent {
+   width: 90%;
+}
+div.schemaComponent div.contents {
+   font-family: Courier New, sans-serif;
+   font-size: 10pt;
+   padding: 5px;
+}
+   /* Syntax characters */
+div.schemaComponent div.contents {
+   color: #00f; /* blue */
+}
+   /* Element and attribute tags */
+div.schemaComponent div.contents .scTag {
+   color: #933; /* maroon */
+}
+   /* Element and attribute content */
+div.schemaComponent div.contents .scContent, div.schemaComponent div.contents .scContent a {
+   color: black;
+   font-weight: bold;
+}
+   /* Comments */
+div.schemaComponent div.contents .comment {
+   color: #999; /* Light gray */
+}
+
+/******** Legend Section ********/
+
+div#legend table, div#legend div {
+   margin-bottom: 3px;
+}
+div#legend div.hint {
+   color: #999; /* Light gray */
+   width: 90%;
+   margin-left: 1em;
+   margin-bottom: 2em;
+}
+
+
+/******** Glossary Section ********/
+
+/* Glossary Terms */
+.glossaryTerm {
+   font-weight: bold;
+}
+
+
+/******** Footer ********/
+
+.footer {
+   font-size: 8pt;
+}
+</style>
+<script type="text/javascript">
+<!--
+/* IDs of XML Instance Representation boxes */
+var xiBoxes = new Array('type_TNull_xibox', 'type_TValueType_xibox', 'type_TFile_xibox', 'type_TCollectionType_xibox', 'type_TCollectionItem_xibox', 'type_TCollection_xibox', 'type_TStringCollection_xibox', 'type_TBigIntegerCollection_xibox', 'type_TLongCollection_xibox', 'type_TIntCollection_xibox', 'type_TShortCollection_xibox', 'type_TByteCollection_xibox', 'type_TBigDecimalCollection_xibox', 'type_TDoubleCollection_xibox', 'type_TFloatCollection_xibox', 'type_TFileCollection_xibox', 'type_TBooleanCollection_xibox', 'element_String_xibox', 'element_BigInteger_xibox', 'element_Long_xibox', 'element_Integer_xibox', 'element_Short_xibox', 'element_Byte_xibox', 'element_BigDecimal_xibox', 'element_Double_xibox', 'element_Float_xibox', 'element_Boolean_xibox', 'element_File_xibox', 'element_Strings_xibox', 'element_BigInts_xibox', 'element_Longs_xibox', 'element_Ints_xibox', 'element_Shorts_xibox', 'element_Bytes_xibox', 'element_BigDecimals_xibox', 'element_Doubles_xibox', 'element_Floats_xibox', 'element_Booleans_xibox', 'element_Files_xibox', 'element_Null_xibox');
+/* IDs of Schema Component Representation boxes */
+var scBoxes = new Array('schema_scbox', 'type_TNull_scbox', 'type_TValueType_scbox', 'type_TFile_scbox', 'type_TCollectionType_scbox', 'type_TCollectionItem_scbox', 'type_TCollection_scbox', 'type_TStringCollection_scbox', 'type_TBigIntegerCollection_scbox', 'type_TLongCollection_scbox', 'type_TIntCollection_scbox', 'type_TShortCollection_scbox', 'type_TByteCollection_scbox', 'type_TBigDecimalCollection_scbox', 'type_TDoubleCollection_scbox', 'type_TFloatCollection_scbox', 'type_TFileCollection_scbox', 'type_TBooleanCollection_scbox', 'element_String_scbox', 'element_BigInteger_scbox', 'element_Long_scbox', 'element_Integer_scbox', 'element_Short_scbox', 'element_Byte_scbox', 'element_BigDecimal_scbox', 'element_Double_scbox', 'element_Float_scbox', 'element_Boolean_scbox', 'element_File_scbox', 'element_Strings_scbox', 'element_BigInts_scbox', 'element_Longs_scbox', 'element_Ints_scbox', 'element_Shorts_scbox', 'element_Bytes_scbox', 'element_BigDecimals_scbox', 'element_Doubles_scbox', 'element_Floats_scbox', 'element_Booleans_scbox', 'element_Files_scbox', 'element_Null_scbox');
+
+/**
+ * Can get the ID of the button controlling
+ * a collapseable box by concatenating
+ * this string onto the ID of the box itself.
+ */
+var B_SFIX = "_button";
+
+/**
+ * Counter of documentation windows
+ * Used to give each window a unique name
+ */
+var windowCount = 0;
+
+/**
+ * Returns an element in the current HTML document.
+ * 
+ * @param elementID Identifier of HTML element
+ * @return               HTML element object
+ */
+function getElementObject(elementID) {
+    var elemObj = null;
+    if (document.getElementById) {
+        elemObj = document.getElementById(elementID);
+    }
+    return elemObj;
+}             
+
+/**
+ * Closes a collapseable box.
+ * 
+ * @param boxObj       Collapseable box
+ * @param buttonObj Button controlling box
+ */
+function closeBox(boxObj, buttonObj) {
+  if (boxObj == null || buttonObj == null) {
+     // Box or button not found
+  } else {
+     // Change 'display' CSS property of box
+     boxObj.style.display="none";
+
+     // Change text of button 
+     if (boxObj.style.display=="none") {
+        buttonObj.value=" + ";
+     }
+  }
+}
+
+/**
+ * Opens a collapseable box.
+ * 
+ * @param boxObj       Collapseable box
+ * @param buttonObj Button controlling box
+ */
+function openBox(boxObj, buttonObj) {
+  if (boxObj == null || buttonObj == null) {
+     // Box or button not found
+  } else {
+     // Change 'display' CSS property of box
+     boxObj.style.display="block";
+
+     // Change text of button
+     if (boxObj.style.display=="block") {
+        buttonObj.value=" - ";
+     }
+  }
+}
+
+/**
+ * Sets the state of a collapseable box.
+ * 
+ * @param boxID Identifier of box
+ * @param open If true, box is "opened",
+ *             Otherwise, box is "closed".
+ */
+function setState(boxID, open) {
+  var boxObj = getElementObject(boxID);
+  var buttonObj = getElementObject(boxID+B_SFIX);
+  if (boxObj == null || buttonObj == null) {
+     // Box or button not found
+  } else if (open) {
+     openBox(boxObj, buttonObj);
+     // Make button visible
+     buttonObj.style.display="inline";
+  } else {
+     closeBox(boxObj, buttonObj);
+     // Make button visible
+     buttonObj.style.display="inline";
+  }
+}
+
+/**
+ * Switches the state of a collapseable box, e.g.
+ * if it's opened, it'll be closed, and vice versa.
+ * 
+ * @param boxID Identifier of box
+ */
+function switchState(boxID) {
+  var boxObj = getElementObject(boxID);
+  var buttonObj = getElementObject(boxID+B_SFIX);
+  if (boxObj == null || buttonObj == null) {
+     // Box or button not found
+  } else if (boxObj.style.display=="none") {
+     // Box is closed, so open it
+     openBox(boxObj, buttonObj);
+  } else if (boxObj.style.display=="block") {
+     // Box is opened, so close it
+     closeBox(boxObj, buttonObj);
+  }
+}
+
+/**
+ * Closes all boxes in a given list.
+ * 
+ * @param boxList Array of box IDs
+ */
+function collapseAll(boxList) {
+  var idx;
+  for (idx = 0; idx < boxList.length; idx++) {
+     var boxObj = getElementObject(boxList[idx]);
+     var buttonObj = getElementObject(boxList[idx]+B_SFIX);
+     closeBox(boxObj, buttonObj);
+  }
+}
+
+/**
+ * Open all boxes in a given list.
+ * 
+ * @param boxList Array of box IDs
+ */
+function expandAll(boxList) {
+  var idx;
+  for (idx = 0; idx < boxList.length; idx++) {
+     var boxObj = getElementObject(boxList[idx]);
+     var buttonObj = getElementObject(boxList[idx]+B_SFIX);
+     openBox(boxObj, buttonObj);
+  }
+}
+
+/**
+ * Makes all the control buttons of boxes appear.
+ * 
+ * @param boxList Array of box IDs
+ */
+function viewControlButtons(boxList) {
+    var idx;
+    for (idx = 0; idx < boxList.length; idx++) {
+        buttonObj = getElementObject(boxList[idx]+B_SFIX);
+        if (buttonObj != null) {
+            buttonObj.style.display = "inline";
+        }
+    }
+}
+
+/**
+ * Makes all the control buttons of boxes disappear.
+ * 
+ * @param boxList Array of box IDs
+ */
+function hideControlButtons(boxList) {
+    var idx;
+    for (idx = 0; idx < boxList.length; idx++) {
+        buttonObj = getElementObject(boxList[idx]+B_SFIX);
+        if (buttonObj != null) {
+            buttonObj.style.display = "none";
+        }
+    }
+}
+
+/**
+ * Sets the page for either printing mode
+ * or viewing mode. In printing mode, the page
+ * is made to be more readable when printing it out.
+ * In viewing mode, the page is more browsable.
+ *
+ * @param isPrinterVersion If true, display in
+ *                                 printing mode; otherwise, 
+ *                                 in viewing mode
+ */
+function displayMode(isPrinterVersion) {
+    var obj;
+    if (isPrinterVersion) {
+        // Hide global control buttons
+        obj = getElementObject("globalControls");
+        if (obj != null) {
+            obj.style.visibility = "hidden";
+        }
+        // Hide Legend
+        obj = getElementObject("legend");
+        if (obj != null) {
+            obj.style.display = "none";
+        }
+        obj = getElementObject("legendTOC");
+        if (obj != null) {
+            obj.style.display = "none";
+        }
+        // Hide Glossary
+        obj = getElementObject("glossary");
+        if (obj != null) {
+            obj.style.display = "none";
+        }
+        obj = getElementObject("glossaryTOC");
+        if (obj != null) {
+            obj.style.display = "none";
+        }
+
+        // Expand all XML Instance Representation tables
+        expandAll(xiBoxes);
+        // Expand all Schema Component Representation tables
+        expandAll(scBoxes);
+
+        // Hide Control buttons
+        hideControlButtons(xiBoxes);
+        hideControlButtons(scBoxes);
+    } else {
+        // View global control buttons
+        obj = getElementObject("globalControls");
+        if (obj != null) {
+            obj.style.visibility = "visible";
+        }
+        // View Legend
+        obj = getElementObject("legend");
+        if (obj != null) {
+            obj.style.display = "block";
+        }
+        obj = getElementObject("legendTOC");
+        if (obj != null) {
+            obj.style.display = "block";
+        }
+        // View Glossary
+        obj = getElementObject("glossary");
+        if (obj != null) {
+            obj.style.display = "block";
+        }
+        obj = getElementObject("glossaryTOC");
+        if (obj != null) {
+            obj.style.display = "block";
+        }
+
+        // Expand all XML Instance Representation tables
+        expandAll(xiBoxes);
+        // Collapse all Schema Component Representation tables
+        collapseAll(scBoxes);
+
+        // View Control buttons
+        viewControlButtons(xiBoxes);
+        viewControlButtons(scBoxes);
+    }
+}
+
+/**
+ * Opens up a window displaying the documentation
+ * of a schema component in the XML Instance
+ * Representation table.
+ * 
+ * @param compDesc      Description of schema component 
+ * @param compName      Name of schema component 
+ * @param docTextArray Array containing the paragraphs 
+ *                           of the new document
+ */
+function viewDocumentation(compDesc, compName, docTextArray) {
+  var width = 400;
+  var height = 200;
+  var locX = 100;
+  var locY = 200;
+
+  /* Generate content */
+  var actualText = "<html>";
+  actualText += "<head><title>";
+  actualText += compDesc;
+  if (compName != '') {
+     actualText += ": " + compName;
+  }
+  actualText += "</title></head>";
+  actualText += "<body bgcolor=\"#FFFFEE\">";
+  // Title
+  actualText += "<p style=\"font-family: Arial, sans-serif; font-size: 12pt; font-weight: bold; letter-spacing:1px;\">";
+  actualText += compDesc;
+  if (compName != '') {
+     actualText += ": <span style=\"color:#006699\">" + compName + "</span>";
+  }
+  actualText += "</p>";
+  // Documentation
+  var idx;
+  for (idx = 0; idx < docTextArray.length; idx++) {
+     actualText += "<p style=\"font-family: Arial, sans-serif; font-size: 10pt;\">" + docTextArray[idx] + "</p>";
+  }
+  // Link to close window
+  actualText += "<a href=\"javascript:void(0)\" onclick=\"window.close();\" style=\"font-family: Arial, sans-serif; font-size: 8pt;\">Close</a>";
+  actualText += "</body></html>";
+
+  /* Display window */
+  windowCount++;
+  var docWindow = window.open("", "documentation"+windowCount, "toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable,alwaysRaised,dependent,titlebar=no,width="+width+",height="+height+",screenX="+locX+",left="+locX+",screenY="+locY+",top="+locY);
+  docWindow.document.write(actualText);
+}
+
+// -->
+</script>
+</head>
+<body>
+<h1><a name="top">XML Schema Documentation</a></h1>
+<div style="float: right;">
+<div id="printerControls" style="display:none;">
+<input type="checkbox" onclick="displayMode(this.checked)" />Printer-friendly Version</div>
+<script type="text/javascript">
+<!--
+
+var pc = getElementObject("printerControls");
+if (pc != null) {
+   pc.style.display="block";
+}
+               
+// -->
+</script>
+<div id="globalControls" style="display:none">
+<strong>XML Instance Representation:</strong><br />
+<span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(xiBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(xiBoxes)">Collapse All</a> ]</span><br /><br />
+<strong>Schema Component Representation:</strong><br />
+<span style="margin-left: 1em; white-space: nowrap">[ <a href="javascript:void(0)" onclick="expandAll(scBoxes)">Expand All</a> | <a href="javascript:void(0)" onclick="collapseAll(scBoxes)">Collapse All</a> ]</span>
+</div>
+<script type="text/javascript">
+<!--
+
+var gc = getElementObject("globalControls");
+if (gc != null) {
+   gc.style.display="block";
+}
+               
+// -->
+</script>
+</div>
+<h2>Table of Contents</h2>
+<ul>
+<li>
+<a href="#SchemaProperties">Schema Document Properties</a>
+</li>
+<li><a href="#SchemaDeclarations">Global Declarations</a>
+<ul>
+<li>
+<a href="#element_BigDecimal">Element: <strong>BigDecimal</strong>
+</a>
+</li>
+<li>
+<a href="#element_BigDecimals">Element: <strong>BigDecimals</strong>
+</a>
+</li>
+<li>
+<a href="#element_BigInteger">Element: <strong>BigInteger</strong>
+</a>
+</li>
+<li>
+<a href="#element_BigInts">Element: <strong>BigInts</strong>
+</a>
+</li>
+<li>
+<a href="#element_Boolean">Element: <strong>Boolean</strong>
+</a>
+</li>
+<li>
+<a href="#element_Booleans">Element: <strong>Booleans</strong>
+</a>
+</li>
+<li>
+<a href="#element_Byte">Element: <strong>Byte</strong>
+</a>
+</li>
+<li>
+<a href="#element_Bytes">Element: <strong>Bytes</strong>
+</a>
+</li>
+<li>
+<a href="#element_Double">Element: <strong>Double</strong>
+</a>
+</li>
+<li>
+<a href="#element_Doubles">Element: <strong>Doubles</strong>
+</a>
+</li>
+<li>
+<a href="#element_File">Element: <strong>File</strong>
+</a>
+</li>
+<li>
+<a href="#element_Files">Element: <strong>Files</strong>
+</a>
+</li>
+<li>
+<a href="#element_Float">Element: <strong>Float</strong>
+</a>
+</li>
+<li>
+<a href="#element_Floats">Element: <strong>Floats</strong>
+</a>
+</li>
+<li>
+<a href="#element_Integer">Element: <strong>Integer</strong>
+</a>
+</li>
+<li>
+<a href="#element_Ints">Element: <strong>Ints</strong>
+</a>
+</li>
+<li>
+<a href="#element_Long">Element: <strong>Long</strong>
+</a>
+</li>
+<li>
+<a href="#element_Longs">Element: <strong>Longs</strong>
+</a>
+</li>
+<li>
+<a href="#element_Null">Element: <strong>Null</strong>
+</a>
+</li>
+<li>
+<a href="#element_Short">Element: <strong>Short</strong>
+</a>
+</li>
+<li>
+<a href="#element_Shorts">Element: <strong>Shorts</strong>
+</a>
+</li>
+<li>
+<a href="#element_String">Element: <strong>String</strong>
+</a>
+</li>
+<li>
+<a href="#element_Strings">Element: <strong>Strings</strong>
+</a>
+</li>
+</ul>
+</li>
+<li><a href="#SchemaDefinitions">Global Definitions</a>
+<ul>
+<li>
+<a href="#type_TBigDecimalCollection">Complex Type: <strong>TBigDecimalCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TBigIntegerCollection">Complex Type: <strong>TBigIntegerCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TBooleanCollection">Complex Type: <strong>TBooleanCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TByteCollection">Complex Type: <strong>TByteCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TCollection">Complex Type: <strong>TCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TCollectionItem">Complex Type: <strong>TCollectionItem</strong>
+</a>
+</li>
+<li>
+<a href="#type_TDoubleCollection">Complex Type: <strong>TDoubleCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TFileCollection">Complex Type: <strong>TFileCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TFloatCollection">Complex Type: <strong>TFloatCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TIntCollection">Complex Type: <strong>TIntCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TLongCollection">Complex Type: <strong>TLongCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TNull">Complex Type: <strong>TNull</strong>
+</a>
+</li>
+<li>
+<a href="#type_TShortCollection">Complex Type: <strong>TShortCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TStringCollection">Complex Type: <strong>TStringCollection</strong>
+</a>
+</li>
+<li>
+<a href="#type_TCollectionType">Simple Type: <strong>TCollectionType</strong>
+</a>
+</li>
+<li>
+<a href="#type_TFile">Simple Type: <strong>TFile</strong>
+</a>
+</li>
+<li>
+<a href="#type_TValueType">Simple Type: <strong>TValueType</strong>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul id="legendTOC" style="margin-top: 0em">
+<li><a href="#Legend">Legend</a></li>
+</ul>
+<ul id="glossaryTOC" style="margin-top: 0em">
+<li><a href="#Glossary">Glossary</a></li>
+</ul>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h2><a name="SchemaProperties">Schema Document Properties</a></h2>
+<table class="properties">
+<tr>
+<th>
+<a title="Look up 'Target Namespace' in glossary" href="#term_TargetNS">Target Namespace</a>
+</th>
+<td>
+<span class="targetNS">http://www.kiv.zcu.cz/component-testing/types</span>
+</td>
+</tr>
+<tr>
+<th>Element and Attribute Namespaces</th>
+<td>
+<ul>
+<li>Global element and attribute declarations belong to this schema's target namespace.</li>
+<li>By default, local element declarations belong to this schema's target namespace.</li>
+<li>By default, local attribute declarations have no namespace.</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Declared Namespaces</h3>
+<table class="namespaces">
+<tr>
+<th>Prefix</th>
+<th>Namespace</th>
+</tr>
+<tr>
+<td>
+<a name="ns_">Default namespace</a>
+</td>
+<td>
+<span class="targetNS">http://www.kiv.zcu.cz/component-testing/types</span>
+</td>
+</tr>
+<tr>
+<td>
+<a name="ns_xml">xml</a>
+</td>
+<td>http://www.w3.org/XML/1998/namespace</td>
+</tr>
+<tr>
+<td>
+<a name="ns_xsd">xsd</a>
+</td>
+<td>http://www.w3.org/2001/XMLSchema</td>
+</tr>
+<tr>
+<td>
+<a name="ns_jaxb">jaxb</a>
+</td>
+<td>http://java.sun.com/xml/ns/jaxb</td>
+</tr>
+<tr>
+<td>
+<a name="ns_xjc">xjc</a>
+</td>
+<td>http://java.sun.com/xml/ns/jaxb/xjc</td>
+</tr>
+</table>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="schema_scbox_button" class="control" onclick="switchState('schema_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="schema_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:schema</span> <span class="scTag">targetNamespace</span>="<span class="scContent">http://www.kiv.zcu.cz/component-testing/types</span>" <span class="scTag">version</span>="<span class="scContent">2.1</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">extensionBindingPrefixes</span>="<span class="scContent">xjc</span>"&gt;<div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">xsd:schema</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('schema_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h2><a name="SchemaDeclarations">Global Declarations</a></h2>
+<h3>Element: <a name="element_BigDecimal" class="name">BigDecimal</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>BigDecimal</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_BigDecimal_xibox_button" class="control" onclick="switchState('element_BigDecimal_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_BigDecimal_xibox" class="contents">
+<div style="margin-left: 0em">&lt;BigDecimal&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span> &lt;/BigDecimal&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_BigDecimal_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_BigDecimal_scbox_button" class="control" onclick="switchState('element_BigDecimal_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_BigDecimal_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">BigDecimal</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_BigDecimal_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_BigDecimals" class="name">BigDecimals</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>BigDecimals</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TBigDecimalCollection&quot; type definition." href="#type_TBigDecimalCollection">TBigDecimalCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_BigDecimals_xibox_button" class="control" onclick="switchState('element_BigDecimals_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_BigDecimals_xibox" class="contents">
+<div style="margin-left: 0em">&lt;BigDecimals<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;BigDecimal&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span> &lt;/BigDecimal&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/BigDecimals&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_BigDecimals_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_BigDecimals_scbox_button" class="control" onclick="switchState('element_BigDecimals_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_BigDecimals_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">BigDecimals</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TBigDecimalCollection&quot; type definition." href="#type_TBigDecimalCollection">TBigDecimalCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_BigDecimals_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_BigInteger" class="name">BigInteger</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>BigInteger</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:integer</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_BigInteger_xibox_button" class="control" onclick="switchState('element_BigInteger_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_BigInteger_xibox" class="contents">
+<div style="margin-left: 0em">&lt;BigInteger&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:integer</span> &lt;/BigInteger&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_BigInteger_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_BigInteger_scbox_button" class="control" onclick="switchState('element_BigInteger_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_BigInteger_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">BigInteger</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:integer</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_BigInteger_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_BigInts" class="name">BigInts</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>BigInts</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TBigIntegerCollection&quot; type definition." href="#type_TBigIntegerCollection">TBigIntegerCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_BigInts_xibox_button" class="control" onclick="switchState('element_BigInts_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_BigInts_xibox" class="contents">
+<div style="margin-left: 0em">&lt;BigInts<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;BigInteger&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:integer</span> &lt;/BigInteger&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/BigInts&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_BigInts_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_BigInts_scbox_button" class="control" onclick="switchState('element_BigInts_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_BigInts_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">BigInts</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TBigIntegerCollection&quot; type definition." href="#type_TBigIntegerCollection">TBigIntegerCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_BigInts_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Boolean" class="name">Boolean</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Boolean</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:boolean</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Boolean_xibox_button" class="control" onclick="switchState('element_Boolean_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Boolean_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Boolean&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:boolean</span> &lt;/Boolean&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Boolean_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Boolean_scbox_button" class="control" onclick="switchState('element_Boolean_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Boolean_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Boolean</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:boolean</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Boolean_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Booleans" class="name">Booleans</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Booleans</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TBooleanCollection&quot; type definition." href="#type_TBooleanCollection">TBooleanCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Booleans_xibox_button" class="control" onclick="switchState('element_Booleans_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Booleans_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Booleans<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Boolean&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:boolean</span> &lt;/Boolean&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Booleans&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Booleans_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Booleans_scbox_button" class="control" onclick="switchState('element_Booleans_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Booleans_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Booleans</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TBooleanCollection&quot; type definition." href="#type_TBooleanCollection">TBooleanCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Booleans_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Byte" class="name">Byte</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Byte</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:byte</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Byte_xibox_button" class="control" onclick="switchState('element_Byte_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Byte_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Byte&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:byte</span> &lt;/Byte&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Byte_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Byte_scbox_button" class="control" onclick="switchState('element_Byte_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Byte_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Byte</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:byte</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Byte_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Bytes" class="name">Bytes</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Bytes</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TByteCollection&quot; type definition." href="#type_TByteCollection">TByteCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Bytes_xibox_button" class="control" onclick="switchState('element_Bytes_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Bytes_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Bytes<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Byte&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:byte</span> &lt;/Byte&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Bytes&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Bytes_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Bytes_scbox_button" class="control" onclick="switchState('element_Bytes_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Bytes_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Bytes</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TByteCollection&quot; type definition." href="#type_TByteCollection">TByteCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Bytes_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Double" class="name">Double</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Double</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:double</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Double_xibox_button" class="control" onclick="switchState('element_Double_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Double_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Double&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:double</span> &lt;/Double&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Double_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Double_scbox_button" class="control" onclick="switchState('element_Double_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Double_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Double</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:double</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Double_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Doubles" class="name">Doubles</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Doubles</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TDoubleCollection&quot; type definition." href="#type_TDoubleCollection">TDoubleCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Doubles_xibox_button" class="control" onclick="switchState('element_Doubles_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Doubles_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Doubles<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Double&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:double</span> &lt;/Double&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Doubles&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Doubles_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Doubles_scbox_button" class="control" onclick="switchState('element_Doubles_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Doubles_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Doubles</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TDoubleCollection&quot; type definition." href="#type_TDoubleCollection">TDoubleCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Doubles_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_File" class="name">File</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>File</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TFile&quot; type definition." href="#type_TFile">TFile</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_File_xibox_button" class="control" onclick="switchState('element_File_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_File_xibox" class="contents">
+<div style="margin-left: 0em">&lt;File&gt; <span class="type"><a title="Jump to &quot;TFile&quot; type definition." href="#type_TFile">TFile</a></span> &lt;/File&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_File_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_File_scbox_button" class="control" onclick="switchState('element_File_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_File_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">File</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TFile&quot; type definition." href="#type_TFile">TFile</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_File_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Files" class="name">Files</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Files</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TFileCollection&quot; type definition." href="#type_TFileCollection">TFileCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Files_xibox_button" class="control" onclick="switchState('element_Files_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Files_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Files<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;<a title="Jump to &quot;File&quot; element declaration." href="#element_File">File</a>&gt; ... &lt;/<a title="Jump to &quot;File&quot; element declaration." href="#element_File">File</a>&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Files&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Files_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Files_scbox_button" class="control" onclick="switchState('element_Files_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Files_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Files</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TFileCollection&quot; type definition." href="#type_TFileCollection">TFileCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Files_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Float" class="name">Float</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Float</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:float</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Float_xibox_button" class="control" onclick="switchState('element_Float_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Float_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Float&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:float</span> &lt;/Float&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Float_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Float_scbox_button" class="control" onclick="switchState('element_Float_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Float_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Float</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:float</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Float_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Floats" class="name">Floats</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Floats</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TFloatCollection&quot; type definition." href="#type_TFloatCollection">TFloatCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Floats_xibox_button" class="control" onclick="switchState('element_Floats_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Floats_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Floats<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Float&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:float</span> &lt;/Float&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Floats&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Floats_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Floats_scbox_button" class="control" onclick="switchState('element_Floats_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Floats_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Floats</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TFloatCollection&quot; type definition." href="#type_TFloatCollection">TFloatCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Floats_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Integer" class="name">Integer</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Integer</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Integer_xibox_button" class="control" onclick="switchState('element_Integer_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Integer_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Integer&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> &lt;/Integer&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Integer_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Integer_scbox_button" class="control" onclick="switchState('element_Integer_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Integer_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Integer</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Integer_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Ints" class="name">Ints</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Ints</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TIntCollection&quot; type definition." href="#type_TIntCollection">TIntCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Ints_xibox_button" class="control" onclick="switchState('element_Ints_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Ints_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Ints<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Integer&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> &lt;/Integer&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Ints&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Ints_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Ints_scbox_button" class="control" onclick="switchState('element_Ints_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Ints_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Ints</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TIntCollection&quot; type definition." href="#type_TIntCollection">TIntCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Ints_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Long" class="name">Long</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Long</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:long</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Long_xibox_button" class="control" onclick="switchState('element_Long_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Long_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Long&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:long</span> &lt;/Long&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Long_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Long_scbox_button" class="control" onclick="switchState('element_Long_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Long_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Long</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:long</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Long_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Longs" class="name">Longs</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Longs</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TLongCollection&quot; type definition." href="#type_TLongCollection">TLongCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Longs_xibox_button" class="control" onclick="switchState('element_Longs_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Longs_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Longs<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Long&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:long</span> &lt;/Long&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Longs&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Longs_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Longs_scbox_button" class="control" onclick="switchState('element_Longs_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Longs_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Longs</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TLongCollection&quot; type definition." href="#type_TLongCollection">TLongCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Longs_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Null" class="name">Null</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Null</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TNull&quot; type definition." href="#type_TNull">TNull</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Null_xibox_button" class="control" onclick="switchState('element_Null_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Null_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Null<br /><span style="margin-left: 0.5em"> base-type="<span class="type"><a title="Jump to &quot;TValueType&quot; type definition." href="#type_TValueType">TValueType</a></span> <span class="occurs">[1]</span>"</span>/&gt; </div></div>
+<script type="text/javascript">
+<!--
+setState('element_Null_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Null_scbox_button" class="control" onclick="switchState('element_Null_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Null_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Null</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TNull&quot; type definition." href="#type_TNull">TNull</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Null_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Short" class="name">Short</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Short</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:short</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Short_xibox_button" class="control" onclick="switchState('element_Short_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Short_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Short&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:short</span> &lt;/Short&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Short_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Short_scbox_button" class="control" onclick="switchState('element_Short_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Short_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Short</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:short</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Short_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Shorts" class="name">Shorts</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Shorts</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TShortCollection&quot; type definition." href="#type_TShortCollection">TShortCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Shorts_xibox_button" class="control" onclick="switchState('element_Shorts_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Shorts_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Shorts<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Short&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:short</span> &lt;/Short&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Shorts&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Shorts_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Shorts_scbox_button" class="control" onclick="switchState('element_Shorts_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Shorts_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Shorts</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TShortCollection&quot; type definition." href="#type_TShortCollection">TShortCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Shorts_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_String" class="name">String</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>String</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_String_xibox_button" class="control" onclick="switchState('element_String_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_String_xibox" class="contents">
+<div style="margin-left: 0em">&lt;String&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span> &lt;/String&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_String_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_String_scbox_button" class="control" onclick="switchState('element_String_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_String_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">String</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_String_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Element: <a name="element_Strings" class="name">Strings</a>
+</h3>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>Strings</td>
+</tr>
+<tr>
+<th>Type</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TStringCollection&quot; type definition." href="#type_TStringCollection">TStringCollection</a>
+</span>
+</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Nillable' in glossary" href="#term_Nillable">Nillable</a>
+</th>
+<td>no</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="element_Strings_xibox_button" class="control" onclick="switchState('element_Strings_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="element_Strings_xibox" class="contents">
+<div style="margin-left: 0em">&lt;Strings<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em">&lt;item<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;String&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span> &lt;/String&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/Strings&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Strings_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="element_Strings_scbox_button" class="control" onclick="switchState('element_Strings_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="element_Strings_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Strings</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TStringCollection&quot; type definition." href="#type_TStringCollection">TStringCollection</a></span></span>"/&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('element_Strings_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h2><a name="SchemaDefinitions">Global Definitions</a></h2>
+<h3>Complex Type: <a name="type_TBigDecimalCollection" class="name">TBigDecimalCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TBigDecimalCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TBigDecimalCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TBigDecimalCollection_xibox_button" class="control" onclick="switchState('type_TBigDecimalCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TBigDecimalCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;BigDecimal&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span> &lt;/BigDecimal&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TBigDecimalCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TBigDecimalCollection_scbox_button" class="control" onclick="switchState('type_TBigDecimalCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TBigDecimalCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TBigDecimalCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">BigDecimal</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TBigDecimalCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TBigIntegerCollection" class="name">TBigIntegerCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TBigIntegerCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TBigIntegerCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TBigIntegerCollection_xibox_button" class="control" onclick="switchState('type_TBigIntegerCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TBigIntegerCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;BigInteger&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:integer</span> &lt;/BigInteger&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TBigIntegerCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TBigIntegerCollection_scbox_button" class="control" onclick="switchState('type_TBigIntegerCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TBigIntegerCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TBigIntegerCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">BigInteger</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:integer</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TBigIntegerCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TBooleanCollection" class="name">TBooleanCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TBooleanCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TBooleanCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TBooleanCollection_xibox_button" class="control" onclick="switchState('type_TBooleanCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TBooleanCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Boolean&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:boolean</span> &lt;/Boolean&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TBooleanCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TBooleanCollection_scbox_button" class="control" onclick="switchState('type_TBooleanCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TBooleanCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TBooleanCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Boolean</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:boolean</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TBooleanCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TByteCollection" class="name">TByteCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TByteCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TByteCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TByteCollection_xibox_button" class="control" onclick="switchState('type_TByteCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TByteCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Byte&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:byte</span> &lt;/Byte&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TByteCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TByteCollection_scbox_button" class="control" onclick="switchState('type_TByteCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TByteCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TByteCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Byte</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:byte</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TByteCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TCollection" class="name">TCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>
+<ul><li><span class="type"><a title="Jump to &quot;TStringCollection&quot; type definition." href="#type_TStringCollection">TStringCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TBigIntegerCollection&quot; type definition." href="#type_TBigIntegerCollection">TBigIntegerCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TLongCollection&quot; type definition." href="#type_TLongCollection">TLongCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TIntCollection&quot; type definition." href="#type_TIntCollection">TIntCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TShortCollection&quot; type definition." href="#type_TShortCollection">TShortCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TByteCollection&quot; type definition." href="#type_TByteCollection">TByteCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TBigDecimalCollection&quot; type definition." href="#type_TBigDecimalCollection">TBigDecimalCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TDoubleCollection&quot; type definition." href="#type_TDoubleCollection">TDoubleCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TFloatCollection&quot; type definition." href="#type_TFloatCollection">TFloatCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TFileCollection&quot; type definition." href="#type_TFileCollection">TFileCollection</a></span> (by extension)</li><li><span class="type"><a title="Jump to &quot;TBooleanCollection&quot; type definition." href="#type_TBooleanCollection">TBooleanCollection</a></span> (by extension)</li></ul></td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>yes</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TCollection_xibox_button" class="control" onclick="switchState('type_TCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>/&gt; </div></div>
+<script type="text/javascript">
+<!--
+setState('type_TCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TCollection_scbox_button" class="control" onclick="switchState('type_TCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TCollection</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:attribute</span> <span class="scTag">name</span>="<span class="scContent">type</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span></span>" <span class="scTag">default</span>="<span class="scContent">ArrayList</span>"/&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TCollectionItem" class="name">TCollectionItem</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TCollectionItem</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>yes</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TCollectionItem_xibox_button" class="control" onclick="switchState('type_TCollectionItem_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TCollectionItem_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>/&gt; </div></div>
+<script type="text/javascript">
+<!--
+setState('type_TCollectionItem_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TCollectionItem_scbox_button" class="control" onclick="switchState('type_TCollectionItem_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TCollectionItem_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TCollectionItem</span>" <span class="scTag">abstract</span>="<span class="scContent">true</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:attribute</span> <span class="scTag">name</span>="<span class="scContent">ord-num</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span></span>" <span class="scTag">use</span>="<span class="scContent">required</span>"/&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TCollectionItem_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TDoubleCollection" class="name">TDoubleCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TDoubleCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TDoubleCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TDoubleCollection_xibox_button" class="control" onclick="switchState('type_TDoubleCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TDoubleCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Double&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:double</span> &lt;/Double&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TDoubleCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TDoubleCollection_scbox_button" class="control" onclick="switchState('type_TDoubleCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TDoubleCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TDoubleCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Double</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:double</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TDoubleCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TFileCollection" class="name">TFileCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TFileCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TFileCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TFileCollection_xibox_button" class="control" onclick="switchState('type_TFileCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TFileCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;<a title="Jump to &quot;File&quot; element declaration." href="#element_File">File</a>&gt; ... &lt;/<a title="Jump to &quot;File&quot; element declaration." href="#element_File">File</a>&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TFileCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TFileCollection_scbox_button" class="control" onclick="switchState('type_TFileCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TFileCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TFileCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">ref</span>="<span class="scContent"><a title="Jump to &quot;File&quot; element declaration." href="#element_File">File</a></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TFileCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TFloatCollection" class="name">TFloatCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TFloatCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TFloatCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TFloatCollection_xibox_button" class="control" onclick="switchState('type_TFloatCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TFloatCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Float&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:float</span> &lt;/Float&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TFloatCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TFloatCollection_scbox_button" class="control" onclick="switchState('type_TFloatCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TFloatCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TFloatCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Float</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:float</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TFloatCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TIntCollection" class="name">TIntCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TIntCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TIntCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TIntCollection_xibox_button" class="control" onclick="switchState('type_TIntCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TIntCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Integer&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> &lt;/Integer&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TIntCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TIntCollection_scbox_button" class="control" onclick="switchState('type_TIntCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TIntCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TIntCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Integer</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TIntCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TLongCollection" class="name">TLongCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TLongCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TLongCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TLongCollection_xibox_button" class="control" onclick="switchState('type_TLongCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TLongCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Long&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:long</span> &lt;/Long&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TLongCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TLongCollection_scbox_button" class="control" onclick="switchState('type_TLongCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TLongCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TLongCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Long</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:long</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TLongCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TNull" class="name">TNull</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>None</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TNull</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TNull_xibox_button" class="control" onclick="switchState('type_TNull_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TNull_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em"> base-type="<span class="type"><a title="Jump to &quot;TValueType&quot; type definition." href="#type_TValueType">TValueType</a></span> <span class="occurs">[1]</span>"</span>/&gt; </div></div>
+<script type="text/javascript">
+<!--
+setState('type_TNull_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TNull_scbox_button" class="control" onclick="switchState('type_TNull_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TNull_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TNull</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:attribute</span> <span class="scTag">name</span>="<span class="scContent">base-type</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TValueType&quot; type definition." href="#type_TValueType">TValueType</a></span></span>" <span class="scTag">use</span>="<span class="scContent">required</span>"/&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TNull_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TShortCollection" class="name">TShortCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TShortCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TShortCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TShortCollection_xibox_button" class="control" onclick="switchState('type_TShortCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TShortCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;Short&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:short</span> &lt;/Short&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TShortCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TShortCollection_scbox_button" class="control" onclick="switchState('type_TShortCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TShortCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TShortCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">Short</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:short</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TShortCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Complex Type: <a name="type_TStringCollection" class="name">TStringCollection</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a>
+</span> &lt; <strong>TStringCollection</strong> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TStringCollection</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="sample box">
+<div>
+<input type="button" id="type_TStringCollection_xibox_button" class="control" onclick="switchState('type_TStringCollection_xibox'); return false;" style="display: none" /> <span class="caption">XML Instance Representation</span>
+</div>
+<div id="type_TStringCollection_xibox" class="contents">
+<div style="margin-left: 0em">&lt;...<br /><span style="margin-left: 0.5em" class="inherited"> type="<span class="type"><a title="Jump to &quot;TCollectionType&quot; type definition." href="#type_TCollectionType">TCollectionType</a></span> <span class="occurs">[0..1]</span>"</span>&gt; <br /><div style="margin-left: 1.5em" class="newFields">&lt;item<br /><span style="margin-left: 0.5em" class="newFields"> ord-num="<span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:int</span> <span class="occurs">[1]</span>"</span>&gt;  <span class="occurs">[0..*]</span> <br /><div style="margin-left: 1.5em">&lt;String&gt; <span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span> &lt;/String&gt; <span class="occurs">[1]</span></div>&lt;/item&gt;</div>&lt;/...&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TStringCollection_xibox', true);
+// -->
+</script>
+</div>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TStringCollection_scbox_button" class="control" onclick="switchState('type_TStringCollection_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TStringCollection_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> <span class="scTag">name</span>="<span class="scContent">TStringCollection</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollection&quot; type definition." href="#type_TCollection">TCollection</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">item</span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexType</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a title="Jump to &quot;TCollectionItem&quot; type definition." href="#type_TCollectionItem">TCollectionItem</a></span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> <span class="scTag">name</span>="<span class="scContent">String</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>&lt;/<span class="scTag">xsd:element</span>&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TStringCollection_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Simple Type: <a name="type_TCollectionType" class="name">TCollectionType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:token</span> &lt; <strong>TCollectionType</strong> (by restriction)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TCollectionType</td>
+</tr>
+<tr>
+<th>Content</th>
+<td>
+<ul><li>Base XSD Type: token</li></ul>
+<ul>
+<li>
+<em>value</em> comes from list: {'array'|'ArrayList'|'LinkedList'}</li>
+</ul>
+</td>
+</tr>
+</table>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TCollectionType_scbox_button" class="control" onclick="switchState('type_TCollectionType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TCollectionType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:simpleType</span> <span class="scTag">name</span>="<span class="scContent">TCollectionType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:restriction</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:token</span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">array</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">ArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">LinkedList</span>"/&gt;</div>&lt;/<span class="scTag">xsd:restriction</span>&gt;</div>&lt;/<span class="scTag">xsd:simpleType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TCollectionType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Simple Type: <a name="type_TFile" class="name">TFile</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:anyURI</span> &lt; <strong>TFile</strong> (by restriction)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TFile</td>
+</tr>
+<tr>
+<th>Content</th>
+<td>
+<ul><li>Base XSD Type: anyURI</li></ul>
+</td>
+</tr>
+</table>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TFile_scbox_button" class="control" onclick="switchState('type_TFile_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TFile_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:simpleType</span> <span class="scTag">name</span>="<span class="scContent">TFile</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:restriction</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:anyURI</span></span>"/&gt;</div>&lt;/<span class="scTag">xsd:simpleType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TFile_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<h3>Simple Type: <a name="type_TValueType" class="name">TValueType</a>
+</h3>
+<table class="hierarchy">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type">
+<a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span> &lt; <strong>TValueType</strong> (by restriction)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>None</td>
+</tr>
+</table>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>TValueType</td>
+</tr>
+<tr>
+<th>Content</th>
+<td>
+<ul><li>Base XSD Type: string</li></ul>
+<ul>
+<li>
+<em>value</em> comes from list: {'String'|'StringArrayList'|'StringLinkedList'|'StringArray'|'BigInteger'|'BigIntegerArrayList'|'BigIntegerLinkedList'|'BigIntegerArray'|'Long'|'LongArrayList'|'LongLinkedList'|'LongArray'|'Integer'|'IntegerArrayList'|'IntegerLinkedList'|'IntegerArray'|'Short'|'ShortArrayList'|'ShortLinkedList'|'ShortArray'|'Byte'|'ByteArrayList'|'ByteLinkedList'|'ByteArray'|'BigDecimal'|'BigDecimalArrayList'|'BigDecimalLinkedList'|'BigDecimalArray'|'Double'|'DoubleArrayList'|'DoubleLinkedList'|'DoubleArray'|'Float'|'FloatArrayList'|'FloatLinkedList'|'FloatArray'|'Boolean'|'BooleanArrayList'|'BooleanLinkedList'|'BooleanArray'|'File'|'FileArrayList'|'FileLinkedList'|'FileArray'}</li>
+</ul>
+</td>
+</tr>
+</table>
+<div class="schemaComponent box">
+<div>
+<input type="button" id="type_TValueType_scbox_button" class="control" onclick="switchState('type_TValueType_scbox'); return false;" style="display: none" /> <span class="caption">Schema Component Representation</span>
+</div>
+<div id="type_TValueType_scbox" class="contents">
+<div style="margin-left: 0em">&lt;<span class="scTag">xsd:simpleType</span> <span class="scTag">name</span>="<span class="scContent">TValueType</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:restriction</span> <span class="scTag">base</span>="<span class="scContent"><span class="type"><a href="#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:string</span></span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">String</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">StringArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">StringLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">StringArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BigInteger</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BigIntegerArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BigIntegerLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BigIntegerArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">Long</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">LongArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">LongLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">LongArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">Integer</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">IntegerArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">IntegerLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">IntegerArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">Short</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">ShortArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">ShortLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">ShortArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">Byte</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">ByteArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">ByteLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">ByteArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BigDecimal</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BigDecimalArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BigDecimalLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BigDecimalArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">Double</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">DoubleArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">DoubleLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">DoubleArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">Float</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">FloatArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">FloatLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">FloatArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">Boolean</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BooleanArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BooleanLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">BooleanArray</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">File</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">FileArrayList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">FileLinkedList</span>"/&gt;</div><div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:enumeration</span> <span class="scTag">value</span>="<span class="scContent">FileArray</span>"/&gt;</div>&lt;/<span class="scTag">xsd:restriction</span>&gt;</div>&lt;/<span class="scTag">xsd:simpleType</span>&gt;</div></div>
+<script type="text/javascript">
+<!--
+setState('type_TValueType_scbox', false);
+// -->
+</script>
+</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+<div id="legend">
+<h2><a name="Legend">Legend</a></h2>
+<div style="float: left; width: 15em;">
+<h3 style="margin-bottom: 0px;">Complex Type:</h3>
+<div class="hint" style="margin-left: 0em;">Schema Component Type</div>
+</div>
+<div style="float: left; width: 15em;">
+<h3 style="margin-bottom: 0px;"><span class="name">AusAddress</span></h3>
+<div class="hint" style="margin-left: 0em;">Schema Component Name</div>
+</div>
+<table class="hierarchy" style="clear : both">
+<tr>
+<th>Super-types:</th>
+<td>
+<span class="type" style="color: #0000FF; text-decoration:underline;">Address</span> &lt; <span class="current">AusAddress</span> (by extension)</td>
+</tr>
+<tr>
+<th>Sub-types:</th>
+<td>
+<ul>
+<li>
+<span class="type" style="color: #0000FF; text-decoration:underline;">QLDAddress</span> (by restriction)</li>
+</ul>
+</td>
+</tr>
+</table>
+<div class="hint">If this schema component is a type definition, its type hierarchy is shown in a gray-bordered box.</div>
+<table class="properties">
+<tr>
+<th>Name</th>
+<td>AusAddress</td>
+</tr>
+<tr>
+<th>
+<a title="Look up 'Abstract' in glossary" href="#term_Abstract">Abstract</a>
+</th>
+<td>no</td>
+</tr>
+</table>
+<div class="hint">The table above displays the properties of this schema component.</div>
+<div class="sample box">
+<div>
+<span class="caption">XML Instance Representation</span>
+</div>
+<div class="contents">
+<span style="margin-left: 0em">&lt;...</span>
+<span class="newFields">
+<span> country="<span class="fixed">Australia</span>"</span>
+</span>&gt; <br />
+<span style="margin-left: 1.5em" class="inherited">&lt;unitNo&gt; <span class="type">string</span> &lt;/unitNo&gt; <span class="occurs">[0..1]</span></span><br />
+<span style="margin-left: 1.5em" class="inherited">&lt;houseNo&gt; <span class="type">string</span> &lt;/houseNo&gt; <span class="occurs">[1]</span></span><br />
+<span style="margin-left: 1.5em" class="inherited">&lt;street&gt; <span class="type">string</span> &lt;/street&gt; <span class="occurs">[1]</span></span><br />
+<span class="group" style="margin-left: 1.5em">Start <a title="Look up 'Choice' in glossary" href="#term_Choice">Choice</a>
+<span class="occurs">[1]</span></span><br />
+<span style="margin-left: 3em" class="inherited">&lt;city&gt; <span class="type">string</span> &lt;/city&gt; <span class="occurs">[1]</span></span><br />
+<span style="margin-left: 3em" class="inherited">&lt;town&gt; <span class="type">string</span> &lt;/town&gt; <span class="occurs">[1]</span></span><br />
+<span class="group" style="margin-left: 1.5em">End Choice</span><br />
+<span class="newFields">
+<span style="margin-left: 1.5em">&lt;state&gt; <span class="type" style="text-decoration:underline;">AusStates</span> &lt;/state&gt; <span class="occurs">[1]</span></span><br />
+<span style="margin-left: 1.5em">&lt;postcode&gt; <span class="constraint">string &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}&gt;&gt;</span> &lt;/postcode&gt; <span class="occurs">[1]</span>
+<a href="javascript:void(0)" title="View Documentation" class="documentation" onclick="docArray = new Array('Post code must be a four-digit number.'); viewDocumentation('Element', 'postcode', docArray);">?</a>
+</span><br />
+</span>
+<span style="margin-left: 0em">&lt;/...&gt;</span><br />
+</div>
+</div>
+<div class="hint">
+<p>The XML Instance Representation table above shows the schema component's content as an XML instance.</p>
+<ul>
+<li>The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].</li>
+<li>Model group information are shown in gray, e.g. Start Choice ... End Choice.</li>
+<li>For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in <span style="font-weight: bold">bold</span>.</li>
+<li>If an element/attribute has a fixed value, the fixed value is shown in green, e.g. country="Australia".</li>
+<li>Otherwise, the type of the element/attribute is displayed.
+               <ul>
+<li>If the element/attribute's type is in the schema, a link is provided to it.</li>
+<li>For local simple type definitions, the constraints are displayed in angle brackets, e.g. &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}&gt;&gt;.</li>
+</ul>
+</li>
+<li>If a local element/attribute has documentation, it will be displayed in a window that pops up when the question mark inside the attribute or next to the element is clicked, e.g. &lt;postcode&gt;.</li>
+</ul>
+</div>
+<div class="schemaComponent box">
+<div>
+<span class="caption">Schema Component Representation</span>
+</div>
+<div class="contents">
+<span style="margin-left: 0em">&lt;<span class="scTag">complexType</span>
+<span class="scTag">name</span>="<span class="scContent">AusAddress</span>"&gt;</span><br />
+<span style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;</span><br />
+<span style="margin-left: 3em">&lt;<span class="scTag">extension</span>
+<span class="scTag">base</span>="<span class="scContent"><span class="type" style="text-decoration:underline;">Address</span></span>"&gt;</span><br />
+<span style="margin-left: 4.5em">&lt;<span class="scTag">sequence</span>&gt;</span><br />
+<span style="margin-left: 6em">&lt;<span class="scTag">element</span>
+<span class="scTag">name</span>="<span class="scContent">state</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type" style="text-decoration:underline;">AusStates</span></span>"/&gt;</span><br />
+<span style="margin-left: 6em">&lt;<span class="scTag">element</span>
+<span class="scTag">name</span>="<span class="scContent">postcode</span>"&gt;</span><br />
+<span style="margin-left: 7.5em">&lt;<span class="scTag">simpleType</span>&gt;</span><br />
+<span style="margin-left: 9em">&lt;<span class="scTag">restriction</span>
+<span class="scTag">base</span>="<span class="scContent"><span class="type">string</span></span>"&gt;</span><br />
+<span style="margin-left: 10.5em">&lt;<span class="scTag">pattern</span>
+<span class="scTag">value</span>="<span class="scContent">[1-9][0-9]{3}</span>"/&gt;</span><br />
+<span style="margin-left: 9em">&lt;/<span class="scTag">restriction</span>&gt;</span><br />
+<span style="margin-left: 7.5em">&lt;/<span class="scTag">simpleType</span>&gt;</span><br />
+<span style="margin-left: 6em">&lt;/<span class="scTag">element</span>&gt;</span><br />
+<span style="margin-left: 4.5em">&lt;/<span class="scTag">sequence</span>&gt;</span><br />
+<span style="margin-left: 4.5em">&lt;<span class="scTag">attribute</span>
+<span class="scTag">name</span>="<span class="scContent">country</span>" <span class="scTag">type</span>="<span class="scContent"><span class="type">string</span></span>" <span class="scTag">fixed</span>="<span class="scContent">Australia</span>"/&gt;</span><br />
+<span style="margin-left: 3em">&lt;/<span class="scTag">extension</span>&gt;</span><br />
+<span style="margin-left: 1.5em">&lt;/<span class="scTag">complexContent</span>&gt;</span><br />
+<span style="margin-left: 0em">&lt;/<span class="scTag">complexType</span>&gt;</span><br />
+</div>
+</div>
+<div class="hint">The Schema Component Representation table above displays the underlying XML representation of the schema component. (Annotations are not shown.)</div>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+</div>
+<div id="glossary">
+<h2><a name="Glossary">Glossary</a></h2>
+<p>
+<span class="glossaryTerm">
+<a name="term_Abstract">Abstract</a> </span>(Applies to complex type definitions and element declarations). An abstract element or complex type cannot used to validate an element instance. If there is a reference to an abstract element, only element declarations that can substitute the abstract element can be used to validate the instance. For references to abstract type definitions, only derived types can be used.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_All">All Model Group</a> </span>Child elements can be provided <em>in any order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-all" href="http://www.w3.org/TR/xmlschema-1/#element-all">http://www.w3.org/TR/xmlschema-1/#element-all</a>.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_Choice">Choice Model Group</a> </span>
+<em>Only one</em> from the list of child elements and model groups can be provided in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-choice" href="http://www.w3.org/TR/xmlschema-1/#element-choice">http://www.w3.org/TR/xmlschema-1/#element-choice</a>.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_CollapseWS">Collapse Whitespace Policy</a> </span>Replace tab, line feed, and carriage return characters with space character (Unicode character 32). Then, collapse contiguous sequences of space characters into single space character, and remove leading and trailing space characters.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_ElemBlock">Disallowed Substitutions</a> </span>(Applies to element declarations). If <em>substitution</em> is specified, then <a title="Look up 'substitution group' in glossary" href="#term_SubGroup">substitution group</a> members cannot be used in place of the given element declaration to validate element instances. If <em>derivation methods</em>, e.g. extension, restriction, are specified, then the given element declaration will not validate element instances that have types derived from the element declaration's type using the specified derivation methods. Normally, element instances can override their declaration's type by specifying an <code>xsi:type</code> attribute.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_Key">Key Constraint</a> </span>Like <a title="Look up 'Uniqueness Constraint' in glossary" href="#term_Unique">Uniqueness Constraint</a>, but additionally requires that the specified value(s) must be provided. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_KeyRef">Key Reference Constraint</a> </span>Ensures that the specified value(s) must match value(s) from a <a title="Look up 'Key Constraint' in glossary" href="#term_Key">Key Constraint</a> or <a title="Look up 'Uniqueness Constraint' in glossary" href="#term_Unique">Uniqueness Constraint</a>. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_ModelGroup">Model Group</a> </span>Groups together element content, specifying the order in which the element content can occur and the number of times the group of element content may be repeated. See: <a title="http://www.w3.org/TR/xmlschema-1/#Model_Groups" href="http://www.w3.org/TR/xmlschema-1/#Model_Groups">http://www.w3.org/TR/xmlschema-1/#Model_Groups</a>.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_Nillable">Nillable</a> </span>(Applies to element declarations). If an element declaration is nillable, instances can use the <code>xsi:nil</code> attribute. The <code>xsi:nil</code> attribute is the boolean attribute, <em>nil</em>, from the <em>http://www.w3.org/2001/XMLSchema-instance</em> namespace. If an element instance has an <code>xsi:nil</code> attribute set to true, it can be left empty, even though its element declaration may have required content.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_Notation">Notation</a> </span>A notation is used to identify the format of a piece of data. Values of elements and attributes that are of type, NOTATION, must come from the names of declared notations. See: <a title="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations" href="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations">http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations</a>.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_PreserveWS">Preserve Whitespace Policy</a> </span>Preserve whitespaces exactly as they appear in instances.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_TypeFinal">Prohibited Derivations</a> </span>(Applies to type definitions). Derivation methods that cannot be used to create sub-types from a given type definition.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_TypeBlock">Prohibited Substitutions</a> </span>(Applies to complex type definitions). Prevents sub-types that have been derived using the specified derivation methods from validating element instances in place of the given type definition.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_ReplaceWS">Replace Whitespace Policy</a> </span>Replace tab, line feed, and carriage return characters with space character (Unicode character 32).</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_Sequence">Sequence Model Group</a> </span>Child elements and model groups must be provided <em>in the specified order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-sequence" href="http://www.w3.org/TR/xmlschema-1/#element-sequence">http://www.w3.org/TR/xmlschema-1/#element-sequence</a>.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_SubGroup">Substitution Group</a> </span>Elements that are <em>members</em> of a substitution group can be used wherever the <em>head</em> element of the substitution group is referenced.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_ElemFinal">Substitution Group Exclusions</a> </span>(Applies to element declarations). Prohibits element declarations from nominating themselves as being able to substitute a given element declaration, if they have types that are derived from the original element's type using the specified derivation methods.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_TargetNS">Target Namespace</a> </span>The target namespace identifies the namespace that components in this schema belongs to. If no target namespace is provided, then the schema components do not belong to any namespace.</p>
+<p>
+<span class="glossaryTerm">
+<a name="term_Unique">Uniqueness Constraint</a> </span>Ensures uniqueness of an element/attribute value, or a combination of values, within a specified scope. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions" href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+<div style="text-align: right; clear: both;"><a href="#top">top</a></div>
+<hr />
+</div>
+<p class="footer">Generated by <a href="http://xml.fiforms.org/xs3p/">xs3p</a> (<a href="http://titanium.dstc.edu.au/xml/xs3p">old link</a>)
+               . Last modified: <script type="text/javascript">
+<!--
+document.write(document.lastModified);
+// -->
+</script>
+</p>
+</body>
+</html>

@@ -29,12 +29,12 @@ import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollectionItem;
  * <pre>
  * &lt;complexType name="TShortCollection">
  *   &lt;complexContent>
- *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollection">
+ *     &lt;extension base="{http://www.kiv.zcu.cz/component-testing/types}TCollection">
  *       &lt;sequence>
  *         &lt;element name="item" maxOccurs="unbounded" minOccurs="0">
  *           &lt;complexType>
  *             &lt;complexContent>
- *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/mocker}TCollectionItem">
+ *               &lt;extension base="{http://www.kiv.zcu.cz/component-testing/types}TCollectionItem">
  *                 &lt;sequence>
  *                   &lt;element name="Short" type="{http://www.w3.org/2001/XMLSchema}short"/>
  *                 &lt;/sequence>
