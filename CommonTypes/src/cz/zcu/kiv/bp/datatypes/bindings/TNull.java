@@ -64,4 +64,16 @@ public class TNull {
         this.baseType = value;
     }
 
+    @Override
+    public String toString()
+    {
+    	StringBuilder sb= new StringBuilder();
+    
+    	sb.append(this.getClass().getSimpleName());
+    	sb.append(" of ");
+    	sb.append(this.getBaseType());
+    	
+    	return sb.toString();
+    }
+    
 }
