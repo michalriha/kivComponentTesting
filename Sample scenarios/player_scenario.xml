@@ -25,8 +25,8 @@
     						<types:item ord-num="0"><types:File>d:/cs_windows_7_professional_with_sp1_x64_dvd_u_676956.iso</types:File></types:item>
     					</types:Files>
     				</argument>
-    				<argument ord-num="1"><String>e:/tmp/nazdar</String></argument>
-    				<argument ord-num="2"><String>d:/</String></argument>
+    				<argument ord-num="1"><types:String>e:/tmp/nazdar</types:String></argument>
+    				<argument ord-num="2"><types:String>d:/</types:String></argument>
     			</arguments>
     		</call>
     		</command>
@@ -43,8 +43,8 @@
     						<types:item ord-num="0"><types:File>d:/Stažené soubory/mips2.asm</types:File></types:item>
     					</types:Files>
     				</argument>
-    				<argument ord-num="1"><String>d:/Stažené soubory/</String></argument>
-    				<argument ord-num="2"><String>d:/Stažené soubory/</String></argument>
+    				<argument ord-num="1"><types:String>d:/Stažené soubory/</types:String></argument>
+    				<argument ord-num="2"><types:String>d:/Stažené soubory/</types:String></argument>
     			</arguments>
     		</call>
     		</command>
@@ -61,8 +61,8 @@
     						<types:item ord-num="0"><types:File>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/WP_000008.jpg</types:File></types:item>
     					</types:Files>
     				</argument>
-    				<argument ord-num="1"><String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</String></argument>
-    				<argument ord-num="2"><String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</String></argument>
+    				<argument ord-num="1"><types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String></argument>
+    				<argument ord-num="2"><types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String></argument>
     			</arguments>
     		</call>
     		</command>
@@ -79,8 +79,8 @@
     						<types:item ord-num="0"><types:File>e:/tmp/nazdar/</types:File></types:item>
     					</types:Files>
     				</argument>
-    				<argument ord-num="1"><String>e:/tmp/</String></argument>
-    				<argument ord-num="2"><String>e:/tmp/</String></argument>
+    				<argument ord-num="1"><types:String>e:/tmp/</types:String></argument>
+    				<argument ord-num="2"><types:String>e:/tmp/</types:String></argument>
     			</arguments>
     		</call>
     		</command>
@@ -97,8 +97,8 @@
     						<types:item ord-num="0"><types:File>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/WP_000009.jpg</types:File></types:item>
     					</types:Files>
     				</argument>
-    				<argument ord-num="1"><String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</String></argument>
-    				<argument ord-num="2"><String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</String></argument>
+    				<argument ord-num="1"><types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String></argument>
+    				<argument ord-num="2"><types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String></argument>
     			</arguments>
     		</call>
     		</command>
@@ -115,8 +115,8 @@
     						<types:item ord-num="0"><types:File>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\WP_000014.jpg</types:File></types:item>
     					</types:Files>
     				</argument>
-    				<argument ord-num="1"><String>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\</String></argument>
-    				<argument ord-num="2"><String>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\</String></argument>
+    				<argument ord-num="1"><types:String>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\</types:String></argument>
+    				<argument ord-num="2"><types:String>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\</types:String></argument>
     			</arguments>
     		</call>
     		</command>
@@ -127,7 +127,7 @@
     		</recurrence>
     		<command>
     			<event topic="changeSourceDir" key="dir">
-    				<argument><String>d:/Obrázky/</String></argument>
+    				<argument><types:String>d:/Obrázky/</types:String></argument>
     			</event>
     		</command>
     	</action>
@@ -137,7 +137,7 @@
     		</recurrence>
     		<command>
     			<event topic="changeDestinationDir" key="dir">
-    				<argument><String>e:/</String></argument>
+    				<argument><types:String>e:/</types:String></argument>
     			</event>
     		</command>
     	</action>
@@ -147,7 +147,7 @@
     		</recurrence>
     		<command>
     			<event topic="changeDestinationDir" key="dir">
-    				<argument><String>d:/Obrázky/</String></argument>
+    				<argument><types:String>d:/Obrázky/</types:String></argument>
     			</event>
     		</command>
     	</action>
@@ -157,7 +157,7 @@
     		</recurrence>
     		<command>
     			<event topic="changeSourceDir" key="dir">
-    				<argument><String>e:/</String></argument>
+    				<argument><types:String>e:/</types:String></argument>
     			</event>
     		</command>
     	</action>
@@ -167,7 +167,7 @@
     		</recurrence>
     		<command>
     			<event topic="changeSourceDir" key="dir">
-    				<argument><String>c:/Windows/</String></argument>
+    				<argument><types:String>c:/Windows/</types:String></argument>
     			</event>
     		</command>
     	</action>
@@ -177,7 +177,7 @@
     		</recurrence>
     		<command>
     			<event topic="changeDestinationDir" key="dir">
-    				<argument><String>e:/</String></argument>
+    				<argument><types:String>e:/</types:String></argument>
     			</event>
     		</command>
     	</action>
@@ -187,7 +187,7 @@
     		</recurrence>
     		<command>
     			<event topic="changeSourceDir" key="dir">
-    				<argument><String>d:/</String></argument>
+    				<argument><types:String>d:/</types:String></argument>
     			</event>
     		</command>
     	</action>
@@ -197,114 +197,9 @@
     		</recurrence>
     		<command>
     			<event topic="swapFocus" key="dir">
-    				<argument><String>d:/</String></argument>
+    				<argument><types:String>d:/</types:String></argument>
     			</event>
     		</command>
     	</action>
-<!--         <action time="0"> -->
-<!--             <recurrence count="30" repeat-until="9223372036854775807"> -->
-<!--                 <exponential rate="5" time-span="9223372036854775807"/> -->
-<!--             </recurrence> -->
-<!--             <command> -->
-<!--                 <event topic="event_topic_scripted" key="event.topics"> -->
-<!--                     <argument> -->
-<!--                         <String>nazdar</String> -->
-<!--                     </argument> -->
-<!--                 </event> -->
-<!--             </command> -->
-<!--         </action> -->
-<!--         <action time="10"> -->
-<!--             <recurrence count="2" repeat-until="9223372036854775807"> -->
-<!--                 <gaussian mean="30.0" deviation="2.0"/> -->
-<!--             </recurrence> -->
-<!--             <command> -->
-<!--                 <call service="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IDisplay" method="Render"> -->
-<!--                     <arguments> -->
-<!--                         <argument ord-num="0"> -->
-<!--                             <File>1;7</File> -->
-<!--                         </argument> -->
-<!--                         <argument ord-num="1"> -->
-<!--                             <String>kokos</String> -->
-<!--                         </argument> -->
-<!--                         <argument ord-num="2"> -->
-<!--                             <Null base-type="String" /> -->
-<!--                         </argument> -->
-<!--                     </arguments> -->
-<!--                 </call> -->
-<!--             </command> -->
-<!--         </action> -->
-<!--         <action time="11"> -->
-<!--             <recurrence count="1" repeat-until="9223372036854775807"> -->
-<!--                 <equidistant step="0"/> -->
-<!--             </recurrence> -->
-<!--             <command> -->
-<!--                 <call service="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IAuthenticator" method="LogIn"> -->
-<!--                     <arguments> -->
-<!--                         <argument ord-num="0"> -->
-<!--                             <String>uživatel</String> -->
-<!--                         </argument> -->
-<!--                         <argument ord-num="1"> -->
-<!--                             <String>heslo</String> -->
-<!--                         </argument> -->
-<!--                     </arguments> -->
-<!--                 </call> -->
-<!--             </command> -->
-<!--         </action> -->
-<!--         <action time="15"> -->
-<!--             <recurrence count="25" repeat-until="45610"> -->
-<!--                 <equidistant step="10"/> -->
-<!--             </recurrence> -->
-<!--             <command> -->
-<!--                 <event topic="mouse/clicked" key="sender"> -->
-<!--                     <argument> -->
-<!--                         <String></String> -->
-<!--                     </argument> -->
-<!--                 </event> -->
-<!--             </command> -->
-<!--         </action> -->
-<!--         <action time="15"> -->
-<!--             <recurrence count="20" repeat-until="1600"> -->
-<!--                 <equidistant step="260"/> -->
-<!--             </recurrence> -->
-<!--             <command> -->
-<!--                 <call service="cz.zcu.kiv.bp.testing.dummy.commons.interfaces.IDisplay" method="Render"> -->
-<!--                     <arguments> -->
-<!--                         <argument ord-num="0"> -->
-<!--                             <String>jeden argumentik</String> -->
-<!--                         </argument> -->
-<!--                         <argument ord-num="1"> -->
-<!--                             <Short>16384</Short> -->
-<!--                         </argument> -->
-<!--                         <argument ord-num="2"> -->
-<!--                             <Ints type="LinkedList"> -->
-<!--                                 <item ord-num="0"><Integer>1</Integer></item> -->
-<!--                                 <item ord-num="1"><Integer>2</Integer></item> -->
-<!--                             </Ints> -->
-<!--                         </argument> -->
-<!--                         <argument ord-num="3"> -->
-<!--                             <Bytes type="ArrayList"/> -->
-<!--                         </argument> -->
-<!--                         <argument ord-num="4"> -->
-<!--                             <Longs type="array"> -->
-<!--                                 <item ord-num="0"><Long>1</Long> </item> -->
-<!--                                 <item ord-num="1"><Long>2</Long> </item> -->
-<!--                             </Longs> -->
-<!--                         </argument> -->
-<!--                     </arguments> -->
-<!--                 </call> -->
-<!--             </command> -->
-<!--         </action> -->
-<!--         <action time="20"> -->
-<!--             <recurrence count="1" repeat-until="9223372036854775807"> -->
-<!--                 <exponential rate="17" time-span="9223372036854775807"/> -->
-<!--             </recurrence> -->
-<!--             <command> -->
-<!--                 <event topic="key/pressed" key="Key"> -->
-<!--                     <argument> -->
-<!--                         <Integer>14</Integer> -->
-<!--                     </argument> -->
-<!--                 </event> -->
-<!--             </command> -->
-<!--         </action> -->
     </actions>
 </project>

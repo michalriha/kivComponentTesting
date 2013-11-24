@@ -302,6 +302,16 @@
         </xsd:complexContent>
     </xsd:complexType>
 
+    <xsd:element name="String" type="xsd:string" />
+    <xsd:element name="BigInteger" type="xsd:integer" />
+    <xsd:element name="Long" type="xsd:long" />
+    <xsd:element name="Integer" type="xsd:int" />
+    <xsd:element name="Short" type="xsd:short" />
+    <xsd:element name="Byte" type="xsd:byte" />
+    <xsd:element name="BigDecimal" type="xsd:decimal"/>
+    <xsd:element name="Double" type="xsd:double" />
+    <xsd:element name="Float" type="xsd:float" />
+    <xsd:element name="Boolean" type="xsd:boolean" />
     <xsd:element name="File" type="TFile" />
     <xsd:element name="Strings" type="TStringCollection" />
     <xsd:element name="BigInts" type="TBigIntegerCollection" />

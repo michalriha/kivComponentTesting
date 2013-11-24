@@ -26,30 +26,30 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;choice>
- *         &lt;element name="String" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="BigInteger" type="{http://www.w3.org/2001/XMLSchema}integer"/>
- *         &lt;element name="Long" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="Integer" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="Short" type="{http://www.w3.org/2001/XMLSchema}short"/>
- *         &lt;element name="Byte" type="{http://www.w3.org/2001/XMLSchema}byte"/>
- *         &lt;element name="BigDecimal" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
- *         &lt;element name="Double" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="Float" type="{http://www.w3.org/2001/XMLSchema}float"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}File"/>
- *         &lt;element name="Boolean" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Strings"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}BigInts"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Longs"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Ints"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Shorts"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Bytes"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}BigDecimals"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Doubles"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Floats"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Booleans"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Files"/>
- *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}Null"/>
- *         &lt;element name="AnyValue" type="{http://www.kiv.zcu.cz/component-testing/mocker}TAnyValue"/>
+ *		   &lt;xsd:element ref="types:String" /> <!-- <xsd:element name="String" type="xsd:string" /> -->
+ *         &lt;xsd:element ref="types:BigInteger" /><!-- <xsd:element name="BigInteger" type="xsd:integer" /> -->
+ *         &lt;xsd:element ref="types:Long" /> <!-- <xsd:element name="Long" type="xsd:long" /> -->
+ *         &lt;xsd:element ref="types:Integer" /> <!-- <xsd:element name="Integer" type="xsd:int" /> -->
+ *         &lt;xsd:element ref="types:Short" /> <!-- <xsd:element name="Short" type="xsd:short" /> -->
+ *         &lt;xsd:element ref="types:Byte" /> <!-- <xsd:element name="Byte" type="xsd:byte" /> -->
+ *         &lt;xsd:element ref="types:BigDecimal" /> <!-- <xsd:element name="BigDecimal" type="xsd:decimal"/> -->
+ *         &lt;xsd:element ref="types:Double" /> <!-- <xsd:element name="Double" type="xsd:double" /> -->
+ *         &lt;xsd:element ref="types:Float" /> <!-- <xsd:element name="Float" type="xsd:float" /> -->
+ *         &lt;xsd:element ref="types:Boolean" /> <!-- <xsd:element name="Boolean" type="xsd:boolean" /> -->
+ *         &lt;xsd:element ref="types:File" /> <!--  name="File" type="types:TFile" /> -->
+ *         &lt;xsd:element ref="types:Strings" /> <!-- name="Strings" type="types:TStringCollection" /> -->
+ *         &lt;xsd:element ref="types:BigInts" /> <!-- name="BigInts" type="types:TBigIntegerCollection" /> -->
+ *         &lt;xsd:element ref="types:Longs" /> <!-- <name="Longs" type="types:TLongCollection" /> -->
+ *         &lt;xsd:element ref="types:Ints" /> <!-- name="Ints" type="types:TIntCollection" /> -->
+ *         &lt;xsd:element ref="types:Shorts" /> <!--  name="Shorts" type="types:TShortCollection" /> -->
+ *         &lt;xsd:element ref="types:Bytes" /> <!-- name="Bytes" type="types:TByteCollection" /> -->
+ *         &lt;xsd:element ref="types:BigDecimals" /> <!-- name="BigDecimals" type="types:TBigDecimalCollection" /> -->
+ *         &lt;xsd:element ref="types:Doubles" /> <!-- name="Doubles" type="types:TDoubleCollection" /> -->
+ *         &lt;xsd:element ref="types:Floats" /> <!-- name="Floats" type="types:TFloatCollection" /> -->
+ *         &lt;xsd:element ref="types:Booleans" /> <!-- name="Booleans" type="types:TBooleanCollection" /> -->
+ *         &lt;xsd:element ref="types:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
+ *         &lt;xsd:element ref="types:Null" /> <!-- name="Null" type="types:TNull" /> -->
+ *         &lt;xsd:element name="AnyValue" type="TAnyValue" />
  *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -91,34 +91,34 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
 })
 public class TValue
 {
-    @XmlElement(name = "String")
+    @XmlElement(name = "String", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected String string;
     
-    @XmlElement(name = "BigInteger")
+    @XmlElement(name = "BigInteger", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected BigInteger bigInteger;
     
-    @XmlElement(name = "Long")
+    @XmlElement(name = "Long", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected Long _long;
     
-    @XmlElement(name = "Integer")
+    @XmlElement(name = "Integer", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected Integer integer;
     
-    @XmlElement(name = "Short")
+    @XmlElement(name = "Short", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected Short _short;
     
-    @XmlElement(name = "Byte")
+    @XmlElement(name = "Byte", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected Byte _byte;
     
-    @XmlElement(name = "BigDecimal")
+    @XmlElement(name = "BigDecimal", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected BigDecimal bigDecimal;
     
-    @XmlElement(name = "Double")
+    @XmlElement(name = "Double", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected Double _double;
     
-    @XmlElement(name = "Float")
+    @XmlElement(name = "Float", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected Float _float;
     
-    @XmlElement(name = "Boolean")
+    @XmlElement(name = "Boolean", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected Boolean _boolean;
     
     @XmlElement(name = "File", namespace = "http://www.kiv.zcu.cz/component-testing/types")

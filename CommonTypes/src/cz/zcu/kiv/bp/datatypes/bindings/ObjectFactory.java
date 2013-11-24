@@ -9,6 +9,8 @@
 package cz.zcu.kiv.bp.datatypes.bindings;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -36,21 +38,31 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
 public class ObjectFactory
 {
     private final static QName _Null_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Null");
-    private final static QName _File_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "File");
-    private final static QName _Files_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Files");
-    private final static QName _BigInts_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigInts");
-    private final static QName _Longs_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Longs");
-    private final static QName _Ints_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Ints");
-    private final static QName _Shorts_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Shorts");
-    private final static QName _Bytes_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Bytes");
+    private final static QName _Integer_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Integer");
     private final static QName _BigDecimals_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigDecimals");
-    private final static QName _Doubles_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Doubles");
+    private final static QName _Bytes_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Bytes");
+    private final static QName _BigDecimal_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigDecimal");
+    private final static QName _Shorts_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Shorts");
+    private final static QName _String_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "String");
     private final static QName _Floats_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Floats");
-    private final static QName _Booleans_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Booleans");
+    private final static QName _Files_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Files");
     private final static QName _Strings_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Strings");
+    private final static QName _Byte_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Byte");
+    private final static QName _Ints_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Ints");
+    private final static QName _Longs_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Longs");
+    private final static QName _BigInteger_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigInteger");
+    private final static QName _Boolean_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Boolean");
+    private final static QName _Short_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Short");
+    private final static QName _File_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "File");
+    private final static QName _BigInts_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "BigInts");
+    private final static QName _Doubles_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Doubles");
+    private final static QName _Booleans_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Booleans");
+    private final static QName _Double_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Double");
+    private final static QName _Float_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Float");
+    private final static QName _Long_QNAME = new QName("http://www.kiv.zcu.cz/component-testing/types", "Long");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.zcu.kiv.bp.datatypes.bindings.gen
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: cz.zcu.kiv.bp.datatypes.bindings
      * 
      */
     public ObjectFactory() {
@@ -238,6 +250,96 @@ public class ObjectFactory
      */
     public TIntCollection.Item createTIntCollectionItem() {
         return new TIntCollection.Item();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Integer }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Integer")
+    public JAXBElement<Integer> createInteger(Integer value) {
+        return new JAXBElement<Integer>(_Integer_QNAME, Integer.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "BigDecimal")
+    public JAXBElement<BigDecimal> createBigDecimal(BigDecimal value) {
+        return new JAXBElement<BigDecimal>(_BigDecimal_QNAME, BigDecimal.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "String")
+    public JAXBElement<String> createString(String value) {
+        return new JAXBElement<String>(_String_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Byte }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Byte")
+    public JAXBElement<Byte> createByte(Byte value) {
+        return new JAXBElement<Byte>(_Byte_QNAME, Byte.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "BigInteger")
+    public JAXBElement<BigInteger> createBigInteger(BigInteger value) {
+        return new JAXBElement<BigInteger>(_BigInteger_QNAME, BigInteger.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Boolean")
+    public JAXBElement<Boolean> createBoolean(Boolean value) {
+        return new JAXBElement<Boolean>(_Boolean_QNAME, Boolean.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Short }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Short")
+    public JAXBElement<Short> createShort(Short value) {
+        return new JAXBElement<Short>(_Short_QNAME, Short.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Double")
+    public JAXBElement<Double> createDouble(Double value) {
+        return new JAXBElement<Double>(_Double_QNAME, Double.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Float }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Float")
+    public JAXBElement<Float> createFloat(Float value) {
+        return new JAXBElement<Float>(_Float_QNAME, Float.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Long }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.kiv.zcu.cz/component-testing/types", name = "Long")
+    public JAXBElement<Long> createLong(Long value) {
+        return new JAXBElement<Long>(_Long_QNAME, Long.class, null, value);
     }
 
     /**

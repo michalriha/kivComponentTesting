@@ -2,14 +2,17 @@
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/master/UniMockerBindings/schema/unimocker.xsd">
-	<simulated-components>
+	<simulated-components xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/types file:///D:/SkyDrive/GitHub/kivComponentTesting/CommonTypes/schema/types.xsd"
+	>
 		<bundle symbolic-name="cz.zcu.kivcmd.core" version="1.0.0">
 			<service interface="cz.zcu.kiv.kc.interfaces.ICopyPlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
 				<method name="getName">
 					<invocation>
 						<arguments />
 						<return>
-							<String>CopyMock</String>
+							<types:String>CopyMock</types:String>
 						</return>
 					</invocation>
 				</method>
@@ -34,7 +37,7 @@
 					<invocation>
 						<arguments />
 						<return>
-							<String>CreateDirMock</String>
+							<types:String>CreateDirMock</types:String>
 						</return>
 					</invocation>
 				</method>
@@ -59,7 +62,7 @@
 					<invocation>
 						<arguments />
 						<return>
-							<String>DeleteMock</String>
+							<types:String>DeleteMock</types:String>
 						</return>
 					</invocation>
 				</method>
@@ -84,7 +87,7 @@
 					<invocation>
 						<arguments />
 						<return>
-							<String>MoveMock</String>
+							<types:String>MoveMock</types:String>
 						</return>
 					</invocation>
 				</method>

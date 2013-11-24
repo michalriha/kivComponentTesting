@@ -57,17 +57,17 @@
 
 	<xsd:complexType name="TValue">
 		<xsd:choice>
-			<xsd:element name="String" type="xsd:string" />
-			<xsd:element name="BigInteger" type="xsd:integer" />
-			<xsd:element name="Long" type="xsd:long" />
-			<xsd:element name="Integer" type="xsd:int" />
-			<xsd:element name="Short" type="xsd:short" />
-			<xsd:element name="Byte" type="xsd:byte" />
-			<xsd:element name="BigDecimal" type="xsd:decimal" />
-			<xsd:element name="Double" type="xsd:double" />
-			<xsd:element name="Float" type="xsd:float" />
+            <xsd:element ref="types:String" /> <!-- <xsd:element name="String" type="xsd:string" /> -->
+            <xsd:element ref="types:BigInteger" /><!-- <xsd:element name="BigInteger" type="xsd:integer" /> -->
+            <xsd:element ref="types:Long" /> <!-- <xsd:element name="Long" type="xsd:long" /> -->
+            <xsd:element ref="types:Integer" /> <!-- <xsd:element name="Integer" type="xsd:int" /> -->
+            <xsd:element ref="types:Short" /> <!-- <xsd:element name="Short" type="xsd:short" /> -->
+            <xsd:element ref="types:Byte" /> <!-- <xsd:element name="Byte" type="xsd:byte" /> -->
+            <xsd:element ref="types:BigDecimal" /> <!-- <xsd:element name="BigDecimal" type="xsd:decimal"/> -->
+            <xsd:element ref="types:Double" /> <!-- <xsd:element name="Double" type="xsd:double" /> -->
+            <xsd:element ref="types:Float" /> <!-- <xsd:element name="Float" type="xsd:float" /> -->
+            <xsd:element ref="types:Boolean" /> <!-- <xsd:element name="Boolean" type="xsd:boolean" /> -->
             <xsd:element ref="types:File" /> <!--  name="File" type="types:TFile" /> -->
-            <xsd:element name="Boolean" type="xsd:boolean" />
             <xsd:element ref="types:Strings" /> <!-- name="Strings" type="types:TStringCollection" /> -->
             <xsd:element ref="types:BigInts" /> <!-- name="BigInts" type="types:TBigIntegerCollection" /> -->
             <xsd:element ref="types:Longs" /> <!-- <name="Longs" type="types:TLongCollection" /> -->
