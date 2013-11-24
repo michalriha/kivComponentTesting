@@ -74,14 +74,6 @@ public class ObjectFactory
     }
 
     /**
-     * Create an instance of {@link TVoid }
-     * 
-     */
-    public TVoid createTVoid() {
-        return new TVoid();
-    }
-
-    /**
      * Create an instance of {@link TArgumentsList }
      * 
      */
