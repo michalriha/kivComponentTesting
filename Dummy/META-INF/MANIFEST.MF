@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Dummy
-Bundle-SymbolicName: cz.zcu.dummy
-Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: ifcs
-Import-Package: org.osgi.framework;version="1.7.0"
