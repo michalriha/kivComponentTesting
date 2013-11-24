@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/master/UniMockerBindings/schema/unimocker.xsd">
-	<simulated-components
-	   xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
-	   xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
-       xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd"
-	>
+	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/UniMockerBindings/schema/unimocker.xsd">
+	<simulated-components xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
+		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
+		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd">
 		<bundle symbolic-name="cz.zcu.kivcmd.common" version="1.0.0">
-			<service interface="cz.zcu.kiv.kc.plugin.Plugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+			<service interface="cz.zcu.kiv.kc.plugin.Plugin"
+				ignore-undefined-methods="true" ignore-undefined-possibilities="true">
 				<method name="executeAction">
 					<invocation>
 						<arguments>
 							<argument ord-num="0">
-							    <types:Files type="ArrayList">
-							       <types:item ord-num="0"><types:File>d:\Obrázky.zip2</types:File></types:item>
-							    </types:Files>
-<!--                                 <AnyValue base-type="FileArrayList" /> -->
-                            </argument>
-                            <argument ord-num="1">
-                                <AnyValue base-type="String" />
-                            </argument>
-                            <argument ord-num="2">
-                                <AnyValue base-type="String" />
-                            </argument>
+								<types:Files type="ArrayList">
+									<types:item ord-num="0">
+										<types:File>d:\Obrázky.zip2</types:File>
+									</types:item>
+								</types:Files>
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="String" />
+							</argument>
+							<argument ord-num="2">
+								<AnyValue base-type="String" />
+							</argument>
 						</arguments>
 					</invocation>
 				</method>
-                <method name="getName">
-                    <invocation>
-                        <arguments />
-                        <return>
-                            <types:String>MockupPlugin1</types:String>
-                        </return>
-                    </invocation>
-                </method>
+				<method name="getName">
+					<invocation>
+						<arguments />
+						<return>
+							<types:String>MockupPlugin1</types:String>
+						</return>
+					</invocation>
+				</method>
 			</service>
 		</bundle>
 		<bundle symbolic-name="cz.zcu.kiv.kc.archiver" version="1.0.0">
@@ -47,34 +47,35 @@
 						</return>
 					</invocation>
 				</method>
-                <method name="getFormatName">
-                    <invocation>
-                        <arguments />
-                        <return>
-                            <types:String>7-Zip</types:String>
-                        </return>
-                    </invocation>
-                </method>
-                <method name="packFilesToArchive">
-                	<invocation>
+				<method name="getFormatName">
+					<invocation>
+						<arguments />
+						<return>
+							<types:String>7-Zip</types:String>
+						</return>
+					</invocation>
+				</method>
+				<method name="packFilesToArchive">
+					<invocation>
 						<arguments>
 							<argument ord-num="0">
-                                <AnyValue base-type="FileArrayList" />
-                            </argument>
-                            <argument ord-num="1">
-                                <AnyValue base-type="File" />
-                            </argument>
-                            <argument ord-num="2">
-                                <AnyValue base-type="File" />
-                            </argument>
+								<AnyValue base-type="FileArrayList" />
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="File" />
+							</argument>
+							<argument ord-num="2">
+								<AnyValue base-type="File" />
+							</argument>
 						</arguments>
 						<return>
 							<types:Boolean>false</types:Boolean>
 						</return>
 					</invocation>
-                </method>
+				</method>
 			</service>
-			<service interface="cz.zcu.kiv.kc.archiver.IArchiveUnpacker" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+			<service interface="cz.zcu.kiv.kc.archiver.IArchiveUnpacker"
+				ignore-undefined-methods="true" ignore-undefined-possibilities="true">
 				<method name="getExtension">
 					<invocation>
 						<arguments />
@@ -83,41 +84,41 @@
 						</return>
 					</invocation>
 				</method>
-                <method name="getFormatName">
-                    <invocation>
-                        <arguments />
-                        <return>
-                            <types:String>7-Zip</types:String>
-                        </return>
-                    </invocation>
-                </method>
-                <method name="isFileSupported">
-                	<invocation>
-                		<arguments>
-                			<argument>
-                				<AnyValue base-type="File" />
-                			</argument>
-                		</arguments>
-                		<return>
-                			<types:Boolean>false</types:Boolean>
-                		</return>
-                	</invocation>
-                </method>
-                <method name="unpackFilesFromArchive">
-                	<invocation>
-                		<arguments>
+				<method name="getFormatName">
+					<invocation>
+						<arguments />
+						<return>
+							<types:String>7-Zip</types:String>
+						</return>
+					</invocation>
+				</method>
+				<method name="isFileSupported">
+					<invocation>
+						<arguments>
+							<argument>
+								<AnyValue base-type="File" />
+							</argument>
+						</arguments>
+						<return>
+							<types:Boolean>false</types:Boolean>
+						</return>
+					</invocation>
+				</method>
+				<method name="unpackFilesFromArchive">
+					<invocation>
+						<arguments>
 							<argument ord-num="0">
-                                <AnyValue base-type="File" />
-                            </argument>
-                            <argument ord-num="1">
-                                <AnyValue base-type="File" />
-                            </argument>
-                		</arguments>
-                		<return>
-                			<types:Boolean>false</types:Boolean>
-                		</return>
-                	</invocation>
-                </method>
+								<AnyValue base-type="File" />
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="File" />
+							</argument>
+						</arguments>
+						<return>
+							<types:Boolean>false</types:Boolean>
+						</return>
+					</invocation>
+				</method>
 			</service>
 		</bundle>
 	</simulated-components>

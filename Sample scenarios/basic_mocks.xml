@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/master/UniMockerBindings/schema/unimocker.xsd">
+	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/UniMockerBindings/schema/unimocker.xsd">
 	<simulated-components xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/types file:///D:/SkyDrive/GitHub/kivComponentTesting/CommonTypes/schema/types.xsd"
-	>
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd">
 		<bundle symbolic-name="cz.zcu.kivcmd.core" version="1.0.0">
-			<service interface="cz.zcu.kiv.kc.interfaces.ICopyPlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+			<service interface="cz.zcu.kiv.kc.interfaces.ICopyPlugin"
+				ignore-undefined-methods="true" ignore-undefined-possibilities="true">
 				<method name="getName">
 					<invocation>
 						<arguments />
@@ -32,7 +32,8 @@
 					</invocation>
 				</method>
 			</service>
-			<service interface="cz.zcu.kiv.kc.interfaces.ICreateDirPlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+			<service interface="cz.zcu.kiv.kc.interfaces.ICreateDirPlugin"
+				ignore-undefined-methods="true" ignore-undefined-possibilities="true">
 				<method name="getName">
 					<invocation>
 						<arguments />
@@ -57,7 +58,8 @@
 					</invocation>
 				</method>
 			</service>
-			<service interface="cz.zcu.kiv.kc.interfaces.IDeletePlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+			<service interface="cz.zcu.kiv.kc.interfaces.IDeletePlugin"
+				ignore-undefined-methods="true" ignore-undefined-possibilities="true">
 				<method name="getName">
 					<invocation>
 						<arguments />
@@ -82,7 +84,8 @@
 					</invocation>
 				</method>
 			</service>
-			<service interface="cz.zcu.kiv.kc.interfaces.IMovePlugin" ignore-undefined-methods="true" ignore-undefined-possibilities="true">
+			<service interface="cz.zcu.kiv.kc.interfaces.IMovePlugin"
+				ignore-undefined-methods="true" ignore-undefined-possibilities="true">
 				<method name="getName">
 					<invocation>
 						<arguments />

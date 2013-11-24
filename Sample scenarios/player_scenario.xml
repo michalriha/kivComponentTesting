@@ -1,205 +1,257 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/player"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/UniPlayerBindings/schema/uniplayer.xsd"
-  >
-    <settings>
-        <time-limit>75600</time-limit>
-        <simul-step-delay>500</simul-step-delay>
-    </settings>
-    <actions
-       xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
-       xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
-       xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd"
-    >
-    	<action time="154">
-    		<recurrence count="2" repeat-until="9223372036854775807">
-    			<equidistant step="15"/>
-    		</recurrence>
-    		<!-- akce se bude opakovat s exponenciálním rozdělením -->
-    		<command>
-    		<call service="cz.zcu.kiv.kc.interfaces.ICopyPlugin" method="executeAction">
-    			<arguments>
-    				<argument ord-num="0">
-    					<types:Files type="array">
-    						<types:item ord-num="0"><types:File>d:/cs_windows_7_professional_with_sp1_x64_dvd_u_676956.iso</types:File></types:item>
-    					</types:Files>
-    				</argument>
-    				<argument ord-num="1"><types:String>e:/tmp/nazdar</types:String></argument>
-    				<argument ord-num="2"><types:String>d:/</types:String></argument>
-    			</arguments>
-    		</call>
-    		</command>
-    	</action>
-    	<action time="150">
-    		<recurrence count="1" repeat-until="9223372036854775807">
-    			<equidistant step="15"/>
-    		</recurrence>
-    		<command>
-    		<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
-    			<arguments>
-    				<argument ord-num="0">
-    					<types:Files>
-    						<types:item ord-num="0"><types:File>d:/Stažené soubory/mips2.asm</types:File></types:item>
-    					</types:Files>
-    				</argument>
-    				<argument ord-num="1"><types:String>d:/Stažené soubory/</types:String></argument>
-    				<argument ord-num="2"><types:String>d:/Stažené soubory/</types:String></argument>
-    			</arguments>
-    		</call>
-    		</command>
-    	</action>
-    	<action time="290">
-    		<recurrence count="1" repeat-until="9223372036854775807">
-    			<equidistant step="15"/>
-    		</recurrence>
-    		<command>
-    		<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
-    			<arguments>
-    				<argument ord-num="0">
-    					<types:Files>
-    						<types:item ord-num="0"><types:File>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/WP_000008.jpg</types:File></types:item>
-    					</types:Files>
-    				</argument>
-    				<argument ord-num="1"><types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String></argument>
-    				<argument ord-num="2"><types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String></argument>
-    			</arguments>
-    		</call>
-    		</command>
-    	</action>
-    	<action time="700">
-    		<recurrence count="1" repeat-until="9223372036854775807">
-    			<equidistant step="15"/>
-    		</recurrence>
-    		<command>
-    		<call service="cz.zcu.kiv.kc.interfaces.IDeletePlugin" method="executeAction">
-    			<arguments>
-    				<argument ord-num="0">
-    					<types:Files>
-    						<types:item ord-num="0"><types:File>e:/tmp/nazdar/</types:File></types:item>
-    					</types:Files>
-    				</argument>
-    				<argument ord-num="1"><types:String>e:/tmp/</types:String></argument>
-    				<argument ord-num="2"><types:String>e:/tmp/</types:String></argument>
-    			</arguments>
-    		</call>
-    		</command>
-    	</action>
-    	<action time="590">
-    		<recurrence count="1" repeat-until="9223372036854775807">
-    			<equidistant step="15"/>
-    		</recurrence>
-    		<command>
-    		<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
-    			<arguments>
-    				<argument ord-num="0">
-    					<types:Files>
-    						<types:item ord-num="0"><types:File>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/WP_000009.jpg</types:File></types:item>
-    					</types:Files>
-    				</argument>
-    				<argument ord-num="1"><types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String></argument>
-    				<argument ord-num="2"><types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String></argument>
-    			</arguments>
-    		</call>
-    		</command>
-    	</action>
-    	<action time="890">
-    		<recurrence count="1" repeat-until="9223372036854775807">
-    			<equidistant step="15"/>
-    		</recurrence>
-    		<command>
-    		<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
-    			<arguments>
-    				<argument ord-num="0">
-    					<types:Files>
-    						<types:item ord-num="0"><types:File>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\WP_000014.jpg</types:File></types:item>
-    					</types:Files>
-    				</argument>
-    				<argument ord-num="1"><types:String>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\</types:String></argument>
-    				<argument ord-num="2"><types:String>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\</types:String></argument>
-    			</arguments>
-    		</call>
-    		</command>
-    	</action>
-    	<action time="100">
-    		<recurrence count="10">
-    			<equidistant step="100"/>
-    		</recurrence>
-    		<command>
-    			<event topic="changeSourceDir" key="dir">
-    				<argument><types:String>d:/Obrázky/</types:String></argument>
-    			</event>
-    		</command>
-    	</action>
-    	<action time="166">
-    		<recurrence count="10">
-    			<equidistant step="100"/>
-    		</recurrence>
-    		<command>
-    			<event topic="changeDestinationDir" key="dir">
-    				<argument><types:String>e:/</types:String></argument>
-    			</event>
-    		</command>
-    	</action>
-    	<action time="133">
-    		<recurrence count="10">
-    			<equidistant step="100"/>
-    		</recurrence>
-    		<command>
-    			<event topic="changeDestinationDir" key="dir">
-    				<argument><types:String>d:/Obrázky/</types:String></argument>
-    			</event>
-    		</command>
-    	</action>
-    	<action time="166">
-    		<recurrence count="10">
-    			<equidistant step="100"/>
-    		</recurrence>
-    		<command>
-    			<event topic="changeSourceDir" key="dir">
-    				<argument><types:String>e:/</types:String></argument>
-    			</event>
-    		</command>
-    	</action>
-    	<action time="200">
-    		<recurrence count="10">
-    			<equidistant step="100"/>
-    		</recurrence>
-    		<command>
-    			<event topic="changeSourceDir" key="dir">
-    				<argument><types:String>c:/Windows/</types:String></argument>
-    			</event>
-    		</command>
-    	</action>
-    	<action time="233">
-    		<recurrence count="10">
-    			<equidistant step="100"/>
-    		</recurrence>
-    		<command>
-    			<event topic="changeDestinationDir" key="dir">
-    				<argument><types:String>e:/</types:String></argument>
-    			</event>
-    		</command>
-    	</action>
-    	<action time="266">
-    		<recurrence count="10">
-    			<equidistant step="100"/>
-    		</recurrence>
-    		<command>
-    			<event topic="changeSourceDir" key="dir">
-    				<argument><types:String>d:/</types:String></argument>
-    			</event>
-    		</command>
-    	</action>
-    	<action time="550">
-    		<recurrence count="2">
-    			<equidistant step="300"/>
-    		</recurrence>
-    		<command>
-    			<event topic="swapFocus" key="dir">
-    				<argument><types:String>d:/</types:String></argument>
-    			</event>
-    		</command>
-    	</action>
-    </actions>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/UniPlayerBindings/schema/uniplayer.xsd">
+	<settings>
+		<time-limit>75600</time-limit>
+		<simul-step-delay>500</simul-step-delay>
+	</settings>
+	<actions xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
+		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
+		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd">
+		<action time="154">
+			<recurrence count="2" repeat-until="9223372036854775807">
+				<equidistant step="15" />
+			</recurrence>
+			<!-- akce se bude opakovat s exponenciálním rozdělením -->
+			<command>
+				<call service="cz.zcu.kiv.kc.interfaces.ICopyPlugin" method="executeAction">
+					<arguments>
+						<argument ord-num="0">
+							<types:Files type="array">
+								<types:item ord-num="0">
+									<types:File>d:/cs_windows_7_professional_with_sp1_x64_dvd_u_676956.iso</types:File>
+								</types:item>
+							</types:Files>
+						</argument>
+						<argument ord-num="1">
+							<types:String>e:/tmp/nazdar</types:String>
+						</argument>
+						<argument ord-num="2">
+							<types:String>d:/</types:String>
+						</argument>
+					</arguments>
+				</call>
+			</command>
+		</action>
+		<action time="150">
+			<recurrence count="1" repeat-until="9223372036854775807">
+				<equidistant step="15" />
+			</recurrence>
+			<command>
+				<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+					<arguments>
+						<argument ord-num="0">
+							<types:Files>
+								<types:item ord-num="0">
+									<types:File>d:/Stažené soubory/mips2.asm</types:File>
+								</types:item>
+							</types:Files>
+						</argument>
+						<argument ord-num="1">
+							<types:String>d:/Stažené soubory/</types:String>
+						</argument>
+						<argument ord-num="2">
+							<types:String>d:/Stažené soubory/</types:String>
+						</argument>
+					</arguments>
+				</call>
+			</command>
+		</action>
+		<action time="290">
+			<recurrence count="1" repeat-until="9223372036854775807">
+				<equidistant step="15" />
+			</recurrence>
+			<command>
+				<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+					<arguments>
+						<argument ord-num="0">
+							<types:Files>
+								<types:item ord-num="0">
+									<types:File>d:/Obrázky/Imported on 21. 1. 2013/Z
+										fotoaparátu/WP_000008.jpg</types:File>
+								</types:item>
+							</types:Files>
+						</argument>
+						<argument ord-num="1">
+							<types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String>
+						</argument>
+						<argument ord-num="2">
+							<types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String>
+						</argument>
+					</arguments>
+				</call>
+			</command>
+		</action>
+		<action time="700">
+			<recurrence count="1" repeat-until="9223372036854775807">
+				<equidistant step="15" />
+			</recurrence>
+			<command>
+				<call service="cz.zcu.kiv.kc.interfaces.IDeletePlugin" method="executeAction">
+					<arguments>
+						<argument ord-num="0">
+							<types:Files>
+								<types:item ord-num="0">
+									<types:File>e:/tmp/nazdar/</types:File>
+								</types:item>
+							</types:Files>
+						</argument>
+						<argument ord-num="1">
+							<types:String>e:/tmp/</types:String>
+						</argument>
+						<argument ord-num="2">
+							<types:String>e:/tmp/</types:String>
+						</argument>
+					</arguments>
+				</call>
+			</command>
+		</action>
+		<action time="590">
+			<recurrence count="1" repeat-until="9223372036854775807">
+				<equidistant step="15" />
+			</recurrence>
+			<command>
+				<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+					<arguments>
+						<argument ord-num="0">
+							<types:Files>
+								<types:item ord-num="0">
+									<types:File>d:/Obrázky/Imported on 21. 1. 2013/Z
+										fotoaparátu/WP_000009.jpg</types:File>
+								</types:item>
+							</types:Files>
+						</argument>
+						<argument ord-num="1">
+							<types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String>
+						</argument>
+						<argument ord-num="2">
+							<types:String>d:/Obrázky/Imported on 21. 1. 2013/Z fotoaparátu/</types:String>
+						</argument>
+					</arguments>
+				</call>
+			</command>
+		</action>
+		<action time="890">
+			<recurrence count="1" repeat-until="9223372036854775807">
+				<equidistant step="15" />
+			</recurrence>
+			<command>
+				<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+					<arguments>
+						<argument ord-num="0">
+							<types:Files>
+								<types:item ord-num="0">
+									<types:File>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z
+										fotoaparátu\WP_000014.jpg</types:File>
+								</types:item>
+							</types:Files>
+						</argument>
+						<argument ord-num="1">
+							<types:String>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\</types:String>
+						</argument>
+						<argument ord-num="2">
+							<types:String>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z fotoaparátu\</types:String>
+						</argument>
+					</arguments>
+				</call>
+			</command>
+		</action>
+		<action time="100">
+			<recurrence count="10">
+				<equidistant step="100" />
+			</recurrence>
+			<command>
+				<event topic="changeSourceDir" key="dir">
+					<argument>
+						<types:String>d:/Obrázky/</types:String>
+					</argument>
+				</event>
+			</command>
+		</action>
+		<action time="166">
+			<recurrence count="10">
+				<equidistant step="100" />
+			</recurrence>
+			<command>
+				<event topic="changeDestinationDir" key="dir">
+					<argument>
+						<types:String>e:/</types:String>
+					</argument>
+				</event>
+			</command>
+		</action>
+		<action time="133">
+			<recurrence count="10">
+				<equidistant step="100" />
+			</recurrence>
+			<command>
+				<event topic="changeDestinationDir" key="dir">
+					<argument>
+						<types:String>d:/Obrázky/</types:String>
+					</argument>
+				</event>
+			</command>
+		</action>
+		<action time="166">
+			<recurrence count="10">
+				<equidistant step="100" />
+			</recurrence>
+			<command>
+				<event topic="changeSourceDir" key="dir">
+					<argument>
+						<types:String>e:/</types:String>
+					</argument>
+				</event>
+			</command>
+		</action>
+		<action time="200">
+			<recurrence count="10">
+				<equidistant step="100" />
+			</recurrence>
+			<command>
+				<event topic="changeSourceDir" key="dir">
+					<argument>
+						<types:String>c:/Windows/</types:String>
+					</argument>
+				</event>
+			</command>
+		</action>
+		<action time="233">
+			<recurrence count="10">
+				<equidistant step="100" />
+			</recurrence>
+			<command>
+				<event topic="changeDestinationDir" key="dir">
+					<argument>
+						<types:String>e:/</types:String>
+					</argument>
+				</event>
+			</command>
+		</action>
+		<action time="266">
+			<recurrence count="10">
+				<equidistant step="100" />
+			</recurrence>
+			<command>
+				<event topic="changeSourceDir" key="dir">
+					<argument>
+						<types:String>d:/</types:String>
+					</argument>
+				</event>
+			</command>
+		</action>
+		<action time="550">
+			<recurrence count="2">
+				<equidistant step="300" />
+			</recurrence>
+			<command>
+				<event topic="swapFocus" key="dir">
+					<argument>
+						<types:String>d:/</types:String>
+					</argument>
+				</event>
+			</command>
+		</action>
+	</actions>
 </project>

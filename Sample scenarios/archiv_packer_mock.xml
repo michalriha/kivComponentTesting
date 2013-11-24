@@ -1,70 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
-  xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/master/UniMockerBindings/schema/unimocker.xsd">
-  <simulated-components>
-    <bundle symbolic-name="cz.zcu.kiv.kc.archiver" version="1.0.0">
-      <service interface="cz.zcu.kiv.kc.archiver.IArchivePacker">
-        <method name="getExtension">
-          <invocation>
-            <arguments />
-            <return><String>7z</String></return>
-          </invocation>
-        </method>
-        <method name="getFormatName">
-          <invocation>
-           <arguments />
-           <return><String>7-Zip</String></return>
-          </invocation>
-        </method>
-        <method name="packFilesToArchive">
-          <invocation>
-            <arguments>
-              <argument ord-num="0">
-                <AnyValue base-type="FileArrayList" />
-              </argument>
-              <argument ord-num="1">
-                <AnyValue base-type="File" />
-              </argument>
-              <argument ord-num="2">
-                <AnyValue base-type="File" />
-              </argument>
-            </arguments>
-            <return><Boolean>false</Boolean></return>
-          </invocation>
-        </method>
-      </service>
-      <service interface="cz.zcu.kiv.kc.archiver.IArchivePacker">
-        <method name="getExtension">
-          <invocation>
-            <arguments />
-            <return><String>rar</String></return>
-          </invocation>
-        </method>
-        <method name="getFormatName">
-          <invocation>
-           <arguments />
-           <return><String>RAR 5.0</String></return>
-          </invocation>
-        </method>
-        <method name="packFilesToArchive">
-          <invocation>
-            <arguments>
-              <argument ord-num="0">
-                <AnyValue base-type="FileArrayList" />
-              </argument>
-              <argument ord-num="1">
-                <AnyValue base-type="File" />
-              </argument>
-              <argument ord-num="2">
-                <AnyValue base-type="File" />
-              </argument>
-            </arguments>
-            <return><Boolean>false</Boolean></return>
-          </invocation>
-        </method>
-      </service>
-    </bundle>
-  </simulated-components>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/UniMockerBindings/schema/unimocker.xsd">
+	<simulated-components xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
+		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
+		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd">
+		<bundle symbolic-name="cz.zcu.kiv.kc.archiver" version="1.0.0">
+			<service interface="cz.zcu.kiv.kc.archiver.IArchivePacker">
+				<method name="getExtension">
+					<invocation>
+						<arguments />
+						<return>
+							<types:String>7z</types:String>
+						</return>
+					</invocation>
+				</method>
+				<method name="getFormatName">
+					<invocation>
+						<arguments />
+						<return>
+							<types:String>7-Zip</types:String>
+						</return>
+					</invocation>
+				</method>
+				<method name="packFilesToArchive">
+					<invocation>
+						<arguments>
+							<argument ord-num="0">
+								<AnyValue base-type="FileArrayList" />
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="File" />
+							</argument>
+							<argument ord-num="2">
+								<AnyValue base-type="File" />
+							</argument>
+						</arguments>
+						<return>
+							<types:Boolean>false</types:Boolean>
+						</return>
+					</invocation>
+				</method>
+			</service>
+			<service interface="cz.zcu.kiv.kc.archiver.IArchivePacker">
+				<method name="getExtension">
+					<invocation>
+						<arguments />
+						<return>
+							<types:String>rar</types:String>
+						</return>
+					</invocation>
+				</method>
+				<method name="getFormatName">
+					<invocation>
+						<arguments />
+						<return>
+							<types:String>RAR 5.0</types:String>
+						</return>
+					</invocation>
+				</method>
+				<method name="packFilesToArchive">
+					<invocation>
+						<arguments>
+							<argument ord-num="0">
+								<AnyValue base-type="FileArrayList" />
+							</argument>
+							<argument ord-num="1">
+								<AnyValue base-type="File" />
+							</argument>
+							<argument ord-num="2">
+								<AnyValue base-type="File" />
+							</argument>
+						</arguments>
+						<return>
+							<types:Boolean>false</types:Boolean>
+						</return>
+					</invocation>
+				</method>
+			</service>
+		</bundle>
+	</simulated-components>
 </project>

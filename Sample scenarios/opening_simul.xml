@@ -1,48 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/player"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/master/UniPlayerBindings/schema/uniplayer.xsd"
- >
-  <settings>
-    <time-limit>75600</time-limit>
-    <simul-step-delay>500</simul-step-delay>
-  </settings>
-  <actions>
-    <action time="150">
-      <recurrence count="1" repeat-until="9223372036854775807">
-        <equidistant step="15"/>
-      </recurrence>
-      <command>
-        <call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
-          <arguments>
-            <argument ord-num="0">
-              <Files>
-                <item ord-num="0"><File>d:/Stažené/mips2.asm</File></item>
-              </Files>
-            </argument>
-            <argument ord-num="1"><String>d:/Stažené/</String></argument>
-            <argument ord-num="2"><String>d:/Stažené/</String></argument>
-          </arguments>
-        </call>
-      </command>
-    </action>
-    <action time="290">
-      <recurrence count="1" repeat-until="9223372036854775807">
-        <equidistant step="30"/>
-      </recurrence>
-      <command>
-        <call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
-          <arguments>
-            <argument ord-num="0">
-              <Files>
-                <item ord-num="0"><File>d:/Obrázky/WP_000008.jpg</File></item>
-              </Files>
-            </argument>
-            <argument ord-num="1"><String>d:/Obrázky/</String></argument>
-            <argument ord-num="2"><String>d:/Stažené/</String></argument>
-          </arguments>
-        </call>
-      </command>
-    </action>
-  </actions>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/UniPlayerBindings/schema/uniplayer.xsd">
+	<settings>
+		<time-limit>75600</time-limit>
+		<simul-step-delay>500</simul-step-delay>
+	</settings>
+	<actions xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
+		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
+		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd">
+		<action time="150">
+			<recurrence count="1" repeat-until="9223372036854775807">
+				<equidistant step="15" />
+			</recurrence>
+			<command>
+				<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+					<arguments>
+						<argument ord-num="0">
+							<types:Files>
+								<types:item ord-num="0">
+									<types:File>d:/Stažené/mips2.asm</types:File>
+								</types:item>
+							</types:Files>
+						</argument>
+						<argument ord-num="1">
+							<types:String>d:/Stažené/</types:String>
+						</argument>
+						<argument ord-num="2">
+							<types:String>d:/Stažené/</types:String>
+						</argument>
+					</arguments>
+				</call>
+			</command>
+		</action>
+		<action time="290">
+			<recurrence count="1" repeat-until="9223372036854775807">
+				<equidistant step="30" />
+			</recurrence>
+			<command>
+				<call service="cz.zcu.kiv.kc.interfaces.IViewPlugin" method="executeAction">
+					<arguments>
+						<argument ord-num="0">
+							<types:Files>
+								<types:item ord-num="0">
+									<types:File>d:/Obrázky/WP_000008.jpg</types:File>
+								</types:item>
+							</types:Files>
+						</argument>
+						<argument ord-num="1">
+							<types:String>d:/Obrázky/</types:String>
+						</argument>
+						<argument ord-num="2">
+							<types:String>d:/Stažené/</types:String>
+						</argument>
+					</arguments>
+				</call>
+			</command>
+		</action>
+	</actions>
 </project>
