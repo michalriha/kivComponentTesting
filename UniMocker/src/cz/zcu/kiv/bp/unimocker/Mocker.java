@@ -83,7 +83,7 @@ public class Mocker implements IMocker, BundleContextAware
 	}
 
     /**
-     * Tries to load given described from the given bundle.
+     * Tries to load described classes from the given bundle.
      * @param bundle which should be probed
      * @param classesToFind array of class names to find
      * @return array of loaded classes
