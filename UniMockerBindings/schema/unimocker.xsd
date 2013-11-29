@@ -10,7 +10,7 @@
 	jaxb:extensionBindingPrefixes="xjc">
 	<!-- obecne typy // -->
 
-    <xsd:import namespace="http://www.kiv.zcu.cz/component-testing/types" schemaLocation="https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd" />
+    <xsd:import namespace="http://www.kiv.zcu.cz/component-testing/types" schemaLocation="https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd" />
 
 	<xsd:simpleType name="TBundleName">
 		<xsd:restriction base="xsd:token">
