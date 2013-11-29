@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/player"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/UniPlayerBindings/schema/uniplayer.xsd">
+	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/master/UniPlayerBindings/schema/uniplayer.xsd">
 	<settings>
 		<time-limit>75600</time-limit>
 		<simul-step-delay>500</simul-step-delay>
 	</settings>
 	<actions xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
 		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
-		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd">
+		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd">
 		<action time="150">
 			<recurrence count="1" repeat-until="9223372036854775807">
 				<equidistant step="15" />
