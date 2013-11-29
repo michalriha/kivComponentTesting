@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
@@ -55,6 +54,62 @@ public class ObjectFactory
      */
     public TInvokedMethod createTInvokedMethod() {
         return new TInvokedMethod();
+    }
+
+    /**
+     * Create an instance of {@link TCodeInjection }
+     * 
+     */
+    public TCodeInjection createTCodeInjection() {
+        return new TCodeInjection();
+    }
+
+    /**
+     * Create an instance of {@link TCodeInjection.Call }
+     * 
+     */
+    public TCodeInjection.Call createTCodeInjectionCall() {
+        return new TCodeInjection.Call();
+    }
+
+    /**
+     * Create an instance of {@link TCodeInjection.Call.Service }
+     * 
+     */
+    public TCodeInjection.Call.Service createTCodeInjectionCallService() {
+        return new TCodeInjection.Call.Service();
+    }
+
+    /**
+     * Create an instance of {@link TCodeInjection.Call.Static }
+     * 
+     */
+    public TCodeInjection.Call.Static createTCodeInjectionCallStatic() {
+        return new TCodeInjection.Call.Static();
+    }
+
+    /**
+     * Create an instance of {@link TCodeInjection.Call.Service.Method }
+     * 
+     */
+    public TCodeInjection.Call.Service.Method createTCodeInjectionCallServiceMethod() {
+        return new TCodeInjection.Call.Service.Method();
+    }
+
+    /**
+     * Create an instance of {@link TCodeInjection.Call.Static.Bundle }
+     * 
+     */
+    public TCodeInjection.Call.Static.Bundle createTCodeInjectionCallStaticBundle() {
+        return new TCodeInjection.Call.Static.Bundle();
+    }
+
+    /**
+     * Create an instance of {@link TCodeInjection.Call.Static.Method }
+     * 
+     */
+    public TCodeInjection.Call.Static.Method createTCodeInjectionCallStaticMethod() {
+        return new TCodeInjection.Call.Static.Method();
     }
 
     /**

@@ -30,6 +30,12 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 
+    <xsd:simpleType name="TStaticMethodFQName">
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="(([a-z_]+[0-9]*)+\.)+([a-zA-Z_]+[0-9]*)*\.[a-zA-Z_$]([a-zA-Z0-9_$])*" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
 	<xsd:simpleType name="TVersion">
 		<xsd:restriction base="xsd:token">
 			<xsd:pattern value="(\d+\.)*(\d+)" />
@@ -109,7 +115,7 @@
 	                               </xsd:element>
 	                               <xsd:element name="method">
 	                                   <xsd:complexType>
-	                                       <xsd:attribute name="name" type="TInterfaceName" />
+	                                       <xsd:attribute name="name" type="TStaticMethodFQName" />
 	                                       <xsd:attribute name="overrides-return-values" type="xsd:boolean" />
 	                                   </xsd:complexType>
 	                               </xsd:element>

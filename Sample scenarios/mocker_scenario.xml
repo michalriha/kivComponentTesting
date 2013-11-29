@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/master/UniMockerBindings/schema/unimocker.xsd">
+	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/custom_code_injection/UniMockerBindings/schema/unimocker.xsd">
 	<simulated-components xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
 		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
 		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd">

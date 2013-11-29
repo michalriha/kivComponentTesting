@@ -15,7 +15,7 @@ public class InvokedMethodAdapter extends XmlAdapter<TInvokedMethod, InvokedMeth
     @Override
     public InvokedMethod unmarshal(TInvokedMethod v) throws Exception
     {
-        return new InvokedMethod(v.getName(), v.getInvocations());
+        return new InvokedMethod(v.getName(), v.getInvocations(), v.getCodeInjection());
     }
 
     @Override
@@ -24,6 +24,7 @@ public class InvokedMethodAdapter extends XmlAdapter<TInvokedMethod, InvokedMeth
         TInvokedMethod method = new TInvokedMethod();
         method.setName(v.getName());
         method.getInvocations().addAll(v.getInvocations());
+        method.setCodeInjection(v.getInjectedCode());
         return method;
     }
 

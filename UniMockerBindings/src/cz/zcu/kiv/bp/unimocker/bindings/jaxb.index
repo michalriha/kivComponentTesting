@@ -4,6 +4,7 @@ TArgument
 TArgumentsList
 TBundle
 TBundleList
+TCodeInjection
 TInvocation
 TInvokedMethod
 TProject
