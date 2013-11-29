@@ -11,7 +11,7 @@
 	
 	<!-- obecne typy // -->
 
-    <xsd:import namespace="http://www.kiv.zcu.cz/component-testing/types" schemaLocation="https://raw.github.com/michalriha/kivComponentTesting/extract_common_datatypes/CommonTypes/schema/types.xsd" />
+    <xsd:import namespace="http://www.kiv.zcu.cz/component-testing/types" schemaLocation="https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd" />
     
 	<xsd:simpleType name="TNonNegativeLong">
 		<xsd:restriction base="xsd:long">
