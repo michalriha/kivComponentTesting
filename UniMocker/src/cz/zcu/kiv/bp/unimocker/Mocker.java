@@ -56,7 +56,7 @@ public class Mocker implements IMocker, BundleContextAware
     /**
      * Tries to found bundle described by string in format symbolic.name:Major.Minor.Micro.
      * Stops with the first bundle that has matching description! 
-     * @param description symbolic.name:Major.Minor.Micro fromated bundle description
+     * @param description symbolic.name:Major.Minor.Micro formated bundle description
      * @return found Bundle instance or null when not found
      */
     private Bundle findBundle(String description)
