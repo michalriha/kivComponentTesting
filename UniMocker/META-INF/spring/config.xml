@@ -10,11 +10,15 @@
 	    http://www.springframework.org/schema/osgi
 	    http://www.springframework.org/schema/osgi/spring-osgi.xsd" >
 
+    <osgi:reference id="envProbe" interface="cz.zcu.kiv.bp.probe.IProbe" />
+
 	<osgi:service id="UniplayerCommander" ref="commander" interface="org.eclipse.osgi.framework.console.CommandProvider" />
 	 
 	<bean name="commander" class="cz.zcu.kiv.bp.unimocker.Commander" init-method="init">
 		<property name="mocker" ref="mocker" />
 	</bean>
 
- 	<bean name="mocker" class="cz.zcu.kiv.bp.unimocker.Mocker" destroy-method="destroy" />
+ 	<bean name="mocker" class="cz.zcu.kiv.bp.unimocker.Mocker" destroy-method="destroy">
+ 	     <property name="envProbe" ref="envProbe" />
+ 	</bean>
 </beans>

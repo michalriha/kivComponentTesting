@@ -9,14 +9,15 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang.reflect.MethodUtils;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
+//import org.osgi.framework.BundleContext;
+//import org.osgi.framework.ServiceReference;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
-import org.osgi.util.tracker.ServiceTracker;
-import org.springframework.osgi.context.BundleContextAware;
+//import org.osgi.util.tracker.ServiceTracker;
+//import org.springframework.osgi.context.BundleContextAware;
 import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.probe.IProbe;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenario;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenarioIterator;
 import cz.zcu.kiv.bp.uniplayer.bindings.Scenario;
@@ -28,25 +29,30 @@ import cz.zcu.kiv.bp.uniplayer.bindings.TEvent;
  * IPlayer implementation. Implements local scenario player.
  * @author Michal
  */
-public class Player implements IPlayer, BundleContextAware
+public class Player implements IPlayer//, BundleContextAware
 {
-	/**
-	 * How long to wait for service to activate
-	 */
-	// TODO: add to scenario file format
-	private static int SERVICE_WAIT_LIMIT = 30000; // ms
+//	/**
+//	 * How long to wait for service to activate
+//	 */
+//	// TODO: add to scenario file format
+//	private static int SERVICE_WAIT_LIMIT = 30000; // ms
 
 	private Player _ = this;
 	
-	/**
-	 * OSGi context
-	 */
-	private BundleContext context;
+//	/**
+//	 * OSGi context
+//	 */
+//	private BundleContext context;
 	
 	/**
 	 * OSGI EventAdmin service
 	 */
 	private EventAdmin eventAdmin;
+	
+	/**
+	 * OSGI environment probe
+	 */
+	private IProbe envProbe;
 	
 	/**
 	 * flag signaling whether the scenario replay has been stopped  
@@ -57,20 +63,20 @@ public class Player implements IPlayer, BundleContextAware
 	 * UniPlayerBinding loader
 	 */
 	private IScenario scenario;
+
+//    /**
+//     * ServiceTracker for services required in scenario
+//     */
+//    private Map<String, ServiceTracker<?, ?>> svcTrackers = new HashMap<>();
     
-    /**
-     * ServiceTracker for services required in scenario
-     */
-    private Map<String, ServiceTracker<?, ?>> svcTrackers = new HashMap<>();
-    
-    /**
-     * BundleContextAware setter 
-     */
-    @Override
-    public void setBundleContext(BundleContext context)
-    {
-        _.context = context;
-    }
+//    /**
+//     * BundleContextAware setter 
+//     */
+//    @Override
+//    public void setBundleContext(BundleContext context)
+//    {
+//        _.context = context;
+//    }
 
     /**
      * OSGi EventAdmin setter
@@ -80,20 +86,29 @@ public class Player implements IPlayer, BundleContextAware
     {
         _.eventAdmin = eventAdmin;
     }
-
+    
     /**
-     * Bundle destroy method.
-     * @throws Exception
+     * EnvProbe setter
      */
-	public void destroy() throws Exception
-	{
-		for (ServiceTracker<?, ?> st : _.svcTrackers.values())
-		{
-			ServiceReference<?> ref = st.getServiceReference();
-			_.context.ungetService(ref);
-			st.close();
-		}
-	}
+    public void setEnvProbe(IProbe envProbe)
+    {
+    	_.envProbe = envProbe;
+    }
+
+//    /**
+//     * Bundle destroy method.
+//     * @throws Exception
+//     * @deprecated
+//     */
+//	public void destroy() throws Exception
+//	{
+//		for (ServiceTracker<?, ?> st : _.svcTrackers.values())
+//		{
+//			ServiceReference<?> ref = st.getServiceReference();
+//			_.context.ungetService(ref);
+//			st.close();
+//		}
+//	}
 
 	@Override
 	public void play() throws Exception
@@ -165,7 +180,8 @@ public class Player implements IPlayer, BundleContextAware
 	private void execute(TCall call)
 	{
 		// find service instance
-		Object serviceInstance = _.getServiceInstance(call.getService());
+//		Object serviceInstance = _.getServiceInstance(call.getService());
+		Object serviceInstance = _.envProbe.getServiceInstance(call.getService(), IProbe.DEFAULT_WAIT_LIMIT);
 		System.out.println(serviceInstance);
 		if (serviceInstance == null)
 		{ // no service implementation is active in current context
@@ -220,76 +236,80 @@ public class Player implements IPlayer, BundleContextAware
 		return sb.length() == 0 ? void.class.getName() : sb.toString();
 	}
 
-	/**
-	 * Tries to acquire service from OSGi context.
-	 * @param serviceName name of the service to acquire
-	 * @return service instance
-	 */
-	private Object getServiceInstance(String serviceName)
-	{
-		Object ret = null; // service instance
-		ServiceTracker<?, ?> st = _.getTracker(serviceName);
-		ret = st.getService();
-		if (ret == null)
-		{ // service instance is not active, wait
-			System.out.printf(
-				"Waiting for service. Please activate bundle providing service %s%n",
-				serviceName
-			);		
-			int i = 0;
-			while (ret == null && i < SERVICE_WAIT_LIMIT && !_.stopped)
-			{
-				ret = st.getService();
-				if (ret != null)
-				{ // service instance has been active, exit loop
-					break;
-				}
-				
-				// wait 1s for service to activate
-				try
-				{
-					System.out.print(".");
-					st.waitForService(1000);
-				}
-				catch (InterruptedException ignore) {}
-				i += 1000;
-			}
-		}
-
-		
-		return ret;
-	}
-	
-	/**
-	 * Returns ServiceTracker for given service. If the tracker does not exist, it creates and stores new one.
-	 * @param serviceName service to track
-	 * @return corresponding ServiceTracker
-	 */
-	private ServiceTracker<?, ?> getTracker(String serviceName)
-	{
-		if (!_.svcTrackers.containsKey(serviceName))
-		{
-			_.createServiceTracker(serviceName);
-		}
-		return _.svcTrackers.get(serviceName);
-	}
-	
-	/**
-	 * Create ServiceTracker for current OSGi context and given service.
-	 * @param serviceName name of the tracked service
-	 */
-	private void createServiceTracker(String serviceName)
-	{
-		ServiceTracker<?, ?> st = new ServiceTracker<>(_.context, serviceName, null);
-		st.open();
-		_.svcTrackers.put(serviceName, st);
-	}
+//	/**
+//	 * Tries to acquire service from OSGi context.
+//	 * @param serviceName name of the service to acquire
+//	 * @return service instance
+//	 * @deprecated
+//	 */
+//	private Object getServiceInstance(String serviceName)
+//	{
+//		Object ret = null; // service instance
+//		ServiceTracker<?, ?> st = _.getTracker(serviceName);
+//		ret = st.getService();
+//		if (ret == null)
+//		{ // service instance is not active, wait
+//			System.out.printf(
+//				"Waiting for service. Please activate bundle providing service %s%n",
+//				serviceName
+//			);		
+//			int i = 0;
+//			while (ret == null && i < SERVICE_WAIT_LIMIT && !_.stopped)
+//			{
+//				ret = st.getService();
+//				if (ret != null)
+//				{ // service instance has been active, exit loop
+//					break;
+//				}
+//				
+//				// wait 1s for service to activate
+//				try
+//				{
+//					System.out.print(".");
+//					st.waitForService(1000);
+//				}
+//				catch (InterruptedException ignore) {}
+//				i += 1000;
+//			}
+//		}
+//
+//		
+//		return ret;
+//	}
+//	
+//	/**
+//	 * Returns ServiceTracker for given service. If the tracker does not exist, it creates and stores new one.
+//	 * @param serviceName service to track
+//	 * @return corresponding ServiceTracker
+//	 * @deprecated
+//	 */
+//	private ServiceTracker<?, ?> getTracker(String serviceName)
+//	{
+//		if (!_.svcTrackers.containsKey(serviceName))
+//		{
+//			_.createServiceTracker(serviceName);
+//		}
+//		return _.svcTrackers.get(serviceName);
+//	}
+//	
+//	/**
+//	 * Create ServiceTracker for current OSGi context and given service.
+//	 * @param serviceName name of the tracked service
+//	 * @deprecated
+//	 */
+//	private void createServiceTracker(String serviceName)
+//	{
+//		ServiceTracker<?, ?> st = new ServiceTracker<>(_.context, serviceName, null);
+//		st.open();
+//		_.svcTrackers.put(serviceName, st);
+//	}
 	
 	/**
 	 * Signals the player to stop the replay
 	 */
 	public void stop()
 	{
+		_.envProbe.stopWaiting();
 		_.stopped = true;
 	}
 
