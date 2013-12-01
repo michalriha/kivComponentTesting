@@ -11,6 +11,7 @@
 	    http://www.springframework.org/schema/osgi/spring-osgi.xsd" >
 
 	<osgi:reference id="EventAdmin" interface="org.osgi.service.event.EventAdmin" />
+    <osgi:reference id="envProbe" interface="cz.zcu.kiv.bp.probe.IProbe" />
 	
 	<osgi:service id="UniplayerCommander" ref="commander" interface="org.eclipse.osgi.framework.console.CommandProvider" />
 	 
@@ -18,7 +19,8 @@
 		<property name="plr" ref="player" />
 	</bean>
 		
- 	<bean name="player" class="cz.zcu.kiv.bp.uniplayer.Player" destroy-method="destroy">
+ 	<bean name="player" class="cz.zcu.kiv.bp.uniplayer.Player">
 		<property name="eventAdmin" ref="EventAdmin" />
+        <property name="envProbe" ref="envProbe" />
 	</bean>
 </beans>

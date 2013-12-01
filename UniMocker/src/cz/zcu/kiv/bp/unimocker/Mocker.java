@@ -22,6 +22,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.springframework.osgi.context.BundleContextAware;
 import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.probe.IProbe;
 import cz.zcu.kiv.bp.unimocker.bindings.IScenario;
 import cz.zcu.kiv.bp.unimocker.bindings.Scenario;
 import cz.zcu.kiv.bp.unimocker.bindings.TSimulatedService;
@@ -53,57 +54,72 @@ public class Mocker implements IMocker, BundleContextAware
      */
     private List<ServiceRegistration<?>> serviceRegistrations = new LinkedList<ServiceRegistration<?>>();
 	
+	/**
+	 * OSGI environment probe
+	 */
+	private IProbe envProbe;
+    
     /**
-     * Tries to found bundle described by string in format symbolic.name:Major.Minor.Micro.
-     * Stops with the first bundle that has matching description! 
-     * @param description symbolic.name:Major.Minor.Micro formated bundle description
-     * @return found Bundle instance or null when not found
+     * EnvProbe setter
      */
-    private Bundle findBundle(String description)
-	{
-		Bundle ret = null;
-		
-		for (Bundle bundle : _.context.getBundles())
-		{
-            String key = String.format(
-            	"%s:%s.%s.%s",
-            	bundle.getSymbolicName(),
-            	bundle.getVersion().getMajor(),
-            	bundle.getVersion().getMinor(),
-            	bundle.getVersion().getMicro()
-            );
-            if (description.equalsIgnoreCase(key))
-            {
-            	ret = bundle;
-            	break;
-            }
-		}
-		
-		return ret;
-	}
-
-    /**
-     * Tries to load described classes from the given bundle.
-     * @param bundle which should be probed
-     * @param classesToFind array of class names to find
-     * @return array of loaded classes
-     * @throws ClassNotFoundException when bundles classloader fails to load class
-     */
-	private Class<?>[] findClassesInBundle(Bundle bundle, String[] classesToFind) throws ClassNotFoundException
-	{
-		List<Class<?>> ret = new ArrayList<>(classesToFind.length);
-
-		for (String className : classesToFind)
-		{
-			ret.add(bundle.loadClass(className));
-		}
-		
-		return ret.toArray(new Class<?>[0]);
-	}
+    public void setEnvProbe(IProbe envProbe)
+    {
+    	_.envProbe = envProbe;
+    }
+	
+//    /**
+//     * Tries to found bundle described by string in format symbolic.name:Major.Minor.Micro.
+//     * Stops with the first bundle that has matching description! 
+//     * @param description symbolic.name:Major.Minor.Micro fromated bundle description
+//     * @return found Bundle instance or null when not found
+//     * @deprecated
+//     */
+//    private Bundle findBundle(String description)
+//	{
+//		Bundle ret = null;
+//		
+//		for (Bundle bundle : _.context.getBundles())
+//		{
+//            String key = String.format(
+//            	"%s:%s.%s.%s",
+//            	bundle.getSymbolicName(),
+//            	bundle.getVersion().getMajor(),
+//            	bundle.getVersion().getMinor(),
+//            	bundle.getVersion().getMicro()
+//            );
+//            if (description.equalsIgnoreCase(key))
+//            {
+//            	ret = bundle;
+//            	break;
+//            }
+//		}
+//		
+//		return ret;
+//	}
+//
+//    /**
+//     * Tries to load described classes from the given bundle.
+//     * @param bundle which should be probed
+//     * @param classesToFind array of class names to find
+//     * @return array of loaded classes
+//     * @throws ClassNotFoundException when bundles classloader fails to load class
+//     * @deprecated
+//     */
+//	private Class<?>[] findClassesInBundle(Bundle bundle, String[] classesToFind) throws ClassNotFoundException
+//	{
+//		List<Class<?>> ret = new ArrayList<>(classesToFind.length);
+//
+//		for (String className : classesToFind)
+//		{
+//			ret.add(bundle.loadClass(className));
+//		}
+//		
+//		return ret.toArray(new Class<?>[0]);
+//	}
 
 	/**
      * Tries to load described classes from the given bundle without
-     * throwing exception case of non-existent class.
+     * throwing exception in case of non-existing class.
      * @param mockedBundle which should be probed
      * @param classesToFind array of class names to find
      * @return array of loaded classes or null if loading was not successful
@@ -113,7 +129,8 @@ public class Mocker implements IMocker, BundleContextAware
 		Class<?>[] ret = null;
 		try
 		{
-			ret = _.findClassesInBundle(mockedBundle, classesToFind);
+//			ret = _.findClassesInBundle(mockedBundle, classesToFind);
+			ret = _.envProbe.findClassesInBundle(mockedBundle, classesToFind);
 		}
 		catch (ClassNotFoundException ignore)
 		{
@@ -209,7 +226,7 @@ public class Mocker implements IMocker, BundleContextAware
 					methodToFind.getName(),
 					Arrays.deepToString(parameterTypes)
 				);
-				// If this method has not been yet described, create new collection.
+				// If this method has not yet been described, create new collection.
 				if (!returns.containsKey(foundMethod))
 				{ // new method
 					returns.put(foundMethod, new HashMap<Object[], Object>());
@@ -255,7 +272,8 @@ public class Mocker implements IMocker, BundleContextAware
 
 		for (Entry<String, HashMap<String, List<TSimulatedService>>> bundle : scenario.entrySet())
 		{
-			Bundle mockedBundle = _.findBundle(bundle.getKey());
+//			Bundle mockedBundle = _.findBundle(bundle.getKey());
+			Bundle mockedBundle = _.envProbe.findBundle(bundle.getKey());
 			if (mockedBundle == null)
 			{ // bundle described in scenario has not been found in current context
 				System.out.printf("Bundle %s has not been found! Skipping bundle.%n", bundle.getKey());
