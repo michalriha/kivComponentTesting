@@ -49,7 +49,7 @@ public class Player implements IPlayer, BundleContextAware
 	private EventAdmin eventAdmin;
 	
 	/**
-	 * flag signaling whether the scenario has replay has been stopped  
+	 * flag signaling whether the scenario replay has been stopped  
 	 */
 	private volatile boolean stopped = false;
 	
@@ -286,7 +286,7 @@ public class Player implements IPlayer, BundleContextAware
 	}
 	
 	/**
-	 * Bundel destroy-method
+	 * Signals the player to stop the replay
 	 */
 	public void stop()
 	{

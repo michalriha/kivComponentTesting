@@ -103,7 +103,7 @@ public class Mocker implements IMocker, BundleContextAware
 
 	/**
      * Tries to load described classes from the given bundle without
-     * throwing exception case of non-existent class.
+     * throwing exception in case of non-existing class.
      * @param mockedBundle which should be probed
      * @param classesToFind array of class names to find
      * @return array of loaded classes or null if loading was not successful
