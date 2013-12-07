@@ -190,7 +190,7 @@ public class Player implements IPlayer//, BundleContextAware
 		}
 
 		try
-		{ // try to execute requirred action
+		{ // try to execute required action
 			// apache method utils used for it's better matching capabilities
 			MethodUtils.invokeMethod(
 				serviceInstance,

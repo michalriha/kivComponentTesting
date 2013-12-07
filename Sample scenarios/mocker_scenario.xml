@@ -19,12 +19,26 @@
 				            </static>
 				        </call>
 				    </code-injection>
+				    <!-- Following invocations has no meaning since this method does not return anything -->
+                    <invocation>
+                        <arguments>
+                            <argument ord-num="0">
+                                <AnyValue base-type="FileArrayList"/>
+                            </argument>
+                            <argument ord-num="1">
+                                <AnyValue base-type="String" />
+                            </argument>
+                            <argument ord-num="2">
+                                <AnyValue base-type="String" />
+                            </argument>
+                        </arguments>
+                    </invocation>
 					<invocation>
 						<arguments>
 							<argument ord-num="0">
 								<types:Files type="ArrayList">
 									<types:item ord-num="0">
-										<types:File>d:\Obrázky.zip2</types:File>
+										<types:File>\Obrázky.zip2</types:File>
 									</types:item>
 								</types:Files>
 							</argument>
@@ -57,6 +71,14 @@
 		<bundle symbolic-name="cz.zcu.kiv.kc.archiver" version="1.0.0">
 			<service interface="cz.zcu.kiv.kc.archiver.IArchivePacker">
 				<method name="getExtension">
+				    <code-injection>
+                        <call>
+                            <static>
+                                <bundle symbolic-name="my.code.injector.bundle" version="1.0.0" />
+                                <method name="my.code.injector.Observer.executeAction" overrides-return-values="true" />
+                            </static>
+                        </call>
+                    </code-injection>
 					<invocation>
 						<arguments />
 						<return>
@@ -65,6 +87,14 @@
 					</invocation>
 				</method>
 				<method name="getFormatName">
+                    <code-injection>
+                        <call>
+                            <static>
+                                <bundle symbolic-name="my.code.injector.bundle" version="1.0.0" />
+                                <method name="my.code.injector.Observer.executeAction2" overrides-return-values="true" />
+                            </static>
+                        </call>
+                    </code-injection>
 					<invocation>
 						<arguments />
 						<return>

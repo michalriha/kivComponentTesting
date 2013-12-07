@@ -128,7 +128,16 @@ public class TCodeInjection {
         this.call = value;
     }
 
-
+    /**
+     * Returns true if current injection is method call.
+     * So far no other injection is supported.
+     * @return 
+     */
+    public boolean isCall()
+    {
+    	return this.call != null ? true : false; 
+    }
+    
     /**
      * <p>Java class for anonymous complex type.
      * 
@@ -207,6 +216,7 @@ public class TCodeInjection {
 
         @XmlElement(name = "static", namespace = "http://www.kiv.zcu.cz/component-testing/mocker")
         protected TCodeInjection.Call.Static _static;
+        
         @XmlElement(namespace = "http://www.kiv.zcu.cz/component-testing/mocker")
         protected TCodeInjection.Call.Service service;
 
@@ -258,7 +268,25 @@ public class TCodeInjection {
             this.service = value;
         }
 
+        /**
+         * Returns true if current injection is represented by a call of a static method.
+         * @return
+         */
+        public boolean isStatic()
+        {
+        	return this._static == null ? false : true;
+        }
 
+        /**
+         * Returns true if current injection is represented by a call of
+         * a method on an instance of a service provider. 
+         * @return
+         */
+        public boolean isService()
+        {
+        	return this.service == null ? false : true;
+        }
+        
         /**
          * <p>Java class for anonymous complex type.
          * 
@@ -296,6 +324,7 @@ public class TCodeInjection {
 
             @XmlElement(namespace = "http://www.kiv.zcu.cz/component-testing/mocker", required = true)
             protected TCodeInjection.Call.Service.Method method;
+            
             @XmlAttribute(name = "name")
             @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
             protected String name;
@@ -424,7 +453,21 @@ public class TCodeInjection {
                 public void setOverridesReturnValues(Boolean value) {
                     this.overridesReturnValues = value;
                 }
+                
+                public String toString()
+                {
+                	return this.getName() + " (" + this.isOverridesReturnValues() + ")";
+                }
 
+            }
+            
+            public String toString()
+            {
+            	StringBuilder sb = new StringBuilder();
+            	
+            	sb.append(this.getName() + "." + this.getMethod());
+            	
+            	return sb.toString();
             }
 
         }
@@ -605,6 +648,11 @@ public class TCodeInjection {
                 public void setVersion(String value) {
                     this.version = value;
                 }
+                
+                public String toString()
+                {
+                	return this.getSymbolicName() + ":" + this.getVersion();
+                }
 
             }
 
@@ -684,7 +732,23 @@ public class TCodeInjection {
                 public void setOverridesReturnValues(Boolean value) {
                     this.overridesReturnValues = value;
                 }
+                
+                public String toString()
+                {
+                	return this.getName() + " (" + this.isOverridesReturnValues() + ")";
+                }
 
+            }
+            
+            public String toString()
+            {
+            	StringBuilder sb = new StringBuilder();
+            	
+            	sb.append(this.getBundle());
+            	sb.append("!");
+            	sb.append(this.getMethod());
+            	
+            	return sb.toString();
             }
 
         }

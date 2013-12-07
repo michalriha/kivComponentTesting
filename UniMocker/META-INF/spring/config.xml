@@ -12,7 +12,7 @@
 
     <osgi:reference id="envProbe" interface="cz.zcu.kiv.bp.probe.IProbe" />
 
-	<osgi:service id="UniplayerCommander" ref="commander" interface="org.eclipse.osgi.framework.console.CommandProvider" />
+	<osgi:service id="UnimockerCommander" ref="commander" interface="org.eclipse.osgi.framework.console.CommandProvider" />
 	 
 	<bean name="commander" class="cz.zcu.kiv.bp.unimocker.Commander" init-method="init">
 		<property name="mocker" ref="mocker" />

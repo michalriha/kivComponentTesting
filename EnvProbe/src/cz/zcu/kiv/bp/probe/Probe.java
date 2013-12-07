@@ -110,6 +110,15 @@ public class Probe implements BundleContextAware, IProbe
 	}
 
 	/* (non-Javadoc)
+	 * @see cz.zcu.kiv.bp.probe.IProbe#findClassInBundle(org.osgi.framework.Bundle, java.lang.String)
+	 */
+	@Override
+	public Class<?> findClassInBundle(Bundle bundle, String classToFind) throws ClassNotFoundException
+	{
+		return bundle.loadClass(classToFind);
+	}
+	
+	/* (non-Javadoc)
 	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstance(java.lang.String, int)
 	 */
 	@Override

@@ -5,7 +5,6 @@ package cz.zcu.kiv.bp.unimocker;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -25,6 +24,7 @@ import org.xml.sax.SAXException;
 import cz.zcu.kiv.bp.probe.IProbe;
 import cz.zcu.kiv.bp.unimocker.bindings.IScenario;
 import cz.zcu.kiv.bp.unimocker.bindings.Scenario;
+import cz.zcu.kiv.bp.unimocker.bindings.TCodeInjection;
 import cz.zcu.kiv.bp.unimocker.bindings.TSimulatedService;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
@@ -170,14 +170,20 @@ public class Mocker implements IMocker, BundleContextAware
 	private Object createMockup(
 		Class<?> clazz,
 		Map<Method, Map<Object[], Object>> returns,
+		Map<Method, TCodeInjection> injections,
 		boolean ignoreUndefMethods,
 		boolean ignoreUndefPossibs)
 	{
+		// prepare handler
+		UniHandler handler = new UniHandler(clazz, returns, ignoreUndefMethods, ignoreUndefPossibs);
+		handler.setEnvProbe(_.envProbe);
+		handler.setInjectedCode(injections);
+		
 		// create mockup object
 		Object mockup = Proxy.newProxyInstance(
 			clazz.getClassLoader(),
 			new Class<?> [] { clazz },
-			new UniHandler(clazz, returns, ignoreUndefMethods, ignoreUndefPossibs)
+			handler
 		);
 		return mockup;
 	}
@@ -296,16 +302,18 @@ public class Mocker implements IMocker, BundleContextAware
 			for (Class<?> clazz : mockedClasses)
 			{
 				try
-				{ 
+				{
 					// find all described invocations for current class
 					List<TSimulatedService> simulation = bundle.getValue().get(clazz.getName());
 					for (TSimulatedService service : simulation)
 					{
 						Map<Method, Map<Object[], Object>> returns = _.buildInvocationPossibilitiesForClass(clazz, service);
-
+						Map<Method, TCodeInjection> injections = _.buildCodeInjections(clazz, service);
+						
 						Object srv = _.createMockup(
 							clazz,
 							returns,
+							injections,
 							service.isIgnoreUndefinedMethods(),
 							service.isIgnoreUndefinedPossibilities()
 						);
@@ -322,6 +330,58 @@ public class Mocker implements IMocker, BundleContextAware
 		}
 	}
 	
+	private Map<Method, TCodeInjection> buildCodeInjections(
+		Class<?> clazz,
+		TSimulatedService service)
+	throws NoSuchMethodException
+	{
+		Map<Method, TCodeInjection> ret = new HashMap<>();
+		
+		for (InvokedMethod method : service.getMethods())
+		{
+			// invoked method has to have at least one invocation
+			if (method.getInvocations().size() < 1)
+			{
+				throw new IllegalStateException("Mocked method has no invocation described.");
+			}
+			Invocation inv = method.getInvocations().get(0);
+			Class<?>[] parameterTypes = inv.getArguments().getTypes();
+			// Tries to match method w/o wrapper classes for primitive types.
+			Method mockedMethod = MethodUtils.getMatchingAccessibleMethod(
+				clazz,
+				method.getName(),
+				parameterTypes
+			);
+			if (mockedMethod == null)
+			{ // class does not provide required method
+				if (!service.isIgnoreUndefinedMethods())
+				{ // scenario says not to ignore undefined methods
+					throw new NoSuchMethodException(
+						String.format(
+							"Class %s does not provide any method %s with arguments %s",
+							clazz.getCanonicalName(),
+							method.getName(),
+							Arrays.deepToString(parameterTypes)
+						)
+					);
+				}
+				else
+				{ // scenario says to ignore undefined methods
+				  // go to next method
+					continue;
+				}
+			}
+			
+			TCodeInjection injectedCode = method.getInjectedCode();
+			if (injectedCode != null)
+			{
+				ret.put(mockedMethod, injectedCode);
+			}
+		}
+		
+		return ret;
+	}
+
 	@Override
 	public void diag()
 	{

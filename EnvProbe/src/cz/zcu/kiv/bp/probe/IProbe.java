@@ -20,11 +20,21 @@ public interface IProbe
 	 * @param bundle which should be probed
 	 * @param classesToFind array of class names to find
 	 * @return array of loaded classes
-	 * @throws ClassNotFoundException when bundles classloader fails to load class
+	 * @throws ClassNotFoundException when bundle's classloader fails to load class
 	 */
 	public abstract Class<?>[] findClassesInBundle(Bundle bundle, String[] classesToFind)
 	throws ClassNotFoundException;
 
+	/**
+	 * Tries to load described class from the given bundle.
+	 * @param bundle which should be probed
+	 * @param classToFind name of the class to find
+	 * @return array of loaded classes
+	 * @throws ClassNotFoundException when bundle's classloader fails to load class
+	 */
+	public abstract Class<?> findClassInBundle(Bundle bundle, String classToFind)
+	throws ClassNotFoundException;
+	
 	/**
 	 * Tries to acquire service from OSGi context.
 	 * @param serviceName name of the service to acquire
