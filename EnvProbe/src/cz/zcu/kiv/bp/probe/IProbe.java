@@ -55,16 +55,31 @@ public interface IProbe
 	 * @param serviceName service to track
 	 * @return corresponding ServiceTracker
 	 */
-	public abstract ServiceTracker<?, ?> getTracker(String serviceName);
+	public abstract ServiceTracker<?, ?> getTracker(String serviceName, boolean tractAllServices);
 
 	/**
 	 * Create ServiceTracker for current OSGi context and given service.
 	 * @param serviceName name of the tracked service
 	 */
-	public abstract void createServiceTracker(String serviceName);
+	public abstract void createServiceTracker(String serviceName, boolean tractAllServices);
 
 	/**
 	 * Sets the stopped flag so that method getServiceInstance(String serviceName, int waitLimit) can stop waiting for service.
 	 */
 	public void stopWaiting();
+
+	/**
+	 * Tries to acquire all service instances from OSGi context.
+	 * @param serviceName name of the service to acquire
+	 * @param waitLimit time in [ms] to wait for service to be activated
+	 * @return array of instances
+	 */
+	public Object[] getServiceInstances(String serviceName, int waitLimit);
+
+	/**
+	 * Tries to acquire all service instances from OSGi context.
+	 * @param serviceName name of the service to acquire
+	 * @return array of instances
+	 */
+	public Object[] getServiceInstances(String serviceName);
 }

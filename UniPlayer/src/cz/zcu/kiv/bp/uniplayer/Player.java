@@ -138,7 +138,7 @@ public class Player implements IPlayer//, BundleContextAware
 			if (call != null)
 			{
 				System.out.printf(
-					" %s.%s (%s)",
+					" %s.%s (%s)%n",
 					call.getService(),
 					call.getMethod(),
 					call.getArguments()
@@ -148,7 +148,7 @@ public class Player implements IPlayer//, BundleContextAware
 			else if (event != null)
 			{
 				System.out.printf(
-					" %s/%s[%s]",
+					" %s/%s[%s]%n",
 					event.getTopic(),
 					event.getKey(),
 					event.getArgument()
@@ -179,18 +179,30 @@ public class Player implements IPlayer//, BundleContextAware
 	 */
 	private void execute(TCall call)
 	{
-		// find service instance
-//		Object serviceInstance = _.getServiceInstance(call.getService());
-		Object serviceInstance = _.envProbe.getServiceInstance(call.getService(), IProbe.DEFAULT_WAIT_LIMIT);
-		System.out.println(serviceInstance);
-		if (serviceInstance == null)
+		Object[] serviceInstances = _.getServiceInstances(call);
+		
+		if (serviceInstances == null)
 		{ // no service implementation is active in current context
 			System.out.printf("No instance of %s has not been found. skipping ...%n", call.getService());
 			return;
 		}
+		
+		for (Object serviceInstance : serviceInstances)
+		{ // invoke method on each service instance
+			_.invokeMethodOnInstance(call, serviceInstance);
+		}
+	}
 
+	/**
+	 * Invokes method described in the call argument on service Instance object.
+	 * @param call - invocation description
+	 * @param serviceInstance - instance on which the method will be invoked
+	 */
+	private void invokeMethodOnInstance(TCall call, Object serviceInstance)
+	{
 		try
 		{ // try to execute required action
+			System.out.println("\t\tinstance: " + serviceInstance);
 			// apache method utils used for it's better matching capabilities
 			MethodUtils.invokeMethod(
 				serviceInstance,
@@ -220,6 +232,83 @@ public class Player implements IPlayer//, BundleContextAware
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Build array of service instances. Array has only one element when use-all-services-available is set to false.
+	 * @param call - invocation description
+	 * @return array of service instances, null when no instance is found
+	 */
+	private Object[] getServiceInstances(TCall call)
+	{
+		Object[] serviceInstances = null;
+		
+		if (call.isUseAllServicesAvailable())
+		{ // find all service instances
+			serviceInstances = _.envProbe.getServiceInstances(call.getService(), IProbe.DEFAULT_WAIT_LIMIT);
+		}
+		else
+		{ // find single service instance
+			Object singleInstance = _.envProbe.getServiceInstance(call.getService(), IProbe.DEFAULT_WAIT_LIMIT);
+			if (singleInstance != null)
+			{
+				serviceInstances = new Object[] {singleInstance};
+			}
+		}
+		return serviceInstances;
+	}
+	
+//	/**
+//	 * Invokes method on service with arguments described in call argument.
+//	 * @param call invocation description
+//	 */
+//	private void executeOld(TCall call)
+//	{
+//		// find service instance
+//		Object serviceInstance = _.envProbe.getServiceInstance(call.getService(), IProbe.DEFAULT_WAIT_LIMIT);
+//		if (call.isUseAllServicesAvailable())
+//		{
+//			Object[] serviceInstanc2 = _.envProbe.getServiceInstances(call.getService(), IProbe.DEFAULT_WAIT_LIMIT);
+//
+//		}
+//		
+//		System.out.println(serviceInstance);
+//		if (serviceInstance == null)
+//		{ // no service implementation is active in current context
+//			System.out.printf("No instance of %s has not been found. skipping ...%n", call.getService());
+//			return;
+//		}
+//
+//		try
+//		{ // try to execute required action
+//			// apache method utils used for it's better matching capabilities
+//			MethodUtils.invokeMethod(
+//				serviceInstance,
+//				call.getMethod(),
+//				call.getArguments().toArray(),
+//				call.getArguments().getTypes()
+//			);
+//		}
+//		catch (NoSuchMethodException ex)
+//		{ // required method does not exist
+//			System.out.printf(
+//				"Service does not provide method %s (%s). skipping ...%n",
+//				call.getMethod(),
+//				printTypes(call.getArguments().getTypes())
+//			);
+//		}
+//		catch (
+//			IllegalAccessException
+//			| IllegalArgumentException
+//			| InvocationTargetException e)
+//		{ // invocation failed
+//			System.out.println("Invocation of method %s in service %s failled. stack trace:%n");
+//			e.printStackTrace();
+//		}
+//		catch (Throwable e)
+//		{ // unexpected exception
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Implodes array of Class<?> using it's getName() method.

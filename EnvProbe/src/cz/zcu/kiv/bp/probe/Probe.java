@@ -119,13 +119,60 @@ public class Probe implements BundleContextAware, IProbe
 	}
 	
 	/* (non-Javadoc)
+	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstances(java.lang.String serviceName, int waitLimit)
+	 */
+	@Override
+	public Object[] getServiceInstances(String serviceName, int waitLimit)
+	{
+		Object[] ret = null;
+		ServiceTracker<?, ?> st = _.getTracker(serviceName, false);
+		
+		int i = 0;
+		while ((ret = st.getServices()) == null && i < waitLimit && !_.stopped)
+		{ // service instance is not active, wait
+			if (i == 0)
+			{ // this is the first waiting, print warning message
+				System.out.printf(
+					"Waiting for service. Please activate bundle providing service %s%n",
+					serviceName
+				);
+			}
+			else
+			{
+				System.out.printf(".");
+			}
+			try
+			{
+				// wait 1s for service to activate
+				st.waitForService(1000);
+			}
+			catch (InterruptedException ignore) {}
+			i += 1000;
+		}
+		
+		return ret;
+	}
+	
+	/* (non-Javadoc)
+	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstances(java.lang.String, int)
+	 */
+	@Override
+	public Object[] getServiceInstances(String serviceName)
+	{
+		Object[] ret = null;
+		ServiceTracker<?, ?> st = _.getTracker(serviceName, false);
+		ret = st.getServices();
+		return ret;
+	}
+	
+	/* (non-Javadoc)
 	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstance(java.lang.String, int)
 	 */
 	@Override
 	public Object getServiceInstance(String serviceName, int waitLimit)
 	{
 		Object ret = null; // service instance
-		ServiceTracker<?, ?> st = _.getTracker(serviceName);
+		ServiceTracker<?, ?> st = _.getTracker(serviceName, false);
 		ret = st.getService();
 		if (ret == null)
 		{ // service instance is not active, wait
@@ -138,7 +185,7 @@ public class Probe implements BundleContextAware, IProbe
 			{
 				ret = st.getService();
 				if (ret != null)
-				{ // service instance has been active, exit loop
+				{ // service instance has been activated, exit loop
 					break;
 				}
 				
@@ -163,7 +210,7 @@ public class Probe implements BundleContextAware, IProbe
 	public Object getServiceInstance(String serviceName)
 	{
 		Object ret = null; // service instance
-		ServiceTracker<?, ?> st = _.getTracker(serviceName);
+		ServiceTracker<?, ?> st = _.getTracker(serviceName, false);
 		ret = st.getService();		
 		return ret;
 	}
@@ -172,24 +219,24 @@ public class Probe implements BundleContextAware, IProbe
 	 * @see cz.zcu.kiv.bp.probe.IProbe#getTracker(java.lang.String)
 	 */
 	@Override
-	public ServiceTracker<?, ?> getTracker(String serviceName)
+	public ServiceTracker<?, ?> getTracker(String serviceName, boolean tractAllServices)
 	{
-		if (!_.svcTrackers.containsKey(serviceName))
+		if (!_.svcTrackers.containsKey(serviceName + ":" + tractAllServices))
 		{
-			_.createServiceTracker(serviceName);
-		}
-		return _.svcTrackers.get(serviceName);
+			_.createServiceTracker(serviceName, tractAllServices);
+		}		
+		return _.svcTrackers.get(serviceName + ":" + tractAllServices);
 	}
 	
 	/* (non-Javadoc)
 	 * @see cz.zcu.kiv.bp.probe.IProbe#createServiceTracker(java.lang.String)
 	 */
 	@Override
-	public void createServiceTracker(String serviceName)
+	public void createServiceTracker(String serviceName, boolean tractAllServices)
 	{
 		ServiceTracker<?, ?> st = new ServiceTracker<>(_.context, serviceName, null);
-		st.open();
-		_.svcTrackers.put(serviceName, st);
+		st.open(tractAllServices);
+		_.svcTrackers.put(serviceName + ":" + tractAllServices, st);
 	}
     
 	/* (non-Javadoc)

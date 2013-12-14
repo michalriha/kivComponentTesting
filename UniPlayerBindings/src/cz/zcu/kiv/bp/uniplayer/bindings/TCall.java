@@ -33,6 +33,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.adapted.ArgumentsList;
  *       &lt;attribute name="service" use="required" type="{http://www.kiv.zcu.cz/component-testing/player}TInterfaceName" />
  *       &lt;attribute name="method" use="required" type="{http://www.kiv.zcu.cz/component-testing/player}TMethodName" />
  *       &lt;attribute name="filter" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *		 &lt;attribute name="use-all-services-availabe" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -56,6 +57,8 @@ public class TCall {
     protected String method;
     @XmlAttribute(name = "filter")
     protected String filter;
+    @XmlAttribute(name = "use-all-services-availabe")
+    protected boolean useAllServicesAvailable;
 
     /**
      * Gets the value of the arguments property.
@@ -153,4 +156,27 @@ public class TCall {
         this.filter = value;
     }
 
+    /**
+     * Gets the value of the filter property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public boolean isUseAllServicesAvailable() {
+        return this.useAllServicesAvailable;
+    }
+
+    /**
+     * Sets the value of the filter property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUseAllServicesAvailable(boolean value) {
+        this.useAllServicesAvailable = value;
+    }
 }

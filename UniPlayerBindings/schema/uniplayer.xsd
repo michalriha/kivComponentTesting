@@ -135,6 +135,7 @@
 		<xsd:attribute name="service" type="TInterfaceName" use="required" />
 		<xsd:attribute name="method" type="TMethodName" use="required" />
 		<xsd:attribute name="filter" type="xsd:string" use="optional" />
+		<xsd:attribute name="use-all-services-availabe" type="xsd:boolean" default="false" />
 	</xsd:complexType>
 
 	<!-- vyvolani udalosti // -->
