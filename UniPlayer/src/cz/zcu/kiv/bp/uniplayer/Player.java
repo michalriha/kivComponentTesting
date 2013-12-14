@@ -242,13 +242,15 @@ public class Player implements IPlayer//, BundleContextAware
 	{
 		Object[] serviceInstances = null;
 		
+		String filter = call.getFilter();
+		
 		if (call.isUseAllServicesAvailable())
 		{ // find all service instances
-			serviceInstances = _.envProbe.getServiceInstances(call.getService(), IProbe.DEFAULT_WAIT_LIMIT);
+			serviceInstances = _.envProbe.getServiceInstances(call.getService(), filter == null ? "" : filter, IProbe.DEFAULT_WAIT_LIMIT);
 		}
 		else
 		{ // find single service instance
-			Object singleInstance = _.envProbe.getServiceInstance(call.getService(), IProbe.DEFAULT_WAIT_LIMIT);
+			Object singleInstance = _.envProbe.getServiceInstance(call.getService(), filter == null ? "" : filter, IProbe.DEFAULT_WAIT_LIMIT);
 			if (singleInstance != null)
 			{
 				serviceInstances = new Object[] {singleInstance};

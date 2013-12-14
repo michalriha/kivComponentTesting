@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Filter;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.springframework.osgi.context.BundleContextAware;
@@ -124,9 +126,18 @@ public class Probe implements BundleContextAware, IProbe
 	@Override
 	public Object[] getServiceInstances(String serviceName, int waitLimit)
 	{
+		return _.getServiceInstances(serviceName, "", waitLimit);
+	}
+	
+	/* (non-Javadoc)
+	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstances(java.lang.String serviceName, java.lang.String, int waitLimit)
+	 */
+	@Override
+	public Object[] getServiceInstances(String serviceName, String filter, int waitLimit)
+	{
 		Object[] ret = null;
-		ServiceTracker<?, ?> st = _.getTracker(serviceName, false);
-		
+		ServiceTracker<?, ?> st = _.getTracker(serviceName, filter, true);
+		System.out.printf("Tracker for %s is %s%n", _.createTrackerKey(serviceName, filter, true), st.toString());
 		int i = 0;
 		while ((ret = st.getServices()) == null && i < waitLimit && !_.stopped)
 		{ // service instance is not active, wait
@@ -154,13 +165,22 @@ public class Probe implements BundleContextAware, IProbe
 	}
 	
 	/* (non-Javadoc)
-	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstances(java.lang.String, int)
+	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstances(java.lang.String)
 	 */
 	@Override
 	public Object[] getServiceInstances(String serviceName)
 	{
+		return _.getServiceInstances(serviceName, "");
+	}
+	
+	/* (non-Javadoc)
+	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstances(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Object[] getServiceInstances(String serviceName, String filter)
+	{
 		Object[] ret = null;
-		ServiceTracker<?, ?> st = _.getTracker(serviceName, false);
+		ServiceTracker<?, ?> st = _.getTracker(serviceName, filter, true);
 		ret = st.getServices();
 		return ret;
 	}
@@ -171,8 +191,17 @@ public class Probe implements BundleContextAware, IProbe
 	@Override
 	public Object getServiceInstance(String serviceName, int waitLimit)
 	{
+		return _.getServiceInstance(serviceName, "", waitLimit);
+	}
+	
+	/* (non-Javadoc)
+	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstance(java.lang.String, java.lang.String, int)
+	 */
+	@Override
+	public Object getServiceInstance(String serviceName, String filter, int waitLimit)
+	{
 		Object ret = null; // service instance
-		ServiceTracker<?, ?> st = _.getTracker(serviceName, false);
+		ServiceTracker<?, ?> st = _.getTracker(serviceName, filter, false);
 		ret = st.getService();
 		if (ret == null)
 		{ // service instance is not active, wait
@@ -209,8 +238,17 @@ public class Probe implements BundleContextAware, IProbe
 	@Override
 	public Object getServiceInstance(String serviceName)
 	{
+		return _.getServiceInstance(serviceName, "");
+	}
+	
+	/* (non-Javadoc)
+	 * @see cz.zcu.kiv.bp.probe.IProbe#getServiceInstance(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Object getServiceInstance(String serviceName, String filter)
+	{
 		Object ret = null; // service instance
-		ServiceTracker<?, ?> st = _.getTracker(serviceName, false);
+		ServiceTracker<?, ?> st = _.getTracker(serviceName, filter, false);
 		ret = st.getService();		
 		return ret;
 	}
@@ -219,24 +257,44 @@ public class Probe implements BundleContextAware, IProbe
 	 * @see cz.zcu.kiv.bp.probe.IProbe#getTracker(java.lang.String)
 	 */
 	@Override
-	public ServiceTracker<?, ?> getTracker(String serviceName, boolean tractAllServices)
+	public ServiceTracker<?, ?> getTracker(String serviceName, String filter, boolean tractAllServices)
 	{
-		if (!_.svcTrackers.containsKey(serviceName + ":" + tractAllServices))
+		String trackerKey = _.createTrackerKey(serviceName, filter, tractAllServices);
+		
+		if (!_.svcTrackers.containsKey(trackerKey))
 		{
-			_.createServiceTracker(serviceName, tractAllServices);
+			_.createServiceTracker(serviceName, filter, tractAllServices);
 		}		
-		return _.svcTrackers.get(serviceName + ":" + tractAllServices);
+		return _.svcTrackers.get(trackerKey);
+	}
+
+	private String createTrackerKey(String serviceName, String filter, boolean tractAllServices)
+	{
+		String trackerKey = String.format("all:%s(&(objectclass=%s)%s)", tractAllServices, serviceName, filter);
+		return trackerKey;
 	}
 	
 	/* (non-Javadoc)
 	 * @see cz.zcu.kiv.bp.probe.IProbe#createServiceTracker(java.lang.String)
 	 */
 	@Override
-	public void createServiceTracker(String serviceName, boolean tractAllServices)
+	public void createServiceTracker(String serviceName, String filter, boolean tractAllServices)
 	{
-		ServiceTracker<?, ?> st = new ServiceTracker<>(_.context, serviceName, null);
-		st.open(tractAllServices);
-		_.svcTrackers.put(serviceName + ":" + tractAllServices, st);
+		String filterString = String.format("(&(objectclass=%s)%s)", serviceName, filter);
+		String trackerKey = _.createTrackerKey(serviceName, filter, tractAllServices);
+		try 
+		{
+			Filter fltr = _.context.createFilter(filterString);
+			ServiceTracker<?, ?> st = new ServiceTracker<>(_.context, fltr, null);
+			st.open(tractAllServices);
+			_.svcTrackers.put(trackerKey, st);
+			System.out.printf("Tracker for %s created.%n", trackerKey);
+		}
+		catch (InvalidSyntaxException e)
+		{
+			System.out.printf("Invalid filter string: %s%nTracker for %s has not been created!%n", filterString, trackerKey);
+			e.printStackTrace();
+		}
 	}
     
 	/* (non-Javadoc)

@@ -38,7 +38,7 @@
                 <equidistant step="15" />
             </recurrence>
             <command>
-                <call service="cz.zcu.kiv.kc.plugin.Plugin" method="getName" use-all-services-availabe="true">
+                <call service="cz.zcu.kiv.kc.plugin.Plugin" method="getName" use-all-services-availabe="true" filter="(name=*)">
                     <arguments />
                 </call>
             </command>
