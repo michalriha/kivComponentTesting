@@ -30,6 +30,7 @@ import javax.xml.validation.SchemaFactory;
 
 import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 import cz.zcu.kiv.bp.unimocker.bindings.TProject;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
@@ -227,6 +228,16 @@ public class Scenario implements IScenario
         {
             System.out.println(e.getMessage());
         }
+	}
+
+	@Override
+	public TCustomTypesSupport getCustomTypesSupportStructure()
+	{
+		if (_.scenario.getSettings() != null && _.scenario.getSettings().getCustomTypesSupport() != null)
+		{
+			return _.scenario.getSettings().getCustomTypesSupport();
+		}
+		else return null;
 	}
 	
 	

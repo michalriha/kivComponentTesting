@@ -2,9 +2,36 @@
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/custom_code_injection/UniMockerBindings/schema/unimocker.xsd">
+	<settings>
+	   <custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types"
+            xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
+            xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd">
+	       <types>
+	           <type cannonical-name="custom.types.Type5" version="1.0.0" bundle="custom.types">
+                    <factory>
+                        <static-member>
+                            <method>newInstance</method>
+                        </static-member>
+                    </factory>
+	           </type>
+	       </types>
+            <values>
+                <value type="custom.types.Type5" id="myVal">
+                    <arguments>
+                       <argument ord-num="0">
+                           <Strings type="array">
+                               <item ord-num="0"><String>D:\temp.tmp</String></item>
+                               <item ord-num="1"><String>D:\temp2.tmp</String></item>
+                           </Strings>
+                       </argument>
+                    </arguments>
+                </value>
+            </values>
+	   </custom-types-support>
+	</settings>
 	<simulated-components xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
 		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
-		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd">
+		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd">
 		<bundle symbolic-name="cz.zcu.kivcmd.common" version="1.0.0">
 			<service interface="cz.zcu.kiv.kc.plugin.Plugin"
 				ignore-undefined-methods="true" ignore-undefined-possibilities="true">
@@ -23,7 +50,8 @@
                     <invocation>
                         <arguments>
                             <argument ord-num="0">
-                                <AnyValue base-type="FileArrayList"/>
+<!--                                 <AnyValue base-type="FileArrayList"/> -->
+                                <types:CustomTypeData ref="myVal" />
                             </argument>
                             <argument ord-num="1">
                                 <AnyValue base-type="String" />

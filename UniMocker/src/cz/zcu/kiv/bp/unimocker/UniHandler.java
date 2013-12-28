@@ -3,6 +3,7 @@ package cz.zcu.kiv.bp.unimocker;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -104,7 +105,6 @@ public class UniHandler implements InvocationHandler
 		boolean ignoreUndefMethods,
 		boolean ignoreUndefPossibs)
 	{
-
 		_.mockedClass = mockedClass;
 		_.ignoreUndefinedMethods = ignoreUndefMethods;
 		_.ignoreUndefinedPossibilities = ignoreUndefPossibs;
@@ -231,112 +231,11 @@ public class UniHandler implements InvocationHandler
 				throw ex;
 			}
 			System.out.println("Undefined incovation possibility. Ignore flag set.");
-			System.out.println("actuallyInvokedMethod: " + actuallyInvokedMethod);
+			System.out.println("actuallyInvokedMethod: " + actuallyInvokedMethod + " with arguments: " + Arrays.deepToString(args));
 		}
 		
 		return ret;
 	}
-	
-//	/**
-//	 * @exception UndefinedMethodInvocationException
-//	 * @exception UndefinedPossibilityException
-//	 */
-//	@Override
-//	public Object invoke2(
-//		Object proxy,
-//		Method actuallyInvokedMethod,
-//		Object[] args)
-//	throws Throwable
-//	{
-//		// return value
-//		Object ret = null;
-//		
-//		Method tmpMet = null;
-//		try
-//		{
-//			// check if the mocked interface has this invoked method
-//			Class<?>[] paramTypes = actuallyInvokedMethod.getParameterTypes();
-//			String methodName = actuallyInvokedMethod.getName();
-//			tmpMet = _.mockedClass.getMethod(methodName, paramTypes);
-//
-//			if (!_.retMatrix.containsKey(tmpMet) && !_.paramLessMethods.containsKey(tmpMet))
-//			{ // invoked method has not been described in scenario
-//				if(!_.ignoreUndefinedMethods)
-//				{ // flag ignoreUndefinedMethods has been cleared
-//					throw new UndefinedMethodInvocationException(
-//						String.format(
-//							"Undefined method: %s width args: %s of type (%s)",
-//							tmpMet,
-//							Arrays.deepToString(args),
-//							Arrays.toString(paramTypes)
-//						)
-//					);
-//				}
-//				else 
-//				{ // flag ignoreUndefinedMethods has been set, this branch skips injected code!
-//					System.out.println("undefined method: " + actuallyInvokedMethod);
-//					return null;
-//				}
-//			}
-//			
-//			// find defined return value
-//			if (args != null)
-//			{
-//				ret = _.retMatrix.get(tmpMet).find(args);
-//			}
-//			else
-//			{
-//				ret = _.paramLessMethods.get(tmpMet);
-//			}
-//			
-//			// look if user wants to invoke custom code for this method
-//			if (_.injectedCode.containsKey(tmpMet))
-//			{ // injection for current method has been specified
-//				// value returned by injected method
-//				Object retFromInjection = null;
-//
-//				TCodeInjection injectedCode = _.injectedCode.get(tmpMet);
-//				if (injectedCode.isCall())
-//				{ // injected code is call
-//					TCodeInjection.Call call = injectedCode.getCall();
-//					if (call.isStatic())
-//					{ // injected code is static call
-//						retFromInjection = _.invokeCall(call.getStatic(), actuallyInvokedMethod, args);
-//						if (call.getStatic().getMethod().isOverridesReturnValues() && retFromInjection != void.class)
-//						{ // injection overrides return value
-//							ret = retFromInjection;
-//						}
-//					}
-//					else if (call.isService())
-//					{ // injected code is provided by OSGi service
-//						retFromInjection = _.invokeCall(call.getService(), actuallyInvokedMethod, args);
-//						if (call.getService().getMethod().isOverridesReturnValues() && retFromInjection != void.class)
-//						{ // injection overrides return value
-//							ret = retFromInjection;
-//						}
-//					}
-//				}
-//			}
-//		}
-//		catch (UndefinedPossibilityException ex)
-//		{
-//			if (!_.ignoreUndefinedPossibilities)
-//			{
-//				throw ex;
-//			}
-//			System.out.println("Undefined incovation possibility. Ignore flag set.");
-//			System.out.println("actuallyInvokedMethod: " + actuallyInvokedMethod);
-//		}
-//		catch (NoSuchMethodException ignore)
-//		{ // method has not been found -> method is from Object
-//			// try to invoke required method on current object in case of Object methods
-//			// possible exception are populated
-//			ret = actuallyInvokedMethod.invoke(this, args);
-//			System.out.println("invoked method does not belong to mocked class");
-//			System.out.println("actuallyInvokedMethod: " + actuallyInvokedMethod);
-//		}
-//		return ret;
-//	}
 
 	private Object invokeCall(
 		TCodeInjection.Call.Service injectedService,
@@ -401,18 +300,24 @@ public class UniHandler implements InvocationHandler
 			try
 			{
 				Class<?> foundClass = _.envProbe.findClassInBundle(foundBundle, classToFind);
-				ret = MethodUtils.invokeStaticMethod(
+				
+				Method injectedMethod = MethodUtils.getMatchingAccessibleMethod(
 					foundClass,
 					methodToFind,
-					args,
 					mockedMethod.getParameterTypes()
 				);
 				
-				Method injectedMethod = MethodUtils.getAccessibleMethod(
-					foundClass,
-					methodToFind,
-					mockedMethod.getParameterTypes()
-				);
+				if (injectedMethod == null)
+				{
+					throw new NoSuchMethodException();
+				}
+				if (!Modifier.isStatic(injectedMethod.getModifiers()))
+				{
+					throw new NoSuchMethodException();
+				}
+				
+				ret = injectedMethod.invoke(null, args);
+				
 				_.checkReturnTypes(mockedMethod, injectedMethod);
 				if (injectedMethod.getReturnType() == void.class)
 				{

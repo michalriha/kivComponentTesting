@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMapAdapter;
+import cz.zcu.kiv.bp.uniplayer.bindings.TSettings;
 
 
 /**
@@ -39,13 +40,41 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMapAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TProject", propOrder = {
+	"settings",
     "simulatedComponents"
 })
-public class TProject {
+public class TProject
+{
+	@XmlElement(required = false)
+    protected TSettings settings;
 
     @XmlElement(name = "simulated-components", type = TBundleList.class)
     @XmlJavaTypeAdapter(BundlesMapAdapter.class)
     protected BundlesMap simulatedComponents;
+
+    /**
+     * Gets the value of the settings property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link TSettings }
+     *     
+     */
+    public TSettings getSettings() {
+        return settings;
+    }
+
+    /**
+     * Sets the value of the settings property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TSettings }
+     *     
+     */
+    public void setSettings(TSettings value) {
+        this.settings = value;
+    }
 
     /**
      * Gets the value of the simulatedComponents property.
@@ -70,5 +99,4 @@ public class TProject {
     public void setSimulatedComponents(BundlesMap value) {
         this.simulatedComponents = value;
     }
-
 }

@@ -109,5 +109,4 @@ public class TSettings {
 	public void setCustomTypesSupport(TCustomTypesSupport customTypesSupport) {
 		this.customTypesSupport = customTypesSupport;
 	}
-
 }

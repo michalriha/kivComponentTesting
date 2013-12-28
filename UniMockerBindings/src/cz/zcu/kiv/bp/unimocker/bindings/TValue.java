@@ -26,30 +26,31 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;choice>
- *		   &lt;xsd:element ref="types:String" /> <!-- <xsd:element name="String" type="xsd:string" /> -->
- *         &lt;xsd:element ref="types:BigInteger" /><!-- <xsd:element name="BigInteger" type="xsd:integer" /> -->
- *         &lt;xsd:element ref="types:Long" /> <!-- <xsd:element name="Long" type="xsd:long" /> -->
- *         &lt;xsd:element ref="types:Integer" /> <!-- <xsd:element name="Integer" type="xsd:int" /> -->
- *         &lt;xsd:element ref="types:Short" /> <!-- <xsd:element name="Short" type="xsd:short" /> -->
- *         &lt;xsd:element ref="types:Byte" /> <!-- <xsd:element name="Byte" type="xsd:byte" /> -->
- *         &lt;xsd:element ref="types:BigDecimal" /> <!-- <xsd:element name="BigDecimal" type="xsd:decimal"/> -->
- *         &lt;xsd:element ref="types:Double" /> <!-- <xsd:element name="Double" type="xsd:double" /> -->
- *         &lt;xsd:element ref="types:Float" /> <!-- <xsd:element name="Float" type="xsd:float" /> -->
- *         &lt;xsd:element ref="types:Boolean" /> <!-- <xsd:element name="Boolean" type="xsd:boolean" /> -->
- *         &lt;xsd:element ref="types:File" /> <!--  name="File" type="types:TFile" /> -->
- *         &lt;xsd:element ref="types:Strings" /> <!-- name="Strings" type="types:TStringCollection" /> -->
- *         &lt;xsd:element ref="types:BigInts" /> <!-- name="BigInts" type="types:TBigIntegerCollection" /> -->
- *         &lt;xsd:element ref="types:Longs" /> <!-- <name="Longs" type="types:TLongCollection" /> -->
- *         &lt;xsd:element ref="types:Ints" /> <!-- name="Ints" type="types:TIntCollection" /> -->
- *         &lt;xsd:element ref="types:Shorts" /> <!--  name="Shorts" type="types:TShortCollection" /> -->
- *         &lt;xsd:element ref="types:Bytes" /> <!-- name="Bytes" type="types:TByteCollection" /> -->
- *         &lt;xsd:element ref="types:BigDecimals" /> <!-- name="BigDecimals" type="types:TBigDecimalCollection" /> -->
- *         &lt;xsd:element ref="types:Doubles" /> <!-- name="Doubles" type="types:TDoubleCollection" /> -->
- *         &lt;xsd:element ref="types:Floats" /> <!-- name="Floats" type="types:TFloatCollection" /> -->
- *         &lt;xsd:element ref="types:Booleans" /> <!-- name="Booleans" type="types:TBooleanCollection" /> -->
- *         &lt;xsd:element ref="types:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
- *         &lt;xsd:element ref="types:Null" /> <!-- name="Null" type="types:TNull" /> -->
+ *		   &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}String" /> <!-- <xsd:element name="String" type="xsd:string" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}BigInteger" /><!-- <xsd:element name="BigInteger" type="xsd:integer" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Long" /> <!-- <xsd:element name="Long" type="xsd:long" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Integer" /> <!-- <xsd:element name="Integer" type="xsd:int" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Short" /> <!-- <xsd:element name="Short" type="xsd:short" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Byte" /> <!-- <xsd:element name="Byte" type="xsd:byte" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}BigDecimal" /> <!-- <xsd:element name="BigDecimal" type="xsd:decimal"/> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Double" /> <!-- <xsd:element name="Double" type="xsd:double" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Float" /> <!-- <xsd:element name="Float" type="xsd:float" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Boolean" /> <!-- <xsd:element name="Boolean" type="xsd:boolean" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}File" /> <!--  name="File" type="types:TFile" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Strings" /> <!-- name="Strings" type="types:TStringCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}BigInts" /> <!-- name="BigInts" type="types:TBigIntegerCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Longs" /> <!-- <name="Longs" type="types:TLongCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Ints" /> <!-- name="Ints" type="types:TIntCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Shorts" /> <!--  name="Shorts" type="types:TShortCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Bytes" /> <!-- name="Bytes" type="types:TByteCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}BigDecimals" /> <!-- name="BigDecimals" type="types:TBigDecimalCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Doubles" /> <!-- name="Doubles" type="types:TDoubleCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Floats" /> <!-- name="Floats" type="types:TFloatCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Booleans" /> <!-- name="Booleans" type="types:TBooleanCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Null" /> <!-- name="Null" type="types:TNull" /> -->
  *         &lt;xsd:element name="AnyValue" type="TAnyValue" />
+ *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}CustomTypeData" />
  *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -84,7 +85,7 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
     "files",
     "_null",
     "anyValue",
-//    "collection"
+    "customTypeData"
 })
 @XmlSeeAlso({
     TArgument.class
@@ -171,6 +172,9 @@ public class TValue
     
     @XmlElement(name = "AnyValue")
     protected TAnyValue anyValue;
+    
+    @XmlElement(name = "CustomTypeData", namespace = "http://www.kiv.zcu.cz/component-testing/types")
+    protected TCustomTypeData customTypeData;
 
     /**
      * Gets the value of the string property.
@@ -753,6 +757,14 @@ public class TValue
     public void setAnyValue(TAnyValue value) {
         this.anyValue = value;
     }
+
+    public TCustomTypeData getCustomTypeData() {
+		return customTypeData;
+	}
+
+	public void setCustomTypeData(TCustomTypeData customTypeData) {
+		this.customTypeData = customTypeData;
+	}
 
     @Override
     public String toString()

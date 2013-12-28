@@ -10,7 +10,7 @@
 	jaxb:extensionBindingPrefixes="xjc">
 	<!-- obecne typy // -->
 
-    <xsd:import namespace="http://www.kiv.zcu.cz/component-testing/types" schemaLocation="https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd" />
+    <xsd:import namespace="http://www.kiv.zcu.cz/component-testing/types" schemaLocation="https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd" />
 
 	<xsd:simpleType name="TBundleName">
 		<xsd:restriction base="xsd:token">
@@ -74,6 +74,7 @@
 			<xsd:element ref="types:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
 			<xsd:element ref="types:Null" /> <!-- name="Null" type="types:TNull" /> -->
 			<xsd:element name="AnyValue" type="TAnyValue" />
+            <xsd:element ref="types:CustomTypeData" />
 		</xsd:choice>
 	</xsd:complexType>
 
@@ -172,9 +173,16 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
+	<xsd:complexType name="TSettings">
+	   <xsd:sequence>
+	       <xsd:element ref="types:custom-types-support" />
+	   </xsd:sequence>
+	</xsd:complexType>
+	
 	<!-- projekt // -->
 	<xsd:complexType name="TProject">
 		<xsd:sequence>
+		    <xsd:element name="settings" type="TSettings" minOccurs="0" maxOccurs="1" />
 			<xsd:element name="simulated-components" type="TBundleList" minOccurs="0" maxOccurs="1" />
 		</xsd:sequence>
 	</xsd:complexType>

@@ -197,7 +197,7 @@ public class Player implements IPlayer//, BundleContextAware
 		Object[] values = call.getArguments().toArray();
 		for (int i = 0; i < types.length; i++)
 		{
-			System.out.println("type: " + types[i] + " / " + (types[i] == TCustomTypeData.class));
+//			System.out.println("type: " + types[i] + " / " + (types[i] == TCustomTypeData.class));
 			if (types[i] == TCustomTypeData.class)
 			{
 				TCustomTypeData value = (TCustomTypeData) values[i];
