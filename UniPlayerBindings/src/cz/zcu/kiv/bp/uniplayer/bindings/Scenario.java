@@ -33,6 +33,8 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypeData;
+import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenarioIterator;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.ActionsMap;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Argument;
@@ -224,6 +226,16 @@ public class Scenario implements IScenario
                     );
                     for (Argument arg : action.getCommand().getCall().getArguments())
                     {
+                    	if (arg.getValue() instanceof TCustomTypeData)
+                    	{
+                    		TCustomTypeData data = (TCustomTypeData) arg.getValue();
+                    		System.out.printf(
+                    			"\t\t%s %s (%s)%n",
+                            	arg.getArgumentOrder(),
+                            	data.getRef().getArguments().toString(),
+                            	_.scenario.getSettings().getCustomTypesSupport().getTypes().get(data.getRef().getType()).getCannonicalName()
+                    		);
+                    	} else
                         System.out.printf(
                         	"\t\t%s %s (%s, %s)%n",
                         	arg.getArgumentOrder(),
@@ -383,6 +395,12 @@ public class Scenario implements IScenario
 	public long getSimulStepDelay()
 	{
 		return (long) _.scenario.getSettings().getSimulStepDelay();
+	}
+	
+	@Override
+	public TCustomTypesSupport getCustomTypesSupportStructure()
+	{
+		return _.scenario.getSettings().getCustomTypesSupport();
 	}
 
 }

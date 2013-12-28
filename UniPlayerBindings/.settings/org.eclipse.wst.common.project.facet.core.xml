@@ -2,5 +2,4 @@
 <faceted-project>
   <runtime name="jdk1.7.0_45 (64bit)"/>
   <installed facet="java" version="1.7"/>
-  <installed facet="jpt.jaxb" version="2.2"/>
 </faceted-project>

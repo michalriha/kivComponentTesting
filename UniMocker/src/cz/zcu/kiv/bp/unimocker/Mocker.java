@@ -22,6 +22,7 @@ import org.springframework.osgi.context.BundleContextAware;
 import org.xml.sax.SAXException;
 
 import cz.zcu.kiv.bp.probe.IProbe;
+import cz.zcu.kiv.bp.probe.NoSuchBundleException;
 import cz.zcu.kiv.bp.unimocker.bindings.IScenario;
 import cz.zcu.kiv.bp.unimocker.bindings.Scenario;
 import cz.zcu.kiv.bp.unimocker.bindings.TCodeInjection;
@@ -279,8 +280,12 @@ public class Mocker implements IMocker, BundleContextAware
 		for (Entry<String, HashMap<String, List<TSimulatedService>>> bundle : scenario.entrySet())
 		{
 //			Bundle mockedBundle = _.findBundle(bundle.getKey());
-			Bundle mockedBundle = _.envProbe.findBundle(bundle.getKey());
-			if (mockedBundle == null)
+			Bundle mockedBundle;
+			try
+			{
+				mockedBundle = _.envProbe.findBundle(bundle.getKey());
+			}
+			catch (NoSuchBundleException e)
 			{ // bundle described in scenario has not been found in current context
 				System.out.printf("Bundle %s has not been found! Skipping bundle.%n", bundle.getKey());
 				continue;

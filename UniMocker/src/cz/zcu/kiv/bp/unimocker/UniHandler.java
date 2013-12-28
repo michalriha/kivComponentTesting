@@ -7,10 +7,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.apache.commons.lang.reflect.MethodUtils;
 import org.osgi.framework.Bundle;
 
 import cz.zcu.kiv.bp.probe.IProbe;
+import cz.zcu.kiv.bp.probe.NoSuchBundleException;
 import cz.zcu.kiv.bp.unimocker.ArgumentScenarioTable.Posibility;
 import cz.zcu.kiv.bp.unimocker.bindings.TCodeInjection;
 
@@ -390,9 +392,10 @@ public class UniHandler implements InvocationHandler
 		TCodeInjection.Call.Static.Bundle bndl = injectedCall.getBundle();
 		TCodeInjection.Call.Static.Method injectedMethodDescription = injectedCall.getMethod();
 		String bundleKey = bndl.getSymbolicName() + ":" + bndl.getVersion();
-		Bundle foundBundle = _.envProbe.findBundle(bundleKey);
-		if (foundBundle != null)
+		Bundle foundBundle;
+		try
 		{
+			foundBundle = _.envProbe.findBundle(bundleKey);
 			String classToFind = injectedMethodDescription.getName().substring(0, injectedMethodDescription.getName().lastIndexOf("."));
 			String methodToFind = injectedMethodDescription.getName().substring(injectedMethodDescription.getName().lastIndexOf(".") + 1);
 			try
@@ -431,7 +434,7 @@ public class UniHandler implements InvocationHandler
 				ex.printStackTrace();
 			}
 		}
-		else
+		catch (NoSuchBundleException e)
 		{ // bundle described in scenario has not been found in current context
 			System.out.printf("Bundle %s has not been found! Skipping bundle.%n", bundleKey);
 		}

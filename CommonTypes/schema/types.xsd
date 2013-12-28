@@ -3,14 +3,14 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-    xmlns="http://www.kiv.zcu.cz/component-testing/types"
+    xmlns:r="http://www.kiv.zcu.cz/component-testing/types"
     targetNamespace="http://www.kiv.zcu.cz/component-testing/types"
     jaxb:version="2.1"
     elementFormDefault="qualified"
     jaxb:extensionBindingPrefixes="xjc">
 
     <xsd:complexType name="TNull">
-        <xsd:attribute name="base-type" use="required" type="TValueType" />
+        <xsd:attribute name="base-type" use="required" type="r:TValueType" />
     </xsd:complexType>
     
     <xsd:simpleType name="TValueType">
@@ -79,17 +79,17 @@
     </xsd:complexType>
 
     <xsd:complexType name="TCollection" abstract="true">
-        <xsd:attribute name="type" default="ArrayList" type="TCollectionType" />
+        <xsd:attribute name="type" default="ArrayList" type="r:TCollectionType" />
     </xsd:complexType>
     
     <xsd:complexType name="TStringCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="String" type="xsd:string" />
                                     </xsd:sequence>
@@ -104,12 +104,12 @@
     
     <xsd:complexType name="TBigIntegerCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="BigInteger" type="xsd:integer" />
                                     </xsd:sequence>
@@ -124,12 +124,12 @@
     
     <xsd:complexType name="TLongCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="Long" type="xsd:long"/>
                                     </xsd:sequence>
@@ -144,12 +144,12 @@
         
     <xsd:complexType name="TIntCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="Integer" type="xsd:int" />
                                     </xsd:sequence>
@@ -164,12 +164,12 @@
     
     <xsd:complexType name="TShortCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="Short" type="xsd:short" />
                                     </xsd:sequence>
@@ -184,12 +184,12 @@
     
     <xsd:complexType name="TByteCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="Byte" type="xsd:byte" />
                                     </xsd:sequence>
@@ -204,12 +204,12 @@
     
     <xsd:complexType name="TBigDecimalCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="BigDecimal" type="xsd:decimal" />
                                     </xsd:sequence>
@@ -224,12 +224,12 @@
     
     <xsd:complexType name="TDoubleCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="Double" type="xsd:double" />
                                     </xsd:sequence>
@@ -244,12 +244,12 @@
     
     <xsd:complexType name="TFloatCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="Float" type="xsd:float" />
                                     </xsd:sequence>
@@ -264,14 +264,14 @@
     
     <xsd:complexType name="TFileCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
-                                        <xsd:element ref="File" />
+                                        <xsd:element ref="r:File" />
                                     </xsd:sequence>
                                 </xsd:extension>
                             </xsd:complexContent>
@@ -284,12 +284,12 @@
     
     <xsd:complexType name="TBooleanCollection">
         <xsd:complexContent>
-            <xsd:extension base="TCollection">
+            <xsd:extension base="r:TCollection">
                 <xsd:sequence>
                     <xsd:element name="item" minOccurs="0" maxOccurs="unbounded">
                         <xsd:complexType>
                             <xsd:complexContent>
-                                <xsd:extension base="TCollectionItem">
+                                <xsd:extension base="r:TCollectionItem">
                                     <xsd:sequence>
                                         <xsd:element name="Boolean" type="xsd:boolean" />
                                     </xsd:sequence>
@@ -302,6 +302,10 @@
         </xsd:complexContent>
     </xsd:complexType>
 
+    <xsd:complexType name="TCustomTypeData">
+        <xsd:attribute name="ref" type="xsd:IDREF" />
+    </xsd:complexType>
+
     <xsd:element name="String" type="xsd:string" />
     <xsd:element name="BigInteger" type="xsd:integer" />
     <xsd:element name="Long" type="xsd:long" />
@@ -312,18 +316,182 @@
     <xsd:element name="Double" type="xsd:double" />
     <xsd:element name="Float" type="xsd:float" />
     <xsd:element name="Boolean" type="xsd:boolean" />
-    <xsd:element name="File" type="TFile" />
-    <xsd:element name="Strings" type="TStringCollection" />
-    <xsd:element name="BigInts" type="TBigIntegerCollection" />
-    <xsd:element name="Longs" type="TLongCollection" />
-    <xsd:element name="Ints" type="TIntCollection" />
-    <xsd:element name="Shorts" type="TShortCollection" />
-    <xsd:element name="Bytes" type="TByteCollection" />
-    <xsd:element name="BigDecimals" type="TBigDecimalCollection" />
-    <xsd:element name="Doubles" type="TDoubleCollection" />
-    <xsd:element name="Floats" type="TFloatCollection" />
-    <xsd:element name="Booleans" type="TBooleanCollection" />
-    <xsd:element name="Files" type="TFileCollection" />
-    <xsd:element name="Null" type="TNull" />
+    <xsd:element name="File" type="r:TFile" />
+    <xsd:element name="Strings" type="r:TStringCollection" />
+    <xsd:element name="BigInts" type="r:TBigIntegerCollection" />
+    <xsd:element name="Longs" type="r:TLongCollection" />
+    <xsd:element name="Ints" type="r:TIntCollection" />
+    <xsd:element name="Shorts" type="r:TShortCollection" />
+    <xsd:element name="Bytes" type="r:TByteCollection" />
+    <xsd:element name="BigDecimals" type="r:TBigDecimalCollection" />
+    <xsd:element name="Doubles" type="r:TDoubleCollection" />
+    <xsd:element name="Floats" type="r:TFloatCollection" />
+    <xsd:element name="Booleans" type="r:TBooleanCollection" />
+    <xsd:element name="Files" type="r:TFileCollection" />
+    <xsd:element name="Null" type="r:TNull" />
+    <xsd:element name="CustomTypeData" type="r:TCustomTypeData" />
 
+    <!-- custom types support -->
+    
+    <xsd:simpleType name="TBundleName">
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="(([a-z_]+[0-9]*)+\.)+([a-z_]+[0-9]*)*" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="TInterfaceName">
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="(([a-z_]+[0-9]*)+\.)*([a-zA-Z_]+[0-9]*)+" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="TMethodName">
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="[a-zA-Z_$]([a-zA-Z0-9_$])*" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="TVersion">
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="(\d+\.)*(\d+)" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="TBundle">
+        <xsd:attribute name="name" type="r:TBundleName" />
+        <xsd:attribute name="version" type="r:TVersion" />
+    </xsd:complexType>
+
+    <xsd:complexType name="TMethod">
+        <xsd:simpleContent>
+            <xsd:extension base="r:TMethodName">
+                <xsd:attribute name="class" type="r:TInterfaceName" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TFactory" abstract="true" />
+    
+    <xsd:complexType name="TStaticMemberFactory">
+        <xsd:complexContent>
+            <xsd:extension base="r:TFactory">
+                <xsd:sequence>
+                    <xsd:element name="method" type="r:TMethodName" />
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TConstructFactory">
+        <xsd:complexContent>
+            <xsd:extension base="r:TFactory" />
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TExternalFactory">
+        <xsd:complexContent>
+            <xsd:extension base="r:TFactory">
+                <xsd:sequence>
+                    <xsd:element name="bundle" type="r:TBundle" />
+                    <xsd:element name="method" type="r:TMethod" />
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TImportedType">
+        <xsd:sequence>
+            <xsd:element name="factory">
+                <xsd:complexType>
+                    <xsd:choice>
+                        <xsd:element name="static-member" type="r:TStaticMemberFactory" />
+                        <xsd:element name="constructor" type="r:TConstructFactory" />
+                        <xsd:element name="external" type="r:TExternalFactory" />
+                    </xsd:choice>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="bundle" type="r:TBundleName" use="required"/>
+        <xsd:attribute name="version" type="r:TVersion" use="required" />
+        <xsd:attribute name="cannonical-name" type="xsd:string" use="required" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="TImportedTypes">
+        <xsd:sequence>
+            <xsd:element name="type" type="r:TImportedType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="TValue">
+        <xsd:choice>
+            <xsd:element ref="r:String" /> <!-- <xsd:element name="String" type="xsd:string" /> -->
+            <xsd:element ref="r:BigInteger" /><!-- <xsd:element name="BigInteger" type="xsd:integer" /> -->
+            <xsd:element ref="r:Long" /> <!-- <xsd:element name="Long" type="xsd:long" /> -->
+            <xsd:element ref="r:Integer" /> <!-- <xsd:element name="Integer" type="xsd:int" /> -->
+            <xsd:element ref="r:Short" /> <!-- <xsd:element name="Short" type="xsd:short" /> -->
+            <xsd:element ref="r:Byte" /> <!-- <xsd:element name="Byte" type="xsd:byte" /> -->
+            <xsd:element ref="r:BigDecimal" /> <!-- <xsd:element name="BigDecimal" type="xsd:decimal"/> -->
+            <xsd:element ref="r:Double" /> <!-- <xsd:element name="Double" type="xsd:double" /> -->
+            <xsd:element ref="r:Float" /> <!-- <xsd:element name="Float" type="xsd:float" /> -->
+            <xsd:element ref="r:Boolean" /> <!-- <xsd:element name="Boolean" type="xsd:boolean" /> -->
+            <xsd:element ref="r:File" /> <!--  name="File" type="types:TFile" /> -->
+            <xsd:element ref="r:Strings" /> <!-- name="Strings" type="types:TStringCollection" /> -->
+            <xsd:element ref="r:BigInts" /> <!-- name="BigInts" type="types:TBigIntegerCollection" /> -->
+            <xsd:element ref="r:Longs" /> <!-- <name="Longs" type="types:TLongCollection" /> -->
+            <xsd:element ref="r:Ints" /> <!-- name="Ints" type="types:TIntCollection" /> -->
+            <xsd:element ref="r:Shorts" /> <!--  name="Shorts" type="types:TShortCollection" /> -->
+            <xsd:element ref="r:Bytes" /> <!-- name="Bytes" type="types:TByteCollection" /> -->
+            <xsd:element ref="r:BigDecimals" /> <!-- name="BigDecimals" type="types:TBigDecimalCollection" /> -->
+            <xsd:element ref="r:Doubles" /> <!-- name="Doubles" type="types:TDoubleCollection" /> -->
+            <xsd:element ref="r:Floats" /> <!-- name="Floats" type="types:TFloatCollection" /> -->
+            <xsd:element ref="r:Booleans" /> <!-- name="Booleans" type="types:TBooleanCollection" /> -->
+            <xsd:element ref="r:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="TArgument">
+        <xsd:complexContent>
+            <xsd:extension base="r:TValue">
+                <xsd:attribute name="ord-num" type="xsd:int" default="0" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="TArgumentsList">
+        <xsd:sequence>
+            <xsd:element name="argument" type="r:TArgument" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="TValueOfImportedType">
+        <xsd:sequence>
+            <xsd:element name="arguments" type="r:TArgumentsList" />
+        </xsd:sequence>
+        <xsd:attribute name="type" type="xsd:string" />
+        <xsd:attribute name="id" type="xsd:ID" />
+    </xsd:complexType>
+    
+    <xsd:complexType name="TListOfValuesOfImportedTypes">
+        <xsd:sequence>
+            <xsd:element name="value" minOccurs="0" maxOccurs="unbounded" type="r:TValueOfImportedType" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="TCustomTypesSupport">
+        <xsd:sequence>
+            <xsd:element name="types" type="r:TImportedTypes" />
+            <xsd:element name="values" type="r:TListOfValuesOfImportedTypes" />
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="custom-types-support" type="r:TCustomTypesSupport">
+        <xsd:key name="typeKey">
+            <xsd:selector xpath="r:types/r:type" />
+            <xsd:field xpath="@cannonical-name" />
+        </xsd:key>
+        <xsd:keyref name="typeRef" refer="r:typeKey">
+            <xsd:selector xpath="r:values/r:value" />
+            <xsd:field xpath="@type" />
+        </xsd:keyref>
+    </xsd:element>
 </xsd:schema>

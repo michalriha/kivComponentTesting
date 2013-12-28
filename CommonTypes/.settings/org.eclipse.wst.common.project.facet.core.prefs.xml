@@ -1,7 +1,7 @@
 <root>
   <facet id="jpt.jaxb">
     <node name="classgen">
-      <attribute name="package" value="cz.zcu.kiv.bp.datatypes.bindings.gen"/>
+      <attribute name="package" value="cz.zcu.kiv.bp.datatypes.bindings.gen2"/>
     </node>
     <node name="libprov">
       <attribute name="provider-id" value="jaxb-jre-library-provider"/>

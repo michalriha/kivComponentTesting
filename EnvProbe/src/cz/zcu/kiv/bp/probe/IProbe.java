@@ -12,8 +12,10 @@ public interface IProbe
 	 * Stops with the first bundle that has matching description! 
 	 * @param description symbolic.name:Major.Minor.Micro fromated bundle description
 	 * @return found Bundle instance or null when not found
+	 * @throws NoSuchBundleException 
 	 */
-	public abstract Bundle findBundle(String description);
+	public abstract Bundle findBundle(String description)
+	throws NoSuchBundleException;
 
 	/**
 	 * Tries to load described classes from the given bundle.
