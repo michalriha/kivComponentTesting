@@ -72,7 +72,7 @@ public class Probe implements BundleContextAware, IProbe
 	 * @see cz.zcu.kiv.bp.probe.IProbe#findBundle(java.lang.String)
 	 */
     @Override
-	public Bundle findBundle(String description)
+	public Bundle findBundle(String description) throws NoSuchBundleException
 	{
 		Bundle ret = null;
 		
@@ -91,6 +91,8 @@ public class Probe implements BundleContextAware, IProbe
             	break;
             }
 		}
+		
+		if (ret == null) throw new NoSuchBundleException(String.format("Bundle %s not found.", description));
 		
 		return ret;
 	}

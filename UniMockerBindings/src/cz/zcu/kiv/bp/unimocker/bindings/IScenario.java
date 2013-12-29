@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 
 import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 
 /**
@@ -39,4 +40,10 @@ public interface IScenario
      * @return mocking scenario map
      */
     public BundlesMap getSimulatedComponents();
+    
+    /**
+     * Returns structure with description of custom types and prepared values.
+     */
+
+	public abstract TCustomTypesSupport getCustomTypesSupportStructure();
 }

@@ -11,7 +11,7 @@
 	
 	<!-- obecne typy // -->
 
-    <xsd:import namespace="http://www.kiv.zcu.cz/component-testing/types" schemaLocation="https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd" />
+    <xsd:import namespace="http://www.kiv.zcu.cz/component-testing/types" schemaLocation="https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd" />
     
 	<xsd:simpleType name="TNonNegativeLong">
 		<xsd:restriction base="xsd:long">
@@ -80,6 +80,7 @@
             <xsd:element ref="types:Booleans" /> <!-- name="Booleans" type="types:TBooleanCollection" /> -->
             <xsd:element ref="types:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
             <xsd:element ref="types:Null" /> <!-- name="Null" type="types:TNull" /> -->
+            <xsd:element ref="types:CustomTypeData" />
 		</xsd:choice>
 	</xsd:complexType>
 
@@ -174,6 +175,7 @@
 		<xsd:sequence>
 			<xsd:element name="time-limit" type="TPositiveLong" default="9223372036854775807"  minOccurs="0" maxOccurs="1" />
 			<xsd:element name="simul-step-delay" type="TNonNegativeLong" default="0"  minOccurs="0" maxOccurs="1" />
+			<xsd:element ref="types:custom-types-support" />
 		</xsd:sequence>
 	</xsd:complexType>
 	

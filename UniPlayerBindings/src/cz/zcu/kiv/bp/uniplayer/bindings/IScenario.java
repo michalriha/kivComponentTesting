@@ -4,7 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
+
 import org.xml.sax.SAXException;
+
+import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 
 /**
  * Playing scenario interface 
@@ -49,4 +52,9 @@ public interface IScenario extends Iterable<TCommand>
      */
     @Override
     public abstract IScenarioIterator iterator();
+    
+    /**
+     * Returns structure with description of custom types and prepared values.
+     */
+    public TCustomTypesSupport getCustomTypesSupportStructure();
 }

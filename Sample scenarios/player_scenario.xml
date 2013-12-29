@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/player"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/master/UniPlayerBindings/schema/uniplayer.xsd">
+	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/UniPlayerBindings/schema/uniplayer.xsd">
 	<settings>
 		<time-limit>75600</time-limit>
 		<simul-step-delay>500</simul-step-delay>
+		<custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types"
+			xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
+			xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd">
+			<types>
+				<type cannonical-name="custom.types.Type2" bundle="custom.types" version="1.0.0">
+					<factory>
+						<static-member>
+							<method>newInstance</method>
+						</static-member>
+					</factory>
+				</type>
+				<type cannonical-name="custom.types.Type1" bundle="custom.types" version="1.0.0">
+					<factory>
+						<constructor />
+					</factory>
+				</type>
+                <type cannonical-name="custom.types.Type3" bundle="custom.types" version="1.0.0">
+                    <factory>
+                        <external>
+                            <bundle name="custom.types" version="1.0.0" />
+                            <method class="custom.types.factories.Type3Factory">newInstance</method>
+                        </external>
+                    </factory>
+                </type>
+                <type cannonical-name="custom.types.Type4" bundle="custom.types" version="1.0.0">
+                    <factory>
+                        <external>
+                            <bundle name="custom.types" version="1.0.0" />
+                            <method class="custom.types.factories.Type4Factory">newInstance</method>
+                        </external>
+                    </factory>
+                </type>
+			</types>
+			<values>
+				<value type="custom.types.Type4" id="myVal">
+					<arguments>
+					   <argument ord-num="0">
+					       <Shorts type="array">
+                               <item ord-num="0"><Short>10</Short></item>
+					           <item ord-num="1"><Short>10</Short></item>
+					       </Shorts>
+					   </argument>
+                       <argument ord-num="1">
+                           <Shorts type="LinkedList">
+                               <item ord-num="0"><Short>10</Short></item>
+                               <item ord-num="1"><Short>10</Short></item>
+                           </Shorts>
+                       </argument>
+					</arguments>
+				</value>
+			</values>
+		</custom-types-support>
 	</settings>
 	<actions xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
 		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
@@ -30,6 +82,9 @@
 						<argument ord-num="2">
 							<types:String>d:/</types:String>
 						</argument>
+                        <argument ord-num="3">
+                            <types:CustomTypeData ref="myVal" />
+                        </argument>
 					</arguments>
 				</call>
 			</command>
@@ -69,7 +124,8 @@
 							<types:Files>
 								<types:item ord-num="0">
 									<types:File>d:/Obrázky/Imported on 21. 1. 2013/Z
-										fotoaparátu/WP_000008.jpg</types:File>
+										fotoaparátu/WP_000008.jpg
+									</types:File>
 								</types:item>
 							</types:Files>
 						</argument>
@@ -118,7 +174,8 @@
 							<types:Files>
 								<types:item ord-num="0">
 									<types:File>d:/Obrázky/Imported on 21. 1. 2013/Z
-										fotoaparátu/WP_000009.jpg</types:File>
+										fotoaparátu/WP_000009.jpg
+									</types:File>
 								</types:item>
 							</types:Files>
 						</argument>
@@ -143,7 +200,8 @@
 							<types:Files>
 								<types:item ord-num="0">
 									<types:File>e:\tmp\Obrázky\Imported on 26. 1. 2013\Z
-										fotoaparátu\WP_000014.jpg</types:File>
+										fotoaparátu\WP_000014.jpg
+									</types:File>
 								</types:item>
 							</types:Files>
 						</argument>

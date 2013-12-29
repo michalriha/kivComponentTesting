@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
+
 
 /**
  * <p>Java class for TSettings complex type.
@@ -26,6 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="time-limit" type="{http://www.kiv.zcu.cz/component-testing/player}TPositiveLong" minOccurs="0"/>
  *         &lt;element name="simul-step-delay" type="{http://www.kiv.zcu.cz/component-testing/player}TNonNegativeLong" minOccurs="0"/>
+ *		   &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}custom-types-support" />
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,15 +40,20 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TSettings", propOrder = {
     "timeLimit",
-    "simulStepDelay"
+    "simulStepDelay",
+    "customTypesSupport"
 })
 public class TSettings {
 
     @XmlElement(name = "time-limit", defaultValue = "9223372036854775807")
     protected Long timeLimit;
+    
     @XmlElement(name = "simul-step-delay", defaultValue = "0")
     protected Long simulStepDelay;
 
+    @XmlElement(namespace = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_URI, name = "custom-types-support", required = false)
+    protected TCustomTypesSupport customTypesSupport;
+    
     /**
      * Gets the value of the timeLimit property.
      * 
@@ -94,4 +102,11 @@ public class TSettings {
         this.simulStepDelay = value;
     }
 
+	public TCustomTypesSupport getCustomTypesSupport() {
+		return customTypesSupport;
+	}
+
+	public void setCustomTypesSupport(TCustomTypesSupport customTypesSupport) {
+		this.customTypesSupport = customTypesSupport;
+	}
 }

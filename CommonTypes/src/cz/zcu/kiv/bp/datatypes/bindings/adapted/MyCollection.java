@@ -1,10 +1,14 @@
 package cz.zcu.kiv.bp.datatypes.bindings.adapted;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 //import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+
+
 
 import cz.zcu.kiv.bp.datatypes.bindings.TCollectionType;
 import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection;
@@ -79,7 +83,25 @@ public class MyCollection<T> extends ArrayList<T>
 		
 		@SuppressWarnings("unchecked")
 		Class<T> ret2 = (Class<T>) paramType.getActualTypeArguments()[0];
-				
 		return ret2;
+	}
+	
+	@Override
+	public T[] toArray()
+	{
+		@SuppressWarnings("unchecked")
+		T[] ret = (T[]) Array.newInstance(_.getComponentType(), _.size());;
+		for (int i = 0; i <_.size(); i++)
+		{
+			ret[i] = _.get(i);
+		}
+		
+//		System.out.printf(
+//			"converting collection to array: %s / %s%n",
+//			ret.getClass().getCanonicalName(),
+//			Array.newInstance(_.getComponentType(), 0).getClass().getCanonicalName()
+//		);
+		
+		return ret;
 	}
 }

@@ -3,7 +3,9 @@ package cz.zcu.kiv.bp.unimocker;
 //import ifcs.IPrinter;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import java.util.Map.Entry;
 
 import javax.xml.bind.JAXBException;
 
+import org.apache.commons.lang.reflect.ConstructorUtils;
 import org.apache.commons.lang.reflect.MethodUtils;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -21,7 +24,15 @@ import org.osgi.framework.ServiceRegistration;
 import org.springframework.osgi.context.BundleContextAware;
 import org.xml.sax.SAXException;
 
+import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypeData;
+import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
+import cz.zcu.kiv.bp.datatypes.bindings.TExternalFactory;
+import cz.zcu.kiv.bp.datatypes.bindings.TImportedType;
+import cz.zcu.kiv.bp.datatypes.bindings.TListOfValuesOfImportedTypes;
+import cz.zcu.kiv.bp.datatypes.bindings.TValueOfImportedType;
+import cz.zcu.kiv.bp.datatypes.bindings.adapted.CustomTypesRegistry;
 import cz.zcu.kiv.bp.probe.IProbe;
+import cz.zcu.kiv.bp.probe.NoSuchBundleException;
 import cz.zcu.kiv.bp.unimocker.bindings.IScenario;
 import cz.zcu.kiv.bp.unimocker.bindings.Scenario;
 import cz.zcu.kiv.bp.unimocker.bindings.TCodeInjection;
@@ -49,6 +60,15 @@ public class Mocker implements IMocker, BundleContextAware
 	 */
 	private IScenario scenarioProject;
 	
+	/**
+	 * Custom types support structure
+	 */
+	private TCustomTypesSupport custTypesStruct;
+	
+	private Map<String, Object> customTypeValues = new HashMap<>();
+	
+	private Map<String, Class<?>> customTypeClasses = new HashMap<>();
+	
     /**
      * ServiceRegistrations for mocks registered as OSGi services.
      */
@@ -67,56 +87,6 @@ public class Mocker implements IMocker, BundleContextAware
     	_.envProbe = envProbe;
     }
 	
-//    /**
-//     * Tries to found bundle described by string in format symbolic.name:Major.Minor.Micro.
-//     * Stops with the first bundle that has matching description! 
-//     * @param description symbolic.name:Major.Minor.Micro fromated bundle description
-//     * @return found Bundle instance or null when not found
-//     * @deprecated
-//     */
-//    private Bundle findBundle(String description)
-//	{
-//		Bundle ret = null;
-//		
-//		for (Bundle bundle : _.context.getBundles())
-//		{
-//            String key = String.format(
-//            	"%s:%s.%s.%s",
-//            	bundle.getSymbolicName(),
-//            	bundle.getVersion().getMajor(),
-//            	bundle.getVersion().getMinor(),
-//            	bundle.getVersion().getMicro()
-//            );
-//            if (description.equalsIgnoreCase(key))
-//            {
-//            	ret = bundle;
-//            	break;
-//            }
-//		}
-//		
-//		return ret;
-//	}
-//
-//    /**
-//     * Tries to load described classes from the given bundle.
-//     * @param bundle which should be probed
-//     * @param classesToFind array of class names to find
-//     * @return array of loaded classes
-//     * @throws ClassNotFoundException when bundles classloader fails to load class
-//     * @deprecated
-//     */
-//	private Class<?>[] findClassesInBundle(Bundle bundle, String[] classesToFind) throws ClassNotFoundException
-//	{
-//		List<Class<?>> ret = new ArrayList<>(classesToFind.length);
-//
-//		for (String className : classesToFind)
-//		{
-//			ret.add(bundle.loadClass(className));
-//		}
-//		
-//		return ret.toArray(new Class<?>[0]);
-//	}
-
 	/**
      * Tries to load described classes from the given bundle without
      * throwing exception in case of non-existing class.
@@ -207,12 +177,15 @@ public class Mocker implements IMocker, BundleContextAware
 		{
 			for (Invocation inv : methodToFind.getInvocations())
 			{
-				Class<?>[] parameterTypes = inv.getArguments().getTypes();
+				Class<?>[] types = inv.getArguments().getTypes();
+				Object[] values = inv.getArguments().toArray();
+				_.replaceCustomTypes(types, values);
+				
 				// Tries to match method w/o wrapper classes for primitive types.
 				Method foundMethod = MethodUtils.getMatchingAccessibleMethod(
 					clazz,
 					methodToFind.getName(),
-					parameterTypes
+					types
 				);
 				if (foundMethod == null)
 				{ // class does not provide required method
@@ -221,7 +194,7 @@ public class Mocker implements IMocker, BundleContextAware
 							"Class %s does not provide any method %s with arguments %s",
 							clazz.getCanonicalName(),
 							methodToFind.getName(),
-							Arrays.deepToString(parameterTypes)
+							Arrays.deepToString(types)
 						)
 					);
 				}
@@ -230,7 +203,7 @@ public class Mocker implements IMocker, BundleContextAware
 					clazz,
 					foundMethod,
 					methodToFind.getName(),
-					Arrays.deepToString(parameterTypes)
+					Arrays.deepToString(types)
 				);
 				// If this method has not yet been described, create new collection.
 				if (!returns.containsKey(foundMethod))
@@ -240,7 +213,7 @@ public class Mocker implements IMocker, BundleContextAware
 				// Contains return values for current method and all possible invocation arguments. 
 				Map<Object[], Object> methodsInvocationPossibilities = returns.get(foundMethod);
 				methodsInvocationPossibilities.put(
-					inv.getArguments().toArray(),
+					values,
 					inv.getReturnValue().getValue()
 				);
 			}
@@ -278,9 +251,12 @@ public class Mocker implements IMocker, BundleContextAware
 
 		for (Entry<String, HashMap<String, List<TSimulatedService>>> bundle : scenario.entrySet())
 		{
-//			Bundle mockedBundle = _.findBundle(bundle.getKey());
-			Bundle mockedBundle = _.envProbe.findBundle(bundle.getKey());
-			if (mockedBundle == null)
+			Bundle mockedBundle;
+			try
+			{
+				mockedBundle = _.envProbe.findBundle(bundle.getKey());
+			}
+			catch (NoSuchBundleException e)
 			{ // bundle described in scenario has not been found in current context
 				System.out.printf("Bundle %s has not been found! Skipping bundle.%n", bundle.getKey());
 				continue;
@@ -345,12 +321,15 @@ public class Mocker implements IMocker, BundleContextAware
 				throw new IllegalStateException("Mocked method has no invocation described.");
 			}
 			Invocation inv = method.getInvocations().get(0);
-			Class<?>[] parameterTypes = inv.getArguments().getTypes();
+			Class<?>[] types = inv.getArguments().getTypes();
+			Object[] values = inv.getArguments().toArray();
+			_.replaceCustomTypes(types, values);
+			
 			// Tries to match method w/o wrapper classes for primitive types.
 			Method mockedMethod = MethodUtils.getMatchingAccessibleMethod(
 				clazz,
 				method.getName(),
-				parameterTypes
+				types
 			);
 			if (mockedMethod == null)
 			{ // class does not provide required method
@@ -361,7 +340,7 @@ public class Mocker implements IMocker, BundleContextAware
 							"Class %s does not provide any method %s with arguments %s",
 							clazz.getCanonicalName(),
 							method.getName(),
-							Arrays.deepToString(parameterTypes)
+							Arrays.deepToString(types)
 						)
 					);
 				}
@@ -382,6 +361,32 @@ public class Mocker implements IMocker, BundleContextAware
 		return ret;
 	}
 
+	private void replaceCustomTypes(Class<?>[] types, Object[] values)
+	{
+		if (types.length != values.length)
+		{
+			throw new IllegalStateException(
+				"Types and values must have same length."
+			);
+		}
+		for (int i = 0; i < types.length; i++)
+		{
+			if (types[i] == TCustomTypeData.class)
+			{
+				if (!(values[i] instanceof TCustomTypeData))
+				{
+					throw new IllegalStateException(
+						"Values argumetn has to contain instances of TCustomTypeData on the possitions," +
+						"where types argument contains Class<TCustomTypeData>."
+					);
+				}
+				TCustomTypeData parameterValue = (TCustomTypeData) values[i];
+				types[i] = _.customTypeClasses.get(parameterValue.getRef().getId());
+				values[i] = _.customTypeValues.get(parameterValue.getRef().getId());
+			}
+		}
+	}
+	
 	@Override
 	public void diag()
 	{
@@ -400,6 +405,243 @@ public class Mocker implements IMocker, BundleContextAware
 		System.out.println("Nacitam soubor: " + fileName);
 		_.scenarioProject = new Scenario();
 		_.scenarioProject.loadFile(fileName);
+		
+		_.custTypesStruct = _.scenarioProject.getCustomTypesSupportStructure();
+		if (_.custTypesStruct == null)
+		{ // custom types has not been defined so we create empty description maps, so that we don't have to check existence of those maps
+			_.custTypesStruct = new TCustomTypesSupport();
+			_.custTypesStruct.setTypes(new CustomTypesRegistry());
+			_.custTypesStruct.setValues(new TListOfValuesOfImportedTypes());
+		}
+		_.loadCustomTypesAndValues();
+	}
+
+	private void loadCustomTypesAndValues() throws JAXBException
+	{
+		for (TValueOfImportedType value : _.custTypesStruct.getValues().getValue())
+		{
+			System.out.println("loading type " + value.getType());
+			String valueId = value.getId();
+			String typeName = value.getType();
+			TImportedType typeDescription = _.custTypesStruct.getTypes().get(typeName);
+			_.checkTypeNameEquality(typeName, typeDescription);
+
+			
+			Object[] argumentValues = value.getArguments().toArray();
+			Class<?>[] argumentTypes = value.getArguments().getTypes();
+			// prepare empty data for case the loading fails
+			Object customValue = null;
+			Class<?> customClazz = void.class;
+			// string describing OSGi bundle
+			String exportingBundleName = String.format(
+				"%s:%s",
+				typeDescription.getBundle(),
+				typeDescription.getVersion()
+			);
+			try
+			{
+				Bundle bndl = _.envProbe.findBundle(exportingBundleName);
+				customClazz = _.envProbe.findClassInBundle(bndl, typeDescription.getCannonicalName());
+
+				if ((customClazz.isInterface() || Modifier.isAbstract(customClazz.getModifiers())) && typeDescription.getFactory().getExternal() == null)
+				{ // Can not directly instantiate interface
+					throw new InstantiationException(String.format(
+						"Custom type %s is either interface of abstract class but factory class is not defined. Unable to create instance.",
+						customClazz
+					));
+				}
+				
+				if (typeDescription.getFactory().getConstructor() != null)
+				{ // creating instance by constructor
+					customValue = ConstructorUtils.invokeConstructor(
+						customClazz,
+						argumentValues,
+						argumentTypes
+					);
+				}
+				else if (typeDescription.getFactory().getStaticMember() != null)
+				{ // creating an instance by static factory method on the same class
+					String factoryMethodName = typeDescription.getFactory().getStaticMember().getMethod();
+					
+					customValue = _.invokeStaticFactoryMethod(
+						argumentValues,
+						argumentTypes,
+						customClazz,
+						factoryMethodName
+					);
+				}
+				else if (typeDescription.getFactory().getExternal() != null)
+				{ // creating instance of interface
+					TExternalFactory fact = typeDescription.getFactory().getExternal();
+					Bundle factBundle = _.envProbe.findBundle(fact.getBundle().getName() + ":" + fact.getBundle().getVersion());
+					Class<?> factClazz = _.envProbe.findClassInBundle(factBundle, fact.getMethod().getClazz());
+					String factoryMethodName = fact.getMethod().getName();
+					
+					customValue = _.invokeStaticFactoryMethod(
+						argumentValues,
+						argumentTypes,
+						factClazz,
+						factoryMethodName
+					);
+				}
+				else
+				{ // some strange conditions caused that document contains other type of factory type
+				  // for creating instances of given class, document should never be successfully validated
+				  // and therefore the loading should never get here
+					throw new JAXBException(String.format(
+						"Unknow factory type for custom type %s.",
+						customClazz.getCanonicalName()
+					));
+				}
+			}
+			catch (NoSuchBundleException ex)
+			{ // bundle not active
+				System.out.printf(
+					"Bundle % not found or not accessible. Empty data stored.%n",
+					exportingBundleName
+				);
+			}
+			catch (ClassNotFoundException e)
+			{ // bundle does not contain described class
+				System.out.printf(
+					"Class %s or it's factory class not found or not accessible in bundle %s. Empty data storred.%n\tException: %s%n",
+					typeDescription.getCannonicalName(),
+					exportingBundleName,
+					e.getMessage()
+				);
+			}
+			catch (NoSuchMethodException e)
+			{ //  described class does not have compatible method / constructor
+				System.out.printf(
+					"Class %s has no compatible constructor/Method for arguments %s. Empty data storred.%n\tException: %s%n",
+					typeName,
+					_.printTypes(argumentTypes),
+					e.getMessage()
+				);
+			}
+			catch (InstantiationException e)
+			{ // instantiation failed
+				System.out.printf("Unable to create new instance of class %s .%n\tException: %s%n", typeName, e.getMessage());
+			}
+			catch (IllegalArgumentException e)
+			{
+				System.out.printf(
+					"Invocation of factory method for class %s with arguments %s (%s) has failled.%n\tException: %s%n",
+					customClazz.getCanonicalName(),
+					_.printTypes(argumentTypes),
+					_.printValues(argumentValues),
+					e.getMessage()
+				);
+				
+				Integer[] i = new Integer[]{0, 1, 2};
+				System.out.println(_.printValues(new Object[]{i}));
+			}
+			catch (Throwable e)
+			{
+				System.out.printf("Unable to create new instance of class %s .%n\tException: %s%n", typeName, e.getMessage());
+				e.printStackTrace();
+			}
+			finally
+			{ // always store the value, because the scenario will try to load that value
+			  // and we would have to check it's existence
+				_.customTypeValues.put(valueId, customValue);
+				_.customTypeClasses.put(valueId, customClazz);
+			}
+		}
+	}
+
+	private Object invokeStaticFactoryMethod(
+		Object[] argumentValues,
+		Class<?>[] argumentTypes,
+		Class<?> factClazz,
+		String factoryMethodName)
+	throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
+	{
+		Object customValue;
+		Method factoryMethod = MethodUtils.getMatchingAccessibleMethod(
+			factClazz,
+			factoryMethodName,
+			argumentTypes
+		);
+		if (factoryMethod == null)
+		{ // custom type class does not have any method with described name
+			throw new NoSuchMethodException(String.format(
+				"Factory method %s not found in class %s.%n",
+				factoryMethodName,
+				factClazz
+			));
+		}
+		if (!Modifier.isStatic(factoryMethod.getModifiers()))
+		{ // class has method with describe name, but it is not static
+			throw new NoSuchMethodException(String.format(
+				"Factory method %s found in class %s is not static.%n",
+				factoryMethodName,
+				factClazz
+			));
+		}
+		customValue = factoryMethod.invoke(null, argumentValues);
+		return customValue;
+	}
+
+	private void checkTypeNameEquality(String typeName, TImportedType typeDescription)
+	throws JAXBException
+	{
+		if (typeDescription == null)
+		{ // referencing key references non-existent type import
+		  // document should never be successfully validated and therefore the loading should never get here
+			throw new JAXBException(
+				"Type attribute of VALUE element has to reference existing " +
+			    "TYPE element. Unable to continue with current scenario."
+			);
+		}
+		if (!typeName.equals(typeDescription.getCannonicalName()))
+		{ // some strange conditions caused that referencing key differs from referenced key,
+		  // document should never be successfully validated and therefore the loading should never get here
+			throw new JAXBException(
+				"Type attribute of VALUE element has to be equal to cannonical-name " +
+			    "of TYPE element. Unable to continue with current scenario."
+			);
+		}
+	}
+
+	/**
+	 * Implodes array of Class<?> using it's getName() method.
+	 * @param types
+	 * @return list of comma separated class names 
+	 */
+	private String printTypes(Class<?>[] types)
+	{
+		StringBuilder sb = new StringBuilder();
+		for (Class<?> type : types)
+		{
+			sb.append(type.getCanonicalName());
+			sb.append("; ");
+		}
+		return sb.length() == 0 ? void.class.getName() : sb.toString();
+	}
+
+	private String printValues(Object[] values)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		for (Object o : values)
+		{
+			if (o == null)
+			{
+				sb.append("null");
+			}
+			else if (o.getClass().isArray())
+			{
+				sb.append(Arrays.deepToString((Object[]) o) + "( array of: " + o.getClass().getComponentType().getCanonicalName() + ")");
+			}
+			else
+			{
+				sb.append(o.toString());
+			}
+			sb.append("; ");
+		}
+		
+		return sb.toString();
 	}
 
 	@Override
