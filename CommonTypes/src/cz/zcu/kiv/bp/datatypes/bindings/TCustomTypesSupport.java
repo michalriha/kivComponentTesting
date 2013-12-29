@@ -40,17 +40,17 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.CustomTypesRegistryAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TCustomTypesSupport", propOrder = {
-    "types",
-    "values"
+    "listOfTypes",
+    "listOfValues"
 })
 public class TCustomTypesSupport {
 
-    @XmlElement(required = true)
+    @XmlElement(name = "types", required = true)
     @XmlJavaTypeAdapter(CustomTypesRegistryAdapter.class)
-    protected CustomTypesRegistry types;
+    protected CustomTypesRegistry listOfTypes;
     
-    @XmlElement(required = true)
-    protected TListOfValuesOfImportedTypes values;
+    @XmlElement(name = "values", required = true)
+    protected TListOfValuesOfImportedTypes listOfValues;
 
     /**
      * Gets the value of the types property.
@@ -60,8 +60,8 @@ public class TCustomTypesSupport {
      *     {@link TImportedTypes }
      *     
      */
-    public CustomTypesRegistry getTypes() {
-        return types;
+    public CustomTypesRegistry getListOfTypes() {
+        return listOfTypes;
     }
 
     /**
@@ -72,8 +72,8 @@ public class TCustomTypesSupport {
      *     {@link TImportedTypes }
      *     
      */
-    public void setTypes(CustomTypesRegistry value) {
-        this.types = value;
+    public void setListOfTypes(CustomTypesRegistry value) {
+        this.listOfTypes = value;
     }
 
     /**
@@ -84,8 +84,8 @@ public class TCustomTypesSupport {
      *     {@link TListOfValuesOfImportedTypes }
      *     
      */
-    public TListOfValuesOfImportedTypes getValues() {
-        return values;
+    public TListOfValuesOfImportedTypes getListOfValues() {
+        return listOfValues;
     }
 
     /**
@@ -96,8 +96,8 @@ public class TCustomTypesSupport {
      *     {@link TListOfValuesOfImportedTypes }
      *     
      */
-    public void setValues(TListOfValuesOfImportedTypes value) {
-        this.values = value;
+    public void setListOfValues(TListOfValuesOfImportedTypes value) {
+        this.listOfValues = value;
     }
 
 }

@@ -10,8 +10,10 @@ package cz.zcu.kiv.bp.datatypes.bindings;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -36,11 +38,12 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TListOfValuesOfImportedTypes", propOrder = {
-    "value"
+    "values"
 })
 public class TListOfValuesOfImportedTypes {
 
-    protected List<TValueOfImportedType> value;
+	@XmlElement(name = "value")
+    protected List<TValueOfImportedType> values;
 
     /**
      * Gets the value of the value property.
@@ -64,11 +67,11 @@ public class TListOfValuesOfImportedTypes {
      * 
      * 
      */
-    public List<TValueOfImportedType> getValue() {
-        if (value == null) {
-            value = new ArrayList<TValueOfImportedType>();
+    public List<TValueOfImportedType> getValues() {
+        if (values == null) {
+            values = new ArrayList<TValueOfImportedType>();
         }
-        return this.value;
+        return this.values;
     }
 
 }

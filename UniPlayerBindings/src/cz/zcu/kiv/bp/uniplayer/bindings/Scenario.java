@@ -233,7 +233,7 @@ public class Scenario implements IScenario
                     			"\t\t%s %s (%s)%n",
                             	arg.getArgumentOrder(),
                             	data.getRef().getArguments().toString(),
-                            	_.scenario.getSettings().getCustomTypesSupport().getTypes().get(data.getRef().getType()).getCannonicalName()
+                            	_.scenario.getSettings().getCustomTypesSupport().getListOfTypes().get(data.getRef().getType()).getCannonicalName()
                     		);
                     	} else
                         System.out.printf(

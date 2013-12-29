@@ -324,20 +324,20 @@ public class Player implements IPlayer//, BundleContextAware
 		if (_.custTypesStruct == null)
 		{ // custom types has not been defined so we create empty description maps, so that we don't have to check existence of those maps
 			_.custTypesStruct = new TCustomTypesSupport();
-			_.custTypesStruct.setTypes(new CustomTypesRegistry());
-			_.custTypesStruct.setValues(new TListOfValuesOfImportedTypes());
+			_.custTypesStruct.setListOfTypes(new CustomTypesRegistry());
+			_.custTypesStruct.setListOfValues(new TListOfValuesOfImportedTypes());
 		}
 		_.loadCustomTypesAndValues();
 	}
 
 	private void loadCustomTypesAndValues() throws JAXBException
 	{
-		for (TValueOfImportedType value : _.custTypesStruct.getValues().getValue())
+		for (TValueOfImportedType value : _.custTypesStruct.getListOfValues().getValues())
 		{
 			System.out.println("loading type " + value.getType());
 			String valueId = value.getId();
 			String typeName = value.getType();
-			TImportedType typeDescription = _.custTypesStruct.getTypes().get(typeName);
+			TImportedType typeDescription = _.custTypesStruct.getListOfTypes().get(typeName);
 			_.checkTypeNameEquality(typeName, typeDescription);
 
 			
