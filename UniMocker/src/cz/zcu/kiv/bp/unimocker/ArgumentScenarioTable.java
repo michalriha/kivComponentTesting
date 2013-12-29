@@ -221,6 +221,11 @@ public class ArgumentScenarioTable
 	 */
 	private boolean match(Object posibleObj, Object actualObj, Class<?> parametrType)
 	{
+		if ((posibleObj == null || actualObj == null) && posibleObj != actualObj)
+		{ // only one argument is null
+			return false;
+		}
+		
 		if (posibleObj == null && posibleObj == actualObj)
 		{ // both values are null
 			return true;
