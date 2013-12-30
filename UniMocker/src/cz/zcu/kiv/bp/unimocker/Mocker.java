@@ -99,7 +99,6 @@ public class Mocker implements IMocker, BundleContextAware
 		Class<?>[] ret = null;
 		try
 		{
-//			ret = _.findClassesInBundle(mockedBundle, classesToFind);
 			ret = _.envProbe.findClassesInBundle(mockedBundle, classesToFind);
 		}
 		catch (ClassNotFoundException ignore)

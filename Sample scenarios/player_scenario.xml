@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://www.kiv.zcu.cz/component-testing/player"
+    xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/UniPlayerBindings/schema/uniplayer.xsd">
+	xsi:schemaLocation="
+	http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/UniPlayerBindings/schema/uniplayer.xsd
+	http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd
+	">
 	<settings>
 		<time-limit>75600</time-limit>
 		<simul-step-delay>500</simul-step-delay>
-		<custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types"
-			xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
-			xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd">
+		<custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types">
 			<types>
 				<type cannonical-name="custom.types.Type2" bundle="custom.types" version="1.0.0">
 					<factory>
@@ -58,9 +60,7 @@
 			</values>
 		</custom-types-support>
 	</settings>
-	<actions xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
-		xmlns:xsit="http://www.w3.org/2001/XMLSchema-instance"
-		xsit:schemaLocation="http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd">
+	<actions>
 		<action time="154">
 			<recurrence count="2" repeat-until="9223372036854775807">
 				<equidistant step="15" />

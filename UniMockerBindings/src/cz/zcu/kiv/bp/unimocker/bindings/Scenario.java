@@ -115,7 +115,7 @@ public class Scenario implements IScenario
         _.m.setSchema(_.sch);
         _.m.setEventHandler(VALIDATION_EVENT_HANDLER);
         _.m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        _.m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_SCHEMA_LOCATION);
+        _.m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_SCHEMA_LOCATION + " " +cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_SCHEMA_LOCATION);
 
         _.scenario = new TProject();
         _.scenario.setSimulatedComponents(new BundlesMap());
