@@ -3,8 +3,8 @@
     xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-	http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/UniPlayerBindings/schema/uniplayer.xsd
-	http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd
+	http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/UniPlayer_multiple_properties_for_event/UniPlayerBindings/schema/uniplayer.xsd
+	http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd
 	">
 	<settings>
 		<time-limit>75600</time-limit>
@@ -61,6 +61,29 @@
 		</custom-types-support>
 	</settings>
 	<actions>
+        <action time="5">
+            <recurrence count="2">
+                <equidistant step="300" />
+            </recurrence>
+            <command>
+                 <event topic="swapFocus">
+                     <property key="dir">
+                         <types:BigDecimals type="array">
+                            <types:item ord-num="0"><types:BigDecimal>10</types:BigDecimal></types:item>
+                            <types:item ord-num="1"><types:BigDecimal>10</types:BigDecimal></types:item>
+                            <types:item ord-num="2"><types:BigDecimal>10</types:BigDecimal></types:item>
+                         </types:BigDecimals>
+                     </property>
+                     <property key="dir2">
+                         <types:BigDecimals type="ArrayList">
+                            <types:item ord-num="0"><types:BigDecimal>10</types:BigDecimal></types:item>
+                            <types:item ord-num="1"><types:BigDecimal>10</types:BigDecimal></types:item>
+                            <types:item ord-num="2"><types:BigDecimal>10</types:BigDecimal></types:item>
+                         </types:BigDecimals>
+                     </property>
+                 </event>
+            </command>
+        </action>
 		<action time="154">
 			<recurrence count="2" repeat-until="9223372036854775807">
 				<equidistant step="15" />
@@ -220,11 +243,11 @@
 				<equidistant step="100" />
 			</recurrence>
 			<command>
-				<event topic="changeSourceDir" key="dir">
-					<argument>
-						<types:String>d:/Obrázky/</types:String>
-					</argument>
-				</event>
+			     <event topic="changeSourceDir">
+			         <property key="dir">
+			             <types:String>d:/Obrázky/</types:String>
+			         </property>
+			     </event>
 			</command>
 		</action>
 		<action time="166">
@@ -232,11 +255,11 @@
 				<equidistant step="100" />
 			</recurrence>
 			<command>
-				<event topic="changeDestinationDir" key="dir">
-					<argument>
-						<types:String>e:/</types:String>
-					</argument>
-				</event>
+                 <event topic="changeSourceDir">
+                     <property key="dir">
+                         <types:String>e:/</types:String>
+                     </property>
+                 </event>
 			</command>
 		</action>
 		<action time="133">
@@ -244,11 +267,11 @@
 				<equidistant step="100" />
 			</recurrence>
 			<command>
-				<event topic="changeDestinationDir" key="dir">
-					<argument>
-						<types:String>d:/Obrázky/</types:String>
-					</argument>
-				</event>
+                 <event topic="changeSourceDir">
+                     <property key="dir">
+                         <types:String>d:/Obrázky/</types:String>
+                     </property>
+                 </event>
 			</command>
 		</action>
 		<action time="166">
@@ -256,11 +279,11 @@
 				<equidistant step="100" />
 			</recurrence>
 			<command>
-				<event topic="changeSourceDir" key="dir">
-					<argument>
-						<types:String>e:/</types:String>
-					</argument>
-				</event>
+                 <event topic="changeSourceDir">
+                     <property key="dir">
+                         <types:String>e:/</types:String>
+                     </property>
+                 </event>
 			</command>
 		</action>
 		<action time="200">
@@ -268,11 +291,11 @@
 				<equidistant step="100" />
 			</recurrence>
 			<command>
-				<event topic="changeSourceDir" key="dir">
-					<argument>
-						<types:String>c:/Windows/</types:String>
-					</argument>
-				</event>
+                 <event topic="changeSourceDir">
+                     <property key="dir">
+                         <types:String>c:/Windows/</types:String>
+                     </property>
+                 </event>
 			</command>
 		</action>
 		<action time="233">
@@ -280,11 +303,11 @@
 				<equidistant step="100" />
 			</recurrence>
 			<command>
-				<event topic="changeDestinationDir" key="dir">
-					<argument>
-						<types:String>e:/</types:String>
-					</argument>
-				</event>
+                 <event topic="changeSourceDir">
+                     <property key="dir">
+                         <types:String>e:/</types:String>
+                     </property>
+                 </event>
 			</command>
 		</action>
 		<action time="266">
@@ -292,23 +315,11 @@
 				<equidistant step="100" />
 			</recurrence>
 			<command>
-				<event topic="changeSourceDir" key="dir">
-					<argument>
-						<types:String>d:/</types:String>
-					</argument>
-				</event>
-			</command>
-		</action>
-		<action time="550">
-			<recurrence count="2">
-				<equidistant step="300" />
-			</recurrence>
-			<command>
-				<event topic="swapFocus" key="dir">
-					<argument>
-						<types:String>d:/</types:String>
-					</argument>
-				</event>
+                 <event topic="changeSourceDir">
+                     <property key="dir">
+                         <types:String>d:/</types:String>
+                     </property>
+                 </event>
 			</command>
 		</action>
 	</actions>

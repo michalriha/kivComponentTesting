@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * <p>Java class for TCommand complex type.
  * 
@@ -41,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 public class TCommand {
 
     protected TCall call;
-    protected TEvent event;
+    protected TEvent2 event;
 
     /**
      * Gets the value of the call property.
@@ -75,7 +74,7 @@ public class TCommand {
      *     {@link TEvent }
      *     
      */
-    public TEvent getEvent() {
+    public TEvent2 getEvent() {
         return event;
     }
 
@@ -87,7 +86,7 @@ public class TCommand {
      *     {@link TEvent }
      *     
      */
-    public void setEvent(TEvent value) {
+    public void setEvent(TEvent2 value) {
         this.event = value;
     }
 

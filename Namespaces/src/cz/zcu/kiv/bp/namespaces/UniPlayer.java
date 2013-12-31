@@ -8,7 +8,7 @@ public class UniPlayer
 {
 	public static final String SCENARIO_PREFIX = "up";
 	public static final String SCENARIO_URI = "http://www.kiv.zcu.cz/component-testing/player";
-	public static final String SCENARIO_SCHEMA = "https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/UniPlayerBindings/schema/uniplayer.xsd"; //"https://raw.github.com/michalriha/kivComponentTesting/master/UniPlayerBindings/schema/uniplayer.xsd";
+	public static final String SCENARIO_SCHEMA = "https://raw.github.com/michalriha/kivComponentTesting/UniPlayer_multiple_properties_for_event/UniPlayerBindings/schema/uniplayer.xsd"; //"https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/UniPlayerBindings/schema/uniplayer.xsd"; //"https://raw.github.com/michalriha/kivComponentTesting/master/UniPlayerBindings/schema/uniplayer.xsd";
 	public static final String SCENARIO_SCHEMA_LOCATION = SCENARIO_URI + " " + SCENARIO_SCHEMA;
 	
 	private UniPlayer() { }

@@ -38,7 +38,7 @@ import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenarioIterator;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.ActionsMap;
 import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Argument;
-import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Value;
+import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Event2Property;
 
 /**
  * Scenario file loader. Provides methods for proper unmarshalling of scenario file
@@ -247,15 +247,40 @@ public class Scenario implements IScenario
                 }
                 if (action.getCommand().getEvent() != null)
                 {
-                	Value arg = action.getCommand().getEvent().getArgument();
-                    System.out.printf(
-                    	"event: (rep: %d <= %d) %s (%s, %s)%n",
+                	TEvent2 event = action.getCommand().getEvent();
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(String.format(
+                		"event:%n" + 
+                		"\ttopic: %s%n" +
+                		"\trep: %d <= %d%n" +
+                		"\tproperties:%n",
+                		event.getTopic(),
                     	action.getRecurrence().getCount(),
-                    	action.getRecurrence().getRepeatUntil(),
-                    	arg != null ? arg.getValue() : "void",
-                    	arg.getType(),
-                    	arg.getValue() != null ? arg.getValue().getClass().getCanonicalName() : "void"
-                    );
+                    	action.getRecurrence().getRepeatUntil()
+                	));
+                	for (Event2Property property : event.getEventProperties())
+                	{
+                		sb.append("\t\t");
+                		sb.append(property);
+                		sb.append(String.format("%n"));
+//                		sb.append(String.format(
+//                			"\t\t%s => (%s %s) %s",
+//                			property.getKey(),
+//                			property.getType(),
+//                        	property.getValue() != null ? property.getValue().getClass().getCanonicalName() : "void",
+//                        	property != null ? property.getValue() : "void"
+//                		));
+                	}
+                	System.out.println(sb);
+//                	Value arg = action.getCommand().getEvent().getEventProperties();
+//                    System.out.printf(
+//                    	"event: (rep: %d <= %d) %s (%s, %s)%n",
+//                    	action.getRecurrence().getCount(),
+//                    	action.getRecurrence().getRepeatUntil(),
+//                    	arg != null ? arg.getValue() : "void",
+//                    	arg.getType(),
+//                    	arg.getValue() != null ? arg.getValue().getClass().getCanonicalName() : "void"
+//                    );
                 }
             }
         }

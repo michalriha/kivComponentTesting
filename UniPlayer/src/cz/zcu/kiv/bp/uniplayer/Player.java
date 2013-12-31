@@ -36,7 +36,8 @@ import cz.zcu.kiv.bp.uniplayer.bindings.IScenarioIterator;
 import cz.zcu.kiv.bp.uniplayer.bindings.Scenario;
 import cz.zcu.kiv.bp.uniplayer.bindings.TCall;
 import cz.zcu.kiv.bp.uniplayer.bindings.TCommand;
-import cz.zcu.kiv.bp.uniplayer.bindings.TEvent;
+//import cz.zcu.kiv.bp.uniplayer.bindings.TEvent;
+import cz.zcu.kiv.bp.uniplayer.bindings.TEvent2;
 
 /**
  * IPlayer implementation. Implements local scenario player.
@@ -115,7 +116,7 @@ public class Player implements IPlayer//, BundleContextAware
 			TCommand currentCommand = iter.next();
 			
 			TCall call = currentCommand.getCall();
-			TEvent event = currentCommand.getEvent();
+			TEvent2 event = currentCommand.getEvent();
 			
 			System.out.printf(
 				"%10d: %s => ",
@@ -138,16 +139,27 @@ public class Player implements IPlayer//, BundleContextAware
 				);
 				_.execute(call);
 			}
+//			else if (event != null)
+//			{
+//				System.out.printf(
+//					" %s/%s[%s]%n",
+//					event.getTopic(),
+//					event.getKey(),
+//					event.getArgument()
+//				);
+//				_.execute(event);
+//			}
 			else if (event != null)
 			{
 				System.out.printf(
-					" %s/%s[%s]%n",
+					"topic: %s%n" +
+					"\tproperties: %n\t\t%s%n",
 					event.getTopic(),
-					event.getKey(),
-					event.getArgument()
+					event.getEventProperties().toString()
 				);
 				_.execute(event);
 			}
+			
 			System.out.println();
 			
 			_.eventAdmin.sendEvent(new Event(IPlayer.SIMULATION_PLAYER_EVENT_TOPIC_FINISH, actionEventArgs));
@@ -155,15 +167,20 @@ public class Player implements IPlayer//, BundleContextAware
 		}
 	}
 
-	/**
-	 * Fires given event.
-	 * @param event
-	 */
-	private void execute(TEvent event)
+//	/**
+//	 * Fires given event.
+//	 * @param event
+//	 */
+//	private void execute(TEvent event)
+//	{
+//        HashMap<String, Object> arguments = new HashMap<>();
+//        arguments.put(event.getKey(), event.getArgument().getValue());
+//        _.eventAdmin.sendEvent(new Event(event.getTopic(), arguments));
+//	}
+	
+	private void execute(TEvent2 event)
 	{
-        HashMap<String, Object> arguments = new HashMap<>();
-        arguments.put(event.getKey(), event.getArgument().getValue());
-        _.eventAdmin.sendEvent(new Event(event.getTopic(), arguments));
+		_.eventAdmin.sendEvent(event.toEvent());
 	}
 	
 	/**

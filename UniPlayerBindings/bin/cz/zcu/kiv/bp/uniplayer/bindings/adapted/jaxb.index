@@ -5,6 +5,7 @@ ArgumentAdapter
 ArgumentsList
 ArgumentsListAdapter
 Equidistant
+Event2Property
 Exponential
 Gaussian
 Recurrence

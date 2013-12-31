@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
     xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
-	xmlns="http://www.kiv.zcu.cz/component-testing/player"
+	xmlns:r="http://www.kiv.zcu.cz/component-testing/player"
 	targetNamespace="http://www.kiv.zcu.cz/component-testing/player"
 	jaxb:version="2.1"
 	elementFormDefault="qualified"
@@ -86,7 +87,7 @@
 
 	<xsd:complexType name="TArgument">
 		<xsd:complexContent>
-			<xsd:extension base="TValue">
+			<xsd:extension base="r:TValue">
 				<xsd:attribute name="ord-num" type="xsd:int" default="0" />
 			</xsd:extension>
 		</xsd:complexContent>
@@ -100,41 +101,41 @@
 
 	<!-- exponencialni pravdepodobnostni rozdeleni // -->
 	<xsd:complexType name="TExponential">
-		<xsd:attribute name="rate" type="TNonNegativeLong" use="required" />
-		<xsd:attribute name="time-span" type="TNonNegativeLong"
+		<xsd:attribute name="rate" type="r:TNonNegativeLong" use="required" />
+		<xsd:attribute name="time-span" type="r:TNonNegativeLong"
 			use="required" />
 	</xsd:complexType>
 	
 	<!-- pravidelne opakovani // -->
 	<xsd:complexType name="TEquidistant">
-		<xsd:attribute name="step" type="TNonNegativeLong" use="required" />
+		<xsd:attribute name="step" type="r:TNonNegativeLong" use="required" />
 	</xsd:complexType>
 
 	<!-- opakovani // -->
 	<xsd:complexType name="TRecurrence">
 		<xsd:choice>
-			<xsd:element name="equidistant" type="TEquidistant" />
-			<xsd:element name="gaussian" type="TGaussian" />
-			<xsd:element name="exponential" type="TExponential" />
+			<xsd:element name="equidistant" type="r:TEquidistant" />
+			<xsd:element name="gaussian" type="r:TGaussian" />
+			<xsd:element name="exponential" type="r:TExponential" />
 		</xsd:choice>
-		<xsd:attribute name="count" type="TPositiveLong" default="1" />
-		<xsd:attribute name="repeat-until" type="TPositiveLong" default="9223372036854775807" />
+		<xsd:attribute name="count" type="r:TPositiveLong" default="1" />
+		<xsd:attribute name="repeat-until" type="r:TPositiveLong" default="9223372036854775807" />
 	</xsd:complexType>
 
 	<!-- volani metody // -->
 
 	<xsd:complexType name="TArgumentsList">
 		<xsd:sequence>
-			<xsd:element name="argument" type="TArgument" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="argument" type="r:TArgument" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:complexType name="TCall">
 		<xsd:sequence>
-			<xsd:element name="arguments" type="TArgumentsList" />
+			<xsd:element name="arguments" type="r:TArgumentsList" />
 		</xsd:sequence>
-		<xsd:attribute name="service" type="TInterfaceName" use="required" />
-		<xsd:attribute name="method" type="TMethodName" use="required" />
+		<xsd:attribute name="service" type="r:TInterfaceName" use="required" />
+		<xsd:attribute name="method" type="r:TMethodName" use="required" />
 		<xsd:attribute name="filter" type="xsd:string" use="optional" />
 		<xsd:attribute name="use-all-services-availabe" type="xsd:boolean" default="false" />
 	</xsd:complexType>
@@ -142,24 +143,44 @@
 	<!-- vyvolani udalosti // -->
 	<xsd:complexType name="TEvent">
 		<xsd:sequence>
-			<xsd:element name="argument" type="TValue" />
+			<xsd:element name="argument" type="r:TValue" />
 		</xsd:sequence>
 		<xsd:attribute name="topic" type="xsd:string" use="required" />
 		<xsd:attribute name="key" type="xsd:string" use="required" />
 	</xsd:complexType>
 
+    <xsd:complexType name="TEvent2Property">
+        <xsd:complexContent>
+            <xsd:extension base="r:TValue">
+                <xsd:attribute name="key" type="xsd:string" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="TEvent2">
+        <xsd:sequence>
+            <xsd:element name="property" type="r:TEvent2Property" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="topic" type="xsd:string" />
+    </xsd:complexType>
+
 	<xsd:complexType name="TCommand">
 		<xsd:choice>
-			<xsd:element name="call" type="TCall" />
-			<xsd:element name="event" type="TEvent" />
+			<xsd:element name="call" type="r:TCall" />
+			<xsd:element name="event" type="r:TEvent2">
+			     <xsd:unique name="propertyKey">
+			         <xsd:selector xpath="r:property" />
+			         <xsd:field xpath="@key" />
+			     </xsd:unique>
+			</xsd:element>
 		</xsd:choice>
 	</xsd:complexType>
 
 	<!-- akce scenare -->
 	<xsd:complexType name="TAction">
 		<xsd:sequence>
-			<xsd:element name="recurrence" type="TRecurrence" minOccurs="0" maxOccurs="1" />
-			<xsd:element name="command" type="TCommand" />
+			<xsd:element name="recurrence" type="r:TRecurrence" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="command" type="r:TCommand" />
 		</xsd:sequence>
 		<xsd:attribute name="time" type="xsd:long" use="required" />
 	</xsd:complexType>
@@ -167,14 +188,14 @@
 	<!-- seznam akci (scenar) -->
 	<xsd:complexType name="TActionsList">
 		<xsd:sequence>
-			<xsd:element name="action" type="TAction" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="action" type="r:TAction" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:complexType name="TSettings">
 		<xsd:sequence>
-			<xsd:element name="time-limit" type="TPositiveLong" default="9223372036854775807"  minOccurs="0" maxOccurs="1" />
-			<xsd:element name="simul-step-delay" type="TNonNegativeLong" default="0"  minOccurs="0" maxOccurs="1" />
+			<xsd:element name="time-limit" type="r:TPositiveLong" default="9223372036854775807"  minOccurs="0" maxOccurs="1" />
+			<xsd:element name="simul-step-delay" type="r:TNonNegativeLong" default="0"  minOccurs="0" maxOccurs="1" />
 			<xsd:element ref="types:custom-types-support" />
 		</xsd:sequence>
 	</xsd:complexType>
@@ -182,11 +203,11 @@
 	<!-- projekt // -->
 	<xsd:complexType name="TProject">
 		<xsd:sequence>
-			<xsd:element name="settings" type="TSettings" minOccurs="0" maxOccurs="1" />
-			<xsd:element name="actions"  type="TActionsList" />
+			<xsd:element name="settings" type="r:TSettings" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="actions"  type="r:TActionsList" />
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<!-- dokument // -->
-	<xsd:element name="project" type="TProject" />
+	<xsd:element name="project" type="r:TProject" />
 </xsd:schema>

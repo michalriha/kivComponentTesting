@@ -39,10 +39,11 @@ import cz.zcu.kiv.bp.uniplayer.bindings.TValue;
 public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
 {
 
+    ValueAdapter valAdapt = new ValueAdapter();
+    
     @Override
     public Argument unmarshal(TArgument arg) throws Exception
     {
-        ValueAdapter valAdapt = new ValueAdapter();
         Value unmVal = valAdapt.unmarshal((TValue) arg);
         Argument ret = new Argument();
         ret.setType(unmVal.getType());
@@ -57,7 +58,6 @@ public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
     @Override
     public TArgument marshal(Argument arg) throws Exception
     {
-        ValueAdapter valAdapt = new ValueAdapter();
         TValue marVal = valAdapt.marshal(arg);
         TArgument ret = createArgumentFromValue(marVal);
         ret.setOrdNum(arg.getArgumentOrder());
