@@ -3,10 +3,10 @@
     xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-	http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/master/UniPlayerBindings/schema/uniplayer.xsd
+	http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/UniPlayer_reference_return_values_as_arguments/UniPlayerBindings/schema/uniplayer.xsd
 	http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd
 	">
-	<settings>
+	<settings><!-- https://raw.github.com/michalriha/kivComponentTesting/master/UniPlayerBindings/schema/uniplayer.xsd -->
 		<time-limit>75600</time-limit>
 		<simul-step-delay>500</simul-step-delay>
 		<custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types">
@@ -61,6 +61,16 @@
 		</custom-types-support>
 	</settings>
 	<actions>
+	   <action time="0">
+	       <recurrence count="1">
+	           <equidistant step="0"/>
+	       </recurrence>
+	       <command>
+	           <event topic="myEvent">
+	               <property key="key"><types:CustomTypeData ref="myVal"/></property>
+	           </event>
+	       </command>
+	   </action>
         <action time="5">
             <recurrence count="2">
                 <equidistant step="300" />
@@ -88,31 +98,52 @@
 			<recurrence count="2" repeat-until="9223372036854775807">
 				<equidistant step="15" />
 			</recurrence>
-			<!-- akce se bude opakovat s exponenciálním rozdělením -->
+<!-- 			akce se bude opakovat s exponenciálním rozdělením -->
 			<command>
-				<call service="cz.zcu.kiv.kc.interfaces.ICopyPlugin" method="executeAction">
+				<call service="cz.zcu.kiv.kc.interfaces.ICopyPlugin" method="executeAction" returned-value-id="myVal">
 					<arguments>
 						<argument ord-num="0">
-							<types:Files type="array">
+							<types:Files>
 								<types:item ord-num="0">
 									<types:File>d:/cs_windows_7_professional_with_sp1_x64_dvd_u_676956.iso</types:File>
 								</types:item>
 							</types:Files>
 						</argument>
 						<argument ord-num="1">
-							<types:String>e:/tmp/nazdar</types:String>
+							<types:String>d:/</types:String>
 						</argument>
 						<argument ord-num="2">
 							<types:String>d:/</types:String>
 						</argument>
-                        <argument ord-num="3">
-                            <types:CustomTypeData ref="myVal" />
-                        </argument>
 					</arguments>
 				</call>
 			</command>
 		</action>
-		<action time="150">
+    <action time="130">
+        <recurrence count="1">
+            <equidistant step="0" />
+        </recurrence>
+        <command>
+            <call service="cz.zcu.kiv.kc.plugin.Plugin" method="askForName" returned-value-id="givenName" filter="(name=zipper)">
+                <arguments>
+                    <argument ord-num="0">
+                        <types:String>Titulek</types:String>
+                    </argument>
+                </arguments>
+            </call>
+        </command>
+    </action>
+		<action time="157">
+		  <recurrence count="1">
+		      <equidistant step="0" />
+		  </recurrence>
+		  <command>
+		      <event topic="mujTopic">
+		          <property key="klicek"><returned-value ref="givenName"/></property>
+		      </event>
+		  </command>
+		</action>
+		<action time="158">
 			<recurrence count="1" repeat-until="9223372036854775807">
 				<equidistant step="15" />
 			</recurrence>
@@ -130,7 +161,7 @@
 							<types:String>d:/Stažené soubory/</types:String>
 						</argument>
 						<argument ord-num="2">
-							<types:String>d:/Stažené soubory/</types:String>
+                            <types:String>d:/</types:String>
 						</argument>
 					</arguments>
 				</call>
@@ -245,7 +276,8 @@
 			<command>
 			     <event topic="changeSourceDir">
 			         <property key="dir">
-			             <types:String>d:/Obrázky/</types:String>
+<!-- 			             <types:String>d:/Obrázky/</types:String> -->
+                        <returned-value ref="givenName"/>
 			         </property>
 			     </event>
 			</command>

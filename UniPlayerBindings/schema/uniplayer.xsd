@@ -56,6 +56,10 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 
+    <xsd:complexType name="TReturnedValueReference">
+        <xsd:attribute name="ref" type="xsd:string" />
+    </xsd:complexType>
+
 	<xsd:complexType name="TValue">
 		<xsd:choice>
             <xsd:element ref="types:String" /> <!-- <xsd:element name="String" type="xsd:string" /> -->
@@ -82,6 +86,7 @@
             <xsd:element ref="types:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
             <xsd:element ref="types:Null" /> <!-- name="Null" type="types:TNull" /> -->
             <xsd:element ref="types:CustomTypeData" />
+            <xsd:element name="returned-value" type="r:TReturnedValueReference" />
 		</xsd:choice>
 	</xsd:complexType>
 
@@ -143,6 +148,7 @@
 		<xsd:attribute name="method" type="r:TMethodName" use="required" />
 		<xsd:attribute name="filter" type="xsd:string" use="optional" />
 		<xsd:attribute name="use-all-services-availabe" type="xsd:boolean" default="false" />
+		<xsd:attribute name="returned-value-id" type="xsd:string" />
 	</xsd:complexType>
 
 	<!-- vyvolani udalosti // -->
@@ -209,7 +215,16 @@
 	<xsd:complexType name="TProject">
 		<xsd:sequence>
 			<xsd:element name="settings" type="r:TSettings" minOccurs="0" maxOccurs="1" />
-			<xsd:element name="actions"  type="r:TActionsList" />
+			<xsd:element name="actions"  type="r:TActionsList">
+                 <xsd:unique name="returnedValueKey">
+                     <xsd:selector xpath=".//r:call" />
+                     <xsd:field xpath="@returned-value-id" />
+                 </xsd:unique>
+                 <xsd:keyref name="returnedValueReference" refer="r:returnedValueKey">
+                    <xsd:selector xpath=".//r:returned-value" />
+                    <xsd:field xpath="@ref" />
+                 </xsd:keyref>
+            </xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
 
