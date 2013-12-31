@@ -34,6 +34,7 @@ import cz.zcu.kiv.bp.uniplayer.bindings.adapted.ArgumentsList;
  *       &lt;attribute name="method" use="required" type="{http://www.kiv.zcu.cz/component-testing/player}TMethodName" />
  *       &lt;attribute name="filter" type="{http://www.w3.org/2001/XMLSchema}string" />
  *		 &lt;attribute name="use-all-services-availabe" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" />
+ *		 &lt;attribute name="returned-value-id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -49,16 +50,23 @@ public class TCall {
 
     @XmlElement(required = true, type = TArgumentsList.class)
     protected ArgumentsList arguments;
+    
     @XmlAttribute(name = "service", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String service;
+    
     @XmlAttribute(name = "method", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String method;
+    
     @XmlAttribute(name = "filter")
     protected String filter;
+    
     @XmlAttribute(name = "use-all-services-availabe")
     protected boolean useAllServicesAvailable;
+    
+    @XmlAttribute(name = "returned-value-id")
+    protected String returnedValueId;
 
     /**
      * Gets the value of the arguments property.
@@ -179,4 +187,12 @@ public class TCall {
     public void setUseAllServicesAvailable(boolean value) {
         this.useAllServicesAvailable = value;
     }
+
+	public String getReturnedValueId() {
+		return returnedValueId;
+	}
+
+	public void setReturnedValueId(String returnedValueId) {
+		this.returnedValueId = returnedValueId;
+	}
 }

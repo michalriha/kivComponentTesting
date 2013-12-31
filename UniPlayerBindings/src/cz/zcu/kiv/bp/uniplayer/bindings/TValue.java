@@ -50,6 +50,7 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
  *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
  *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}Null" /> <!-- name="Null" type="types:TNull" /> -->
  *         &lt;xsd:element ref="{http://www.kiv.zcu.cz/component-testing/types}CustomTypeData" />
+ *         &lt;xsd:element name="returned-value" type="TReturnedValueReference" />
  *       &lt;/choice>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -83,7 +84,8 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.*;
     "booleans",
     "files",
     "_null",
-    "customTypeData"
+    "customTypeData",
+    "returnedValueRef"
 })
 @XmlSeeAlso({
     TArgument.class
@@ -162,7 +164,9 @@ public class TValue
     
     @XmlElement(name = "CustomTypeData", namespace = "http://www.kiv.zcu.cz/component-testing/types")
     protected TCustomTypeData customTypeData;
-        
+    
+    @XmlElement(name = "returned-value")
+    protected TReturnedValueReference returnedValueRef;
 
     /**
      * Gets the value of the string property.
@@ -722,6 +726,14 @@ public class TValue
 
 	public void setCustomTypeData(TCustomTypeData customTypeData) {
 		this.customTypeData = customTypeData;
+	}
+
+	public TReturnedValueReference getReturnedValueRef() {
+		return returnedValueRef;
+	}
+
+	public void setReturnedValueRef(TReturnedValueReference returnedValueRef) {
+		this.returnedValueRef = returnedValueRef;
 	}
 
 	@Override

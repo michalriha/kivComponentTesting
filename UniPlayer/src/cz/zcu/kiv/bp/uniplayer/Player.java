@@ -38,6 +38,8 @@ import cz.zcu.kiv.bp.uniplayer.bindings.TCall;
 import cz.zcu.kiv.bp.uniplayer.bindings.TCommand;
 //import cz.zcu.kiv.bp.uniplayer.bindings.TEvent;
 import cz.zcu.kiv.bp.uniplayer.bindings.TEvent2;
+import cz.zcu.kiv.bp.uniplayer.bindings.TReturnedValueReference;
+import cz.zcu.kiv.bp.uniplayer.bindings.adapted.Event2Property;
 
 /**
  * IPlayer implementation. Implements local scenario player.
@@ -86,6 +88,10 @@ public class Player implements IPlayer//, BundleContextAware
 	private Map<String, Object> customTypeValues = new HashMap<>();
 	
 	private Map<String, Class<?>> customTypeClasses = new HashMap<>();
+	
+	private Map<String, Object> storedReturnValues = new HashMap<>();
+	
+	private Map<String, Class<?>> storedReturnClasses = new HashMap<>();
 
     /**
      * OSGi EventAdmin setter
@@ -180,7 +186,47 @@ public class Player implements IPlayer//, BundleContextAware
 	
 	private void execute(TEvent2 event)
 	{
-		_.eventAdmin.sendEvent(event.toEvent());
+		Map<String, Object> actualProperties = new HashMap<>();
+		for (Event2Property property : event.getEventProperties())
+		{
+			Object propValue = property.getValue();
+			Class<?> valueType = property.getType();
+			if (valueType == TCustomTypeData.class)
+			{
+				TCustomTypeData value = (TCustomTypeData) property.getValue();
+				String key = value.getRef().getId();
+				propValue = _.customTypeValues.get(key);
+				System.out.printf(
+					"\t\tCustom data type found: %s %s%n",
+					_.customTypeClasses.get(key),
+					propValue
+				);
+			}
+			else if (valueType == TReturnedValueReference.class)
+			{
+				TReturnedValueReference value = (TReturnedValueReference) property.getValue();
+				String key = value.getRef();
+				if (_.storedReturnValues.containsKey(key))
+				{
+					propValue = _.storedReturnValues.get(key);
+					System.out.printf(
+						"\t\tReference to returned value found: %s %s%n",
+						_.storedReturnClasses.get(key),
+						propValue
+					);
+				}
+				else
+				{
+					System.out.printf("\t\tReferenced value %s does not exist.%n", key);
+				}
+			}
+			actualProperties.put(property.getKey(), propValue);
+		}
+		
+		try
+		{
+			_.eventAdmin.sendEvent(new Event(event.getTopic(), actualProperties));
+		} catch (Throwable ignore) {}
 	}
 	
 	/**
@@ -209,30 +255,63 @@ public class Player implements IPlayer//, BundleContextAware
 	 * @param serviceInstance - instance on which the method will be invoked
 	 */
 	private void invokeMethodOnInstance(TCall call, Object serviceInstance)
-	{		
+	{
 		Class<?>[] types = call.getArguments().getTypes();
 		Object[] values = call.getArguments().toArray();
+		String key;
 		for (int i = 0; i < types.length; i++)
 		{
-//			System.out.println("type: " + types[i] + " / " + (types[i] == TCustomTypeData.class));
 			if (types[i] == TCustomTypeData.class)
 			{
 				TCustomTypeData value = (TCustomTypeData) values[i];
-				values[i] = _.customTypeValues.get(value.getRef().getId());
-				types[i] = _.customTypeClasses.get(value.getRef().getId());
+				key = value.getRef().getId();
+				values[i] = _.customTypeValues.get(key);
+				types[i] = _.customTypeClasses.get(key);
+				System.out.printf(
+					"\t\tCustom data type found: %s %s%n",
+					types[i],
+					values[i]
+				);
+			}
+			else if (types[i] == TReturnedValueReference.class)
+			{
+				TReturnedValueReference value = (TReturnedValueReference) values[i];
+				key = value.getRef();
+				if (_.storedReturnClasses.containsKey(key) && _.storedReturnValues.containsKey(key))
+				{
+					values[i] = _.storedReturnValues.get(key);
+					types[i] = _.storedReturnClasses.get(key);
+					System.out.printf(
+						"\t\tReference to returned value found: %s %s%n",
+						types[i],
+						values[i]
+					);
+				}
 			}
 		}
 		
 		try
 		{ // try to execute required action
 			System.out.println("\t\tinstance: " + serviceInstance);
-			// apache method utils used for it's better matching capabilities
-			MethodUtils.invokeMethod(
-				serviceInstance,
+			Method invokedMethod = MethodUtils.getMatchingAccessibleMethod(
+				serviceInstance.getClass(),
 				call.getMethod(),
-				values,
 				types
 			);
+			if (invokedMethod == null) throw new NoSuchMethodException();
+			
+			// apache method utils used for it's better matching capabilities
+			Object returnedValue = invokedMethod.invoke(
+				serviceInstance,
+				values
+			);
+			
+			Class<?> returnedType = invokedMethod.getReturnType();
+			if (returnedType != void.class)
+			{ // invoked method does not return any value
+				_.storedReturnValues.put(call.getReturnedValueId(), returnedValue);
+				_.storedReturnClasses.put(call.getReturnedValueId(), returnedType);
+			}
 		}
 		catch (NoSuchMethodException ex)
 		{ // required method does not exist
@@ -247,7 +326,14 @@ public class Player implements IPlayer//, BundleContextAware
 			| IllegalArgumentException
 			| InvocationTargetException e)
 		{ // invocation failed
-			System.out.println("Invocation of method %s in service %s failled. stack trace:%n");
+			System.out.printf(
+				"Invocation of method %s in service %s (filter: %s) failled.%n\targuments: %s (%s)%n\tstack trace:%n",
+				call.getMethod(),
+				call.getService(),
+				call.getFilter(),
+				Arrays.deepToString(values),
+				Arrays.deepToString(types)
+			);
 			e.printStackTrace();
 		}
 		catch (Throwable e)

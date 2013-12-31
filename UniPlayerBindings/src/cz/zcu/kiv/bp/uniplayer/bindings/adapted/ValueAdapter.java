@@ -14,7 +14,6 @@ import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import cz.zcu.kiv.bp.uniplayer.bindings.TValue;
-
 import cz.zcu.kiv.bp.datatypes.bindings.*;
 import cz.zcu.kiv.bp.datatypes.bindings.adapted.MyCollection;
 import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollection;
@@ -40,7 +39,7 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 	 */
 	public Object probeUnMarshalledInstanceForValue(TValue probed)
 	throws IllegalAccessException, InvocationTargetException
-	{		
+	{
 		Object ret = null;	
 		// get all method of TValue class - presumes that TValue class
 		// has only setters/getters generated from schema.
