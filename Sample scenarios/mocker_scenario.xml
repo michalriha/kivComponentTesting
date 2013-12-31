@@ -2,8 +2,8 @@
 <project xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-	http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/UniMockerBindings/schema/unimocker.xsd
-	http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/CommonDataTypes_custom_types/CommonTypes/schema/types.xsd
+	http://www.kiv.zcu.cz/component-testing/mocker https://raw.github.com/michalriha/kivComponentTesting/master/UniMockerBindings/schema/unimocker.xsd
+	http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd
 	">
 	<settings>
 	   <custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types">

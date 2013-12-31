@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
 	xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
-	xmlns="http://www.kiv.zcu.cz/component-testing/mocker"
+	xmlns:r="http://www.kiv.zcu.cz/component-testing/mocker"
 	targetNamespace="http://www.kiv.zcu.cz/component-testing/mocker"
 	elementFormDefault="qualified"
 	jaxb:version="2.1"
@@ -60,27 +61,27 @@
 			<xsd:element ref="types:Double" /> <!-- <xsd:element name="Double" type="xsd:double" /> -->
 			<xsd:element ref="types:Float" /> <!-- <xsd:element name="Float" type="xsd:float" /> -->
 			<xsd:element ref="types:Boolean" /> <!-- <xsd:element name="Boolean" type="xsd:boolean" /> -->
-			<xsd:element ref="types:File" /> <!--  name="File" type="types:TFile" /> -->
-			<xsd:element ref="types:Strings" /> <!-- name="Strings" type="types:TStringCollection" /> -->
-			<xsd:element ref="types:BigInts" /> <!-- name="BigInts" type="types:TBigIntegerCollection" /> -->
-			<xsd:element ref="types:Longs" /> <!-- <name="Longs" type="types:TLongCollection" /> -->
-			<xsd:element ref="types:Ints" /> <!-- name="Ints" type="types:TIntCollection" /> -->
-			<xsd:element ref="types:Shorts" /> <!--  name="Shorts" type="types:TShortCollection" /> -->
-			<xsd:element ref="types:Bytes" /> <!-- name="Bytes" type="types:TByteCollection" /> -->
-			<xsd:element ref="types:BigDecimals" /> <!-- name="BigDecimals" type="types:TBigDecimalCollection" /> -->
-			<xsd:element ref="types:Doubles" /> <!-- name="Doubles" type="types:TDoubleCollection" /> -->
-			<xsd:element ref="types:Floats" /> <!-- name="Floats" type="types:TFloatCollection" /> -->
-			<xsd:element ref="types:Booleans" /> <!-- name="Booleans" type="types:TBooleanCollection" /> -->
-			<xsd:element ref="types:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
-			<xsd:element ref="types:Null" /> <!-- name="Null" type="types:TNull" /> -->
-			<xsd:element name="AnyValue" type="TAnyValue" />
+			<xsd:element ref="types:File" /> <!--  name="File" type="r:Types:TFile" /> -->
+			<xsd:element ref="types:Strings" /> <!-- name="Strings" type="r:Types:TStringCollection" /> -->
+			<xsd:element ref="types:BigInts" /> <!-- name="BigInts" type="r:Types:TBigIntegerCollection" /> -->
+			<xsd:element ref="types:Longs" /> <!-- <name="Longs" type="r:Types:TLongCollection" /> -->
+			<xsd:element ref="types:Ints" /> <!-- name="Ints" type="r:Types:TIntCollection" /> -->
+			<xsd:element ref="types:Shorts" /> <!--  name="Shorts" type="r:Types:TShortCollection" /> -->
+			<xsd:element ref="types:Bytes" /> <!-- name="Bytes" type="r:Types:TByteCollection" /> -->
+			<xsd:element ref="types:BigDecimals" /> <!-- name="BigDecimals" type="r:Types:TBigDecimalCollection" /> -->
+			<xsd:element ref="types:Doubles" /> <!-- name="Doubles" type="r:Types:TDoubleCollection" /> -->
+			<xsd:element ref="types:Floats" /> <!-- name="Floats" type="r:Types:TFloatCollection" /> -->
+			<xsd:element ref="types:Booleans" /> <!-- name="Booleans" type="r:Types:TBooleanCollection" /> -->
+			<xsd:element ref="types:Files" /> <!-- name="Files" type="r:Types:TFileCollection" /> -->
+			<xsd:element ref="types:Null" /> <!-- name="Null" type="r:Types:TNull" /> -->
+			<xsd:element name="AnyValue" type="r:TAnyValue" />
             <xsd:element ref="types:CustomTypeData" />
 		</xsd:choice>
 	</xsd:complexType>
 
 	<xsd:complexType name="TArgument">
 		<xsd:complexContent>
-			<xsd:extension base="TValue">
+			<xsd:extension base="r:TValue">
 				<xsd:attribute name="ord-num" type="xsd:int" default="0"/>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -88,15 +89,20 @@
 	
 	<xsd:complexType name="TArgumentsList">
 		<xsd:sequence>
-			<xsd:element name="argument" type="TArgument" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="argument" type="r:TArgument" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<!-- simulovane komponenty -->
 	<xsd:complexType name="TInvocation">
 		<xsd:sequence>
-			<xsd:element name="arguments" type="TArgumentsList" />
-			<xsd:element name="return" type="TValue" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="arguments" type="r:TArgumentsList">
+                <xsd:unique name="argumentOrdNum">
+                    <xsd:selector xpath="r:argument" />
+                    <xsd:field xpath="@ord-num" />
+                </xsd:unique>
+            </xsd:element>
+			<xsd:element name="return" type="r:TValue" minOccurs="0" maxOccurs="1"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -110,13 +116,13 @@
 	                           <xsd:sequence>
 	                               <xsd:element name="bundle">
 	                                   <xsd:complexType>
-	                                       <xsd:attribute name="symbolic-name" type="TBundleName" />
-	                                       <xsd:attribute name="version" type="TVersion" />
+	                                       <xsd:attribute name="symbolic-name" type="r:TBundleName" />
+	                                       <xsd:attribute name="version" type="r:TVersion" />
 	                                   </xsd:complexType>
 	                               </xsd:element>
 	                               <xsd:element name="method">
 	                                   <xsd:complexType>
-	                                       <xsd:attribute name="name" type="TStaticMethodFQName" />
+	                                       <xsd:attribute name="name" type="r:TStaticMethodFQName" />
 	                                       <xsd:attribute name="overrides-return-values" type="xsd:boolean" />
 	                                   </xsd:complexType>
 	                               </xsd:element>
@@ -128,12 +134,12 @@
 	                           <xsd:sequence>
 	                               <xsd:element name="method">
 	                                   <xsd:complexType>
-	                                       <xsd:attribute name="name" type="TMethodName" />
+	                                       <xsd:attribute name="name" type="r:TMethodName" />
 	                                       <xsd:attribute name="overrides-return-values" type="xsd:boolean" />
 	                                   </xsd:complexType>
 	                               </xsd:element>
 	                           </xsd:sequence>
-                               <xsd:attribute name="name" type="TInterfaceName" />
+                               <xsd:attribute name="name" type="r:TInterfaceName" />
 	                       </xsd:complexType>
 	                   </xsd:element>
 	               </xsd:choice>
@@ -144,32 +150,32 @@
 	
 	<xsd:complexType name="TInvokedMethod">
 		<xsd:sequence>
-		    <xsd:element name="code-injection" type="TCodeInjection" minOccurs="0" maxOccurs="1" />
-			<xsd:element name="invocation" type="TInvocation" minOccurs="1" maxOccurs="unbounded" />
+		    <xsd:element name="code-injection" type="r:TCodeInjection" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="invocation" type="r:TInvocation" minOccurs="1" maxOccurs="unbounded" />
 		</xsd:sequence>
-		<xsd:attribute name="name" type="TMethodName" />
+		<xsd:attribute name="name" type="r:TMethodName" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="TSimulatedService">
 		<xsd:sequence>
-			<xsd:element name="method" type="TInvokedMethod" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="method" type="r:TInvokedMethod" minOccurs="1" maxOccurs="unbounded" />
 		</xsd:sequence>
-		<xsd:attribute name="interface" type="TInterfaceName" />
+		<xsd:attribute name="interface" type="r:TInterfaceName" />
 		<xsd:attribute name="ignore-undefined-methods" type="xsd:boolean" use="optional" default="false"/>
 		<xsd:attribute name="ignore-undefined-possibilities" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="TBundle">
 		<xsd:sequence>
-			<xsd:element name="service" type="TSimulatedService" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="service" type="r:TSimulatedService" minOccurs="1" maxOccurs="unbounded" />
 		</xsd:sequence>
-		<xsd:attribute name="symbolic-name" type="TBundleName" />
-		<xsd:attribute name="version" type="TVersion" />
+		<xsd:attribute name="symbolic-name" type="r:TBundleName" />
+		<xsd:attribute name="version" type="r:TVersion" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="TBundleList">
 		<xsd:sequence>
-			<xsd:element name="bundle" type="TBundle" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="bundle" type="r:TBundle" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -182,12 +188,12 @@
 	<!-- projekt // -->
 	<xsd:complexType name="TProject">
 		<xsd:sequence>
-		    <xsd:element name="settings" type="TSettings" minOccurs="0" maxOccurs="1" />
-			<xsd:element name="simulated-components" type="TBundleList" minOccurs="0" maxOccurs="1" />
+		    <xsd:element name="settings" type="r:TSettings" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="simulated-components" type="r:TBundleList" minOccurs="0" maxOccurs="1" />
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<!-- dokument // -->
-	<xsd:element name="project" type="TProject" />
+	<xsd:element name="project" type="r:TProject" />
 	
 </xsd:schema>

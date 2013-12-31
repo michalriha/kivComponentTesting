@@ -317,17 +317,72 @@
     <xsd:element name="Float" type="xsd:float" />
     <xsd:element name="Boolean" type="xsd:boolean" />
     <xsd:element name="File" type="r:TFile" />
-    <xsd:element name="Strings" type="r:TStringCollection" />
-    <xsd:element name="BigInts" type="r:TBigIntegerCollection" />
-    <xsd:element name="Longs" type="r:TLongCollection" />
-    <xsd:element name="Ints" type="r:TIntCollection" />
-    <xsd:element name="Shorts" type="r:TShortCollection" />
-    <xsd:element name="Bytes" type="r:TByteCollection" />
-    <xsd:element name="BigDecimals" type="r:TBigDecimalCollection" />
-    <xsd:element name="Doubles" type="r:TDoubleCollection" />
-    <xsd:element name="Floats" type="r:TFloatCollection" />
-    <xsd:element name="Booleans" type="r:TBooleanCollection" />
-    <xsd:element name="Files" type="r:TFileCollection" />
+    <xsd:element name="Strings" type="r:TStringCollection">
+        <xsd:unique name="StringsItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="BigInts" type="r:TBigIntegerCollection">
+        <xsd:unique name="BigIntsItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="Longs" type="r:TLongCollection">
+        <xsd:unique name="LongsItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="Ints" type="r:TIntCollection">
+        <xsd:unique name="IntsItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="Shorts" type="r:TShortCollection">
+        <xsd:unique name="ShortsItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="Bytes" type="r:TByteCollection">
+        <xsd:unique name="BytesItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="BigDecimals" type="r:TBigDecimalCollection">
+        <xsd:unique name="BigDecimalsItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="Doubles" type="r:TDoubleCollection">
+        <xsd:unique name="DoublesItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="Floats" type="r:TFloatCollection">
+        <xsd:unique name="FloatsItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="Booleans" type="r:TBooleanCollection">
+        <xsd:unique name="BooleansItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
+    <xsd:element name="Files" type="r:TFileCollection">
+        <xsd:unique name="FilesItemsOrder">
+            <xsd:selector xpath="r:item" />
+            <xsd:field xpath="@ord-num" />
+        </xsd:unique>
+    </xsd:element>
     <xsd:element name="Null" type="r:TNull" />
     <xsd:element name="CustomTypeData" type="r:TCustomTypeData" />
 
@@ -465,7 +520,12 @@
 
     <xsd:complexType name="TValueOfImportedType">
         <xsd:sequence>
-            <xsd:element name="arguments" type="r:TArgumentsList" />
+            <xsd:element name="arguments" type="r:TArgumentsList">
+                <xsd:unique name="argumentOrdNum">
+                    <xsd:selector xpath="r:argument" />
+                    <xsd:field xpath="@ord-num" />
+                </xsd:unique>
+            </xsd:element>
         </xsd:sequence>
         <xsd:attribute name="type" type="xsd:string" />
         <xsd:attribute name="id" type="xsd:ID" />

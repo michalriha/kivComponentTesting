@@ -132,7 +132,12 @@
 
 	<xsd:complexType name="TCall">
 		<xsd:sequence>
-			<xsd:element name="arguments" type="r:TArgumentsList" />
+			<xsd:element name="arguments" type="r:TArgumentsList">
+                <xsd:unique name="argumentOrdNum">
+                    <xsd:selector xpath="r:argument" />
+                    <xsd:field xpath="@ord-num" />
+                </xsd:unique>
+            </xsd:element>
 		</xsd:sequence>
 		<xsd:attribute name="service" type="r:TInterfaceName" use="required" />
 		<xsd:attribute name="method" type="r:TMethodName" use="required" />
