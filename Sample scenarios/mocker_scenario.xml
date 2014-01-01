@@ -8,7 +8,7 @@
 	<settings>
 	   <custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types">
 	       <types>
-	           <type cannonical-name="custom.types.Type5" version="1.0.0" bundle="custom.types">
+	           <type cannonical-name="dummies.types.Type5" version="1.0.0" bundle="dummies.types">
                     <factory>
                         <static-member>
                             <method>newInstance</method>
@@ -17,7 +17,7 @@
 	           </type>
 	       </types>
             <values>
-                <value type="custom.types.Type5" id="myVal">
+                <value type="dummies.types.Type5" id="myVal">
                     <arguments>
                        <argument ord-num="0">
                            <Strings type="array">
@@ -38,8 +38,8 @@
 				    <code-injection> <!-- allows to execute custom code when this mocked method was called -->
 				        <call>
 				            <static>
-				                <bundle symbolic-name="my.code.injector.bundle" version="1.0.0" />
-				                <method name="my.code.injector.Observer.executeAction" overrides-return-values="true" />
+				                <bundle symbolic-name="dummies.injector" version="1.0.0" />
+				                <method name="dummies.injector.Observer.executeAction" overrides-return-values="true" />
 				                <!-- class must have static method with the same set of arguments as mocked method -->
 				                <!-- if overrides-return-values is true, values returned by this method will be used instead of values defined in scenario -->
 				            </static>
@@ -81,7 +81,7 @@
 				<method name="getName">
 				    <code-injection>
 				        <call>
-				            <service name="my.code.injector.IObserver">
+				            <service name="dummies.injector.IObserver">
 				                <method name="getName" overrides-return-values="true" />
 				            </service>
 				        </call>
@@ -101,8 +101,8 @@
 				    <code-injection>
                         <call>
                             <static>
-                                <bundle symbolic-name="my.code.injector.bundle" version="1.0.0" />
-                                <method name="my.code.injector.Observer.executeAction" overrides-return-values="true" />
+                                <bundle symbolic-name="dummies.injector" version="1.0.0" />
+                                <method name="dummies.injector.Observer.executeAction" overrides-return-values="true" />
                             </static>
                         </call>
                     </code-injection>
@@ -117,8 +117,8 @@
                     <code-injection>
                         <call>
                             <static>
-                                <bundle symbolic-name="my.code.injector.bundle" version="1.0.0" />
-                                <method name="my.code.injector.Observer.executeAction2" overrides-return-values="true" />
+                                <bundle symbolic-name="dummies.injector" version="1.0.0" />
+                                <method name="dummies.injector.Observer.executeAction2" overrides-return-values="true" />
                             </static>
                         </call>
                     </code-injection>

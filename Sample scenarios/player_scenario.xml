@@ -11,37 +11,37 @@
 		<simul-step-delay>500</simul-step-delay>
 		<custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types">
 			<types>
-				<type cannonical-name="custom.types.Type2" bundle="custom.types" version="1.0.0">
+				<type cannonical-name="dummies.types.Type2" bundle="dummies.types" version="1.0.0">
 					<factory>
 						<static-member>
 							<method>newInstance</method>
 						</static-member>
 					</factory>
 				</type>
-				<type cannonical-name="custom.types.Type1" bundle="custom.types" version="1.0.0">
+				<type cannonical-name="dummies.types.Type1" bundle="dummies.typess" version="1.0.0">
 					<factory>
 						<constructor />
 					</factory>
 				</type>
-                <type cannonical-name="custom.types.Type3" bundle="custom.types" version="1.0.0">
+                <type cannonical-name="dummies.types.Type3" bundle="dummies.types" version="1.0.0">
                     <factory>
                         <external>
-                            <bundle name="custom.types" version="1.0.0" />
-                            <method class="custom.types.factories.Type3Factory">newInstance</method>
+                            <bundle name="dummies.types" version="1.0.0" />
+                            <method class="dummies.types.factories.Type3Factory">newInstance</method>
                         </external>
                     </factory>
                 </type>
-                <type cannonical-name="custom.types.Type4" bundle="custom.types" version="1.0.0">
+                <type cannonical-name="dummies.types.Type4" bundle="dummies.types" version="1.0.0">
                     <factory>
                         <external>
-                            <bundle name="custom.types" version="1.0.0" />
-                            <method class="custom.types.factories.Type4Factory">newInstance</method>
+                            <bundle name="dummies.types" version="1.0.0" />
+                            <method class="dummies.types.factories.Type4Factory">newInstance</method>
                         </external>
                     </factory>
                 </type>
 			</types>
 			<values>
-				<value type="custom.types.Type4" id="myVal">
+				<value type="dummies.types.Type4" id="myVal">
 					<arguments>
 					   <argument ord-num="0">
 					       <Shorts type="array">

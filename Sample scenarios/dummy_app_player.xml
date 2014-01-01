@@ -8,14 +8,14 @@
     ">
     <settings>
         <time-limit>9223372036854775807</time-limit>
-        <simul-step-delay>0</simul-step-delay>
+        <simul-step-delay>1000</simul-step-delay>
         <types:custom-types-support />
     </settings>
     <actions>
         <action time="4">
             <recurrence count="2"><equidistant step="5"/></recurrence>
             <command>
-                <call service="dummies.dummyapp.IService" method="getRandomInt" returned-value-id="randomStringLength">
+                <call service="dummies.app.IService" method="getRandomInt" returned-value-id="randomStringLength">
                     <arguments>
                         <argument ord-num="0"><types:Integer>20</types:Integer></argument>
                     </arguments>
@@ -27,7 +27,7 @@
                 <equidistant step="5"/>
             </recurrence>
             <command>
-                <call service="dummies.dummyapp.IService" method="getRandomString" returned-value-id="randomString">
+                <call service="dummies.app.IService" method="getRandomString" returned-value-id="randomString">
                     <arguments>
                         <argument ord-num="0">
                             <returned-value ref="randomStringLength" />

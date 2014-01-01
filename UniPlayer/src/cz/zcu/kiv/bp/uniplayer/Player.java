@@ -508,7 +508,7 @@ public class Player implements IPlayer//, BundleContextAware
 			catch (NoSuchBundleException ex)
 			{ // bundle not active
 				System.out.printf(
-					"Bundle % not found or not accessible. Empty data stored.%n",
+					"Bundle %s not found or not accessible. Empty data stored.%n",
 					exportingBundleName
 				);
 			}
