@@ -10,8 +10,10 @@ package cz.zcu.kiv.bp.datatypes.bindings;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -36,11 +38,12 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TImportedTypes", propOrder = {
-    "type"
+    "types"
 })
 public class TImportedTypes {
 
-    protected List<TImportedType> type;
+	@XmlElement(name = "type", required = false)
+    protected List<TImportedType> types;
 
     /**
      * Gets the value of the type property.
@@ -64,11 +67,11 @@ public class TImportedTypes {
      * 
      * 
      */
-    public List<TImportedType> getType() {
-        if (type == null) {
-            type = new ArrayList<TImportedType>();
+    public List<TImportedType> getTypes() {
+        if (types == null) {
+            types = new ArrayList<TImportedType>();
         }
-        return this.type;
+        return this.types;
     }
 
 }

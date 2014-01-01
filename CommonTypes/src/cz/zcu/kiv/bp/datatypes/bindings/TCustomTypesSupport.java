@@ -45,11 +45,11 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.CustomTypesRegistryAdapter;
 })
 public class TCustomTypesSupport {
 
-    @XmlElement(name = "types", required = true)
+    @XmlElement(name = "types", required = false)
     @XmlJavaTypeAdapter(CustomTypesRegistryAdapter.class)
     protected CustomTypesRegistry listOfTypes;
     
-    @XmlElement(name = "values", required = true)
+    @XmlElement(name = "values", required = false)
     protected TListOfValuesOfImportedTypes listOfValues;
 
     /**

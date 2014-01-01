@@ -14,7 +14,7 @@ public class CustomTypesRegistryAdapter extends XmlAdapter<TImportedTypes, Custo
 	{
 		CustomTypesRegistry ret = new CustomTypesRegistry();
 		
-		for (TImportedType type : v.getType())
+		for (TImportedType type : v.getTypes())
 		{
 			ret.put(type.getCannonicalName(), type);
 		}
@@ -26,8 +26,9 @@ public class CustomTypesRegistryAdapter extends XmlAdapter<TImportedTypes, Custo
 	public TImportedTypes marshal(CustomTypesRegistry v)
 	throws Exception
 	{
+		if (v == null) return null;
 		TImportedTypes ret = new TImportedTypes();
-		ret.getType().addAll(v.values());
+		ret.getTypes().addAll(v.values());
 		return ret;
 	}
 

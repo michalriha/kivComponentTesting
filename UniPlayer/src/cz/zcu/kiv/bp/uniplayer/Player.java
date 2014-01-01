@@ -424,12 +424,6 @@ public class Player implements IPlayer//, BundleContextAware
 		_.scenario = new Scenario();
 		_.scenario.loadFile(fileName);
 		_.custTypesStruct = _.scenario.getCustomTypesSupportStructure();
-		if (_.custTypesStruct == null)
-		{ // custom types has not been defined so we create empty description maps, so that we don't have to check existence of those maps
-			_.custTypesStruct = new TCustomTypesSupport();
-			_.custTypesStruct.setListOfTypes(new CustomTypesRegistry());
-			_.custTypesStruct.setListOfValues(new TListOfValuesOfImportedTypes());
-		}
 		_.loadCustomTypesAndValues();
 	}
 

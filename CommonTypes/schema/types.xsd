@@ -539,8 +539,8 @@
 
     <xsd:complexType name="TCustomTypesSupport">
         <xsd:sequence>
-            <xsd:element name="types" type="r:TImportedTypes" />
-            <xsd:element name="values" type="r:TListOfValuesOfImportedTypes" />
+            <xsd:element name="types" type="r:TImportedTypes" minOccurs="0" maxOccurs="1" />
+            <xsd:element name="values" type="r:TListOfValuesOfImportedTypes" minOccurs="0" maxOccurs="1" />
         </xsd:sequence>
     </xsd:complexType>
     
