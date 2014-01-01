@@ -263,30 +263,23 @@ public class Scenario implements IScenario
                 		sb.append("\t\t");
                 		sb.append(property);
                 		sb.append(String.format("%n"));
-//                		sb.append(String.format(
-//                			"\t\t%s => (%s %s) %s",
-//                			property.getKey(),
-//                			property.getType(),
-//                        	property.getValue() != null ? property.getValue().getClass().getCanonicalName() : "void",
-//                        	property != null ? property.getValue() : "void"
-//                		));
                 	}
                 	System.out.println(sb);
-//                	Value arg = action.getCommand().getEvent().getEventProperties();
-//                    System.out.printf(
-//                    	"event: (rep: %d <= %d) %s (%s, %s)%n",
-//                    	action.getRecurrence().getCount(),
-//                    	action.getRecurrence().getRepeatUntil(),
-//                    	arg != null ? arg.getValue() : "void",
-//                    	arg.getType(),
-//                    	arg.getValue() != null ? arg.getValue().getClass().getCanonicalName() : "void"
-//                    );
                 }
             }
         }
         
         try
         {
+        	if (_.scenario.getSettings().getCustomTypesSupport().getListOfTypes().isEmpty())
+        	{
+        		_.scenario.getSettings().setCustomTypesSupport(null);
+        		if (_.scenario.getSettings().getSimulStepDelay() == TSettings.DEFAULT_SIMUL_STEP &&
+        			_.scenario.getSettings().getTimeLimit() == TSettings.MAX_SIMUL_DURRATION)
+        		{
+        			_.scenario.setSettings(null);
+        		}
+        	}
             ObjectFactory of = new ObjectFactory();
             JAXBElement<TProject> je = of.createProject(_.scenario);
             

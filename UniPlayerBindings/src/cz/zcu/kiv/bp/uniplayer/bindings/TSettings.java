@@ -45,9 +45,13 @@ import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 })
 public class TSettings {
 
-    protected Long timeLimit = Long.MAX_VALUE;
+	public static final long MAX_SIMUL_DURRATION = Long.MAX_VALUE;
+	
+	public static final long DEFAULT_SIMUL_STEP = 0L;
+	
+    protected long timeLimit = MAX_SIMUL_DURRATION;
     
-    protected Long simulStepDelay = 0L;
+    protected long simulStepDelay = DEFAULT_SIMUL_STEP;
 
     protected TCustomTypesSupport customTypesSupport;
     
@@ -60,8 +64,8 @@ public class TSettings {
      *     
      */
     @XmlElement(name = "time-limit")
-    public Long getTimeLimit() {
-        return (timeLimit.longValue() == Long.MAX_VALUE) ? null : timeLimit;
+    public long getTimeLimit() {
+        return timeLimit;
     }
 
     /**
@@ -72,7 +76,7 @@ public class TSettings {
      *     {@link Long }
      *     
      */
-    public void setTimeLimit(Long value) {
+    public void setTimeLimit(long value) {
         this.timeLimit = value;
     }
 
@@ -85,8 +89,8 @@ public class TSettings {
      *     
      */
     @XmlElement(name = "simul-step-delay")
-    public Long getSimulStepDelay() {
-        return (simulStepDelay.longValue() == 0L) ? null : simulStepDelay;
+    public long getSimulStepDelay() {
+        return simulStepDelay;
     }
 
     /**
@@ -97,7 +101,7 @@ public class TSettings {
      *     {@link Long }
      *     
      */
-    public void setSimulStepDelay(Long value) {
+    public void setSimulStepDelay(long value) {
         this.simulStepDelay = value;
     }
 
