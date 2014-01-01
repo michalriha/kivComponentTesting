@@ -46,10 +46,10 @@ import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 public class TSettings {
 
     @XmlElement(name = "time-limit", defaultValue = "9223372036854775807")
-    protected Long timeLimit;
+    protected long timeLimit = Long.MAX_VALUE;
     
     @XmlElement(name = "simul-step-delay", defaultValue = "0")
-    protected Long simulStepDelay;
+    protected long simulStepDelay = 0;
 
     @XmlElement(namespace = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_URI, name = "custom-types-support", required = false)
     protected TCustomTypesSupport customTypesSupport;
@@ -62,7 +62,7 @@ public class TSettings {
      *     {@link Long }
      *     
      */
-    public Long getTimeLimit() {
+    public long getTimeLimit() {
         return timeLimit;
     }
 
@@ -86,7 +86,7 @@ public class TSettings {
      *     {@link Long }
      *     
      */
-    public Long getSimulStepDelay() {
+    public long getSimulStepDelay() {
         return simulStepDelay;
     }
 

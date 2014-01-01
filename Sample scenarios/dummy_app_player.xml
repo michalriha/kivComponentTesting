@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.kiv.zcu.cz/component-testing/player"
+    xmlns:types="http://www.kiv.zcu.cz/component-testing/types"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.kiv.zcu.cz/component-testing/player https://raw.github.com/michalriha/kivComponentTesting/UniPlayer_reference_return_values_as_arguments/UniPlayerBindings/schema/uniplayer.xsd
+    http://www.kiv.zcu.cz/component-testing/types https://raw.github.com/michalriha/kivComponentTesting/master/CommonTypes/schema/types.xsd
+    ">
+    <actions>
+        <action time="4">
+            <recurrence count="2"><equidistant step="5"/></recurrence>
+            <command>
+                <call service="dummies.dummyapp.IService" method="getRandomInt" returned-value-id="randomStringLength">
+                    <arguments>
+                        <argument ord-num="0"><types:Integer>20</types:Integer></argument>
+                    </arguments>
+                </call>
+            </command>
+        </action>
+        <action time="5">
+            <recurrence count="2">
+                <equidistant step="5"/>
+            </recurrence>
+            <command>
+                <call service="dummies.dummyapp.IService" method="getRandomString" returned-value-id="randomString">
+                    <arguments>
+                        <argument ord-num="0">
+                            <returned-value ref="randomStringLength" />
+                        </argument>
+                    </arguments>
+                </call>
+            </command>
+        </action>
+        <action time="6">
+            <recurrence count="2">
+                <equidistant step="10"/>
+            </recurrence>
+            <command>
+                <event topic="resend/string/random">
+                    <property key="string"><returned-value ref="randomString" /></property>
+                </event>
+            </command>
+        </action>
+    </actions>
+</project>
