@@ -27,9 +27,9 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.CustomTypesRegistryAdapter;
  * &lt;complexType name="TCustomTypesSupport">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="types" type="{http://www.kiv.zcu.cz/component-testing/types}TImportedTypes"/>
- *         &lt;element name="values" type="{http://www.kiv.zcu.cz/component-testing/types}TListOfValuesOfImportedTypes"/>
+ *       &lt;sequence minOccurs="0" maxOccurs="1" >
+ *         &lt;element name="types" type="{http://www.kiv.zcu.cz/component-testing/types}TImportedTypes" minOccurs="0" maxOccurs="1" />               
+ *         &lt;element name="values" type="{http://www.kiv.zcu.cz/component-testing/types}TListOfValuesOfImportedTypes" minOccurs="0" maxOccurs="1" />
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
