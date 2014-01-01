@@ -28,7 +28,7 @@ import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
  *       &lt;sequence>
  *         &lt;element name="time-limit" type="{http://www.kiv.zcu.cz/component-testing/player}TPositiveLong" minOccurs="0"/>
  *         &lt;element name="simul-step-delay" type="{http://www.kiv.zcu.cz/component-testing/player}TNonNegativeLong" minOccurs="0"/>
- *		   &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}custom-types-support" />
+ *         &lt;element ref="{http://www.kiv.zcu.cz/component-testing/types}custom-types-support" />
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,7 +37,7 @@ import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
  * 
  * 
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "TSettings", propOrder = {
     "timeLimit",
     "simulStepDelay",
@@ -45,13 +45,10 @@ import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 })
 public class TSettings {
 
-    @XmlElement(name = "time-limit", defaultValue = "9223372036854775807")
-    protected long timeLimit = Long.MAX_VALUE;
+    protected Long timeLimit = Long.MAX_VALUE;
     
-    @XmlElement(name = "simul-step-delay", defaultValue = "0")
-    protected long simulStepDelay = 0;
+    protected Long simulStepDelay = 0L;
 
-    @XmlElement(namespace = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_URI, name = "custom-types-support", required = false)
     protected TCustomTypesSupport customTypesSupport;
     
     /**
@@ -62,8 +59,9 @@ public class TSettings {
      *     {@link Long }
      *     
      */
-    public long getTimeLimit() {
-        return timeLimit;
+    @XmlElement(name = "time-limit")
+    public Long getTimeLimit() {
+        return (timeLimit.longValue() == Long.MAX_VALUE) ? null : timeLimit;
     }
 
     /**
@@ -86,8 +84,9 @@ public class TSettings {
      *     {@link Long }
      *     
      */
-    public long getSimulStepDelay() {
-        return simulStepDelay;
+    @XmlElement(name = "simul-step-delay")
+    public Long getSimulStepDelay() {
+        return (simulStepDelay.longValue() == 0L) ? null : simulStepDelay;
     }
 
     /**
@@ -102,6 +101,10 @@ public class TSettings {
         this.simulStepDelay = value;
     }
 
+    @XmlElement(
+    	namespace = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_URI,
+    	name = "custom-types-support", required = false
+    )
 	public TCustomTypesSupport getCustomTypesSupport() {
 		if (customTypesSupport == null) {
 			customTypesSupport = new TCustomTypesSupport();

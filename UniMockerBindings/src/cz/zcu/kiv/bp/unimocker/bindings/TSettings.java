@@ -32,7 +32,10 @@ import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 })
 public class TSettings
 {
-    @XmlElement(namespace = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_URI, name = "custom-types-support", required = false)
+    @XmlElement(
+    	namespace = cz.zcu.kiv.bp.namespaces.DataTypes.SCENARIO_URI,
+    	name = "custom-types-support", required = false
+    )
     protected TCustomTypesSupport customTypesSupport;
 
 	public TCustomTypesSupport getCustomTypesSupport()
