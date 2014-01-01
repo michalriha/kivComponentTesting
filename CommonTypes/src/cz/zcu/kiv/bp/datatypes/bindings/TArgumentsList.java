@@ -38,12 +38,12 @@ import cz.zcu.kiv.bp.datatypes.bindings.adapted.Argument;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TArgumentsList", propOrder = {
-    "argument"
+    "arguments"
 })
 public class TArgumentsList {
 
-    @XmlElement(type = TArgument.class)
-    protected List<Argument> argument;
+    @XmlElement(name = "argument", type = TArgument.class)
+    protected List<Argument> arguments;
 
     /**
      * Gets the value of the argument property.
@@ -63,15 +63,15 @@ public class TArgumentsList {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link TArgument }
+     * {@link Argument }
      * 
      * 
      */
-    public List<Argument> getArgument() {
-        if (argument == null) {
-            argument = new ArrayList<Argument>();
+    public List<Argument> getArguments() {
+        if (arguments == null) {
+            arguments = new ArrayList<Argument>();
         }
-        return this.argument;
+        return this.arguments;
     }
 
 }

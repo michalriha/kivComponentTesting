@@ -32,7 +32,7 @@ public class ArgumentsListAdapter extends XmlAdapter<TArgumentsList, ArgumentsLi
             arg.setAdaptedTypeWrapper(sortedArguments.get(i).getAdaptedTypeWrapper());
             arg.setXmlTypeWrapper(sortedArguments.get(i).getXmlTypeWrapper());
             
-            ret.getArgument().add(arg);
+            ret.getArguments().add(arg);
         }
         
         return ret;
@@ -44,7 +44,7 @@ public class ArgumentsListAdapter extends XmlAdapter<TArgumentsList, ArgumentsLi
         Map<Integer, Argument> tmp = new TreeMap<Integer, Argument>();
                 
         ArgumentsList ret = new ArgumentsList();
-        for (Argument arg : argumentsList.getArgument())
+        for (Argument arg : argumentsList.getArguments())
         {            
             if (tmp.containsKey((Integer) arg.getArgumentOrder()))
             {
