@@ -26,9 +26,8 @@ public class CustomTypesRegistryAdapter extends XmlAdapter<TImportedTypes, Custo
 	public TImportedTypes marshal(CustomTypesRegistry v)
 	throws Exception
 	{
-		if (v == null) return null;
 		TImportedTypes ret = new TImportedTypes();
-		ret.getTypes().addAll(v.values());
+		if (v != null) ret.getTypes().addAll(v.values());
 		return ret;
 	}
 
