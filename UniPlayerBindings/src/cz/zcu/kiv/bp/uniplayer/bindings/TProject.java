@@ -61,6 +61,9 @@ public class TProject {
      *     
      */
     public TSettings getSettings() {
+    	if (settings == null) {
+    		settings = new TSettings();
+    	}
         return settings;
     }
 

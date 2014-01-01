@@ -103,6 +103,9 @@ public class TSettings {
     }
 
 	public TCustomTypesSupport getCustomTypesSupport() {
+		if (customTypesSupport == null) {
+			customTypesSupport = new TCustomTypesSupport();
+		}
 		return customTypesSupport;
 	}
 

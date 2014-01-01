@@ -61,6 +61,9 @@ public class TCustomTypesSupport {
      *     
      */
     public CustomTypesRegistry getListOfTypes() {
+    	if (listOfTypes == null) {
+    		listOfTypes = new CustomTypesRegistry();
+    	}
         return listOfTypes;
     }
 
@@ -85,6 +88,9 @@ public class TCustomTypesSupport {
      *     
      */
     public TListOfValuesOfImportedTypes getListOfValues() {
+    	if (listOfValues == null) {
+    		listOfValues = new TListOfValuesOfImportedTypes();
+    	}
         return listOfValues;
     }
 
