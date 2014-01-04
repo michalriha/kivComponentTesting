@@ -65,6 +65,11 @@ public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
         return ret;
     }
 
+    /**
+     * Creates {@link TArgument} element representation from {@link TValue}
+     * @param value to be used as template for the new TArgument
+     * @return new TArgument instance
+     */
 	private TArgument createArgumentFromValue(TValue marVal)
 	{
 		TArgument ret = new TArgument();

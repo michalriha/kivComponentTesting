@@ -2,14 +2,26 @@ package cz.zcu.kiv.bp.uniplayer.bindings.adapted;
 
 import java.util.Arrays;
 
+/**
+ * Represents description of a property of OSGi event that should be published. 
+ * @author Michal
+ */
 public class Event2Property extends Value
 {
 	protected String key;
 
+	/**
+	 * Returns key of this property.
+	 * @return key of property
+	 */
 	public String getKey() {
 		return key;
 	}
 
+	/**
+	 * Sets the key of this property.
+	 * @param key
+	 */
 	public void setKey(String key) {
 		this.key = key;
 	}

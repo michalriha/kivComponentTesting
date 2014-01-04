@@ -52,6 +52,9 @@ public class Scenario implements IScenario
                          + ":cz.zcu.kiv.bp.datatypes.bindings.basics"
 						 ;
 
+    /**
+     * Schema files
+     */
     public static final Source[] XML_SCHEMAS_TO_USE =  new Source[]
     {
     	new StreamSource(cz.zcu.kiv.bp.namespaces.UniMocker.SCENARIO_SCHEMA),

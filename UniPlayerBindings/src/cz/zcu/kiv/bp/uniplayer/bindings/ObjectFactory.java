@@ -33,94 +33,6 @@ public class ObjectFactory
     public ObjectFactory() {
     }
 
-//    /**
-//     * Create an instance of {@link TShortCollection }
-//     * 
-//     */
-//    public TShortCollection createTShortCollection() {
-//        return new TShortCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TDoubleCollection }
-//     * 
-//     */
-//    public TDoubleCollection createTDoubleCollection() {
-//        return new TDoubleCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TBigIntegerCollection }
-//     * 
-//     */
-//    public TBigIntegerCollection createTBigIntegerCollection() {
-//        return new TBigIntegerCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TBooleanCollection }
-//     * 
-//     */
-//    public TBooleanCollection createTBooleanCollection() {
-//        return new TBooleanCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TLongCollection }
-//     * 
-//     */
-//    public TLongCollection createTLongCollection() {
-//        return new TLongCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TFileCollection }
-//     * 
-//     */
-//    public TFileCollection createTFileCollection() {
-//        return new TFileCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TStringCollection }
-//     * 
-//     */
-//    public TStringCollection createTStringCollection() {
-//        return new TStringCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TBigDecimalCollection }
-//     * 
-//     */
-//    public TBigDecimalCollection createTBigDecimalCollection() {
-//        return new TBigDecimalCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TFloatCollection }
-//     * 
-//     */
-//    public TFloatCollection createTFloatCollection() {
-//        return new TFloatCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TByteCollection }
-//     * 
-//     */
-//    public TByteCollection createTByteCollection() {
-//        return new TByteCollection();
-//    }
-//
-//    /**
-//     * Create an instance of {@link TIntCollection }
-//     * 
-//     */
-//    public TIntCollection createTIntCollection() {
-//        return new TIntCollection();
-//    }
-
     /**
      * Create an instance of {@link TProject }
      * 
@@ -144,15 +56,7 @@ public class ObjectFactory
     public TValue createTValue() {
         return new TValue();
     }
-
-//    /**
-//     * Create an instance of {@link TNull }
-//     * 
-//     */
-//    public TNull createTNull() {
-//        return new TNull();
-//    }
-
+    
     /**
      * Create an instance of {@link TActionsList }
      * 
@@ -186,11 +90,19 @@ public class ObjectFactory
     }
 
     /**
-     * Create an instance of {@link TEvent }
+     * Create an instance of {@link TEvent2 }
      * 
      */
-    public TEvent createTEvent() {
-        return new TEvent();
+    public TEvent2 createTEvent2() {
+        return new TEvent2();
+    }
+
+    /**
+     * Create an instance of {@link TEvent2Property }
+     * 
+     */
+    public TEvent2Property createTEvent2Property() {
+        return new TEvent2Property();
     }
 
     /**

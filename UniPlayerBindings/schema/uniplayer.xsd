@@ -147,7 +147,7 @@
 		<xsd:attribute name="service" type="r:TInterfaceName" use="required" />
 		<xsd:attribute name="method" type="r:TMethodName" use="required" />
 		<xsd:attribute name="filter" type="xsd:string" use="optional" />
-		<xsd:attribute name="use-all-services-availabe" type="xsd:boolean" default="false" />
+		<xsd:attribute name="use-all-services-available" type="xsd:boolean" default="false" />
 		<xsd:attribute name="returned-value-id" type="xsd:string" />
 	</xsd:complexType>
 

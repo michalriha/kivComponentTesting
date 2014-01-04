@@ -10,10 +10,12 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  */
 public class FileAdapter extends XmlAdapter<String, File> {
 
+	@Override
 	public File unmarshal(String v) {
 		return new File(v);
 	}
 
+	@Override
 	public String marshal(File v) {
 		return v.toString();
 	}

@@ -29,7 +29,7 @@ public class ArgumentsList extends ArrayList<Argument>
     
     /**
      * Returns array of argument values.
-     * @return array of values
+     * @return Object[] array of values
      */
     @Override
     public Object[] toArray()

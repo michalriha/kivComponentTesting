@@ -16,7 +16,7 @@ public class CustomTypesRegistryAdapter extends XmlAdapter<TImportedTypes, Custo
 		
 		for (TImportedType type : v.getTypes())
 		{
-			ret.put(type.getCannonicalName(), type);
+			ret.put(type.getCanonicalName(), type);
 		}
 		
 		return ret;

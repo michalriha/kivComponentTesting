@@ -105,7 +105,7 @@ public interface IProbe
 	 * Returns ServiceTracker for given service. If the tracker does not exist, it creates and stores new one.
 	 * @param serviceName service to track
 	 * @param filter LDAP filter - Do not use (objectclass=...), it is already used from serviceName parameter!
-	 * @param should this tracker track all instances?
+	 * @param tractAllServices should this tracker track all instances?
 	 * @return corresponding ServiceTracker
 	 */
 	public abstract ServiceTracker<?, ?> getTracker(String serviceName, String filter, boolean tractAllServices);
@@ -114,7 +114,7 @@ public interface IProbe
 	 * Create ServiceTracker for current OSGi context and given service.
 	 * @param serviceName name of the tracked service
 	 * @param filter LDAP filter - Do not use (objectclass=...), it is already used from serviceName parameter!
-	 * @param should this tracker track all instances?
+	 * @param tractAllServices should this tracker track all instances?
 	 */
 	public abstract void createServiceTracker(String serviceName, String filter, boolean tractAllServices);
 

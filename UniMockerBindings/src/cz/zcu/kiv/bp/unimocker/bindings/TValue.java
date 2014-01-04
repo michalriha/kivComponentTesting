@@ -758,12 +758,28 @@ public class TValue
         this.anyValue = value;
     }
 
+    /**
+     * Gets the value of the customTypeData property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link TCustomTypeData }
+     *     
+     */
     public TCustomTypeData getCustomTypeData() {
 		return customTypeData;
 	}
 
-	public void setCustomTypeData(TCustomTypeData customTypeData) {
-		this.customTypeData = customTypeData;
+     /**
+      * Sets the value of the customTypeData property.
+      * 
+      * @param value
+      *     allowed object is
+      *     {@link TCustomTypeData }
+      *     
+      */
+    public void setCustomTypeData(TCustomTypeData value) {
+		this.customTypeData = value;
 	}
 
     @Override

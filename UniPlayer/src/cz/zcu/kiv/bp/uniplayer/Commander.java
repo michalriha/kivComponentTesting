@@ -46,16 +46,14 @@ public class Commander implements CommandProvider
     }
     
     /**
-     * CommandProvider proceses console command
-     * @param ci
+     * CommandProvider processes console command
+     * @param ci instance of {@link CommandInterpreter}
      * @throws FileNotFoundException
      * @throws JAXBException
      * @throws SAXException
      */
     public void _up(CommandInterpreter ci)
-    throws FileNotFoundException,
-           JAXBException,
-           SAXException
+    throws FileNotFoundException, JAXBException, SAXException
     {
         String cmd = ci.nextArgument();
             
@@ -119,7 +117,7 @@ public class Commander implements CommandProvider
     }
     
     /**
-     * CommandProvider interface implementation
+     * CommandProvider interface implementation. Prints help to console.
      */
     @Override
     public String getHelp()

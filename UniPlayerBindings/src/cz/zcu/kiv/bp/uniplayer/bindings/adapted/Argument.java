@@ -12,14 +12,17 @@ public class Argument extends Value
     private int argumentOrder = 0;
     
     /**
-     * property for guaranteeing proper ordering of arguments
-     * @return arguments position
+     * Gets arguments position number.
+     * @return position in the argument list
      */
     public int getArgumentOrder()
     {
         return this.argumentOrder;
     }
     
+    /**
+     * Sets arguments position number.
+     **/
     public void setArgumentOrder(int order)
     {
         this.argumentOrder = order;

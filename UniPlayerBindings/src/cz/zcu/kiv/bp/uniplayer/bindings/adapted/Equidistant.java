@@ -57,6 +57,10 @@ public class Equidistant extends ADistribution
         return _.generator;
     }
 
+    /**
+     * Returns distance between two occurrences.
+     * @return long step between occurrences
+     */
     public long getStep()
     {
         return _.step;

@@ -2,6 +2,8 @@ package cz.zcu.kiv.bp.datatypes.bindings.adapted;
 
 import java.util.ArrayList;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+
 /**
  * Representation of the list of arguments for invocation.
  * @author Michal
@@ -28,8 +30,8 @@ public class ArgumentsList extends ArrayList<Argument>
     }
     
     /**
-     * Returns array of argument values.
-     * @return array of values
+     * Returns array of actual argument values.
+     * @return Object[] array of values
      */
     @Override
     public Object[] toArray()

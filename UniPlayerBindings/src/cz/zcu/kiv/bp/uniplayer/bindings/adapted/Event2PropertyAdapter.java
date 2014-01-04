@@ -10,6 +10,10 @@ import cz.zcu.kiv.bp.uniplayer.bindings.TArgument;
 import cz.zcu.kiv.bp.uniplayer.bindings.TEvent2Property;
 import cz.zcu.kiv.bp.uniplayer.bindings.TValue;
 
+/**
+ * Adapter for transforming TEvent2Property to Event2Property
+ * @author Michal
+ */
 public class Event2PropertyAdapter extends XmlAdapter<TEvent2Property, Event2Property>
 {
 
@@ -38,7 +42,12 @@ public class Event2PropertyAdapter extends XmlAdapter<TEvent2Property, Event2Pro
 		return ret;
 	}
 
-	private TEvent2Property createArgumentFromValue(TValue marVal)
+	/**
+     * Creates {@link TArgument} element representation from {@link TValue}
+     * @param value to be used as template for the new TEvent2Property
+     * @return new TEvent2Property instance
+     */
+	private TEvent2Property createArgumentFromValue(TValue value)
 	{
 		TEvent2Property ret = new TEvent2Property();
 		
@@ -56,7 +65,7 @@ public class Event2PropertyAdapter extends XmlAdapter<TEvent2Property, Event2Pro
 			try
 			{
 				
-				foundValue = met.invoke(marVal, (Object[]) null);
+				foundValue = met.invoke(value, (Object[]) null);
 				// if the getter returns value -> we have found something
 				// and therefore can end seeking, else try another method
 				if (foundValue == null) continue;

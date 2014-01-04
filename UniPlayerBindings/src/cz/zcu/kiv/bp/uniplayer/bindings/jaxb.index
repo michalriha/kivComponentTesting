@@ -7,7 +7,6 @@ TArgumentsList
 TCall
 TCommand
 TEquidistant
-TEvent
 TEvent2
 TEvent2Property
 TExponential

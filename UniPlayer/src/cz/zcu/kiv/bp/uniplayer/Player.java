@@ -26,9 +26,7 @@ import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypeData;
 import cz.zcu.kiv.bp.datatypes.bindings.TCustomTypesSupport;
 import cz.zcu.kiv.bp.datatypes.bindings.TExternalFactory;
 import cz.zcu.kiv.bp.datatypes.bindings.TImportedType;
-import cz.zcu.kiv.bp.datatypes.bindings.TListOfValuesOfImportedTypes;
 import cz.zcu.kiv.bp.datatypes.bindings.TValueOfImportedType;
-import cz.zcu.kiv.bp.datatypes.bindings.adapted.CustomTypesRegistry;
 import cz.zcu.kiv.bp.probe.IProbe;
 import cz.zcu.kiv.bp.probe.NoSuchBundleException;
 import cz.zcu.kiv.bp.uniplayer.bindings.IScenario;
@@ -85,12 +83,24 @@ public class Player implements IPlayer//, BundleContextAware
 	 */
 	private TCustomTypesSupport custTypesStruct;
 	
+	/**
+	 * Collection of loaded values of custom types
+	 */
 	private Map<String, Object> customTypeValues = new HashMap<>();
 	
+	/**
+	 * Collection of loaded custom types
+	 */
 	private Map<String, Class<?>> customTypeClasses = new HashMap<>();
 	
+	/**
+	 * Collection of returned values
+	 */
 	private Map<String, Object> storedReturnValues = new HashMap<>();
 	
+	/**
+	 * Collection of returned types
+	 */
 	private Map<String, Class<?>> storedReturnClasses = new HashMap<>();
 
     /**
@@ -145,16 +155,6 @@ public class Player implements IPlayer//, BundleContextAware
 				);
 				_.execute(call);
 			}
-//			else if (event != null)
-//			{
-//				System.out.printf(
-//					" %s/%s[%s]%n",
-//					event.getTopic(),
-//					event.getKey(),
-//					event.getArgument()
-//				);
-//				_.execute(event);
-//			}
 			else if (event != null)
 			{
 				System.out.printf(
@@ -173,17 +173,12 @@ public class Player implements IPlayer//, BundleContextAware
 		}
 	}
 
-//	/**
-//	 * Fires given event.
-//	 * @param event
-//	 */
-//	private void execute(TEvent event)
-//	{
-//        HashMap<String, Object> arguments = new HashMap<>();
-//        arguments.put(event.getKey(), event.getArgument().getValue());
-//        _.eventAdmin.sendEvent(new Event(event.getTopic(), arguments));
-//	}
-	
+	/**
+	 * Publishes new OSGi event described in the instance of {@link TEvent2}.
+	 * If the description contains custom type data of reference to returned value,
+	 * uses those for properties instead. 
+	 * @param event description
+	 */
 	private void execute(TEvent2 event)
 	{
 		Map<String, Object> actualProperties = new HashMap<>();
@@ -230,7 +225,9 @@ public class Player implements IPlayer//, BundleContextAware
 	}
 	
 	/**
-	 * Invokes method on service with arguments described in call argument.
+	 * Invokes method on service(s) with arguments described in instance of {@link TCall}.
+	 * If the description contains custom type data of reference to returned value,
+	 * uses those instead. 
 	 * @param call invocation description
 	 */
 	private void execute(TCall call)
@@ -250,7 +247,7 @@ public class Player implements IPlayer//, BundleContextAware
 	}
 
 	/**
-	 * Invokes method described in the call argument on service Instance object.
+	 * Invokes method described in the call argument on service instance object.
 	 * @param call - invocation description
 	 * @param serviceInstance - instance on which the method will be invoked
 	 */
@@ -343,7 +340,7 @@ public class Player implements IPlayer//, BundleContextAware
 	}
 
 	/**
-	 * Build array of service instances. Array has only one element when use-all-services-available is set to false.
+	 * Build array of service instances. Returned array has only one element when use-all-services-available is set to false.
 	 * @param call - invocation description
 	 * @return array of service instances, null when no instance is found
 	 */
@@ -369,7 +366,7 @@ public class Player implements IPlayer//, BundleContextAware
 	}
 
 	/**
-	 * Implodes array of Class<?> using it's getName() method.
+	 * Implodes array of {@link Class}<?> using it's getName() method.
 	 * @param types
 	 * @return list of comma separated class names 
 	 */
@@ -384,6 +381,11 @@ public class Player implements IPlayer//, BundleContextAware
 		return sb.length() == 0 ? void.class.getName() : sb.toString();
 	}
 
+	/**
+	 * Implodes array of {@link Object} using it's value and class.
+	 * @param values to be imploded
+	 * @return imploded {@link String}
+	 */
 	private String printValues(Object[] values)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -427,6 +429,10 @@ public class Player implements IPlayer//, BundleContextAware
 		_.loadCustomTypesAndValues();
 	}
 
+	/**
+	 * Loads custom types and value described in the scenario.
+	 * @throws JAXBException
+	 */
 	private void loadCustomTypesAndValues() throws JAXBException
 	{
 		for (TValueOfImportedType value : _.custTypesStruct.getListOfValues().getValues())
@@ -452,7 +458,7 @@ public class Player implements IPlayer//, BundleContextAware
 			try
 			{
 				Bundle bndl = _.envProbe.findBundle(exportingBundleName);
-				customClazz = _.envProbe.findClassInBundle(bndl, typeDescription.getCannonicalName());
+				customClazz = _.envProbe.findClassInBundle(bndl, typeDescription.getCanonicalName());
 
 				if ((customClazz.isInterface() || Modifier.isAbstract(customClazz.getModifiers())) && typeDescription.getFactory().getExternal() == null)
 				{ // Can not directly instantiate interface
@@ -516,7 +522,7 @@ public class Player implements IPlayer//, BundleContextAware
 			{ // bundle does not contain described class
 				System.out.printf(
 					"Class %s or it's factory class not found or not accessible in bundle %s. Empty data storred.%n\tException: %s%n",
-					typeDescription.getCannonicalName(),
+					typeDescription.getCanonicalName(),
 					exportingBundleName,
 					e.getMessage()
 				);
@@ -561,6 +567,17 @@ public class Player implements IPlayer//, BundleContextAware
 		}
 	}
 
+	/**
+	 * Creates custom type value by invoking static factory method of the custom type.
+	 * @param argumentValues arguments for factory method 
+	 * @param argumentTypes types of arguments for factory method
+	 * @param factClazz class containing factory method
+	 * @param factoryMethodName name of the factory method
+	 * @return Object returned by the factory method
+	 * @throws NoSuchMethodException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
 	private Object invokeStaticFactoryMethod(
 		Object[] argumentValues,
 		Class<?>[] argumentTypes,
@@ -594,6 +611,13 @@ public class Player implements IPlayer//, BundleContextAware
 		return customValue;
 	}
 
+	/**
+	 * Checks if the referenced name is equal to the actual name of the imported type.
+	 * Check should always be successful because non-equality wont allow validation. 
+	 * @param typeName referenced type name
+	 * @param typeDescription reference to the imported type description object {@link TImportedType}
+	 * @throws JAXBException
+	 */
 	private void checkTypeNameEquality(String typeName, TImportedType typeDescription)
 	throws JAXBException
 	{
@@ -605,7 +629,7 @@ public class Player implements IPlayer//, BundleContextAware
 			    "TYPE element. Unable to continue with current scenario."
 			);
 		}
-		if (!typeName.equals(typeDescription.getCannonicalName()))
+		if (!typeName.equals(typeDescription.getCanonicalName()))
 		{ // some strange conditions caused that referencing key differs from referenced key,
 		  // document should never be successfully validated and therefore the loading should never get here
 			throw new JAXBException(

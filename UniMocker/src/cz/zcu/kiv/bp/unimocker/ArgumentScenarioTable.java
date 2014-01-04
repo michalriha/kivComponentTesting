@@ -62,6 +62,9 @@ public class ArgumentScenarioTable
 		}
 	}
 	
+	/**
+	 * Number of columns in this matrix.
+	 */
     private static int ARGS_COUNT;
 	
     /**

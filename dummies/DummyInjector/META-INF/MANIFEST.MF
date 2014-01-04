@@ -4,3 +4,4 @@ Bundle-Name: DummyInjector
 Bundle-SymbolicName: dummies.inejctor
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: dummies.injector

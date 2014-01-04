@@ -1,7 +1,5 @@
 package cz.zcu.kiv.bp.unimocker;
 
-//import ifcs.IPrinter;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -65,8 +63,14 @@ public class Mocker implements IMocker, BundleContextAware
 	 */
 	private TCustomTypesSupport custTypesStruct;
 	
+	/**
+	 * Collection of loaded values of custom types
+	 */
 	private Map<String, Object> customTypeValues = new HashMap<>();
 	
+	/**
+	 * Collection of loaded custom types
+	 */
 	private Map<String, Class<?>> customTypeClasses = new HashMap<>();
 	
     /**
@@ -305,6 +309,13 @@ public class Mocker implements IMocker, BundleContextAware
 		}
 	}
 	
+	/**
+	 * Creates map of methods expected to be called and the methods that should be invoked when that happens.
+	 * @param clazz
+	 * @param service
+	 * @return injection matrix
+	 * @throws NoSuchMethodException
+	 */
 	private Map<Method, TCodeInjection> buildCodeInjections(
 		Class<?> clazz,
 		TSimulatedService service)
@@ -360,6 +371,12 @@ public class Mocker implements IMocker, BundleContextAware
 		return ret;
 	}
 
+	/**
+	 * Replaces object representing custom type with actual value and type
+	 * in the array of arguments with which the method should be invoked.
+	 * @param types
+	 * @param values
+	 */
 	private void replaceCustomTypes(Class<?>[] types, Object[] values)
 	{
 		if (types.length != values.length)
@@ -415,6 +432,10 @@ public class Mocker implements IMocker, BundleContextAware
 		_.loadCustomTypesAndValues();
 	}
 
+	/**
+	 * Loads custom types and value described in the scenario.
+	 * @throws JAXBException
+	 */
 	private void loadCustomTypesAndValues() throws JAXBException
 	{
 		for (TValueOfImportedType value : _.custTypesStruct.getListOfValues().getValues())
@@ -440,7 +461,7 @@ public class Mocker implements IMocker, BundleContextAware
 			try
 			{
 				Bundle bndl = _.envProbe.findBundle(exportingBundleName);
-				customClazz = _.envProbe.findClassInBundle(bndl, typeDescription.getCannonicalName());
+				customClazz = _.envProbe.findClassInBundle(bndl, typeDescription.getCanonicalName());
 
 				if ((customClazz.isInterface() || Modifier.isAbstract(customClazz.getModifiers())) && typeDescription.getFactory().getExternal() == null)
 				{ // Can not directly instantiate interface
@@ -504,7 +525,7 @@ public class Mocker implements IMocker, BundleContextAware
 			{ // bundle does not contain described class
 				System.out.printf(
 					"Class %s or it's factory class not found or not accessible in bundle %s. Empty data storred.%n\tException: %s%n",
-					typeDescription.getCannonicalName(),
+					typeDescription.getCanonicalName(),
 					exportingBundleName,
 					e.getMessage()
 				);
@@ -549,6 +570,17 @@ public class Mocker implements IMocker, BundleContextAware
 		}
 	}
 
+	/**
+	 * Creates custom type value by invoking static factory method of the custom type.
+	 * @param argumentValues arguments for factory method 
+	 * @param argumentTypes types of arguments for factory method
+	 * @param factClazz class containing factory method
+	 * @param factoryMethodName name of the factory method
+	 * @return Object returned by the factory method
+	 * @throws NoSuchMethodException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
 	private Object invokeStaticFactoryMethod(
 		Object[] argumentValues,
 		Class<?>[] argumentTypes,
@@ -582,6 +614,13 @@ public class Mocker implements IMocker, BundleContextAware
 		return customValue;
 	}
 
+	/**
+	 * Checks if the referenced name is equal to the actual name of the imported type.
+	 * Check should always be successful because non-equality wont allow validation. 
+	 * @param typeName referenced type name
+	 * @param typeDescription reference to the imported type description object {@link TImportedType}
+	 * @throws JAXBException
+	 */
 	private void checkTypeNameEquality(String typeName, TImportedType typeDescription)
 	throws JAXBException
 	{
@@ -593,7 +632,7 @@ public class Mocker implements IMocker, BundleContextAware
 			    "TYPE element. Unable to continue with current scenario."
 			);
 		}
-		if (!typeName.equals(typeDescription.getCannonicalName()))
+		if (!typeName.equals(typeDescription.getCanonicalName()))
 		{ // some strange conditions caused that referencing key differs from referenced key,
 		  // document should never be successfully validated and therefore the loading should never get here
 			throw new JAXBException(
@@ -604,8 +643,8 @@ public class Mocker implements IMocker, BundleContextAware
 	}
 
 	/**
-	 * Implodes array of Class<?> using it's getName() method.
-	 * @param types
+	 * Implodes array of {@link Class}<?> using it's getCanonicalName() method.
+	 * @param types to be imploded
 	 * @return list of comma separated class names 
 	 */
 	private String printTypes(Class<?>[] types)
@@ -619,6 +658,11 @@ public class Mocker implements IMocker, BundleContextAware
 		return sb.length() == 0 ? void.class.getName() : sb.toString();
 	}
 
+	/**
+	 * Implodes array of {@link Object} using it's value and class.
+	 * @param values to be imploded
+	 * @return imploded {@link String}
+	 */
 	private String printValues(Object[] values)
 	{
 		StringBuilder sb = new StringBuilder();

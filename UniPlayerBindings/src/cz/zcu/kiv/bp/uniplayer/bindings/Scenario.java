@@ -57,6 +57,9 @@ public class Scenario implements IScenario
                          + ":cz.zcu.kiv.bp.datatypes.bindings.basics"
 						 ;
 
+    /**
+     * Schema files
+     */
     public static final Source[] XML_SCHEMAS_TO_USE =  new Source[]
     {
     	new StreamSource(cz.zcu.kiv.bp.namespaces.UniPlayer.SCENARIO_SCHEMA),
@@ -233,7 +236,7 @@ public class Scenario implements IScenario
                     			"\t\t%s %s (%s)%n",
                             	arg.getArgumentOrder(),
                             	data.getRef().getArguments().toString(),
-                            	_.scenario.getSettings().getCustomTypesSupport().getListOfTypes().get(data.getRef().getType()).getCannonicalName()
+                            	_.scenario.getSettings().getCustomTypesSupport().getListOfTypes().get(data.getRef().getType()).getCanonicalName()
                     		);
                     	} else
                         System.out.printf(
@@ -293,12 +296,24 @@ public class Scenario implements IScenario
         }
     }
     
+    /**
+     * actions described in scenario
+     */
     private ActionsMap actions;
     
+    /**
+     * actions to be processed in current time
+     */
     private List<TAction> currentTimeList;
     
+    /**
+     * currently processed action
+     */
     private TAction currentAction = null;
     
+    /**
+     * current simulation time
+     */
     private long currentTime = 0;
 
     /**

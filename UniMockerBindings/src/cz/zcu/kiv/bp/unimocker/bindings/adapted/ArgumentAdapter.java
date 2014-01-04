@@ -43,7 +43,12 @@ public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
         return ret;
     }
 
-	private TArgument createArgumentFromValue(TValue marVal)
+    /**
+     * Creates {@link TArgument} element representation from {@link TValue}
+     * @param value to be used as template for the new TArgument
+     * @return new TArgument instance
+     */
+	private TArgument createArgumentFromValue(TValue value)
 	{
 		TArgument ret = new TArgument();
 		
@@ -61,7 +66,7 @@ public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
 			try
 			{
 				
-				foundValue = met.invoke(marVal, (Object[]) null);
+				foundValue = met.invoke(value, (Object[]) null);
 				// if the getter returns value -> we have found something
 				// and therefore can end seeking, else try another method
 				if (foundValue == null) continue;

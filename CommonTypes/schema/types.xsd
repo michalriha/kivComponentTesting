@@ -425,11 +425,11 @@
         </xsd:simpleContent>
     </xsd:complexType>
     
-    <xsd:complexType name="TFactory" abstract="true" />
+    <xsd:complexType name="TFactoryType" abstract="true" />
     
     <xsd:complexType name="TStaticMemberFactory">
         <xsd:complexContent>
-            <xsd:extension base="r:TFactory">
+            <xsd:extension base="r:TFactoryType">
                 <xsd:sequence>
                     <xsd:element name="method" type="r:TMethodName" />
                 </xsd:sequence>
@@ -439,13 +439,13 @@
     
     <xsd:complexType name="TConstructFactory">
         <xsd:complexContent>
-            <xsd:extension base="r:TFactory" />
+            <xsd:extension base="r:TFactoryType" />
         </xsd:complexContent>
     </xsd:complexType>
     
     <xsd:complexType name="TExternalFactory">
         <xsd:complexContent>
-            <xsd:extension base="r:TFactory">
+            <xsd:extension base="r:TFactoryType">
                 <xsd:sequence>
                     <xsd:element name="bundle" type="r:TBundle" />
                     <xsd:element name="method" type="r:TMethod" />
@@ -454,21 +454,21 @@
         </xsd:complexContent>
     </xsd:complexType>
     
+    <xsd:complexType name="TFactory">
+        <xsd:choice>
+            <xsd:element name="static-member" type="r:TStaticMemberFactory" />
+            <xsd:element name="constructor" type="r:TConstructFactory" />
+            <xsd:element name="external" type="r:TExternalFactory" />
+        </xsd:choice>
+    </xsd:complexType>
+    
     <xsd:complexType name="TImportedType">
         <xsd:sequence>
-            <xsd:element name="factory">
-                <xsd:complexType>
-                    <xsd:choice>
-                        <xsd:element name="static-member" type="r:TStaticMemberFactory" />
-                        <xsd:element name="constructor" type="r:TConstructFactory" />
-                        <xsd:element name="external" type="r:TExternalFactory" />
-                    </xsd:choice>
-                </xsd:complexType>
-            </xsd:element>
+            <xsd:element name="factory" type="r:TFactory" />
         </xsd:sequence>
         <xsd:attribute name="bundle" type="r:TBundleName" use="required"/>
         <xsd:attribute name="version" type="r:TVersion" use="required" />
-        <xsd:attribute name="cannonical-name" type="xsd:string" use="required" />
+        <xsd:attribute name="canonical-name" type="xsd:string" use="required" />
     </xsd:complexType>
     
     <xsd:complexType name="TImportedTypes">
@@ -501,6 +501,7 @@
             <xsd:element ref="r:Floats" /> <!-- name="Floats" type="types:TFloatCollection" /> -->
             <xsd:element ref="r:Booleans" /> <!-- name="Booleans" type="types:TBooleanCollection" /> -->
             <xsd:element ref="r:Files" /> <!-- name="Files" type="types:TFileCollection" /> -->
+            <xsd:element ref="r:Null" />
         </xsd:choice>
     </xsd:complexType>
 

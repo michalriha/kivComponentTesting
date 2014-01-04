@@ -16,8 +16,6 @@ import cz.zcu.kiv.bp.datatypes.bindings.basics.TCollectionItem;
  */
 public abstract class MyCollectionAdapter<T> extends XmlAdapter<TCollection<T>, MyCollection<T>> {
 
-//	protected Class<? extends MyCollection<T>> collectionWrapper = null; //(Class<? extends MyCollection<T>>) MyCollection.class;
-	
 	protected abstract Class<? extends MyCollection<T>> getCollectionWrapper();
 	
 	@Override

@@ -11,5 +11,4 @@ public class CustomTypesRegistry extends HashMap<String, TImportedType>
 	 * 
 	 */
 	private static final long serialVersionUID = 1911789686068964197L;
-
 }

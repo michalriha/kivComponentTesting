@@ -25,6 +25,9 @@ public class Value
 	 */
 	Class<? extends TCollection<?>> xmlTypeWrapper;
 	
+	/**
+	 * Adapted type of wrapper class. Used for transferring collections. 
+	 */
 	Class<? extends MyCollection<?>> adaptedTypeWrapper;
 	
 	/**

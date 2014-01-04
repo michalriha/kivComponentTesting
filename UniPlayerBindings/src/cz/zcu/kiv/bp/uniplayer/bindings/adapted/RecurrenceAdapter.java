@@ -7,8 +7,11 @@ import cz.zcu.kiv.bp.uniplayer.bindings.TExponential;
 import cz.zcu.kiv.bp.uniplayer.bindings.TGaussian;
 import cz.zcu.kiv.bp.uniplayer.bindings.TRecurrence;
 
-
-
+/**
+ * Adapter for transforming TRecurrence to Recurrence 
+ * @author Michal
+ *
+ */
 public class RecurrenceAdapter extends XmlAdapter<TRecurrence, Recurrence>
 {
 

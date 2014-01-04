@@ -178,6 +178,13 @@ public class ValueAdapter extends XmlAdapter<TValue, Value>
 		}
 	}
 
+	/**
+	 * Creates {@link TNull} element representation from  the {@link Value} object and its wrappers properties.
+	 * @param v {@link Value} object
+	 * @return {@link TNull} element representation
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 */
 	private TNull createNullElement(Value v)
 	throws InstantiationException, IllegalAccessException
 	{

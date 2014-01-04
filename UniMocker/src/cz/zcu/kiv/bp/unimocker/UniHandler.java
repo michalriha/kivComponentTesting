@@ -63,11 +63,19 @@ public class UniHandler implements InvocationHandler
 	 */
 	private IProbe envProbe = null;
 	
+	/**
+	 * Sets the envProbe property.
+	 * @param envProbe instance of {@link IProbe}
+	 */
 	public void setEnvProbe(IProbe envProbe)
 	{
 		_.envProbe = envProbe;
 	}
 	
+	/**
+	 * Sets the injectedCode property.
+	 * @param injectedCode instance of {@link Map}<{@link Method}, {@link TCodeInjection}>
+	 */
 	public void setInjectedCode(Map<Method, TCodeInjection> injectedCode)
 	{
 		_.injectedCode = injectedCode;
@@ -96,8 +104,8 @@ public class UniHandler implements InvocationHandler
 	 * Create handler with given scenario and exception propagating flags.
 	 * @param mockedClass mockedClass class that is mocked by proxy using this handler instance
 	 * @param retVals mocking scenario
-	 * @param ignoreUndefMethods flag whether or not to throw UndefinedMethodInvocationException
-	 * @param ignoreUndefPossibs flag whether or not to throw UndefinedPossibilityException
+	 * @param ignoreUndefMethods flag whether or not to throw {@link UndefinedMethodInvocationException}
+	 * @param ignoreUndefPossibs flag whether or not to throw {@link UndefinedPossibilityException}
 	 */
 	public UniHandler(
 		Class<?> mockedClass,
@@ -115,7 +123,7 @@ public class UniHandler implements InvocationHandler
 	/**
 	 * Creates possibility matrix for methods with parameters and fills simple
 	 * list of pairs method => return value for parameterless methods.
-	 * @param retVals possibilities
+	 * @param retVals matrix possibilities and it's respective return values
 	 */
 	private void buildPossibilitiesMatrices(Map<Method, Map<Object[], Object>> retVals)
 	{
@@ -148,8 +156,8 @@ public class UniHandler implements InvocationHandler
 	}
 	
 	/**
-	 * @exception UndefinedMethodInvocationException
-	 * @exception UndefinedPossibilityException
+	 * @exception {@link UndefinedMethodInvocationException}
+	 * @exception {@link UndefinedPossibilityException}
 	 */
 	public Object invoke(
 		Object proxy,
@@ -237,6 +245,13 @@ public class UniHandler implements InvocationHandler
 		return ret;
 	}
 
+	/**
+	 * Invokes the injected method on service instance.
+	 * @param injectedService service providing the method to be invoked
+	 * @param mockedMethod actually invoked method
+	 * @param args argument given to invocation
+	 * @return return value of the injected method
+	 */
 	private Object invokeCall(
 		TCodeInjection.Call.Service injectedService,
 		Method mockedMethod,
@@ -280,6 +295,16 @@ public class UniHandler implements InvocationHandler
 		return ret;
 	}
 
+	/**
+	 * Invokes the injected static method.
+	 * @param injectedCall class with the static method to be invoked
+	 * @param mockedMethod name of the method to be invoked
+	 * @param args invocation arguments
+	 * @return return value of the injected method
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws ClassCastException
+	 */
 	private Object invokeCall(
 		TCodeInjection.Call.Static injectedCall,
 		Method mockedMethod,
@@ -347,6 +372,12 @@ public class UniHandler implements InvocationHandler
 		return ret;
 	}
 
+	/**
+	 * Check if the return type is compatible with the return type the injected method. 
+	 * @param originalMethod
+	 * @param injectedMethod
+	 * @throws ClassCastException
+	 */
 	private void checkReturnTypes(Method originalMethod, Method injectedMethod) throws ClassCastException
 	{
 		if (!originalMethod.getReturnType().isAssignableFrom(injectedMethod.getReturnType()))

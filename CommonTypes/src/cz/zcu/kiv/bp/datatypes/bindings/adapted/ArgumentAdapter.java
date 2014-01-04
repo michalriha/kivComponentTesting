@@ -1,13 +1,5 @@
 package cz.zcu.kiv.bp.datatypes.bindings.adapted;
 
-//import java.io.File;
-//import java.lang.reflect.Array;
-//import java.math.BigDecimal;
-//import java.math.BigInteger;
-//import java.util.LinkedList;
-//import java.util.List;
-//
-//import javax.xml.bind.JAXBElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -15,21 +7,7 @@ import java.lang.reflect.Modifier;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import cz.zcu.kiv.bp.datatypes.bindings.TArgument;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TBigDecimalList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TBigIntegerList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TBooleanList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TByteArrayList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TByteList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TCollection;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TDoubleList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TFileList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TFloatList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TIntList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TLongList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TShortList;
-//import cz.zcu.kiv.bp.uniplayer.bindings.TStringList;
 import cz.zcu.kiv.bp.datatypes.bindings.TValue;
-
 
 /**
  * Adapter for transforming TArgument to Argument 
@@ -65,7 +43,12 @@ public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
         return ret;
     }
 
-	private TArgument createArgumentFromValue(TValue marVal)
+    /**
+     * Creates {@link TArgument} element representation from {@link TValue}
+     * @param value to be used as template for the new TArgument
+     * @return new TArgument instance
+     */
+	private TArgument createArgumentFromValue(TValue value)
 	{
 		TArgument ret = new TArgument();
 		
@@ -83,7 +66,7 @@ public class ArgumentAdapter extends XmlAdapter<TArgument, Argument>
 			try
 			{
 				
-				foundValue = met.invoke(marVal, (Object[]) null);
+				foundValue = met.invoke(value, (Object[]) null);
 				// if the getter returns value -> we have found something
 				// and therefore can end seeking, else try another method
 				if (foundValue == null) continue;

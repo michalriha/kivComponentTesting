@@ -720,20 +720,52 @@ public class TValue
         this._null = value;
     }
 
+    /**
+     * Gets the value of the customTypeData property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link TCustomTypeData }
+     *     
+     */
     public TCustomTypeData getCustomTypeData() {
 		return customTypeData;
 	}
 
-	public void setCustomTypeData(TCustomTypeData customTypeData) {
-		this.customTypeData = customTypeData;
+    /**
+     * Sets the value of the customTypeData property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TCustomTypeData }
+     *     
+     */
+    public void setCustomTypeData(TCustomTypeData value) {
+		this.customTypeData = value;
 	}
 
-	public TReturnedValueReference getReturnedValueRef() {
+    /**
+     * Gets the value of the returnedValueRef property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link TReturnedValueReference }
+     *     
+     */
+    public TReturnedValueReference getReturnedValueRef() {
 		return returnedValueRef;
 	}
 
-	public void setReturnedValueRef(TReturnedValueReference returnedValueRef) {
-		this.returnedValueRef = returnedValueRef;
+	/**
+     * Sets the value of the returnedValueRef property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TReturnedValueReference }
+     *     
+     */
+    public void setReturnedValueRef(TReturnedValueReference value) {
+		this.returnedValueRef = value;
 	}
 
 	@Override

@@ -270,6 +270,13 @@ public class Probe implements BundleContextAware, IProbe
 		return _.svcTrackers.get(trackerKey);
 	}
 
+	/**
+	 * Create string representing the key associated with described service.
+	 * @param serviceName name of the service
+	 * @param filter optional filter
+	 * @param tractAllServices track all the service instances
+	 * @return tracker key
+	 */
 	private String createTrackerKey(String serviceName, String filter, boolean tractAllServices)
 	{
 		String trackerKey = String.format("all:%s(&(objectclass=%s)%s)", tractAllServices, serviceName, filter);
