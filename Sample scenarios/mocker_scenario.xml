@@ -8,7 +8,7 @@
 	<settings>
 	   <custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types">
 	       <types>
-	           <type cannonical-name="dummies.types.Type5" version="1.0.0" bundle="dummies.types">
+	           <type canonical-name="dummies.types.Type5" version="1.0.0" bundle="dummies.types">
                     <factory>
                         <static-member>
                             <method>newInstance</method>

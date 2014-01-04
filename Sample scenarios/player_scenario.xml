@@ -11,19 +11,19 @@
 		<simul-step-delay>500</simul-step-delay>
 		<custom-types-support xmlns="http://www.kiv.zcu.cz/component-testing/types">
 			<types>
-				<type cannonical-name="dummies.types.Type2" bundle="dummies.types" version="1.0.0">
+				<type canonical-name="dummies.types.Type2" bundle="dummies.types" version="1.0.0">
 					<factory>
 						<static-member>
 							<method>newInstance</method>
 						</static-member>
 					</factory>
 				</type>
-				<type cannonical-name="dummies.types.Type1" bundle="dummies.typess" version="1.0.0">
+				<type canonical-name="dummies.types.Type1" bundle="dummies.typess" version="1.0.0">
 					<factory>
 						<constructor />
 					</factory>
 				</type>
-                <type cannonical-name="dummies.types.Type3" bundle="dummies.types" version="1.0.0">
+                <type canonical-name="dummies.types.Type3" bundle="dummies.types" version="1.0.0">
                     <factory>
                         <external>
                             <bundle name="dummies.types" version="1.0.0" />
@@ -31,7 +31,7 @@
                         </external>
                     </factory>
                 </type>
-                <type cannonical-name="dummies.types.Type4" bundle="dummies.types" version="1.0.0">
+                <type canonical-name="dummies.types.Type4" bundle="dummies.types" version="1.0.0">
                     <factory>
                         <external>
                             <bundle name="dummies.types" version="1.0.0" />
