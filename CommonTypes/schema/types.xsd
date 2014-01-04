@@ -548,7 +548,7 @@
     <xsd:element name="custom-types-support" type="r:TCustomTypesSupport">
         <xsd:key name="typeKey">
             <xsd:selector xpath="r:types/r:type" />
-            <xsd:field xpath="@cannonical-name" />
+            <xsd:field xpath="@canonical-name" />
         </xsd:key>
         <xsd:keyref name="typeRef" refer="r:typeKey">
             <xsd:selector xpath="r:values/r:value" />
