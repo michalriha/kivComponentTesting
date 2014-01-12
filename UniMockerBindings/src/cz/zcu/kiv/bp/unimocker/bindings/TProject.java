@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMap;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.BundlesMapAdapter;
-import cz.zcu.kiv.bp.uniplayer.bindings.TSettings;
+import cz.zcu.kiv.bp.unimocker.bindings.TSettings;
 
 
 /**

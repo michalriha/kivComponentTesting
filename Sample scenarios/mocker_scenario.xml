@@ -47,7 +47,7 @@
 				        </call>
 				    </code-injection>
 				    <!-- Following invocations has no meaning since this method does not return anything -->
-                    <invocation>
+                    <invocation count-limit="10">
                         <arguments>
                             <argument ord-num="0">
 <!--                                 <AnyValue base-type="FileArrayList"/> -->

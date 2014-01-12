@@ -21,7 +21,7 @@ public class InvocationAdapter extends XmlAdapter<TInvocation, Invocation>
     		val.setType(void.class);
     		val.setValue(null);
     	}
-        return new Invocation(v.getArguments(), val);
+        return new Invocation(v.getArguments(), val, v.getCountLimit());
     }
 
     @Override
@@ -29,6 +29,7 @@ public class InvocationAdapter extends XmlAdapter<TInvocation, Invocation>
     {
         TInvocation inv = new TInvocation();
         inv.setArguments(v.getArguments());
+        inv.setCountLimit(v.getCountLimit());
         if (v.getReturnValue().getType() != void.class) inv.setReturn(v.getReturnValue());
         
         return inv;

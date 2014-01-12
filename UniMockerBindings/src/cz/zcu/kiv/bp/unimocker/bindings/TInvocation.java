@@ -2,8 +2,10 @@ package cz.zcu.kiv.bp.unimocker.bindings;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.ArgumentsList;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.Value;
 
@@ -36,7 +38,8 @@ import cz.zcu.kiv.bp.unimocker.bindings.adapted.Value;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TInvocation", propOrder = {
     "arguments",
-    "_return"
+    "_return",
+    "countLimit"
 })
 public class TInvocation {
 
@@ -44,7 +47,9 @@ public class TInvocation {
     protected ArgumentsList arguments;
     @XmlElement(name = "return", required = false, type = TValue.class)
     protected Value _return;
-
+    @XmlAttribute(name = "count-limit", required = false)
+    protected Long countLimit;
+    
     /**
      * Gets the value of the arguments property.
      * 
@@ -92,5 +97,13 @@ public class TInvocation {
     public void setReturn(Value value) {
         this._return = value;
     }
+
+	public Long getCountLimit() {
+		return countLimit;
+	}
+
+	public void setCountLimit(Long countLimit) {
+		this.countLimit = countLimit;
+	}
 
 }

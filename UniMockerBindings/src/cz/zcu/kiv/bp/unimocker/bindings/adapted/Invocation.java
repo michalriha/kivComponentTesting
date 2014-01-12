@@ -15,6 +15,8 @@ public class Invocation
     
     private Value returnValue;
     
+    private Long countLimit;
+    
     /**
      * Returns return value associated with this invocation.
      * @return this invocation's return value
@@ -38,9 +40,18 @@ public class Invocation
      * @param arguments
      * @param returnValue
      */
-    public Invocation(ArgumentsList arguments, Value returnValue)
+    public Invocation(ArgumentsList arguments, Value returnValue, Long countLimit)
     {
         _.arguments = arguments;
         _.returnValue = returnValue;
+        _.countLimit = countLimit;
     }
+
+	public Long getCountLimit() {
+		return countLimit;
+	}
+
+	public void setCountLimit(Long countLimit) {
+		this.countLimit = countLimit;
+	}
 }
