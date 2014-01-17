@@ -17,6 +17,8 @@ public class Invocation
     
     private Long countLimit;
     
+    private long invocationCount = 0L;
+    
     /**
      * Returns return value associated with this invocation.
      * @return this invocation's return value
@@ -48,10 +50,24 @@ public class Invocation
     }
 
 	public Long getCountLimit() {
-		return countLimit;
+		return countLimit == null ? -1 : countLimit;
 	}
 
 	public void setCountLimit(Long countLimit) {
+		if (this.countLimit != null)
+		{
+			throw new IllegalStateException("Invocation limit can be set only once.");
+		}
 		this.countLimit = countLimit;
+	}
+	
+	public void incInvocationCount()
+	{
+		this.invocationCount++;
+	}
+	
+	public long getInvocationCount()
+	{
+		return this.invocationCount;
 	}
 }

@@ -16,6 +16,8 @@ import cz.zcu.kiv.bp.probe.IProbe;
 import cz.zcu.kiv.bp.probe.NoSuchBundleException;
 import cz.zcu.kiv.bp.unimocker.ArgumentScenarioTable.Posibility;
 import cz.zcu.kiv.bp.unimocker.bindings.TCodeInjection;
+import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
+import cz.zcu.kiv.bp.unimocker.bindings.adapted.Value;
 
 /**
  * Implements InvocationHandler. This class is universal invocation handler pro proxy objects used as mockup.
@@ -51,7 +53,7 @@ public class UniHandler implements InvocationHandler
 	/**
 	 * list for pairs method=>return value for method without arguments
 	 */
-	private Map<Method, Object> paramLessMethods = new HashMap<>();
+	private Map<Method, Invocation /*Object*/> paramLessMethods = new HashMap<>();
 	
 	/**
 	 * Map of injected executions for defined methods. 
@@ -87,7 +89,7 @@ public class UniHandler implements InvocationHandler
 	 */
 	public UniHandler(Class<?> mockedClass)
 	{
-		this(mockedClass, new HashMap<Method, Map<Object[], Object>>(), false, false);
+		this(mockedClass, new HashMap<Method, Map<Object[], Invocation /*Object*/>>(), false, false);
 	}
 	
 	/**
@@ -95,7 +97,7 @@ public class UniHandler implements InvocationHandler
 	 * @param mockedClass class that is mocked by proxy using this handler instance
 	 * @param retVals mocking scenario
 	 */
-	public UniHandler(Class<?> mockedClass, Map<Method, Map<Object[], Object>> retVals)
+	public UniHandler(Class<?> mockedClass, Map<Method, Map<Object[], Invocation /*Object*/>> retVals)
 	{
 		this(mockedClass, retVals, false, false);
 	}
@@ -109,7 +111,7 @@ public class UniHandler implements InvocationHandler
 	 */
 	public UniHandler(
 		Class<?> mockedClass,
-		Map<Method, Map<Object[], Object>> retVals,
+		Map<Method, Map<Object[], Invocation /*Object*/>> retVals,
 		boolean ignoreUndefMethods,
 		boolean ignoreUndefPossibs)
 	{
@@ -125,18 +127,18 @@ public class UniHandler implements InvocationHandler
 	 * list of pairs method => return value for parameterless methods.
 	 * @param retVals matrix possibilities and it's respective return values
 	 */
-	private void buildPossibilitiesMatrices(Map<Method, Map<Object[], Object>> retVals)
+	private void buildPossibilitiesMatrices(Map<Method, Map<Object[], Invocation /*Object*/>> retVals)
 	{
-		for (Entry<Method, Map<Object[], Object>> posib : retVals.entrySet())
+		for (Entry<Method, Map<Object[], Invocation /*Object*/>> posib : retVals.entrySet())
 		{
 			int argsCount = posib.getKey().getParameterTypes().length;
 			if (argsCount == 0)
 			{ // method has no parameters
 				// since parameterless method will have only one meaningful description,
 				// we can save only the first possibility
-				for (Object retunValue: posib.getValue().values())
+				for (Invocation invocationDescription /*Object retunValue*/: posib.getValue().values())
 				{
-					_.paramLessMethods.put(posib.getKey(), retunValue);
+					_.paramLessMethods.put(posib.getKey(), invocationDescription /*retunValue*/);
 					break;
 				}
 				continue;
@@ -145,11 +147,11 @@ public class UniHandler implements InvocationHandler
 			ArgumentScenarioTable matrix = new ArgumentScenarioTable(posib.getKey().getParameterTypes());
 			retMatrix.put(posib.getKey(), matrix);
 			
-			for (Entry<Object[], Object> row : posib.getValue().entrySet())
+			for (Entry<Object[], Invocation /*Object*/> row : posib.getValue().entrySet())
 			{
 				Posibility tmp = matrix.new Posibility();
 				tmp.addAll(Arrays.asList(row.getKey()));
-				tmp.returnValue = row.getValue();
+				tmp.invocationDescription = row.getValue();
 				matrix.addPosibility(tmp);
 			}
 		}
@@ -230,7 +232,15 @@ public class UniHandler implements InvocationHandler
 		try
 		{
 			// find defined return value
-			ret = args != null ? _.retMatrix.get(mockedInterfaceMemberMethod).find(args) : _.paramLessMethods.get(mockedInterfaceMemberMethod);
+			ret = args != null ? _.retMatrix.get(mockedInterfaceMemberMethod).find(args).getReturnValue() : _.paramLessMethods.get(mockedInterfaceMemberMethod).getReturnValue();
+			Invocation inv = args != null ? _.retMatrix.get(mockedInterfaceMemberMethod).find(args) : _.paramLessMethods.get(mockedInterfaceMemberMethod);
+			long invLimit = inv.getCountLimit();
+			if (inv.getInvocationCount() == invLimit)
+			{
+				throw new InvocationCountLimitReachedException(String.format("Current invocation reached it %d allowed invocations.", invLimit));
+			}
+			inv.incInvocationCount();
+			ret = inv.getReturnValue().getValue();
 		}
 		catch (UndefinedPossibilityException ex)
 		{

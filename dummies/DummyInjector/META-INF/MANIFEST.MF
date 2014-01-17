@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DummyInjector
-Bundle-SymbolicName: dummies.inejctor
+Bundle-SymbolicName: dummies.injector
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: dummies.injector

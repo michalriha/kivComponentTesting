@@ -142,7 +142,7 @@ public class Mocker implements IMocker, BundleContextAware
 	 */
 	private Object createMockup(
 		Class<?> clazz,
-		Map<Method, Map<Object[], Object>> returns,
+		Map<Method, Map<Object[], Invocation /*Object*/>> returns,
 		Map<Method, TCodeInjection> injections,
 		boolean ignoreUndefMethods,
 		boolean ignoreUndefPossibs)
@@ -169,13 +169,13 @@ public class Mocker implements IMocker, BundleContextAware
 	 * @return Expectations map
 	 * @throws NoSuchMethodException
 	 */
-	private Map<Method, Map<Object[], Object>> buildInvocationPossibilitiesForClass(
+	private Map<Method, Map<Object[], Invocation /*Object*/>> buildInvocationPossibilitiesForClass(
 		Class<?> clazz,
 		TSimulatedService simulation)
 	throws NoSuchMethodException
 	{
 		// Contains return values for all described methods.
-		Map<Method, Map<Object[], Object>> returns = new HashMap<>();
+		Map<Method, Map<Object[], Invocation /*Object*/>> returns = new HashMap<>();
 		for (InvokedMethod methodToFind : simulation.getMethods())
 		{
 			for (Invocation inv : methodToFind.getInvocations())
@@ -211,13 +211,13 @@ public class Mocker implements IMocker, BundleContextAware
 				// If this method has not yet been described, create new collection.
 				if (!returns.containsKey(foundMethod))
 				{ // new method
-					returns.put(foundMethod, new HashMap<Object[], Object>());
+					returns.put(foundMethod, new HashMap<Object[], Invocation /*Object*/>());
 				}
 				// Contains return values for current method and all possible invocation arguments. 
-				Map<Object[], Object> methodsInvocationPossibilities = returns.get(foundMethod);
+				Map<Object[], Invocation /*Object*/> methodsInvocationPossibilities = returns.get(foundMethod);
 				methodsInvocationPossibilities.put(
 					values,
-					inv.getReturnValue().getValue()
+					inv/*.getReturnValue().getValue()*/
 				);
 			}
 		}
@@ -286,7 +286,7 @@ public class Mocker implements IMocker, BundleContextAware
 					List<TSimulatedService> simulation = bundle.getValue().get(clazz.getName());
 					for (TSimulatedService service : simulation)
 					{
-						Map<Method, Map<Object[], Object>> returns = _.buildInvocationPossibilitiesForClass(clazz, service);
+						Map<Method, Map<Object[], Invocation /*Object*/>> returns = _.buildInvocationPossibilitiesForClass(clazz, service);
 						Map<Method, TCodeInjection> injections = _.buildCodeInjections(clazz, service);
 						
 						Object srv = _.createMockup(

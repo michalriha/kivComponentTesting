@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 
 import cz.zcu.kiv.bp.unimocker.bindings.TAnyValue;
+import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
 
 /**
  * Implementation of argument matrix for storing and matching arguments against it's return values.
@@ -32,7 +33,8 @@ public class ArgumentScenarioTable
 		/**
 		 * return value matching to contained argument values
 		 */
-		Object returnValue = null;
+//		Object returnValue = null;
+		Invocation invocationDescription = null;
 
 		/**
 		 * convenient marker for comparison
@@ -110,7 +112,7 @@ public class ArgumentScenarioTable
 	 * @throws IllegalArgumentException Given arguments to match is either null or the array has different
 	 * 		   number of values than the matrix has columns.
 	 */
-	public Object find(Object... args)
+	public Invocation /*Object*/ find(Object... args)
 	throws UndefinedPossibilityException, IllegalArgumentException
 	{
 		if (args != null && args.length != this.parametrTypes.length)
@@ -118,7 +120,7 @@ public class ArgumentScenarioTable
 			throw new IllegalArgumentException("Invalid arguments count!(" + args.length + " / " + ARGS_COUNT + ")");
 		}
 		
-		Object ret = null;
+		Invocation /*Object*/ ret = null;
 		boolean found = false;
 		
 		// find all matching rows in the matrix
@@ -136,7 +138,7 @@ public class ArgumentScenarioTable
             		universalRows.add(this.matrix.get(row));
             		continue;
             	}
-                ret = this.matrix.get(row).returnValue;
+                ret = this.matrix.get(row).invocationDescription;
                 found = true;
                 break;
             }
@@ -146,7 +148,7 @@ public class ArgumentScenarioTable
         {
         	// sort by number of universal arguments
         	Collections.sort(universalRows);
-	        ret = universalRows.get(0).returnValue;
+	        ret = universalRows.get(0).invocationDescription;
 	        found = true;
         }
         

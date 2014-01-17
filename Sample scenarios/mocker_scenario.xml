@@ -107,7 +107,7 @@
                             </static>
                         </call>
                     </code-injection>
-					<invocation>
+					<invocation count-limit="5">
 						<arguments />
 						<return>
 							<types:String>7z</types:String>
