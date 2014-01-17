@@ -193,7 +193,7 @@ public class ArgumentScenarioTable
                 { // Previous arguments in this possibility matched
                     
                     if (!this.match(this.matrix.get(row).get(col), args[col], this.parametrTypes[col]))
-                    {
+                    { // mark current possibility as not possible so it can be skipped
                         this.matrix.get(row).posible = false;
                     }
                 }

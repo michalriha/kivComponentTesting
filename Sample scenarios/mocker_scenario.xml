@@ -103,7 +103,7 @@
                         <call>
                             <static>
                                 <bundle symbolic-name="dummies.injector" version="1.0.0" />
-                                <method name="dummies.injector.Observer.executeAction" overrides-return-values="true" />
+                                <method name="dummies.injector.Observer.executeAction" overrides-return-values="false" />
                             </static>
                         </call>
                     </code-injection>
@@ -119,7 +119,7 @@
                         <call>
                             <static>
                                 <bundle symbolic-name="dummies.injector" version="1.0.0" />
-                                <method name="dummies.injector.Observer.executeAction2" overrides-return-values="true" />
+                                <method name="dummies.injector.Observer.executeAction2" overrides-return-values="false" />
                             </static>
                         </call>
                     </code-injection>
