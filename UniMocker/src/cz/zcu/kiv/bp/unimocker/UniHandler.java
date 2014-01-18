@@ -17,7 +17,6 @@ import cz.zcu.kiv.bp.probe.NoSuchBundleException;
 import cz.zcu.kiv.bp.unimocker.ArgumentScenarioTable.Posibility;
 import cz.zcu.kiv.bp.unimocker.bindings.TCodeInjection;
 import cz.zcu.kiv.bp.unimocker.bindings.adapted.Invocation;
-import cz.zcu.kiv.bp.unimocker.bindings.adapted.Value;
 
 /**
  * Implements InvocationHandler. This class is universal invocation handler pro proxy objects used as mockup.

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 public class Type5 extends ArrayList<File>
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static Type5 newInstance(String... paths)
 	{
 		Type5 ret = new Type5();
